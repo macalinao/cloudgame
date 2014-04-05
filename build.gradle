@@ -74,14 +74,3 @@ task scaffold << {
     }
 }
 
-task testmc(type: Copy) {
-    from 'build/libs'
-    include '**/' + jar.baseName + '.jar'
-    
-    into System.getProperty('user.home') + '/mc/plugins/'
-}
-
-task rekt(type:Exec) {
-    commandLine 'scp', './build/libs/' + jar.baseName + '.jar', 'ian@rekt.us:/home/ian/mc/plugins/'
-}
-
