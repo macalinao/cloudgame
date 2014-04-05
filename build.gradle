@@ -7,12 +7,12 @@ ext.author = 'AlbireoX'
 ext.url = 'http://ianmacalinao.com/'
 ext.groupName = 'com.simplyian'
 
-// Do not modify
+// Do not modify below this line!
 ext.artifact = pluginName.toLowerCase()
 ext.mainClass = groupName + '.' + artifact + '.' + pluginName
 jar.baseName = pluginName
 
-defaultTasks 'clean', 'build', 'testmc'
+defaultTasks 'clean', 'build'
 
 repositories {
     mavenCentral()
