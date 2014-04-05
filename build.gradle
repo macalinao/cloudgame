@@ -68,8 +68,6 @@ task scaffold << {
         
         filter(ReplaceTokens, tokens: [pluginName: pluginName])
     }
-    
-    delete 'bootstrap/'
 }
 
 task testmc(type: Copy) {
