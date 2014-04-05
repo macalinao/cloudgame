@@ -7,10 +7,6 @@ ext.author = 'AlbireoX'
 ext.url = 'http://ianmacalinao.com/'
 ext.groupName = 'com.simplyian'
 
-// Test directories
-ext.testPluginDir = '~/mc/plugins'
-ext.remotePluginDir = 'ian@example.com:/home/ian/mc/plugins/'
-
 // Do not modify below this line!
 ext.artifact = pluginName.toLowerCase()
 ext.mainClass = groupName + '.' + artifact + '.' + pluginName
@@ -79,9 +75,10 @@ task scaffold << {
 }
 
 task testCopy << {
-    cmd('cp build/libs/*.jar ' + testPluginDir)
+    cmd("mkdir -p $testPluginDir")
+    cmd("cp $projectDir/build/libs/*.jar $testPluginDir")
 }
 
 task remoteCopy << {
-    cmd('scp build/libs/*.jar' + remotePluginDir)
+    cmd("scp $projectDir/build/libs/*.jar $remotePluginDir")
 }

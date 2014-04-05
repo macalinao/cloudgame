@@ -3,12 +3,21 @@ bukkit-bootstrap
 
 A bootstrap to create new Bukkit plugins quicker.
 
-## Usage
+## Setup
+First, ensure you have a *nix OS, Git, and Gradle. Then proceed.
 
 1. Edit `build.gradle` with your plugin's information.
 2. Run `gradle scaffold`. This will set up your plugin directories and files and rename the `git remote` so you can push to your own Git repository.
-3. Delete this README and put in your own. *(optional)* It is recommended to use the `.md` extension if you are using Markdown, so edits don't conflict with this file.
-4. Delete/change the license. *(also optional)*
+3. Edit your `gradle.properties` and set the `testPluginDir` and `remotePluginDir` variables. Make sure you use `$HOME` instead of `~` for your home directory.
+4. Delete this README and put in your own. *(optional)* It is recommended to use the `.md` extension if you are using Markdown, so edits don't conflict with this file.
+5. Delete/change the license. *(also optional)*
+
+## Usage
+**bukkit-bootstrap** provides the following Gradle tasks:
+
+* `scaffold` - Sets things up.
+* `testCopy` - Copies the JAR to the test directory at whatever `testPluginDir` is set to.
+* `remoteCopy` - Copies the JAR via SCP to a remote directory of your choice.
 
 ## License
 This license can also be found in the attached `LICENSE.txt`.
