@@ -1,4 +1,4 @@
-import org.bukkit.plugin.JavaPlugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class @pluginName@ extends JavaPlugin {
     @Override
