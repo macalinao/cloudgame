@@ -76,7 +76,7 @@ task scaffold << {
 
 task testCopy << {
     cmd("mkdir -p $testPluginDir")
-    cmd("cp $projectDir/build/libs/*.jar $testPluginDir")
+    cmd("cp $projectDir/build/libs/${pluginName}.jar $testPluginDir")
 }
 
 task remoteCopy << {
