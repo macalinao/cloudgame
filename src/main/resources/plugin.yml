@@ -1,0 +1,21 @@
+name: @pluginName@
+description: @desc@
+version: @version@
+author: @author@
+website: @website@
+
+main: @mainClass@
+depends: [WorldGuard]
+
+commands:
+    logexempt:
+        description: Sets a region to be exempt from log
+        usage: /logexempt <region>
+
+permissions:
+    mattlog.*:
+        description: Allows usage of mattlog
+        default: op
+    mattlog.ignore:
+        description: Makes the enemy check ignore the player.
+        default: op

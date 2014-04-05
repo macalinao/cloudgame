@@ -1,0 +1,84 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+apply plugin: 'java'
+
+ext.pluginName = 'MyPlugin'
+ext.desc = 'A simple Bukkit plugin.'
+ext.author = 'AlbireoX'
+ext.url = 'http://ianmacalinao.com/'
+ext.groupName = 'com.simplyian'
+
+// Do not modify
+ext.artifact = pluginName.toLowerCase()
+ext.mainClass = groupName + '.' + artifact + '.' + pluginName
+jar.baseName = pluginName
+
+defaultTasks 'clean', 'build', 'testmc'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'http://repo.md-5.net/content/groups/public/'
+    }
+}
+
+dependencies {
+    compile group: 'org.bukkit', name: 'bukkit', version: '1.7.5-R0.1-SNAPSHOT'
+}
+
+def getDescribe = { ->
+    try {
+        def code = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'describe', '--always', '--dirty=-dirty'
+            standardOutput = code
+        }
+        return code.toString().trim()
+    }
+    catch (ignored) {
+        return null;
+    }
+}
+
+processResources {
+    from('src/main/resources') {
+        include 'plugin.yml'
+        filter(ReplaceTokens, tokens: [
+                pluginName: project.pluginName,
+                desc: project.desc,
+                version: getDescribe(),
+                author: project.author,
+                website: project.url,
+                mainClass: project.mainClass
+            ])
+    }
+}
+
+task scaffold << {
+    // Make artifact source directory
+    ext.artifactSrcDir = new File('src/main/java/' + groupName.replace('.', '/')
+        + '/' + artifact.replace('.', '/') + '/')
+    artifactSrcDir.mkdirs()
+    
+    // Copy plugin bootstrap file over
+    copy {
+        from 'bootstrap'
+        into ext.artifactSrcDir.getPath()
+        include 'PluginBootstrap.java'
+        rename '.*', pluginName + '.java'
+        
+        filter(ReplaceTokens, tokens: [pluginName: pluginName])
+    }
+    
+    delete 'bootstrap/'
+}
+
+task testmc(type: Copy) {
+    from 'build/libs'
+    include '**/' + jar.baseName + '.jar'
+    
+    into System.getProperty('user.home') + '/mc/plugins/'
+}
+
+task rekt(type:Exec) {
+    commandLine 'scp', './build/libs/' + jar.baseName + '.jar', 'ian@rekt.us:/home/ian/mc/plugins/'
+}
