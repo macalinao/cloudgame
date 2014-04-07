@@ -1,18 +1,23 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 apply plugin: 'java'
 
-ext.pluginName = 'MyPlugin'
-ext.desc = 'A simple Bukkit plugin.'
-ext.author = 'AlbireoX'
-ext.url = 'http://ianmacalinao.com/'
-ext.groupName = 'com.simplyian'
+import org.yaml.snakeyaml.Yaml
+Yaml yaml = new Yaml()
+def plugin = yaml.load(new FileInputStream(new File("plugin.yml")))
 
-// Do not modify below this line!
-ext.artifact = pluginName.toLowerCase()
-ext.mainClass = groupName + '.' + artifact + '.' + pluginName
-jar.baseName = pluginName
+jar.baseName = plugin.name
 
 defaultTasks 'clean', 'build'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath group: 'org.yaml', name: 'snakeyaml', version: '1.5'
+    }
+}
 
 repositories {
     mavenCentral()
@@ -40,16 +45,9 @@ def cmd(str) {
 }
 
 processResources {
-    from('src/main/resources') {
+    from('.') {
         include 'plugin.yml'
-        filter(ReplaceTokens, tokens: [
-                pluginName: project.pluginName,
-                desc: project.desc,
-                version: cmd('git describe --always --dirty=-dirty'),
-                author: project.author,
-                website: project.url,
-                mainClass: project.mainClass
-            ])
+        filter { String line -> line.replace('$version', cmd('git describe --always --dirty=-dirty')) }
     }
 }
 
@@ -76,7 +74,7 @@ task scaffold << {
 
 task testCopy << {
     cmd("mkdir -p $testPluginDir")
-    cmd("cp $projectDir/build/libs/${pluginName}.jar $testPluginDir")
+    cmd("cp $projectDir/build/libs/${jar.baseName}.jar $testPluginDir")
 }
 
 task remoteCopy << {

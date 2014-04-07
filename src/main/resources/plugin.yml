@@ -1,8 +1,0 @@
-name: @pluginName@
-description: @desc@
-version: @version@
-author: @author@
-website: @website@
-
-main: @mainClass@
-

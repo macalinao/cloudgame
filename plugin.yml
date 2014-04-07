@@ -1,0 +1,8 @@
+name: MyPlugin
+description: Plugin description
+version: $version
+author: AlbireoX
+website: http://simplyian.com/
+
+main: com.simplyian.myplugin.MyPlugin
+
