@@ -3,7 +3,7 @@ apply plugin: 'java'
 
 import org.yaml.snakeyaml.Yaml
 Yaml yaml = new Yaml()
-def plugin = yaml.load(new FileInputStream(new File("plugin.yml")))
+def plugin = yaml.load(new FileInputStream(new File("src/main/resources/plugin.yml")))
 
 jar.baseName = plugin.name
 
@@ -45,13 +45,9 @@ def cmd(str) {
 }
 
 processResources {
-    from('.') {
-        include 'plugin.yml'
-        filter { String line -> line.replace('$version', cmd('git describe --always --dirty=-dirty')) }
-    }
-
-    from('src/main/resouces') {
+    from('src/main/resources') {
         include '*'
+        filter { String line -> line.replace('$version', cmd('git describe --always --dirty=-dirty')) }
     }
 }
 
