@@ -3,7 +3,7 @@ apply plugin: 'java'
 
 import org.yaml.snakeyaml.Yaml
 Yaml yaml = new Yaml()
-def plugin = yaml.load(new FileInputStream(new File("src/main/resources/plugin.yml")))
+ext.plugin = yaml.load(new FileInputStream(new File("src/main/resources/plugin.yml")))
 
 jar.baseName = plugin.name
 
@@ -53,18 +53,18 @@ processResources {
 
 task scaffold << {
     // Make artifact source directory
-    ext.artifactSrcDir = new File('src/main/java/' + groupName.replace('.', '/')
-        + '/' + artifact.replace('.', '/') + '/')
+    def artifactPath = new File('src/main/java/' + plugin.main.replace('.', '/')).getAbsolutePath()
+    def artifactSrcDir = new File(artifactPath.substring(0, artifactPath.lastIndexOf(File.separator)))
     artifactSrcDir.mkdirs()
     
     // Copy plugin bootstrap file over
     copy {
         from '.bootstrap/'
-        into ext.artifactSrcDir.getPath()
+        into artifactSrcDir.getPath()
         include 'PluginBootstrap.java'
-        rename '.*', pluginName + '.java'
+        rename '.*', plugin.name + '.java'
         
-        filter(ReplaceTokens, tokens: [pluginName: pluginName])
+        filter(ReplaceTokens, tokens: [pluginName: plugin.name])
     }
     
     if ((cmd('git remote -v') =~ /origin.+?bukkit-bootstrap\.git/).find()) {
@@ -78,5 +78,5 @@ task testCopy << {
 }
 
 task remoteCopy << {
-    cmd("scp $projectDir/build/libs/*.jar $remotePluginDir")
+    cmd("scp $projectDir/build/libs/${jar.baseName}.jar $remotePluginDir")
 }
