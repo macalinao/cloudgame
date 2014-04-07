@@ -3,7 +3,7 @@ apply plugin: 'java'
 
 import org.yaml.snakeyaml.Yaml
 Yaml yaml = new Yaml()
-ext.plugin = yaml.load(new FileInputStream(new File("src/main/resources/plugin.yml")))
+ext.plugin = yaml.load(new FileInputStream(new File(projectDir, "src/main/resources/plugin.yml")))
 
 jar.baseName = plugin.name
 
