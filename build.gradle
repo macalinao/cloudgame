@@ -49,6 +49,10 @@ processResources {
         include 'plugin.yml'
         filter { String line -> line.replace('$version', cmd('git describe --always --dirty=-dirty')) }
     }
+
+    from('src/main/resouces') {
+        include '*'
+    }
 }
 
 task scaffold << {
