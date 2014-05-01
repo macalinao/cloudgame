@@ -1,7 +1,9 @@
 import org.apache.tools.ant.filters.ReplaceTokens
-apply plugin: 'java'
-
 import org.yaml.snakeyaml.Yaml
+
+apply plugin: 'java'
+apply plugin: 'nexus'
+
 Yaml yaml = new Yaml()
 ext.plugin = yaml.load(new FileInputStream(new File(projectDir, "src/main/resources/plugin.yml")))
 
@@ -12,10 +14,12 @@ defaultTasks 'clean', 'build'
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
     }
 
     dependencies {
         classpath group: 'org.yaml', name: 'snakeyaml', version: '1.5'
+        classpath group: 'org.gradle.api.plugins', name: 'gradle-nexus-plugin', version: '0.7'
     }
 }
 
@@ -79,4 +83,21 @@ task testCopy << {
 
 task remoteCopy << {
     cmd("scp $projectDir/build/libs/${jar.baseName}.jar $remotePluginDir")
+}
+
+modifyPom {
+    project {
+        name plugin.name
+        description plugin.description
+        url plugin.website
+    }
+}
+
+nexus {
+    attachSources = true
+    attachTests = true
+    attachJavadoc = true
+    sign = true
+    repositoryUrl = deployRepoUrl
+    snapshotRepositoryUrl = deploySnapshotRepoUrl
 }
