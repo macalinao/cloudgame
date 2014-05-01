@@ -3,23 +3,28 @@ import org.yaml.snakeyaml.Yaml
 
 apply plugin: 'java'
 apply plugin: 'nexus'
+apply plugin: 'shadow'
 
 Yaml yaml = new Yaml()
 ext.plugin = yaml.load(new FileInputStream(new File(projectDir, "src/main/resources/plugin.yml")))
 
 jar.baseName = plugin.name
 
-defaultTasks 'clean', 'build'
+defaultTasks 'clean', 'build', 'shadow'
 
 buildscript {
     repositories {
         mavenCentral()
         jcenter()
+        ivy {
+            url 'http://dl.bintray.com/content/johnrengelman/gradle-plugins'
+        }
     }
 
     dependencies {
         classpath group: 'org.yaml', name: 'snakeyaml', version: '1.5'
         classpath group: 'org.gradle.api.plugins', name: 'gradle-nexus-plugin', version: '0.7'
+        classpath 'org.gradle.plugins:shadow:0.7'
     }
 }
 
@@ -52,6 +57,14 @@ processResources {
     from('src/main/resources') {
         include '*'
         filter { String line -> line.replace('$version', cmd('git describe --always --dirty=-dirty')) }
+    }
+}
+
+shadow {
+    artifactAttached = false
+    outputFile = jar.archivePath
+    artifactSet {
+        exclude 'org.bukkit:bukkit'
     }
 }
 
