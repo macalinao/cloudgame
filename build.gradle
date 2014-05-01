@@ -111,6 +111,6 @@ nexus {
     attachTests = true
     attachJavadoc = true
     sign = true
-    repositoryUrl = deployRepoUrl
-    snapshotRepositoryUrl = deploySnapshotRepoUrl
+    if (hasProperty('deployRepoUrl')) repositoryUrl = deployRepoUrl
+    if (hasProperty('deploySnapshotRepoUrl')) snapshotRepositoryUrl = deploySnapshotRepoUrl
 }
