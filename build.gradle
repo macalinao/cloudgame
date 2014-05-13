@@ -60,7 +60,7 @@ jar.dependsOn(generateRebel)
 processResources {
     from('src/main/resources') {
         include '*'
-        filter { String line -> line.replace('$version', cmd('git describe --always --dirty=-dirty')) }
+        filter { String line -> line.replace('$version', 'v' + cmd('git describe --always --dirty=-dirty')) }
     }
 }
 
