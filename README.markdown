@@ -20,6 +20,8 @@ First, ensure you have a *nix OS, Git, and Gradle. Then proceed.
 * `testCopy` - Copies the JAR to the test directory at whatever `testPluginDir` is set to.
 * `remoteCopy` - Copies the JAR via SCP to a remote directory of your choice.
 
+To add external libraries as JARs, simply put them in a `libs/` directory. Gradle will automatically set them as dependencies.
+
 ## License
 This license can also be found in the attached `LICENSE.txt`.
 

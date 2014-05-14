@@ -39,6 +39,7 @@ repositories {
 
 dependencies {
     compile group: 'org.bukkit', name: 'bukkit', version: '1.7.5-R0.1-SNAPSHOT'
+    compile fileTree(dir: 'libs', includes: ['*.jar']) 
 }
 
 def cmd(str) {
