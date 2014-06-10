@@ -1,8 +1,8 @@
-name: MyPlugin
-description: Plugin description
+name: MattKOTH
+description: King of the hill minigame.
 version: $version
 author: AlbireoX
-website: http://simplyian.com/
+website: http://og-mc.net/
 
-main: com.simplyian.myplugin.MyPlugin
+main: net.og_mc.mattkoth.MattKOTH
 
