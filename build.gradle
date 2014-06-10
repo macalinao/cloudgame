@@ -93,6 +93,7 @@ task scaffold << {
     
     if ((cmd('git remote -v') =~ /origin.+?bukkit-bootstrap\.git/).find()) {
         cmd('git remote rename origin bukkit-bootstrap')
+        cmd('git branch -u hub/master')
     }
 }
 
