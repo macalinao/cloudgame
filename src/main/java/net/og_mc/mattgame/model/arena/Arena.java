@@ -67,6 +67,13 @@ public class Arena extends Model {
         }
     }
 
+    /**
+     * Resets all spawns of this arena.
+     */
+    public void resetSpawns() {
+        spawns.clear();
+    }
+
     public Location getSpawn(int index) {
         return spawns.get(index);
     }

@@ -7,6 +7,8 @@ package net.og_mc.mattgame.command;
 
 import net.og_mc.mattgame.MattGame;
 import net.og_mc.mattgame.commands.arena.ArenaCreateCommand;
+import net.og_mc.mattgame.commands.arena.ArenaResetSpawnsCommand;
+import net.og_mc.mattgame.commands.arena.ArenaSetSpawnCommand;
 import net.og_mc.mattgame.commands.room.RoomSetCommand;
 import net.og_mc.mattgame.commands.room.RoomUnsetCommand;
 import org.bukkit.command.PluginCommand;
@@ -31,7 +33,8 @@ public class Commands {
 
     public void registerDefaultCommands() {
         registerCommand("arenacreate", new ArenaCreateCommand(plugin));
-        registerCommand("arenasetspawn", new ArenaCreateCommand(plugin));
+        registerCommand("arenaresetspawns", new ArenaResetSpawnsCommand(plugin));
+        registerCommand("arenasetspawn", new ArenaSetSpawnCommand(plugin));
 
         registerCommand("roomset", new RoomSetCommand(plugin));
         registerCommand("roomunset", new RoomUnsetCommand(plugin));

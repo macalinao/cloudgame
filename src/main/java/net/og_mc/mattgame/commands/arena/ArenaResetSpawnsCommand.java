@@ -16,9 +16,9 @@ import org.bukkit.entity.Player;
  *
  * @author ian
  */
-public class ArenaSetSpawnCommand extends PlayerCommandHandler {
+public class ArenaResetSpawnsCommand extends PlayerCommandHandler {
 
-    public ArenaSetSpawnCommand(MattGame plugin) {
+    public ArenaResetSpawnsCommand(MattGame plugin) {
         super(plugin);
     }
 
@@ -31,8 +31,8 @@ public class ArenaSetSpawnCommand extends PlayerCommandHandler {
             return;
         }
 
-        int index = a.addSpawn(loc);
-        player.sendMessage(ChatColor.GREEN + "Spawn point #" + index + " added.");
+        a.resetSpawns();
+        player.sendMessage(ChatColor.GREEN + "Spawns have been reset in the arena " + ChatColor.YELLOW + a.getId() + ChatColor.GREEN + ".");
     }
 
 }

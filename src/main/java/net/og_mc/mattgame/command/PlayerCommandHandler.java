@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
  */
 public abstract class PlayerCommandHandler extends CommandHandler {
 
-    public PlayerCommandHandler(MattGame plugin, String permission) {
+    public PlayerCommandHandler(MattGame plugin) {
         super(plugin);
     }
 
