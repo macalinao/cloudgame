@@ -12,16 +12,17 @@ import net.og_mc.mattgame.model.arena.Arena;
 /**
  *
  * @author ian
+ * @param <T> The type of state of this game
  */
-public class Game {
+public class Game<T extends State> {
 
-    private final Logic<?> logic;
+    private final Logic<T> logic;
 
     private final Arena arena;
 
-    private final State state;
+    private final T state;
 
-    public Game(Logic logic, Arena arena) {
+    public Game(Logic<T> logic, Arena arena) {
         this.logic = logic;
         this.arena = arena;
         state = logic.newState();
@@ -35,7 +36,7 @@ public class Game {
         return arena;
     }
 
-    public State getState() {
+    public T getState() {
         return state;
     }
 

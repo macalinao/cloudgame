@@ -14,12 +14,13 @@ import org.bukkit.event.Listener;
 /**
  *
  * @author ian
+ * @param <T> The type of state
  */
-public class GameListener implements Listener {
+public class GameListener<T extends State> implements Listener {
 
-    private final Logic logic;
+    private final Logic<T> logic;
 
-    public GameListener(Logic logic) {
+    public GameListener(Logic<T> logic) {
         this.logic = logic;
     }
 
@@ -41,6 +42,6 @@ public class GameListener implements Listener {
         if (!game.getLogic().equals(logic)) {
             return null;
         }
-        return game;
+        return (Game<T>) game;
     }
 }
