@@ -6,3 +6,11 @@ website: http://og-mc.net/
 
 main: net.og_mc.mattgame.MattGame
 
+commands:
+    setroom:
+        description: Sets a room
+        permission: mattgame.commands.setroom
+
+permissions:
+    mattgame.commands.setroom:
+        description: Allows setting of a mattgame room

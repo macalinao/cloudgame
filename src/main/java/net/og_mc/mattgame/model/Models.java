@@ -39,8 +39,16 @@ public abstract class Models<T> {
         return file;
     }
 
+    /**
+     * Returns true if the add was successful
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     public boolean add(String id, T model) {
-        return map.put(id, model) == null;
+        map.put(id, model);
+        return true;
     }
 
     public T findById(String id) {

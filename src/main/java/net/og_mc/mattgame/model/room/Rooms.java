@@ -7,9 +7,7 @@ package net.og_mc.mattgame.model.room;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import net.og_mc.mattgame.MattGame;
 import net.og_mc.mattgame.model.ModelManager;
 import net.og_mc.mattgame.model.Models;
@@ -25,6 +23,30 @@ public class Rooms extends Models<Room> {
 
     public Rooms(ModelManager modelManager) {
         super(modelManager, "rooms");
+    }
+
+    /**
+     * Override to prevent adding multiple rooms
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @Override
+    public boolean add(String id, Room model) {
+        if (findById(id) != null) {
+            return false;
+        }
+        return super.add(id, model);
+    }
+
+    public boolean add(World world, ProtectedRegion pr) {
+        String id = id(world, pr);
+        return add(id, new Room(id, world, pr));
+    }
+
+    public Room find(World world, ProtectedRegion pr) {
+        return findById(id(world, pr));
     }
 
     @Override
@@ -49,6 +71,10 @@ public class Rooms extends Models<Room> {
             ids.add(r.getId());
         }
         modelsConf.set("rooms", ids);
+    }
+
+    private String id(World world, ProtectedRegion pr) {
+        return world.getName() + ";" + pr.getId();
     }
 
 }

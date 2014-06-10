@@ -6,8 +6,6 @@
 package net.og_mc.mattgame.model.room;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import net.og_mc.mattgame.MattGame;
-import org.bukkit.Bukkit;
 import org.bukkit.World;
 
 /**
