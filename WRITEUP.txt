@@ -1,0 +1,59 @@
+MattKoth --
+ 
+King of the hill minigame.
+ 
+** Commands
+ 
+*Starting the game
+/koth start <map>
+- This starts the KOTH, but puts it on a cooldown. In chat, it will post this:
+' &7&m-&8&m--------------------------------------------------&7&m-'
+' &aA KOTH on map &2<map name> &ais starting in &2<count down>&2!'
+' &aType &2/koth join &ato join! (armor not provided)
+' &7&m-&8&m--------------------------------------------------&7&m-'
+ 
+- The executer of the start command will be tped to spawn1 of the KOTH map after saving their inventory (vital). They will turn invisible when tped to the map.
+ 
+- There will be a five minute cool down from when the command is executed and when it actually happens. The countdown will repeat the message on these
+ 
+marks:
+5 minutes
+3 minutes
+1 minute
+30 seconds
+10 seconds
+ 
+- After it reaches the cooldown, it will send this message:
+' &7&m-&8&m--------------------------------------------------&7&m-'
+' &aA KOTH on map &2<map name> &ahas started!'
+' &aType &2/koth spectate &ato spectate it!'
+' &7&m-&8&m--------------------------------------------------&7&m-'
+ 
+*Joining the game
+/koth join
+- When a user (can't be the host of the koth) joins, they will be sent this message:
+' &7&m-&8&m--------------------------------------------------&7&m-'
+' &aYou've joined the KOTH! Pay attention to the countdown.'
+' &aWant to leave the que? Type &2/koth leave&a!
+' &7&m-&8&m--------------------------------------------------&7&m-'
+ 
+-- If a user types /koth leave during the countdown after joining, remove them from the que.
+ 
+- When the countdown is finished. The users in que will be distributed to the different map spawns (may be one spawn, may be five. There will be odd numbers). This message will also be sent to them:
+' &7&m-&8&m--------------------------------------------------&7&m-'
+' &aKoth started! Want to leave the game in progress, type'
+' &2/koth leave&a!
+' &7&m-&8&m--------------------------------------------------&7&m-'
+ 
+*Leaving a game in progress
+/koth leave
+- The user must have killed at least one person in the koth to leave. If they leave and this hasn't been done, send them:
+'&4[KOTH] &cYou must kill one person before leaving!
+ 
+- The user also can't be within 20 blocks of another player. If they are, send them this message:
+'&4KOTH] &cYou must be 20 blocks away from another player!'
+ 
+- If they haven't done both, send them both messages.
+ 
+** Game
+
