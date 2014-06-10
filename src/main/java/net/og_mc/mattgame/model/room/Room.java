@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.og_mc.mattkoth.model;
+package net.og_mc.mattgame.model.room;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import net.og_mc.mattkoth.MattKOTH;
+import net.og_mc.mattgame.MattGame;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
@@ -22,14 +22,7 @@ public class Room {
 
     private final ProtectedRegion region;
 
-    public Room(String id) {
-        this.id = id;
-        String[] split = id.split(";");
-        this.world = Bukkit.getWorld(split[0]);
-        this.region = MattKOTH.i.wg.getRegionManager(world).getRegion(split[1]);
-    }
-
-    public Room(String id, World world, ProtectedRegion region) {
+    Room(String id, World world, ProtectedRegion region) {
         this.id = id;
         this.world = world;
         this.region = region;

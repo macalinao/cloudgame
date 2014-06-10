@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.og_mc.mattkoth.model;
+package net.og_mc.mattgame.model;
 
+import net.og_mc.mattgame.model.room.Room;
 import java.util.Map;
-import net.og_mc.mattkoth.MattKOTH;
+import net.og_mc.mattgame.MattGame;
 import org.bukkit.Location;
 
 /**
@@ -23,7 +24,7 @@ public class Arena {
 
     private final Map<Integer, Location> spawns;
 
-    public Arena(Room lobby, Room main, Location lobbySpawn, Map<Integer, Location> spawns) {
+    Arena(Room lobby, Room main, Location lobbySpawn, Map<Integer, Location> spawns) {
         this.lobby = lobby;
         this.main = main;
         this.lobbySpawn = lobbySpawn;
@@ -49,11 +50,11 @@ public class Arena {
     public Location getNextTeamSpawn(int numTeams, int teamId) {
         int spawnCt = spawns.size();
         int spawnsPerTeam = spawnCt / numTeams;
-        int spawnId = MattKOTH.i.r.nextInt(spawnsPerTeam);
+        int spawnId = MattGame.i.r.nextInt(spawnsPerTeam);
         return getSpawn(teamId * spawnsPerTeam + spawnId);
     }
 
     public Location getNextSpawn() {
-        return getSpawn(MattKOTH.i.r.nextInt(spawns.size()));
+        return getSpawn(MattGame.i.r.nextInt(spawns.size()));
     }
 }

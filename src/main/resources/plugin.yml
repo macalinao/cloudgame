@@ -4,5 +4,5 @@ version: $version
 author: AlbireoX
 website: http://og-mc.net/
 
-main: net.og_mc.mattkoth.MattKOTH
+main: net.og_mc.mattgame.MattGame
 

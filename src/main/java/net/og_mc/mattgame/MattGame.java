@@ -1,12 +1,12 @@
-package net.og_mc.mattkoth;
+package net.og_mc.mattgame;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import java.util.Random;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class MattKOTH extends JavaPlugin {
+public class MattGame extends JavaPlugin {
 
-    public static MattKOTH i;
+    public static MattGame i;
 
     public WorldGuardPlugin wg;
 
