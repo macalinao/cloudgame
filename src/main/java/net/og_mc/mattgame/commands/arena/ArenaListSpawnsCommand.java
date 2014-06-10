@@ -17,9 +17,9 @@ import org.bukkit.entity.Player;
  *
  * @author ian
  */
-public class ArenaListSpawns extends PlayerCommandHandler {
+public class ArenaListSpawnsCommand extends PlayerCommandHandler {
 
-    public ArenaListSpawns(MattGame plugin) {
+    public ArenaListSpawnsCommand(MattGame plugin) {
         super(plugin);
     }
 
