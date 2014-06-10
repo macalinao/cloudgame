@@ -38,6 +38,7 @@ public class Commands {
         registerCommand("arenalistspawns", new ArenaInfoCommand(plugin));
         registerCommand("arenalistspawns", new ArenaListSpawnsCommand(plugin));
         registerCommand("arenaresetspawns", new ArenaResetSpawnsCommand(plugin));
+        registerCommand("arenasetname", new ArenaSetSpawnCommand(plugin));
         registerCommand("arenasetspawn", new ArenaSetSpawnCommand(plugin));
 
         registerCommand("roomset", new RoomSetCommand(plugin));

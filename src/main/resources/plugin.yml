@@ -23,6 +23,10 @@ commands:
         description: Resets the spawns of an arena
         permission: mattgame.admin
         usage: /arenaresetspawns
+    arenasetname:
+        description: Sets the name of an arena
+        permission: mattgame.admin
+        usage: /arenasetname
     arenasetspawn:
         description: Sets a spawn of an arena
         permission: mattgame.admin
