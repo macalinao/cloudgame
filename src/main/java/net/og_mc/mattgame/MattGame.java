@@ -3,7 +3,9 @@ package net.og_mc.mattgame;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import net.og_mc.mattgame.command.Commands;
 import net.og_mc.mattgame.game.GameManager;
+import net.og_mc.mattgame.gameplay.GameplayManager;
 import net.og_mc.mattgame.model.ModelManager;
+import net.og_mc.mattkoth.MattKOTH;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,6 +19,8 @@ public class MattGame extends JavaPlugin {
 
     private GameManager gameManager;
 
+    private GameplayManager gameplayManager;
+
     @Override
     public void onEnable() {
         i = this;
@@ -28,6 +32,9 @@ public class MattGame extends JavaPlugin {
         modelManager.load();
 
         gameManager = new GameManager(this);
+
+        gameplayManager = new GameplayManager(this);
+        gameplayManager.addGameplay(new MattKOTH(this));
     }
 
     @Override
@@ -39,6 +46,7 @@ public class MattGame extends JavaPlugin {
         commands = null;
         modelManager = null;
         gameManager = null;
+        gameplayManager = null;
     }
 
     public Commands getCommands() {

@@ -5,6 +5,7 @@
  */
 package net.og_mc.mattgame.gameplay;
 
+import net.og_mc.mattgame.MattGame;
 import net.og_mc.mattgame.game.Game;
 
 /**
@@ -14,6 +15,35 @@ import net.og_mc.mattgame.game.Game;
  * @param <T> The type of state associated with this game.
  */
 public abstract class Gameplay<T extends State> {
+
+    private final MattGame plugin;
+
+    private final String id;
+
+    protected Gameplay(MattGame plugin, String id) {
+        this.plugin = plugin;
+        this.id = id;
+    }
+
+    public MattGame getPlugin() {
+        return plugin;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Called when the plugin is enabled. Set up listeners etc here.
+     */
+    public void onEnable() {
+    }
+
+    /**
+     * Called when the plugin is disabled.
+     */
+    public void onDisable() {
+    }
 
     /**
      * Sets up the gameplay.
