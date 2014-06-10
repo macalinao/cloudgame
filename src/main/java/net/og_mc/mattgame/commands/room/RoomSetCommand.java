@@ -27,7 +27,7 @@ public class RoomSetCommand extends CommandHandler {
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(ChatColor.RED + "Usage: /roomset <region> [world=current]");
+            sender.sendMessage(usage());
             return;
         }
 
