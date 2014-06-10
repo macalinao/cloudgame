@@ -5,6 +5,10 @@
  */
 package net.og_mc.mattgame.logic;
 
+import net.og_mc.mattgame.MattGame;
+import net.og_mc.mattgame.game.Game;
+import net.og_mc.mattgame.model.room.Room;
+import org.bukkit.Location;
 import org.bukkit.event.Listener;
 
 /**
@@ -17,5 +21,14 @@ public class GameListener implements Listener {
 
     public GameListener(Logic logic) {
         this.logic = logic;
+    }
+
+    public Game game(Location loc) {
+        Room r = MattGame.i.getModelManager().getRooms().find(loc);
+        if (r == null) {
+            return null;
+        }
+        // TOOD
+        return null;
     }
 }

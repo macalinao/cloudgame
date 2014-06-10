@@ -26,6 +26,50 @@ public class Arenas extends Models<Arena> {
         super(modelManager, "arenas");
     }
 
+    /**
+     * Finds an arena from its lobby.
+     *
+     * @param r
+     * @return
+     */
+    public Arena findByLobby(Room r) {
+        for (Arena a : findAll()) {
+            if (a.getLobby().equals(r)) {
+                return a;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Finds an arena from its main room.
+     *
+     * @param r
+     * @return
+     */
+    public Arena findByMain(Room r) {
+        for (Arena a : findAll()) {
+            if (a.getMain().equals(r)) {
+                return a;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Finds an arena by its room.
+     *
+     * @param r
+     * @return
+     */
+    public Arena findByRoom(Room r) {
+        Arena a = findByLobby(r);
+        if (a != null) {
+            return a;
+        }
+        return findByMain(r);
+    }
+
     @Override
     protected void load(YamlConfiguration modelsConf) {
         for (String key : modelsConf.getKeys(false)) {

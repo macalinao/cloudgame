@@ -5,6 +5,7 @@
  */
 package net.og_mc.mattgame.model.room;
 
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import net.og_mc.mattgame.MattGame;
 import net.og_mc.mattgame.model.ModelManager;
 import net.og_mc.mattgame.model.Models;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -47,6 +49,24 @@ public class Rooms extends Models<Room> {
 
     public Room find(World world, ProtectedRegion pr) {
         return findById(id(world, pr));
+    }
+
+    /**
+     * Finds a room from its location.
+     *
+     * @param loc
+     * @return
+     */
+    public Room find(Location loc) {
+        ApplicableRegionSet regions = MattGame.i.wg.getRegionManager(loc.getWorld()).getApplicableRegions(loc);
+
+        for (ProtectedRegion pr : regions) {
+            Room r = find(loc.getWorld(), pr);
+            if (r != null) {
+                return r;
+            }
+        }
+        return null;
     }
 
     public boolean remove(World world, ProtectedRegion pr) {

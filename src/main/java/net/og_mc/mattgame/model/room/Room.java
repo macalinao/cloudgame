@@ -6,6 +6,8 @@
 package net.og_mc.mattgame.model.room;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import net.og_mc.mattgame.MattGame;
+import net.og_mc.mattgame.model.arena.Arenas;
 import org.bukkit.World;
 
 /**
@@ -19,6 +21,8 @@ public class Room {
     private final World world;
 
     private final ProtectedRegion region;
+
+    private Purpose purpose;
 
     Room(String id, World world, ProtectedRegion region) {
         this.id = id;
@@ -44,4 +48,34 @@ public class Room {
         return region;
     }
 
+    /**
+     * Gets the purpose of this room. Lazy-loaded.
+     *
+     * @return
+     */
+    public Purpose getPurpose() {
+        if (purpose == null) {
+            Arenas as = MattGame.i.getModelManager().getArenas();
+            if (as.findByLobby(this) != null) {
+                purpose = Purpose.ARENA_LOBBY;
+            } else if (as.findByMain(this) != null) {
+                purpose = Purpose.ARENA_MAIN;
+            } else {
+                purpose = Purpose.UNUSED;
+            }
+        }
+        return purpose;
+    }
+
+    /**
+     * Resets the purpose of this room. Internal use only.
+     */
+    public void resetPurpose() {
+        purpose = null;
+    }
+
+    public static enum Purpose {
+
+        ARENA_LOBBY, ARENA_MAIN, UNUSED;
+    }
 }
