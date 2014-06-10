@@ -14,11 +14,11 @@ commands:
     arenaresetspawns:
         description: Resets the spawns of an arena
         permission: mattgame.admin
-        usage: /arenaresetspawns <region> [world=current]
+        usage: /arenaresetspawns
     arenasetspawn:
         description: Sets a spawn of an arena
         permission: mattgame.admin
-        usage: /arenasetspawn <region> [world=current]
+        usage: /arenasetspawn
     roomset:
         description: Sets a room
         permission: mattgame.admin
