@@ -18,24 +18,35 @@ import org.bukkit.Location;
  */
 public class Arena extends Model {
 
-    private final Room lobby;
+    private String name;
 
-    private final Room main;
+    private Room lobby;
 
-    private final Location lobbySpawn;
+    private Room main;
 
-    private final Map<Integer, Location> spawns;
+    private Location lobbySpawn;
+
+    private Map<Integer, Location> spawns;
 
     Arena(String id, Room main) {
-        this(id, null, main, null, new HashMap<Integer, Location>());
+        this(id, id, null, main, null, new HashMap<Integer, Location>());
     }
 
-    Arena(String id, Room lobby, Room main, Location lobbySpawn, Map<Integer, Location> spawns) {
+    Arena(String id, String name, Room lobby, Room main, Location lobbySpawn, Map<Integer, Location> spawns) {
         super(id);
+        this.name = name;
         this.lobby = lobby;
         this.main = main;
         this.lobbySpawn = lobbySpawn;
         this.spawns = spawns;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Room getLobby() {

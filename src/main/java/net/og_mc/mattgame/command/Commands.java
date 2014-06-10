@@ -7,6 +7,7 @@ package net.og_mc.mattgame.command;
 
 import net.og_mc.mattgame.MattGame;
 import net.og_mc.mattgame.commands.arena.ArenaCreateCommand;
+import net.og_mc.mattgame.commands.arena.ArenaInfoCommand;
 import net.og_mc.mattgame.commands.arena.ArenaListSpawnsCommand;
 import net.og_mc.mattgame.commands.arena.ArenaResetSpawnsCommand;
 import net.og_mc.mattgame.commands.arena.ArenaSetSpawnCommand;
@@ -34,6 +35,7 @@ public class Commands {
 
     public void registerDefaultCommands() {
         registerCommand("arenacreate", new ArenaCreateCommand(plugin));
+        registerCommand("arenalistspawns", new ArenaInfoCommand(plugin));
         registerCommand("arenalistspawns", new ArenaListSpawnsCommand(plugin));
         registerCommand("arenaresetspawns", new ArenaResetSpawnsCommand(plugin));
         registerCommand("arenasetspawn", new ArenaSetSpawnCommand(plugin));
