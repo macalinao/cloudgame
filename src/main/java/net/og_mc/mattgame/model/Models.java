@@ -59,6 +59,17 @@ public abstract class Models<T> {
         return new ArrayList<T>(map.values());
     }
 
+    /**
+     * Returns true if the remove was successful
+     *
+     * @param id
+     * @return
+     */
+    public boolean remove(String id) {
+        map.remove(id);
+        return true;
+    }
+
     public final void load() throws IOException {
         map = new HashMap<>();
         if (!file.exists()) {
