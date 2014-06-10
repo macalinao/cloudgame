@@ -92,6 +92,7 @@ public class Arenas extends Models<Arena> {
             ConfigurationSection sect = modelsConf.getConfigurationSection(key);
 
             String id = sect.getString("id");
+            String name = sect.getString("name");
             Room lobby = getModelManager().getRooms().findById(sect.getString("lobby"));
             Room main = getModelManager().getRooms().findById(sect.getString("main"));
             Location lobbySpawn = LocationUtils.deserialize(sect.getString("lobby-spawn"));
@@ -104,7 +105,7 @@ public class Arenas extends Models<Arena> {
                 spawns.put(spawnIndex, loc);
             }
 
-            Arena a = new Arena(id, lobby, main, lobbySpawn, spawns);
+            Arena a = new Arena(id, name, lobby, main, lobbySpawn, spawns);
             add(a);
         }
     }
@@ -115,6 +116,7 @@ public class Arenas extends Models<Arena> {
             ConfigurationSection sect = modelsConf.createSection(a.getId());
 
             sect.set("id", a.getId());
+            sect.set("name", a.getName());
             sect.set("lobby", a.getLobby().getId());
             sect.set("main", a.getMain().getId());
             sect.set("lobby-spawn", LocationUtils.serialize(a.getLobbySpawn()));
