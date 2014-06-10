@@ -6,9 +6,9 @@
 package net.og_mc.mattgame.command;
 
 import net.og_mc.mattgame.MattGame;
-import net.og_mc.mattgame.commands.ArenaCreateCommand;
-import net.og_mc.mattgame.commands.RoomSetCommand;
-import net.og_mc.mattgame.commands.RoomUnsetCommand;
+import net.og_mc.mattgame.commands.arena.ArenaCreateCommand;
+import net.og_mc.mattgame.commands.room.RoomSetCommand;
+import net.og_mc.mattgame.commands.room.RoomUnsetCommand;
 import org.bukkit.command.PluginCommand;
 
 /**

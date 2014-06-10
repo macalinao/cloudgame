@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.og_mc.mattgame.commands;
+package net.og_mc.mattgame.commands.arena;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.og_mc.mattgame.MattGame;
 import net.og_mc.mattgame.command.CommandHandler;
+import net.og_mc.mattgame.model.arena.Arena;
+import net.og_mc.mattgame.model.arena.Arenas;
+import net.og_mc.mattgame.model.room.Room;
+import net.og_mc.mattgame.model.room.Rooms;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -18,19 +22,18 @@ import org.bukkit.entity.Player;
  *
  * @author ian
  */
-public class RoomUnsetCommand extends CommandHandler {
+public class ArenaCreateCommand extends CommandHandler {
 
-    public RoomUnsetCommand(MattGame plugin) {
+    public ArenaCreateCommand(MattGame plugin) {
         super(plugin);
     }
 
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(ChatColor.RED + "Usage: /roomunset <region> [world=current]");
+            sender.sendMessage(usage());
             return;
         }
-
         String regionName = args[0];
 
         World world = null;
@@ -52,14 +55,21 @@ public class RoomUnsetCommand extends CommandHandler {
             return;
         }
 
-        if (plugin.getModelManager().getRooms().find(world, pr) == null) {
-            sender.sendMessage(ChatColor.RED + "The given world and region does not correspond to an existing room.");
+        Rooms rooms = plugin.getModelManager().getRooms();
+        Room main = rooms.find(world, pr);
+        if (main == null) {
+            rooms.create(world, pr);
+            main = rooms.find(world, pr);
+        }
+
+        Arenas arenas = plugin.getModelManager().getArenas();
+        Arena a = arenas.create(main);
+        if (a == null) {
+            sender.sendMessage(ChatColor.RED + "An arena already exists at that region.");
             return;
         }
 
-        plugin.getModelManager().getRooms().remove(world, pr);
-        sender.sendMessage(ChatColor.GREEN + "The room has been unset.");
-
+        sender.sendMessage(ChatColor.GREEN + "Arena created. Use " + ChatColor.YELLOW + "/arenasetspawn" + ChatColor.GREEN + " to add spawn points.");
     }
 
 }

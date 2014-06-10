@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.og_mc.mattgame.commands;
+package net.og_mc.mattgame.commands.room;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.og_mc.mattgame.MattGame;
@@ -18,16 +18,16 @@ import org.bukkit.entity.Player;
  *
  * @author ian
  */
-public class RoomSetCommand extends CommandHandler {
+public class RoomUnsetCommand extends CommandHandler {
 
-    public RoomSetCommand(MattGame plugin) {
+    public RoomUnsetCommand(MattGame plugin) {
         super(plugin);
     }
 
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(ChatColor.RED + "Usage: /roomset <region> [world=current]");
+            sender.sendMessage(ChatColor.RED + "Usage: /roomunset <region> [world=current]");
             return;
         }
 
@@ -52,11 +52,14 @@ public class RoomSetCommand extends CommandHandler {
             return;
         }
 
-        if (plugin.getModelManager().getRooms().create(world, pr) != null) {
-            sender.sendMessage(ChatColor.GREEN + "The room has been set.");
-        } else {
-            sender.sendMessage(ChatColor.GREEN + "This room already exists.");
+        if (plugin.getModelManager().getRooms().find(world, pr) == null) {
+            sender.sendMessage(ChatColor.RED + "The given world and region does not correspond to an existing room.");
+            return;
         }
+
+        plugin.getModelManager().getRooms().remove(world, pr);
+        sender.sendMessage(ChatColor.GREEN + "The room has been unset.");
+
     }
 
 }

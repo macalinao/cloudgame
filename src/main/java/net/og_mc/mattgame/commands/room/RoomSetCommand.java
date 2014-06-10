@@ -3,15 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.og_mc.mattgame.commands;
+package net.og_mc.mattgame.commands.room;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.og_mc.mattgame.MattGame;
 import net.og_mc.mattgame.command.CommandHandler;
-import net.og_mc.mattgame.model.arena.Arena;
-import net.og_mc.mattgame.model.arena.Arenas;
-import net.og_mc.mattgame.model.room.Room;
-import net.og_mc.mattgame.model.room.Rooms;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -22,18 +18,19 @@ import org.bukkit.entity.Player;
  *
  * @author ian
  */
-public class ArenaCreateCommand extends CommandHandler {
+public class RoomSetCommand extends CommandHandler {
 
-    public ArenaCreateCommand(MattGame plugin) {
+    public RoomSetCommand(MattGame plugin) {
         super(plugin);
     }
 
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(usage());
+            sender.sendMessage(ChatColor.RED + "Usage: /roomset <region> [world=current]");
             return;
         }
+
         String regionName = args[0];
 
         World world = null;
@@ -55,21 +52,11 @@ public class ArenaCreateCommand extends CommandHandler {
             return;
         }
 
-        Rooms rooms = plugin.getModelManager().getRooms();
-        Room main = rooms.find(world, pr);
-        if (main == null) {
-            rooms.create(world, pr);
-            main = rooms.find(world, pr);
+        if (plugin.getModelManager().getRooms().create(world, pr) != null) {
+            sender.sendMessage(ChatColor.GREEN + "The room has been set.");
+        } else {
+            sender.sendMessage(ChatColor.GREEN + "This room already exists.");
         }
-
-        Arenas arenas = plugin.getModelManager().getArenas();
-        Arena a = arenas.create(main);
-        if (a == null) {
-            sender.sendMessage(ChatColor.RED + "An arena already exists at that region.");
-            return;
-        }
-
-        sender.sendMessage(ChatColor.GREEN + "Arena created. Use " + ChatColor.YELLOW + "/arenasetspawn" + ChatColor.GREEN + " to add spawn points.");
     }
 
 }
