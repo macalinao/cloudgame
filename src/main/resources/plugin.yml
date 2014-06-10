@@ -11,6 +11,10 @@ commands:
         description: Creates an arena
         permission: mattgame.admin
         usage: /arenacreate <region> [world=current]
+    arenasetspawn:
+        description: Sets a spawn of an arena
+        permission: mattgame.admin
+        usage: /arenasetspawn <region> [world=current]
     roomset:
         description: Sets a room
         permission: mattgame.admin

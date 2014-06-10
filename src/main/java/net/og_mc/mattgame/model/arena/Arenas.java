@@ -32,6 +32,17 @@ public class Arenas extends Models<Arena> {
     }
 
     /**
+     * Finds an arena from a given location.
+     *
+     * @param location
+     * @return
+     */
+    public Arena find(Location location) {
+        Room r = getModelManager().getRooms().find(location);
+        return findByRoom(r);
+    }
+
+    /**
      * Finds an arena from its lobby.
      *
      * @param r

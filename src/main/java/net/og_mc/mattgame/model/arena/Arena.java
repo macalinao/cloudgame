@@ -50,6 +50,23 @@ public class Arena extends Model {
         return lobbySpawn;
     }
 
+    /**
+     * Adds a spawn to this arena.
+     *
+     * @param l
+     * @return The index of the created spawn.
+     */
+    public int addSpawn(Location l) {
+        for (int i = 0;; i++) {
+            if (spawns.containsKey(i)) {
+                continue;
+            }
+
+            spawns.put(i, l);
+            return i;
+        }
+    }
+
     public Location getSpawn(int index) {
         return spawns.get(index);
     }

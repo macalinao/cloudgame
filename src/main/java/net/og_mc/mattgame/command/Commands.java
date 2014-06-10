@@ -31,6 +31,7 @@ public class Commands {
 
     public void registerDefaultCommands() {
         registerCommand("arenacreate", new ArenaCreateCommand(plugin));
+        registerCommand("arenasetspawn", new ArenaCreateCommand(plugin));
 
         registerCommand("roomset", new RoomSetCommand(plugin));
         registerCommand("roomunset", new RoomUnsetCommand(plugin));
