@@ -116,7 +116,7 @@ modifyPom {
 nexus {
     attachSources = true
     attachTests = true
-    attachJavadoc = true
+    attachJavadoc = false
     sign = true
     if (hasProperty('deployRepoUrl')) repositoryUrl = deployRepoUrl
     if (hasProperty('deploySnapshotRepoUrl')) snapshotRepositoryUrl = deploySnapshotRepoUrl
