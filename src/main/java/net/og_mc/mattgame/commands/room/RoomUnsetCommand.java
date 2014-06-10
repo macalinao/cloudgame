@@ -7,6 +7,7 @@ package net.og_mc.mattgame.commands.room;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.og_mc.mattgame.MattGame;
+import static net.og_mc.mattgame.MattGame.wg;
 import net.og_mc.mattgame.command.CommandHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -46,7 +47,7 @@ public class RoomUnsetCommand extends CommandHandler {
             sender.sendMessage(ChatColor.RED + "You need to specify a valid world.");
         }
 
-        ProtectedRegion pr = plugin.wg.getRegionManager(world).getRegionExact(regionName);
+        ProtectedRegion pr = wg().getRegionManager(world).getRegionExact(regionName);
         if (pr == null) {
             sender.sendMessage(ChatColor.RED + "The region '" + regionName + "' does not exist in the world '" + world.getName() + "'.");
             return;

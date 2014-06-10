@@ -7,6 +7,7 @@ package net.og_mc.mattgame.commands.arena;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.og_mc.mattgame.MattGame;
+import static net.og_mc.mattgame.MattGame.wg;
 import net.og_mc.mattgame.command.CommandHandler;
 import net.og_mc.mattgame.model.arena.Arena;
 import net.og_mc.mattgame.model.arena.Arenas;
@@ -49,7 +50,7 @@ public class ArenaCreateCommand extends CommandHandler {
             sender.sendMessage(ChatColor.RED + "You need to specify a valid world.");
         }
 
-        ProtectedRegion pr = plugin.wg.getRegionManager(world).getRegionExact(regionName);
+        ProtectedRegion pr = wg().getRegionManager(world).getRegionExact(regionName);
         if (pr == null) {
             sender.sendMessage(ChatColor.RED + "The region '" + regionName + "' does not exist in the world '" + world.getName() + "'.");
             return;

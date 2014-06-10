@@ -5,6 +5,7 @@ author: AlbireoX
 website: http://og-mc.net/
 
 main: net.og_mc.mattgame.MattGame
+depend: [WorldGuard]
 
 commands:
     arenacreate:

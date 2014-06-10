@@ -10,6 +10,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import java.util.ArrayList;
 import java.util.List;
 import net.og_mc.mattgame.MattGame;
+import static net.og_mc.mattgame.MattGame.wg;
 import net.og_mc.mattgame.model.ModelManager;
 import net.og_mc.mattgame.model.Models;
 import org.bukkit.Bukkit;
@@ -42,7 +43,7 @@ public class Rooms extends Models<Room> {
      * @return
      */
     public Room find(Location loc) {
-        ApplicableRegionSet regions = MattGame.i.wg.getRegionManager(loc.getWorld()).getApplicableRegions(loc);
+        ApplicableRegionSet regions = wg().getRegionManager(loc.getWorld()).getApplicableRegions(loc);
 
         for (ProtectedRegion pr : regions) {
             Room r = find(loc.getWorld(), pr);
@@ -66,7 +67,7 @@ public class Rooms extends Models<Room> {
         for (String roomId : roomIds) {
             String[] split = roomId.split(";");
             World world = Bukkit.getWorld(split[0]);
-            ProtectedRegion region = MattGame.i.wg.getRegionManager(world).getRegion(split[1]);
+            ProtectedRegion region = wg().getRegionManager(world).getRegion(split[1]);
             Room r = new Room(roomId, world, region);
             add(r);
         }
