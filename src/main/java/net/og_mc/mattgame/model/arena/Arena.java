@@ -8,8 +8,8 @@ package net.og_mc.mattgame.model.arena;
 import java.util.HashMap;
 import net.og_mc.mattgame.model.room.Room;
 import java.util.Map;
-import net.og_mc.mattgame.MattGame;
 import net.og_mc.mattgame.model.Model;
+import net.og_mc.mattgame.util.Rand;
 import org.bukkit.Location;
 
 /**
@@ -106,13 +106,19 @@ public class Arena extends Model {
     }
 
     public Location getNextTeamSpawn(int numTeams, int teamId) {
+        if (spawns.isEmpty()) {
+            return null;
+        }
         int spawnCt = spawns.size();
         int spawnsPerTeam = spawnCt / numTeams;
-        int spawnId = MattGame.i.r.nextInt(spawnsPerTeam);
+        int spawnId = Rand.r.nextInt(spawnsPerTeam);
         return getSpawn(teamId * spawnsPerTeam + spawnId);
     }
 
     public Location getNextSpawn() {
-        return getSpawn(MattGame.i.r.nextInt(spawns.size()));
+        if (spawns.isEmpty()) {
+            return null;
+        }
+        return getSpawn(Rand.r.nextInt(spawns.size()));
     }
 }

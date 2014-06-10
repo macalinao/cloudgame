@@ -19,8 +19,6 @@ public class MattGame extends JavaPlugin {
 
     public WorldGuardPlugin wg;
 
-    public Random r = new Random();
-
     @Override
     public void onEnable() {
         i = this;
