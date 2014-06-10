@@ -46,7 +46,7 @@ public abstract class Models<T extends Model> {
      * @param model
      * @return
      */
-    public T add(T model) {
+    protected T add(T model) {
         if (has(model.getId())) {
             return null;
         }
