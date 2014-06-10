@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.og_mc.mattgame.model;
+package net.og_mc.mattgame.model.arena;
 
+import java.util.HashMap;
 import net.og_mc.mattgame.model.room.Room;
 import java.util.Map;
 import net.og_mc.mattgame.MattGame;
@@ -16,6 +17,8 @@ import org.bukkit.Location;
  */
 public class Arena {
 
+    private final String id;
+
     private final Room lobby;
 
     private final Room main;
@@ -24,11 +27,16 @@ public class Arena {
 
     private final Map<Integer, Location> spawns;
 
-    Arena(Room lobby, Room main, Location lobbySpawn, Map<Integer, Location> spawns) {
+    Arena(String id, Room lobby, Room main, Location lobbySpawn, Map<Integer, Location> spawns) {
+        this.id = id;
         this.lobby = lobby;
         this.main = main;
         this.lobbySpawn = lobbySpawn;
         this.spawns = spawns;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public Room getLobby() {
@@ -45,6 +53,10 @@ public class Arena {
 
     public Location getSpawn(int index) {
         return spawns.get(index);
+    }
+
+    public Map<Integer, Location> getSpawns() {
+        return new HashMap<>(spawns);
     }
 
     public Location getNextTeamSpawn(int numTeams, int teamId) {

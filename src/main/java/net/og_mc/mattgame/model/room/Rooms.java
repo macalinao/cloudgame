@@ -23,15 +23,12 @@ import org.bukkit.configuration.file.YamlConfiguration;
  */
 public class Rooms extends Models<Room> {
 
-    private Map<String, Room> rooms;
-
     public Rooms(ModelManager modelManager) {
-        super(modelManager, "room");
+        super(modelManager, "rooms");
     }
 
     @Override
     protected void load(YamlConfiguration modelsConf) {
-        rooms = new HashMap<>();
         List<String> roomIds = modelsConf.getStringList("rooms");
         if (roomIds == null || roomIds.isEmpty()) {
             return;
@@ -41,7 +38,7 @@ public class Rooms extends Models<Room> {
             World world = Bukkit.getWorld(split[0]);
             ProtectedRegion region = MattGame.i.wg.getRegionManager(world).getRegion(split[1]);
             Room r = new Room(roomId, world, region);
-            rooms.put(roomId, r);
+            add(roomId, r);
         }
     }
 
@@ -52,11 +49,6 @@ public class Rooms extends Models<Room> {
             ids.add(r.getId());
         }
         modelsConf.set("rooms", ids);
-    }
-
-    @Override
-    public List<Room> findAll() {
-        return new ArrayList<>(rooms.values());
     }
 
 }
