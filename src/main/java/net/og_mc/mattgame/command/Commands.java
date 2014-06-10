@@ -7,7 +7,7 @@ package net.og_mc.mattgame.command;
 
 import net.og_mc.mattgame.MattGame;
 import net.og_mc.mattgame.commands.SetRoomCommand;
-import org.bukkit.permissions.Permission;
+import net.og_mc.mattgame.commands.UnsetRoomCommand;
 
 /**
  *
@@ -27,5 +27,6 @@ public class Commands {
 
     public void registerDefaultCommands() {
         registerCommand("setroom", new SetRoomCommand(plugin));
+        registerCommand("unsetroom", new UnsetRoomCommand(plugin));
     }
 }

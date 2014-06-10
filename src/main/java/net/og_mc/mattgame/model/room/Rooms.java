@@ -49,6 +49,10 @@ public class Rooms extends Models<Room> {
         return findById(id(world, pr));
     }
 
+    public boolean remove(World world, ProtectedRegion pr) {
+        return remove(id(world, pr));
+    }
+
     @Override
     protected void load(YamlConfiguration modelsConf) {
         List<String> roomIds = modelsConf.getStringList("rooms");

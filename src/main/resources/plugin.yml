@@ -10,7 +10,12 @@ commands:
     setroom:
         description: Sets a room
         permission: mattgame.commands.setroom
+    unsetroom:
+        description: Unsets a room
+        permission: mattgame.commands.unsetroom
 
 permissions:
     mattgame.commands.setroom:
         description: Allows setting of a mattgame room
+    mattgame.commands.unsetroom:
+        description: Allows unsetting of a mattgame room
