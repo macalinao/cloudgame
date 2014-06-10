@@ -38,6 +38,7 @@ public class GameManager {
     public <T extends State> Game<T> createGame(Gameplay<T> gameplay, Arena arena) {
         Game<T> game = new Game<>(gameplay, arena);
         games.put(arena, game);
+        gameplay.setup(game);
         return game;
     }
 

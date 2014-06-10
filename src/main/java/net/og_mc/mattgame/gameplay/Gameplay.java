@@ -5,6 +5,8 @@
  */
 package net.og_mc.mattgame.gameplay;
 
+import net.og_mc.mattgame.game.Game;
+
 /**
  * Contains all game gameplay.
  *
@@ -12,6 +14,13 @@ package net.og_mc.mattgame.gameplay;
  * @param <T> The type of state associated with this game.
  */
 public abstract class Gameplay<T extends State> {
+
+    /**
+     * Sets up the gameplay.
+     *
+     * @param g
+     */
+    public abstract void setup(Game<T> g);
 
     /**
      * Creates a new state associated with this game gameplay.
