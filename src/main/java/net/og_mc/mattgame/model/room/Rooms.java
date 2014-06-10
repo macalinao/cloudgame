@@ -27,24 +27,8 @@ public class Rooms extends Models<Room> {
         super(modelManager, "rooms");
     }
 
-    /**
-     * Override to prevent adding multiple rooms
-     *
-     * @param id
-     * @param model
-     * @return
-     */
-    @Override
-    public boolean add(String id, Room model) {
-        if (findById(id) != null) {
-            return false;
-        }
-        return super.add(id, model);
-    }
-
-    public boolean add(World world, ProtectedRegion pr) {
-        String id = id(world, pr);
-        return add(id, new Room(id, world, pr));
+    public Room create(World world, ProtectedRegion pr) {
+        return add(new Room(id(world, pr), world, pr));
     }
 
     public Room find(World world, ProtectedRegion pr) {
@@ -84,7 +68,7 @@ public class Rooms extends Models<Room> {
             World world = Bukkit.getWorld(split[0]);
             ProtectedRegion region = MattGame.i.wg.getRegionManager(world).getRegion(split[1]);
             Room r = new Room(roomId, world, region);
-            add(roomId, r);
+            add(r);
         }
     }
 

@@ -6,8 +6,10 @@
 package net.og_mc.mattgame.command;
 
 import net.og_mc.mattgame.MattGame;
-import net.og_mc.mattgame.commands.SetRoomCommand;
-import net.og_mc.mattgame.commands.UnsetRoomCommand;
+import net.og_mc.mattgame.commands.ArenaCreateCommand;
+import net.og_mc.mattgame.commands.RoomSetCommand;
+import net.og_mc.mattgame.commands.RoomUnsetCommand;
+import org.bukkit.command.PluginCommand;
 
 /**
  *
@@ -22,11 +24,15 @@ public class Commands {
     }
 
     public void registerCommand(String command, CommandHandler handler) {
-        plugin.getCommand(command).setExecutor(handler);
+        PluginCommand cmd = plugin.getCommand(command);
+        cmd.setExecutor(handler);
+        handler.setCommand(cmd);
     }
 
     public void registerDefaultCommands() {
-        registerCommand("setroom", new SetRoomCommand(plugin));
-        registerCommand("unsetroom", new UnsetRoomCommand(plugin));
+        registerCommand("arenacreate", new ArenaCreateCommand(plugin));
+
+        registerCommand("roomset", new RoomSetCommand(plugin));
+        registerCommand("roomunset", new RoomUnsetCommand(plugin));
     }
 }

@@ -26,6 +26,11 @@ public class Arenas extends Models<Arena> {
         super(modelManager, "arenas");
     }
 
+    public Arena create(Room r) {
+        Arena a = new Arena(r.getId(), r);
+        return add(a);
+    }
+
     /**
      * Finds an arena from its lobby.
      *
@@ -89,7 +94,7 @@ public class Arenas extends Models<Arena> {
             }
 
             Arena a = new Arena(id, lobby, main, lobbySpawn, spawns);
-            add(id, a);
+            add(a);
         }
     }
 

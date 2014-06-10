@@ -9,15 +9,14 @@ import java.util.HashMap;
 import net.og_mc.mattgame.model.room.Room;
 import java.util.Map;
 import net.og_mc.mattgame.MattGame;
+import net.og_mc.mattgame.model.Model;
 import org.bukkit.Location;
 
 /**
  *
  * @author ian
  */
-public class Arena {
-
-    private final String id;
+public class Arena extends Model {
 
     private final Room lobby;
 
@@ -27,16 +26,16 @@ public class Arena {
 
     private final Map<Integer, Location> spawns;
 
+    Arena(String id, Room main) {
+        this(id, null, main, null, new HashMap<Integer, Location>());
+    }
+
     Arena(String id, Room lobby, Room main, Location lobbySpawn, Map<Integer, Location> spawns) {
-        this.id = id;
+        super(id);
         this.lobby = lobby;
         this.main = main;
         this.lobbySpawn = lobbySpawn;
         this.spawns = spawns;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public Room getLobby() {

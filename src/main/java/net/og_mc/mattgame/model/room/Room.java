@@ -7,6 +7,7 @@ package net.og_mc.mattgame.model.room;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.og_mc.mattgame.MattGame;
+import net.og_mc.mattgame.model.Model;
 import net.og_mc.mattgame.model.arena.Arenas;
 import org.bukkit.World;
 
@@ -14,9 +15,7 @@ import org.bukkit.World;
  *
  * @author ian
  */
-public class Room {
-
-    private final String id;
+public class Room extends Model {
 
     private final World world;
 
@@ -25,13 +24,9 @@ public class Room {
     private Purpose purpose;
 
     Room(String id, World world, ProtectedRegion region) {
-        this.id = id;
+        super(id);
         this.world = world;
         this.region = region;
-    }
-
-    public String getId() {
-        return id;
     }
 
     /**

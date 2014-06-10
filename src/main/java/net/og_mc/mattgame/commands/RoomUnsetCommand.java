@@ -18,16 +18,16 @@ import org.bukkit.entity.Player;
  *
  * @author ian
  */
-public class UnsetRoomCommand extends CommandHandler {
+public class RoomUnsetCommand extends CommandHandler {
 
-    public UnsetRoomCommand(MattGame plugin) {
+    public RoomUnsetCommand(MattGame plugin) {
         super(plugin);
     }
 
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(ChatColor.RED + "Usage: /unsetroom <region> [world=current]");
+            sender.sendMessage(ChatColor.RED + "Usage: /roomunset <region> [world=current]");
             return;
         }
 

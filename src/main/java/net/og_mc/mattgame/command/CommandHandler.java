@@ -19,8 +19,20 @@ public abstract class CommandHandler implements CommandExecutor {
 
     protected final MattGame plugin;
 
+    private Command command = null;
+
     public CommandHandler(MattGame plugin) {
         this.plugin = plugin;
+    }
+
+    protected void setCommand(Command command) {
+        if (command == null) {
+            this.command = command;
+        }
+    }
+
+    public String usage() {
+        return ChatColor.RED + "Usage: " + command.getUsage();
     }
 
     @Override

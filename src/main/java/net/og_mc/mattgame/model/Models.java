@@ -18,7 +18,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
  * @author ian
  * @param <T>
  */
-public abstract class Models<T> {
+public abstract class Models<T extends Model> {
 
     private final ModelManager modelManager;
 
@@ -40,15 +40,22 @@ public abstract class Models<T> {
     }
 
     /**
-     * Returns true if the add was successful
+     * Returns the model if the add was successful
      *
      * @param id
      * @param model
      * @return
      */
-    public boolean add(String id, T model) {
-        map.put(id, model);
-        return true;
+    public T add(T model) {
+        if (has(model.getId())) {
+            return null;
+        }
+        map.put(model.getId(), model);
+        return model;
+    }
+
+    public boolean has(String id) {
+        return findById(id) != null;
     }
 
     public T findById(String id) {
