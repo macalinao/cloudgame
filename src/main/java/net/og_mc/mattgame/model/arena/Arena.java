@@ -53,12 +53,24 @@ public class Arena extends Model {
         return lobby;
     }
 
+    public void setLobby(Room lobby) {
+        this.lobby = lobby;
+    }
+
     public Room getMain() {
         return main;
     }
 
+    public void setMain(Room main) {
+        this.main = main;
+    }
+
     public Location getLobbySpawn() {
         return lobbySpawn;
+    }
+
+    public void setLobbySpawn(Location lobbySpawn) {
+        this.lobbySpawn = lobbySpawn;
     }
 
     /**
