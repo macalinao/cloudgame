@@ -5,11 +5,13 @@
  */
 package net.og_mc.mattgame.game;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 import net.og_mc.mattgame.MattGame;
+import net.og_mc.mattgame.logic.Logic;
+import net.og_mc.mattgame.logic.State;
+import net.og_mc.mattgame.model.arena.Arena;
 import net.og_mc.mattgame.model.room.Room;
-import org.bukkit.Location;
 
 /**
  *
@@ -19,10 +21,24 @@ public class GameManager {
 
     private final MattGame plugin;
 
-    private final Set<Game> games = new HashSet<>();
+    private final Map<Arena, Game> games = new HashMap<>();
 
     public GameManager(MattGame plugin) {
         this.plugin = plugin;
+    }
+
+    /**
+     * Creates a game at the given arena.
+     *
+     * @param <T>
+     * @param logic
+     * @param arena
+     * @return
+     */
+    public <T extends State> Game<T> createGame(Logic<T> logic, Arena arena) {
+        Game<T> game = new Game<>(logic, arena);
+        games.put(arena, game);
+        return game;
     }
 
     /**
@@ -32,11 +48,10 @@ public class GameManager {
      * @return
      */
     public Game gameAt(Room r) {
-        for (Game game : games) {
-            if (game.getArena().getLobby().equals(r) || game.getArena().getMain().equals(r)) {
-                return game;
-            }
+        Arena a = plugin.getModelManager().getArenas().findByRoom(r);
+        if (a == null) {
+            return null;
         }
-        return null;
+        return games.get(a);
     }
 }

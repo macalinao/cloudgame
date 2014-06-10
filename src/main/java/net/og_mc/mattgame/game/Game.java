@@ -22,7 +22,7 @@ public class Game<T extends State> {
 
     private final T state;
 
-    public Game(Logic<T> logic, Arena arena) {
+    Game(Logic<T> logic, Arena arena) {
         this.logic = logic;
         this.arena = arena;
         state = logic.newState();
