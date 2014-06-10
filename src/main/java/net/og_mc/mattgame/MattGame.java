@@ -53,4 +53,8 @@ public class MattGame extends JavaPlugin {
         return modelManager;
     }
 
+    public GameManager getGameManager() {
+        return gameManager;
+    }
+
 }

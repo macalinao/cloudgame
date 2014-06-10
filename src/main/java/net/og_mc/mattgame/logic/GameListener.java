@@ -23,12 +23,24 @@ public class GameListener implements Listener {
         this.logic = logic;
     }
 
+    /**
+     * Gets the game associated with the location.
+     *
+     * @param loc
+     * @return
+     */
     public Game game(Location loc) {
         Room r = MattGame.i.getModelManager().getRooms().find(loc);
         if (r == null) {
             return null;
         }
-        // TOOD
-        return null;
+        Game game = MattGame.i.getGameManager().gameAt(r);
+        if (game == null) {
+            return null;
+        }
+        if (!game.getLogic().equals(logic)) {
+            return null;
+        }
+        return game;
     }
 }
