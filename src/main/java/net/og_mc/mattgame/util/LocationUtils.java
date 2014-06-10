@@ -28,11 +28,18 @@ public final class LocationUtils {
         loc.setX(Integer.parseInt(str2loc[1]));
         loc.setY(Integer.parseInt(str2loc[2]));
         loc.setZ(Integer.parseInt(str2loc[3]));
+        loc.setYaw(Float.parseFloat(str2loc[4]));
+        loc.setPitch(Float.parseFloat(str2loc[5]));
         return loc;
 
     }
 
     public static String serialize(Location loc) {
-        return loc.getWorld().getName() + "@" + loc.getBlockX() + "@" + loc.getBlockY() + "@" + loc.getBlockZ();
+        return loc.getWorld().getName() + "@"
+                + loc.getBlockX() + "@"
+                + loc.getBlockY() + "@"
+                + loc.getBlockZ() + "@"
+                + loc.getYaw() + "@"
+                + loc.getPitch();
     }
 }
