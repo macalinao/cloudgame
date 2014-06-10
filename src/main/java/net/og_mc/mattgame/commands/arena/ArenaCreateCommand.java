@@ -57,7 +57,12 @@ public class ArenaCreateCommand extends CommandHandler {
 
         Rooms rooms = plugin.getModelManager().getRooms();
         Room main = rooms.find(world, pr);
-        if (main == null) {
+        if (main != null) {
+            if (plugin.getModelManager().getArenas().findByRoom(main) != null) {
+                sender.sendMessage(ChatColor.RED + "That room is already associated with an arena. Try using a different region.");
+                return;
+            }
+        } else {
             rooms.create(world, pr);
             main = rooms.find(world, pr);
         }
