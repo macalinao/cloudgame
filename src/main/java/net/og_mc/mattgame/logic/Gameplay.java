@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.og_mc.mattgame.logic;
+package net.og_mc.mattgame.gameplay;
 
 /**
- * Contains all game logic.
+ * Contains all game gameplay.
  *
  * @author ian
  * @param <T> The type of state associated with this game.
  */
-public abstract class Logic<T extends State> {
+public abstract class Gameplay<T extends State> {
 
     /**
-     * Creates a new state associated with this game logic.
+     * Creates a new state associated with this game gameplay.
      *
      * @return
      */

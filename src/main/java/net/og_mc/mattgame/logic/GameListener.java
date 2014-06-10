@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.og_mc.mattgame.logic;
+package net.og_mc.mattgame.gameplay;
 
 import net.og_mc.mattgame.MattGame;
 import net.og_mc.mattgame.game.Game;
@@ -18,10 +18,10 @@ import org.bukkit.event.Listener;
  */
 public class GameListener<T extends State> implements Listener {
 
-    private final Logic<T> logic;
+    private final Gameplay<T> gameplay;
 
-    public GameListener(Logic<T> logic) {
-        this.logic = logic;
+    public GameListener(Gameplay<T> gameplay) {
+        this.gameplay = gameplay;
     }
 
     /**
@@ -39,7 +39,7 @@ public class GameListener<T extends State> implements Listener {
         if (game == null) {
             return null;
         }
-        if (!game.getLogic().equals(logic)) {
+        if (!game.getGameplay().equals(gameplay)) {
             return null;
         }
         return (Game<T>) game;

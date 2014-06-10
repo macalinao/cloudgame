@@ -5,8 +5,8 @@
  */
 package net.og_mc.mattgame.game;
 
-import net.og_mc.mattgame.logic.Logic;
-import net.og_mc.mattgame.logic.State;
+import net.og_mc.mattgame.gameplay.Gameplay;
+import net.og_mc.mattgame.gameplay.State;
 import net.og_mc.mattgame.model.arena.Arena;
 
 /**
@@ -16,20 +16,20 @@ import net.og_mc.mattgame.model.arena.Arena;
  */
 public class Game<T extends State> {
 
-    private final Logic<T> logic;
+    private final Gameplay<T> gameplay;
 
     private final Arena arena;
 
     private final T state;
 
-    Game(Logic<T> logic, Arena arena) {
-        this.logic = logic;
+    Game(Gameplay<T> gameplay, Arena arena) {
+        this.gameplay = gameplay;
         this.arena = arena;
-        state = logic.newState();
+        state = gameplay.newState();
     }
 
-    public Logic getLogic() {
-        return logic;
+    public Gameplay getGameplay() {
+        return gameplay;
     }
 
     public Arena getArena() {

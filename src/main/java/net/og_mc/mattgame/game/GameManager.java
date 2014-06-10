@@ -8,8 +8,8 @@ package net.og_mc.mattgame.game;
 import java.util.HashMap;
 import java.util.Map;
 import net.og_mc.mattgame.MattGame;
-import net.og_mc.mattgame.logic.Logic;
-import net.og_mc.mattgame.logic.State;
+import net.og_mc.mattgame.gameplay.Gameplay;
+import net.og_mc.mattgame.gameplay.State;
 import net.og_mc.mattgame.model.arena.Arena;
 import net.og_mc.mattgame.model.room.Room;
 
@@ -31,12 +31,12 @@ public class GameManager {
      * Creates a game at the given arena.
      *
      * @param <T>
-     * @param logic
+     * @param gameplay
      * @param arena
      * @return
      */
-    public <T extends State> Game<T> createGame(Logic<T> logic, Arena arena) {
-        Game<T> game = new Game<>(logic, arena);
+    public <T extends State> Game<T> createGame(Gameplay<T> gameplay, Arena arena) {
+        Game<T> game = new Game<>(gameplay, arena);
         games.put(arena, game);
         return game;
     }
