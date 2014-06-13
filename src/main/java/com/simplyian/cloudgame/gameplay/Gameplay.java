@@ -7,6 +7,9 @@ package com.simplyian.cloudgame.gameplay;
 
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
+import java.lang.reflect.ParameterizedType;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Contains all game gameplay.
@@ -46,17 +49,26 @@ public abstract class Gameplay<T extends State> {
     }
 
     /**
+     * Creates a new state associated with this game gameplay.
+     *
+     * @return
+     */
+    public T newState() {
+        try {
+            return (T) ((Class) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0]).newInstance();
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    /**
      * Sets up the gameplay.
      *
      * @param g
      */
     public abstract void setup(Game<T> g);
-
-    /**
-     * Creates a new state associated with this game gameplay.
-     *
-     * @return
-     */
-    public abstract T newState();
 
 }
