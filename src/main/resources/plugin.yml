@@ -10,37 +10,37 @@ depend: [WorldGuard]
 commands:
     arenacreate:
         description: Creates an arena
-        permission: mattgame.admin
+        permission: mattkoth.admin
         usage: /arenacreate <region> [world=current]
     arenainfo:
         description: Gets information about the arena
-        permission: mattgame.admin
+        permission: mattkoth.admin
         usage: /arenainfo
     arenalistspawns:
         description: Lists the spawns of an arena.
-        permission: mattgame.admin
+        permission: mattkoth.admin
         usage: /arenalistspawns
     arenaresetspawns:
         description: Resets the spawns of an arena
-        permission: mattgame.admin
+        permission: mattkoth.admin
         usage: /arenaresetspawns
     arenasetname:
         description: Sets the name of an arena
-        permission: mattgame.admin
+        permission: mattkoth.admin
         usage: /arenasetname
     arenasetspawn:
         description: Sets a spawn of an arena
-        permission: mattgame.admin
+        permission: mattkoth.admin
         usage: /arenasetspawn
     roomset:
         description: Sets a room
-        permission: mattgame.admin
+        permission: mattkoth.admin
         usage: /roomset <region> [world=current]
     roomunset:
         description: Unsets a room
-        permission: mattgame.admin
+        permission: mattkoth.admin
         usage: /roomunset <region> [world=current]
 
 permissions:
-    mattgame.admin:
-        description: Allows managing of MattGame.
+    mattkoth.admin:
+        description: Allows managing of MattKOTH.
