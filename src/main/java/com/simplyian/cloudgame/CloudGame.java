@@ -39,10 +39,14 @@ public class CloudGame extends JavaPlugin {
         gameplayManager = new GameplayManager(this);
         gameplayManager.addGameplay(new MattKOTH(this));
         gameplayManager.onEnable();
+
+        inventoryManager = new InventoryManager(this);
+        inventoryManager.load();
     }
 
     @Override
     public void onDisable() {
+        inventoryManager.save();
         gameplayManager.onDisable();
         modelManager.save();
 
@@ -50,6 +54,7 @@ public class CloudGame extends JavaPlugin {
         modelManager = null;
         gameManager = null;
         gameplayManager = null;
+        inventoryManager = null;
 
         i = null;
     }
