@@ -4,6 +4,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.simplyian.cloudgame.command.Commands;
 import com.simplyian.cloudgame.game.GameManager;
 import com.simplyian.cloudgame.gameplay.GameplayManager;
+import com.simplyian.cloudgame.inventory.InventoryManager;
 import com.simplyian.cloudgame.model.ModelManager;
 import com.simplyian.mattkoth.MattKOTH;
 import org.bukkit.Bukkit;
@@ -20,6 +21,8 @@ public class CloudGame extends JavaPlugin {
     private GameManager gameManager;
 
     private GameplayManager gameplayManager;
+
+    private InventoryManager inventoryManager;
 
     @Override
     public void onEnable() {
@@ -61,6 +64,10 @@ public class CloudGame extends JavaPlugin {
 
     public GameManager getGameManager() {
         return gameManager;
+    }
+
+    public InventoryManager getInventoryManager() {
+        return inventoryManager;
     }
 
     public static WorldGuardPlugin wg() {
