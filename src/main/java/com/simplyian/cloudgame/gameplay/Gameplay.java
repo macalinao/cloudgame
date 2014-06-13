@@ -8,6 +8,7 @@ package com.simplyian.cloudgame.gameplay;
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
 import java.lang.reflect.ParameterizedType;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,5 +71,14 @@ public abstract class Gameplay<T extends State> {
      * @param g
      */
     public abstract void setup(Game<T> g);
+
+    /**
+     * Called when a message is sent.
+     *
+     * @param game
+     * @param type
+     * @param message
+     */
+    public abstract void onSend(Game<T> game, String type, Map<String, Object> message);
 
 }

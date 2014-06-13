@@ -8,6 +8,7 @@ package com.simplyian.mattkoth;
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.Gameplay;
+import java.util.Map;
 
 /**
  *
@@ -27,6 +28,19 @@ public class MattKOTH extends Gameplay<KOTHState> {
     @Override
     public KOTHState newState() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void onSend(Game<KOTHState> game, String type, Map<String, Object> message) {
+        switch (type) {
+            case "start":
+                onStart();
+                break;
+        }
+    }
+
+    private void onStart() {
+
     }
 
 }

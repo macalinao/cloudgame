@@ -8,6 +8,7 @@ package com.simplyian.cloudgame.game;
 import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.gameplay.State;
 import com.simplyian.cloudgame.model.arena.Arena;
+import java.util.Map;
 
 /**
  *
@@ -38,6 +39,16 @@ public class Game<T extends State> {
 
     public T getState() {
         return state;
+    }
+    
+    /**
+     * Sends a message to this game.
+     * 
+     * @param type
+     * @param message 
+     */
+    public void send(String type, Map<String, Object> message) {
+        gameplay.onSend(this, type, message);
     }
 
 }
