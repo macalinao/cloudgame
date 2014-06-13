@@ -20,7 +20,7 @@ import org.bukkit.entity.Player;
  */
 public class FFAState implements State {
 
-    private Set<UUID> players = new HashSet<>();
+    private final Set<UUID> players = new HashSet<>();
 
     public void addPlayer(Player p) {
         players.add(p.getUniqueId());

@@ -5,12 +5,12 @@
  */
 package com.simplyian.mattkoth;
 
-import com.simplyian.cloudgame.gameplay.State;
+import com.simplyian.cloudgame.gameplay.states.FFAState;
 
 /**
  *
  * @author ian
  */
-public class KOTHState implements State {
+public class KOTHState extends FFAState {
 
 }
