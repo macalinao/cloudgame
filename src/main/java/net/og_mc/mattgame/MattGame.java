@@ -35,18 +35,20 @@ public class MattGame extends JavaPlugin {
 
         gameplayManager = new GameplayManager(this);
         gameplayManager.addGameplay(new MattKOTH(this));
+        gameplayManager.onEnable();
     }
 
     @Override
     public void onDisable() {
-        i = null;
-
+        gameplayManager.onDisable();
         modelManager.save();
 
         commands = null;
         modelManager = null;
         gameManager = null;
         gameplayManager = null;
+
+        i = null;
     }
 
     public Commands getCommands() {

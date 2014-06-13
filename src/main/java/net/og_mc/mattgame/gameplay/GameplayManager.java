@@ -24,6 +24,24 @@ public class GameplayManager {
     }
 
     /**
+     * Calls onEnable on all gameplays.
+     */
+    public void onEnable() {
+        for (Gameplay g : gameplays.values()) {
+            g.onEnable();
+        }
+    }
+
+    /**
+     * Calls onDisable on all gameplays.
+     */
+    public void onDisable() {
+        for (Gameplay g : gameplays.values()) {
+            g.onDisable();
+        }
+    }
+
+    /**
      * Adds a gameplay to the manager.
      *
      * @param gameplay
