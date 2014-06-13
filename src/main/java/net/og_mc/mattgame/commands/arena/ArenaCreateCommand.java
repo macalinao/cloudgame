@@ -75,7 +75,6 @@ public class ArenaCreateCommand extends CommandHandler {
             return;
         }
 
-        main.resetPurpose();
         sender.sendMessage(ChatColor.GREEN + "Arena created. Use " + ChatColor.YELLOW + "/arenasetspawn" + ChatColor.GREEN + " to add spawn points.");
     }
 
