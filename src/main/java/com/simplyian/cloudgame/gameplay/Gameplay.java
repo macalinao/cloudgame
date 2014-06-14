@@ -96,6 +96,7 @@ public abstract class Gameplay<T extends State> {
     /**
      * Handles when a player quits. They are not necessarily in this game.
      *
+     * @param game The game
      * @param player The quitting player
      */
     public abstract void handleQuit(Game<T> game, Player player);
