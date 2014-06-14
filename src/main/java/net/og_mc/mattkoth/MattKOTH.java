@@ -49,6 +49,8 @@ public class MattKOTH extends Gameplay<KOTHState> {
     private void onStart(Game<KOTHState> game, Map<String, Object> message) {
         KOTHState state = game.getState();
         for (Player p : state.getPlayers()) {
+            getPlugin().getInventoryManager().backupInventory(p);
+
             Location spawn = game.getArena().getNextSpawn();
             p.teleport(spawn);
         }
@@ -100,9 +102,21 @@ public class MattKOTH extends Gameplay<KOTHState> {
         }
 
         if (!failedKillsCheck && !failedDistanceCheck) {
-            state.removePlayer(p);
+            restorePlayer(game, p);
             sendGameMessage(p, "You have left the game.");
         }
+    }
+
+    /**
+     * Restores the player to how they were before.
+     *
+     * @param game
+     * @param p
+     */
+    private void restorePlayer(Game<KOTHState> game, Player p) {
+        game.getState().removePlayer(p);
+        getPlugin().getInventoryManager().restoreInventory(p);
+        // TODO restore old location
     }
 
     @Override
