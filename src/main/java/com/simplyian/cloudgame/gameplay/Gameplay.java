@@ -43,6 +43,7 @@ public abstract class Gameplay<T extends State> {
      * Called when the plugin is enabled. Set up listeners etc here.
      */
     public void onEnable() {
+        plugin.getServer().getPluginManager().registerEvents(new CoreGameListener<T>(this), plugin);
     }
 
     /**

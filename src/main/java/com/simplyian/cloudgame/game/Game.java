@@ -8,6 +8,7 @@ package com.simplyian.cloudgame.game;
 import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.gameplay.State;
 import com.simplyian.cloudgame.model.arena.Arena;
+import com.simplyian.cloudgame.stats.Stats;
 import java.util.Map;
 
 /**
@@ -23,10 +24,13 @@ public class Game<T extends State> {
 
     private final T state;
 
+    private final Stats stats;
+
     Game(Gameplay<T> gameplay, Arena arena) {
         this.gameplay = gameplay;
         this.arena = arena;
         state = gameplay.newState();
+        stats = new Stats();
     }
 
     public Gameplay getGameplay() {
@@ -39,6 +43,10 @@ public class Game<T extends State> {
 
     public T getState() {
         return state;
+    }
+
+    public Stats getStats() {
+        return stats;
     }
 
     /**

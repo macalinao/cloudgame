@@ -30,7 +30,7 @@ public class GameListener<T extends State> implements Listener {
      * @param loc
      * @return
      */
-    public Game game(Location loc) {
+    public Game<T> game(Location loc) {
         Room r = CloudGame.i.getModelManager().getRooms().find(loc);
         if (r == null) {
             return null;
