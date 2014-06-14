@@ -9,6 +9,7 @@ import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.model.room.Room;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 /**
@@ -36,6 +37,23 @@ public class GameListener<T extends State> implements Listener {
             return null;
         }
         Game game = CloudGame.i.getGameManager().gameAt(r);
+        if (game == null) {
+            return null;
+        }
+        if (!game.getGameplay().equals(gameplay)) {
+            return null;
+        }
+        return (Game<T>) game;
+    }
+
+    /**
+     * Gets the game of the given player.
+     *
+     * @param p
+     * @return
+     */
+    public Game<T> game(Player p) {
+        Game game = CloudGame.i.getGameManager().gameOf(p);
         if (game == null) {
             return null;
         }

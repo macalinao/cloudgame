@@ -35,7 +35,7 @@ public class FFAState implements State {
      *
      * @return
      */
-    public List<Player> getOnlinePlayers() {
+    public List<Player> getPlayers() {
         List<Player> ret = new ArrayList<>();
         for (UUID u : players) {
             ret.add(Bukkit.getPlayer(u));

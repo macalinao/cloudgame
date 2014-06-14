@@ -9,6 +9,8 @@ import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.util.Messaging;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -46,7 +48,7 @@ public class MattKOTH extends Gameplay<KOTHState> {
 
     private void onStart(Game<KOTHState> game, Map<String, Object> message) {
         KOTHState state = game.getState();
-        for (Player p : state.getOnlinePlayers()) {
+        for (Player p : state.getPlayers()) {
             Location spawn = game.getArena().getNextSpawn();
             p.teleport(spawn);
         }
@@ -84,7 +86,7 @@ public class MattKOTH extends Gameplay<KOTHState> {
 
         // Distance check
         boolean failedDistanceCheck = false;
-        for (Player player : state.getOnlinePlayers()) {
+        for (Player player : state.getPlayers()) {
             if (p.getLocation().distanceSquared(player.getLocation()) < 20 * 20) {
                 failedDistanceCheck = true;
                 break;
@@ -105,9 +107,12 @@ public class MattKOTH extends Gameplay<KOTHState> {
     }
 
     @Override
-    public void handleQuit(Game<KOTHState> game, Player player) {
-        game.getState().removePlayer(player);
-        // TODO add complicated combat logging stuff
+    public List<Player> getPlayers(Game<KOTHState> game) {
+        return new ArrayList<>(game.getState().getPlayers());
     }
 
+    @Override
+    public void handleQuit(Game<KOTHState> game, Player p) {
+        game.getState().removePlayer(p); // TODO handle it better
+    }
 }

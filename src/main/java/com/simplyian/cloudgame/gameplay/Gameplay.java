@@ -8,6 +8,7 @@ package com.simplyian.cloudgame.gameplay;
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -95,11 +96,19 @@ public abstract class Gameplay<T extends State> {
     public abstract void onReceive(Game<T> game, String type, Map<String, Object> message);
 
     /**
-     * Handles when a player quits. They are not necessarily in this game.
+     * Gets a list of all players in a game.
      *
-     * @param game The game
-     * @param player The quitting player
+     * @param game
+     * @return
      */
-    public abstract void handleQuit(Game<T> game, Player player);
+    public abstract List<Player> getPlayers(Game<T> game);
+
+    /**
+     * Handles the quitting of a player.
+     *
+     * @param game
+     * @param p
+     */
+    public abstract void handleQuit(Game<T> game, Player p);
 
 }

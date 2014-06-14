@@ -58,13 +58,17 @@ public class GameManager {
     }
 
     /**
-     * Handles when a player quits the server.
+     * Gets the game of the given player.
      *
      * @param p
+     * @return
      */
-    public void handleQuit(Player p) {
+    public Game gameOf(Player p) {
         for (Game g : games.values()) {
-            g.getGameplay().handleQuit(g, p);
+            if (g.getGameplay().getPlayers(g).contains(p)) {
+                return g;
+            }
         }
+        return null;
     }
 }

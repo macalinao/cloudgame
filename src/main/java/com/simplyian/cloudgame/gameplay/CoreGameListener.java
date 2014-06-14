@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 /**
  *
@@ -30,7 +31,7 @@ public class CoreGameListener<T extends State> extends GameListener<T> {
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player p = e.getEntity();
         Location location = p.getLocation();
-        Game<T> game = game(location);
+        Game<T> game = game(location); // use location in case of being queued
         if (game == null) {
             return;
         }
@@ -53,6 +54,14 @@ public class CoreGameListener<T extends State> extends GameListener<T> {
 
         Death death = new Death(player, killer, cause, timestamp, location);
         game.getStats().addDeath(death);
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent e) {
+        Game<T> g = game(e.getPlayer());
+        if (g != null) {
+            g.getGameplay().handleQuit(g, e.getPlayer());
+        }
     }
 
 }
