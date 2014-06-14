@@ -33,32 +33,41 @@ public class KOTHAnnouncerTask extends BukkitRunnable {
         int secsLeft = 5 * 60 - (((int) (System.currentTimeMillis() - start)) / 1000);
 
         if (secsLeft <= 5 * 60 && announceCount == 0) {
-            announce("5 minutes");
+            announceTime("5 minutes");
             announceCount++;
         } else if (secsLeft <= 3 * 60 && announceCount == 1) {
-            announce("3 minutes");
+            announceTime("3 minutes");
             announceCount++;
         } else if (secsLeft <= 1 * 60 && announceCount == 2) {
-            announce("1 minute");
+            announceTime("1 minute");
             announceCount++;
         } else if (secsLeft <= 30 && announceCount == 3) {
-            announce("30 seconds");
+            announceTime("30 seconds");
             announceCount++;
         } else if (secsLeft <= 10 && announceCount == 4) {
-            announce("10 seconds");
+            announceTime("10 seconds");
             announceCount++;
         } else if (secsLeft <= 0 && announceCount == 5) {
+            announceStart();
             game.send("START", null);
+            announceCount++; // just in case
             cancel();
         }
     }
 
-    private void announce(String time) {
+    private void announceTime(String time) {
         for (Player p : Bukkit.getOnlinePlayers()) {
             Messaging.sendBanner(p,
                     "A KOTH on map " + ChatColor.DARK_GREEN + game.getArena().getName() + " "
-                    + ChatColor.GREEN + "is starting in " + ChatColor.DARK_GREEN + time + ChatColor.DARK_GREEN + "!",
+                    + ChatColor.GREEN + "is starting in " + ChatColor.DARK_GREEN + time + ChatColor.GREEN + "!",
                     "Type " + ChatColor.DARK_GREEN + "/koth join " + ChatColor.GREEN + "to join! (armor not provided)");
+        }
+    }
+
+    private void announceStart() {
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            Messaging.sendBanner(p, "A KOTH on map " + ChatColor.DARK_GREEN + game.getArena().getName() + " " + ChatColor.GREEN + "has started!",
+                    "Type " + ChatColor.DARK_GREEN + "/koth spectate " + ChatColor.GREEN + "to spectate it!");
         }
     }
 
