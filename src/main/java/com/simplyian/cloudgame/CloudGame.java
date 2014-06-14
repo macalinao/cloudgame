@@ -42,6 +42,8 @@ public class CloudGame extends JavaPlugin {
 
         inventoryManager = new InventoryManager(this);
         inventoryManager.load();
+
+        getServer().getPluginManager().registerEvents(new CoreListener(this), this);
     }
 
     @Override

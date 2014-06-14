@@ -68,6 +68,16 @@ public abstract class Gameplay<T extends State> {
     }
 
     /**
+     * Sends a game related message to the given player.
+     *
+     * @param p
+     * @param message
+     */
+    public void sendGameMessage(Player p, String message) {
+        p.sendMessage(ChatColor.DARK_RED + "[" + id + "] " + ChatColor.RED + message);
+    }
+
+    /**
      * Sets up the gameplay.
      *
      * @param g
@@ -84,13 +94,10 @@ public abstract class Gameplay<T extends State> {
     public abstract void onReceive(Game<T> game, String type, Map<String, Object> message);
 
     /**
-     * Sends a game related message to the given player.
+     * Handles when a player quits. They are not necessarily in this game.
      *
-     * @param p
-     * @param message
+     * @param player The quitting player
      */
-    public void sendGameMessage(Player p, String message) {
-        p.sendMessage(ChatColor.DARK_RED + "[" + id + "] " + ChatColor.RED + message);
-    }
+    public abstract void handleQuit(Game<T> game, Player player);
 
 }

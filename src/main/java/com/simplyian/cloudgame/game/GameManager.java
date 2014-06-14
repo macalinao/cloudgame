@@ -12,6 +12,7 @@ import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.gameplay.State;
 import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.model.room.Room;
+import org.bukkit.entity.Player;
 
 /**
  *
@@ -54,5 +55,16 @@ public class GameManager {
             return null;
         }
         return games.get(a);
+    }
+
+    /**
+     * Handles when a player quits the server.
+     *
+     * @param p
+     */
+    public void handleQuit(Player p) {
+        for (Game g : games.values()) {
+            g.getGameplay().handleQuit(g, p);
+        }
     }
 }

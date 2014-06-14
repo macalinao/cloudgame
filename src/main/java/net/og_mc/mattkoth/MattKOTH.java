@@ -104,4 +104,10 @@ public class MattKOTH extends Gameplay<KOTHState> {
         }
     }
 
+    @Override
+    public void handleQuit(Game<KOTHState> game, Player player) {
+        game.getState().removePlayer(player);
+        // TODO add complicated combat logging stuff
+    }
+
 }
