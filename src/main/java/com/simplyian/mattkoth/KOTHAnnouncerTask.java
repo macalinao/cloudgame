@@ -6,6 +6,7 @@
 package com.simplyian.mattkoth;
 
 import com.simplyian.cloudgame.game.Game;
+import com.simplyian.cloudgame.util.Messaging;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -54,10 +55,10 @@ public class KOTHAnnouncerTask extends BukkitRunnable {
 
     private void announce(String time) {
         for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-" + ChatColor.DARK_GRAY + ChatColor.STRIKETHROUGH + "--------------------------------------------------" + ChatColor.GRAY + ChatColor.STRIKETHROUGH + "-");
-            p.sendMessage(ChatColor.GREEN + "A KOTH on map " + ChatColor.DARK_GREEN + game.getArena().getName() + " " + ChatColor.GREEN + "is starting in " + ChatColor.DARK_GREEN + time + ChatColor.DARK_GREEN + "!");
-            p.sendMessage(ChatColor.GREEN + "Type " + ChatColor.DARK_GREEN + "/koth join " + ChatColor.GREEN + "to join! (armor not provided)");
-            p.sendMessage(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-" + ChatColor.DARK_GRAY + ChatColor.STRIKETHROUGH + "--------------------------------------------------" + ChatColor.GRAY + ChatColor.STRIKETHROUGH + "-");
+            Messaging.sendBanner(p,
+                    "A KOTH on map " + ChatColor.DARK_GREEN + game.getArena().getName() + " "
+                    + ChatColor.GREEN + "is starting in " + ChatColor.DARK_GREEN + time + ChatColor.DARK_GREEN + "!",
+                    "Type " + ChatColor.DARK_GREEN + "/koth join " + ChatColor.GREEN + "to join! (armor not provided)");
         }
     }
 
