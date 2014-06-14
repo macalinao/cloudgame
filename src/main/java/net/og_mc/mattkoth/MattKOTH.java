@@ -81,8 +81,7 @@ public class MattKOTH extends Gameplay<KOTHState> {
         }
 
         // Kills check
-        boolean failedKillsCheck = false;
-        // TODO
+        boolean failedKillsCheck = game.getStats().getKillCount(p) == 0;
 
         // Distance check
         boolean failedDistanceCheck = false;

@@ -7,6 +7,8 @@ package com.simplyian.cloudgame.stats;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
+import org.bukkit.entity.Player;
 
 /**
  *
@@ -21,6 +23,17 @@ public class Stats {
 
     public void addDeath(Death death) {
         deaths.add(death);
+    }
+
+    public int getKillCount(Player p) {
+        UUID uuid = p.getUniqueId();
+        int sum = 0;
+        for (Death d : deaths) {
+            if (uuid.equals(d.getKiller())) {
+                sum++;
+            }
+        }
+        return sum;
     }
 
 }
