@@ -11,7 +11,7 @@ import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.gameplay.State;
 import com.simplyian.cloudgame.model.arena.Arena;
-import com.simplyian.cloudgame.model.room.Room;
+import com.simplyian.cloudgame.model.region.Region;
 import org.bukkit.entity.Player;
 
 /**
@@ -44,13 +44,13 @@ public class GameManager {
     }
 
     /**
-     * Gets the game at the given room.
+     * Gets the game at the given region.
      *
      * @param r
      * @return
      */
-    public Game gameAt(Room r) {
-        Arena a = plugin.getModelManager().getArenas().findByRoom(r);
+    public Game gameAt(Region r) {
+        Arena a = plugin.getModelManager().getArenas().findByRegion(r);
         if (a == null) {
             return null;
         }

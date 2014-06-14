@@ -6,7 +6,7 @@
 package com.simplyian.cloudgame.model.arena;
 
 import java.util.HashMap;
-import com.simplyian.cloudgame.model.room.Room;
+import com.simplyian.cloudgame.model.region.Region;
 import java.util.Map;
 import com.simplyian.cloudgame.model.Model;
 import com.simplyian.cloudgame.util.Rand;
@@ -20,19 +20,19 @@ public class Arena extends Model {
 
     private String name;
 
-    private Room lobby;
+    private Region lobby;
 
-    private Room main;
+    private Region main;
 
     private Location lobbySpawn;
 
     private Map<Integer, Location> spawns;
 
-    Arena(String id, Room main) {
+    Arena(String id, Region main) {
         this(id, id, null, main, null, new HashMap<Integer, Location>());
     }
 
-    Arena(String id, String name, Room lobby, Room main, Location lobbySpawn, Map<Integer, Location> spawns) {
+    Arena(String id, String name, Region lobby, Region main, Location lobbySpawn, Map<Integer, Location> spawns) {
         super(id);
         this.name = name;
         this.lobby = lobby;
@@ -49,19 +49,19 @@ public class Arena extends Model {
         this.name = name;
     }
 
-    public Room getLobby() {
+    public Region getLobby() {
         return lobby;
     }
 
-    public void setLobby(Room lobby) {
+    public void setLobby(Region lobby) {
         this.lobby = lobby;
     }
 
-    public Room getMain() {
+    public Region getMain() {
         return main;
     }
 
-    public void setMain(Room main) {
+    public void setMain(Region main) {
         this.main = main;
     }
 

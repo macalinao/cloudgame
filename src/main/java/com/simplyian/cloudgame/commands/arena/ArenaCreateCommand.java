@@ -11,8 +11,8 @@ import static com.simplyian.cloudgame.CloudGame.wg;
 import com.simplyian.cloudgame.command.CommandHandler;
 import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.model.arena.Arenas;
-import com.simplyian.cloudgame.model.room.Room;
-import com.simplyian.cloudgame.model.room.Rooms;
+import com.simplyian.cloudgame.model.region.Region;
+import com.simplyian.cloudgame.model.region.Regions;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -56,16 +56,16 @@ public class ArenaCreateCommand extends CommandHandler {
             return;
         }
 
-        Rooms rooms = plugin.getModelManager().getRooms();
-        Room main = rooms.find(world, pr);
+        Regions regions = plugin.getModelManager().getRegions();
+        Region main = regions.find(world, pr);
         if (main != null) {
-            if (plugin.getModelManager().getArenas().findByRoom(main) != null) {
-                sender.sendMessage(ChatColor.RED + "That room is already associated with an arena. Try using a different region.");
+            if (plugin.getModelManager().getArenas().findByRegion(main) != null) {
+                sender.sendMessage(ChatColor.RED + "That region is already associated with an arena. Try using a different region.");
                 return;
             }
         } else {
-            rooms.create(world, pr);
-            main = rooms.find(world, pr);
+            regions.create(world, pr);
+            main = regions.find(world, pr);
         }
 
         Arenas arenas = plugin.getModelManager().getArenas();

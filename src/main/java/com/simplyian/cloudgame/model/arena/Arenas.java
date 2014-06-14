@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import com.simplyian.cloudgame.model.ModelManager;
 import com.simplyian.cloudgame.model.Models;
-import com.simplyian.cloudgame.model.room.Room;
+import com.simplyian.cloudgame.model.region.Region;
 import com.simplyian.cloudgame.util.LocationUtils;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
@@ -26,7 +26,7 @@ public class Arenas extends Models<Arena> {
         super(modelManager, "arenas");
     }
 
-    public Arena create(Room r) {
+    public Arena create(Region r) {
         Arena a = new Arena(r.getId(), r);
         return add(a);
     }
@@ -38,8 +38,8 @@ public class Arenas extends Models<Arena> {
      * @return
      */
     public Arena find(Location location) {
-        Room r = getModelManager().getRooms().find(location);
-        return findByRoom(r);
+        Region r = getModelManager().getRegions().find(location);
+        return findByRegion(r);
     }
 
     /**
@@ -48,7 +48,7 @@ public class Arenas extends Models<Arena> {
      * @param r
      * @return
      */
-    public Arena findByLobby(Room r) {
+    public Arena findByLobby(Region r) {
         for (Arena a : findAll()) {
             if (a.getLobby().equals(r)) {
                 return a;
@@ -58,12 +58,12 @@ public class Arenas extends Models<Arena> {
     }
 
     /**
-     * Finds an arena from its main room.
+     * Finds an arena from its main region.
      *
      * @param r
      * @return
      */
-    public Arena findByMain(Room r) {
+    public Arena findByMain(Region r) {
         for (Arena a : findAll()) {
             if (a.getMain().equals(r)) {
                 return a;
@@ -73,12 +73,12 @@ public class Arenas extends Models<Arena> {
     }
 
     /**
-     * Finds an arena by its room.
+     * Finds an arena by its region.
      *
      * @param r
      * @return
      */
-    public Arena findByRoom(Room r) {
+    public Arena findByRegion(Region r) {
         Arena a = findByLobby(r);
         if (a != null) {
             return a;
@@ -93,8 +93,8 @@ public class Arenas extends Models<Arena> {
 
             String id = sect.getString("id");
             String name = sect.getString("name");
-            Room lobby = getModelManager().getRooms().findById(sect.getString("lobby"));
-            Room main = getModelManager().getRooms().findById(sect.getString("main"));
+            Region lobby = getModelManager().getRegions().findById(sect.getString("lobby"));
+            Region main = getModelManager().getRegions().findById(sect.getString("main"));
             Location lobbySpawn = LocationUtils.deserialize(sect.getString("lobby-spawn"));
 
             Map<Integer, Location> spawns = new HashMap<>();

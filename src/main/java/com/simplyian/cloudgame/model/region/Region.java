@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.simplyian.cloudgame.model.room;
+package com.simplyian.cloudgame.model.region;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.simplyian.cloudgame.model.Model;
@@ -13,13 +13,13 @@ import org.bukkit.World;
  *
  * @author ian
  */
-public class Room extends Model {
+public class Region extends Model {
 
     private final World world;
 
     private final ProtectedRegion region;
 
-    Room(String id, World world, ProtectedRegion region) {
+    Region(String id, World world, ProtectedRegion region) {
         super(id);
         this.world = world;
         this.region = region;

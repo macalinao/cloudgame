@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.simplyian.cloudgame.model.room;
+package com.simplyian.cloudgame.model.region;
 
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -22,31 +22,31 @@ import org.bukkit.configuration.file.YamlConfiguration;
  *
  * @author ian
  */
-public class Rooms extends Models<Room> {
+public class Regions extends Models<Region> {
 
-    public Rooms(ModelManager modelManager) {
-        super(modelManager, "rooms");
+    public Regions(ModelManager modelManager) {
+        super(modelManager, "regions");
     }
 
-    public Room create(World world, ProtectedRegion pr) {
-        return add(new Room(id(world, pr), world, pr));
+    public Region create(World world, ProtectedRegion pr) {
+        return add(new Region(id(world, pr), world, pr));
     }
 
-    public Room find(World world, ProtectedRegion pr) {
+    public Region find(World world, ProtectedRegion pr) {
         return findById(id(world, pr));
     }
 
     /**
-     * Finds a room from its location.
+     * Finds a region from its location.
      *
      * @param loc
      * @return
      */
-    public Room find(Location loc) {
+    public Region find(Location loc) {
         ApplicableRegionSet regions = wg().getRegionManager(loc.getWorld()).getApplicableRegions(loc);
 
         for (ProtectedRegion pr : regions) {
-            Room r = find(loc.getWorld(), pr);
+            Region r = find(loc.getWorld(), pr);
             if (r != null) {
                 return r;
             }
@@ -60,15 +60,15 @@ public class Rooms extends Models<Room> {
 
     @Override
     protected void load(YamlConfiguration modelsConf) {
-        List<String> roomIds = modelsConf.getStringList("rooms");
-        if (roomIds == null || roomIds.isEmpty()) {
+        List<String> regionIds = modelsConf.getStringList("regions");
+        if (regionIds == null || regionIds.isEmpty()) {
             return;
         }
-        for (String roomId : roomIds) {
-            String[] split = roomId.split(";");
+        for (String regionId : regionIds) {
+            String[] split = regionId.split(";");
             World world = Bukkit.getWorld(split[0]);
             ProtectedRegion region = wg().getRegionManager(world).getRegion(split[1]);
-            Room r = new Room(roomId, world, region);
+            Region r = new Region(regionId, world, region);
             add(r);
         }
     }
@@ -76,10 +76,10 @@ public class Rooms extends Models<Room> {
     @Override
     protected void save(YamlConfiguration modelsConf) {
         List<String> ids = new ArrayList<>();
-        for (Room r : findAll()) {
+        for (Region r : findAll()) {
             ids.add(r.getId());
         }
-        modelsConf.set("rooms", ids);
+        modelsConf.set("regions", ids);
     }
 
     private String id(World world, ProtectedRegion pr) {

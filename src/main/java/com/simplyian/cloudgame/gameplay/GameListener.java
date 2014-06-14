@@ -7,7 +7,7 @@ package com.simplyian.cloudgame.gameplay;
 
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
-import com.simplyian.cloudgame.model.room.Room;
+import com.simplyian.cloudgame.model.region.Region;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -32,7 +32,7 @@ public class GameListener<T extends State> implements Listener {
      * @return
      */
     public Game<T> game(Location loc) {
-        Room r = CloudGame.i.getModelManager().getRooms().find(loc);
+        Region r = CloudGame.i.getModelManager().getRegions().find(loc);
         if (r == null) {
             return null;
         }

@@ -32,14 +32,6 @@ commands:
         description: Sets a spawn of an arena
         permission: mattkoth.admin
         usage: /arenasetspawn
-    roomset:
-        description: Sets a room
-        permission: mattkoth.admin
-        usage: /roomset <region> [world=current]
-    roomunset:
-        description: Unsets a room
-        permission: mattkoth.admin
-        usage: /roomunset <region> [world=current]
 
 permissions:
     mattkoth.admin:

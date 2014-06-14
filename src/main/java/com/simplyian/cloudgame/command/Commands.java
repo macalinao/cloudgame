@@ -10,9 +10,8 @@ import com.simplyian.cloudgame.commands.arena.ArenaCreateCommand;
 import com.simplyian.cloudgame.commands.arena.ArenaInfoCommand;
 import com.simplyian.cloudgame.commands.arena.ArenaListSpawnsCommand;
 import com.simplyian.cloudgame.commands.arena.ArenaResetSpawnsCommand;
+import com.simplyian.cloudgame.commands.arena.ArenaSetNameCommand;
 import com.simplyian.cloudgame.commands.arena.ArenaSetSpawnCommand;
-import com.simplyian.cloudgame.commands.room.RoomSetCommand;
-import com.simplyian.cloudgame.commands.room.RoomUnsetCommand;
 import org.bukkit.command.PluginCommand;
 
 /**
@@ -38,10 +37,7 @@ public class Commands {
         registerCommand("arenalistspawns", new ArenaInfoCommand(plugin));
         registerCommand("arenalistspawns", new ArenaListSpawnsCommand(plugin));
         registerCommand("arenaresetspawns", new ArenaResetSpawnsCommand(plugin));
-        registerCommand("arenasetname", new ArenaSetSpawnCommand(plugin));
+        registerCommand("arenasetname", new ArenaSetNameCommand(plugin));
         registerCommand("arenasetspawn", new ArenaSetSpawnCommand(plugin));
-
-        registerCommand("roomset", new RoomSetCommand(plugin));
-        registerCommand("roomunset", new RoomUnsetCommand(plugin));
     }
 }

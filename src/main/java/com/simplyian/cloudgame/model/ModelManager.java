@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.model.arena.Arenas;
-import com.simplyian.cloudgame.model.room.Rooms;
+import com.simplyian.cloudgame.model.region.Regions;
 
 /**
  *
@@ -22,7 +22,7 @@ public class ModelManager {
 
     private final File modelsFolder;
 
-    private final Rooms rooms;
+    private final Regions regions;
 
     private final Arenas arenas;
 
@@ -30,14 +30,14 @@ public class ModelManager {
         this.plugin = plugin;
         this.modelsFolder = new File(plugin.getDataFolder(), "models/");
 
-        this.rooms = new Rooms(this);
+        this.regions = new Regions(this);
         this.arenas = new Arenas(this);
     }
 
     public void load() {
         modelsFolder.mkdirs();
         try {
-            rooms.load();
+            regions.load();
             arenas.load();
         } catch (IOException ex) {
             plugin.getLogger().log(Level.SEVERE, "Error loading models!", ex);
@@ -47,7 +47,7 @@ public class ModelManager {
     public void save() {
         modelsFolder.mkdirs();
         try {
-            rooms.save();
+            regions.save();
             arenas.save();
         } catch (IOException ex) {
             plugin.getLogger().log(Level.SEVERE, "Error saving models!", ex);
@@ -62,8 +62,8 @@ public class ModelManager {
         return modelsFolder;
     }
 
-    public Rooms getRooms() {
-        return rooms;
+    public Regions getRegions() {
+        return regions;
     }
 
     public Arenas getArenas() {
