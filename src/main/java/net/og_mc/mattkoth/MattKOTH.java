@@ -50,21 +50,35 @@ public class MattKOTH extends Gameplay<KOTHState> {
             Location spawn = game.getArena().getNextSpawn();
             p.teleport(spawn);
         }
+
+        state.setStarted(true);
     }
 
     private void onJoin(Game<KOTHState> game, Map<String, Object> message) {
+        KOTHState state = game.getState();
         Player p = (Player) message.get("player");
 
-        game.getState().addPlayer(p);
+        if (state.isStarted()) {
+            p.sendMessage(ChatColor.DARK_RED + "[KOTH]" + ChatColor.RED + " You can't join a KOTH that is already in progress.");
+            return;
+        }
+
+        state.addPlayer(p);
         Messaging.sendBanner(p, "You've joined the KOTH! Pay attention to the countdown.",
                 "Want to leave the game? Type " + ChatColor.DARK_GREEN + "/koth leave" + ChatColor.GREEN + "!");
     }
 
     private void onLeave(Game<KOTHState> game, Map<String, Object> message) {
+        KOTHState state = game.getState();
         Player p = (Player) message.get("player");
 
-        game.getState().removePlayer(p);
-        p.sendMessage(ChatColor.GREEN + "You've left the KOTH. To rejoin, type " + ChatColor.DARK_GREEN + "/koth join" + ChatColor.GREEN + "!");
+        if (!state.isStarted()) {
+            game.getState().removePlayer(p);
+            p.sendMessage(ChatColor.DARK_RED + "[KOTH]" + ChatColor.RED + " You've left the KOTH. To rejoin, type " + ChatColor.YELLOW + "/koth join" + ChatColor.RED + "!");
+            return;
+        }
+
+        // TODO
     }
 
 }

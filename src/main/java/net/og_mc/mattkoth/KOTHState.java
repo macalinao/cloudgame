@@ -13,4 +13,14 @@ import com.simplyian.cloudgame.gameplay.states.FFAState;
  */
 public class KOTHState extends FFAState {
 
+    private boolean started = false;
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
+    }
+
 }
