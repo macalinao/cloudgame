@@ -59,7 +59,7 @@ public class MattKOTH extends Gameplay<KOTHState> {
         Player p = (Player) message.get("player");
 
         if (state.isStarted()) {
-            p.sendMessage(ChatColor.DARK_RED + "[KOTH]" + ChatColor.RED + " You can't join a KOTH that is already in progress.");
+            sendGameMessage(p, "You can't join a KOTH that is already in progress.");
             return;
         }
 
@@ -74,11 +74,34 @@ public class MattKOTH extends Gameplay<KOTHState> {
 
         if (!state.isStarted()) {
             game.getState().removePlayer(p);
-            p.sendMessage(ChatColor.DARK_RED + "[KOTH]" + ChatColor.RED + " You've left the KOTH. To rejoin, type " + ChatColor.YELLOW + "/koth join" + ChatColor.RED + "!");
+            sendGameMessage(p, "You've left the KOTH. To rejoin, type " + ChatColor.YELLOW + "/koth join" + ChatColor.RED + "!");
             return;
         }
 
+        // Kills check
+        boolean failedKillsCheck = false;
         // TODO
+
+        // Distance check
+        boolean failedDistanceCheck = false;
+        for (Player player : state.getOnlinePlayers()) {
+            if (p.getLocation().distanceSquared(player.getLocation()) < 20 * 20) {
+                failedDistanceCheck = true;
+                break;
+            }
+        }
+
+        if (failedKillsCheck) {
+            sendGameMessage(p, "You must kill at least one person before leaving!");
+        }
+        if (failedDistanceCheck) {
+            sendGameMessage(p, "You must be at least 20 blocks away from another player!");
+        }
+
+        if (!failedKillsCheck && !failedDistanceCheck) {
+            state.removePlayer(p);
+            sendGameMessage(p, "You have left the game.");
+        }
     }
 
 }

@@ -11,6 +11,8 @@ import java.lang.reflect.ParameterizedType;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 /**
  * Contains all game gameplay.
@@ -80,5 +82,15 @@ public abstract class Gameplay<T extends State> {
      * @param message
      */
     public abstract void onReceive(Game<T> game, String type, Map<String, Object> message);
+
+    /**
+     * Sends a game related message to the given player.
+     *
+     * @param p
+     * @param message
+     */
+    public void sendGameMessage(Player p, String message) {
+        p.sendMessage(ChatColor.DARK_RED + "[" + id + "] " + ChatColor.RED + message);
+    }
 
 }
