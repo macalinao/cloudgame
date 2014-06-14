@@ -56,6 +56,7 @@ public class MattKOTH extends Gameplay<KOTHState> {
         }
 
         state.setStarted(true);
+        (new KOTHTimer(game)).runTaskTimer(getPlugin(), 20L * 10, 20L * 10);
     }
 
     private void onJoin(Game<KOTHState> game, Map<String, Object> message) {
