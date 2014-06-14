@@ -40,15 +40,15 @@ public class Game<T extends State> {
     public T getState() {
         return state;
     }
-    
+
     /**
      * Sends a message to this game.
-     * 
+     *
      * @param type
-     * @param message 
+     * @param message
      */
     public void send(String type, Map<String, Object> message) {
-        gameplay.onSend(this, type, message);
+        gameplay.onReceive(this, type.toUpperCase(), message);
     }
 
 }

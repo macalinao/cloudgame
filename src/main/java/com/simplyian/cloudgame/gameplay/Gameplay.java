@@ -79,6 +79,6 @@ public abstract class Gameplay<T extends State> {
      * @param type
      * @param message
      */
-    public abstract void onSend(Game<T> game, String type, Map<String, Object> message);
+    public abstract void onReceive(Game<T> game, String type, Map<String, Object> message);
 
 }

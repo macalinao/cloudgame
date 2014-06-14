@@ -22,18 +22,13 @@ public class MattKOTH extends Gameplay<KOTHState> {
 
     @Override
     public void setup(Game<KOTHState> g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        (new KOTHAnnouncerTask(g)).runTaskTimer(getPlugin(), 2L, 2L);
     }
 
     @Override
-    public KOTHState newState() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void onSend(Game<KOTHState> game, String type, Map<String, Object> message) {
+    public void onReceive(Game<KOTHState> game, String type, Map<String, Object> message) {
         switch (type) {
-            case "start":
+            case "START":
                 onStart();
                 break;
         }
