@@ -5,11 +5,13 @@
  */
 package net.og_mc.mattkoth.listeners;
 
+import com.simplyian.cloudgame.events.GameEndEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.GameListener;
 import com.simplyian.cloudgame.model.region.Region;
 import net.og_mc.mattkoth.KOTHState;
 import net.og_mc.mattkoth.MattKOTH;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -108,6 +110,12 @@ public class KOTHCaptureListener extends GameListener<KOTHState> {
         Player old = game.getState().getCapturer();
         if (old != null) {
             old.getInventory().setHelmet(null);
+        }
+
+        if (game.getState().remainingTime() < 0) {
+            game.getState().setCapturer(null);
+            Bukkit.getPluginManager().callEvent(new GameEndEvent(game));
+            return;
         }
 
         if (player != null) {
