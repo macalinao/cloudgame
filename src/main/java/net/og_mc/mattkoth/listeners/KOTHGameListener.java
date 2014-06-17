@@ -45,7 +45,7 @@ public class KOTHGameListener extends GameListener<KOTHState> {
             p.teleport(spawn);
         }
 
-        state.setStarted(true);
+        state.setStarted();
         (new KOTHTimer(game)).runTaskTimer(getGameplay().getPlugin(), 20L * 10, 20L * 10);
     }
 

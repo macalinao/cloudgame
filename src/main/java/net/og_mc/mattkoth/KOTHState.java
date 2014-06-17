@@ -16,18 +16,22 @@ import org.bukkit.entity.Player;
  */
 public class KOTHState extends FFAState {
 
-    private boolean started = false;
+    private long start = -1;
 
     private UUID capturer;
 
     private long captureStart = -1;
 
     public boolean isStarted() {
-        return started;
+        return start != -1;
     }
 
-    public void setStarted(boolean started) {
-        this.started = started;
+    public void setStarted() {
+        this.start = System.currentTimeMillis();
+    }
+
+    public long getStart() {
+        return start;
     }
 
     public Player getCapturer() {

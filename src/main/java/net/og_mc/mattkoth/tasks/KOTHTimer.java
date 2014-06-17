@@ -19,8 +19,6 @@ public class KOTHTimer extends BukkitRunnable {
 
     private final Game<KOTHState> game;
 
-    private final long start = System.currentTimeMillis();
-
     public KOTHTimer(Game<KOTHState> game) {
         this.game = game;
     }
@@ -31,6 +29,7 @@ public class KOTHTimer extends BukkitRunnable {
     }
 
     private void announceTimeLeft() {
+        long start = game.getState().getStart();
         int secsElapsed = (((int) (System.currentTimeMillis() - start)) / 1000);
         int remainingTime = (10 * 60) - secsElapsed;
         int halfMins = remainingTime / 30;
