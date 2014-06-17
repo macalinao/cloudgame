@@ -20,6 +20,8 @@ public class KOTHState extends FFAState {
 
     private UUID capturer;
 
+    private long captureStart = -1;
+
     public boolean isStarted() {
         return started;
     }
@@ -34,6 +36,14 @@ public class KOTHState extends FFAState {
 
     public void setCapturer(Player capturer) {
         this.capturer = capturer.getUniqueId();
+        this.captureStart = System.currentTimeMillis();
+    }
+
+    public int secondsCaptured() {
+        if (captureStart == -1) {
+            return 0;
+        }
+        return (int) ((System.currentTimeMillis() - captureStart) / 1000);
     }
 
 }
