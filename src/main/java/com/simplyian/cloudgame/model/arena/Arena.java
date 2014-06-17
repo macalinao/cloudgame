@@ -88,7 +88,7 @@ public class Arena extends Model {
                 continue;
             }
 
-            setSpawn(i, l);
+            spawns.put(i, l);
             return i;
         }
     }
@@ -100,7 +100,6 @@ public class Arena extends Model {
      * @param l
      */
     public void setSpawn(int index, Location l) {
-        assert index > 0;
         spawns.put(index, l);
     }
 
