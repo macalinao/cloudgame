@@ -27,7 +27,9 @@ public class Regions extends Models<Region> {
     }
 
     public Region create(World world, ProtectedRegion pr) {
-        return add(new Region(id(world, pr), world, pr));
+        Region r = new Region(id(world, pr), world, pr);
+        add(r);
+        return r;
     }
 
     @Override
@@ -43,8 +45,7 @@ public class Regions extends Models<Region> {
             if (region == null) {
                 return null;
             }
-            r = new Region(id, world, region);
-            add(r);
+            r = create(world, region);
         }
         return r;
     }

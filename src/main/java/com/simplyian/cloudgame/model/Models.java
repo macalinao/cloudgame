@@ -46,12 +46,8 @@ public abstract class Models<T extends Model> {
      * @param model
      * @return
      */
-    protected T add(T model) {
-        if (has(model.getId())) {
-            return null;
-        }
+    protected void add(T model) {
         map.put(model.getId(), model);
-        return model;
     }
 
     public boolean has(String id) {

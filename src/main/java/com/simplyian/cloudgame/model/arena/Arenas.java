@@ -28,7 +28,11 @@ public class Arenas extends Models<Arena> {
 
     public Arena create(Region r) {
         Arena a = new Arena(r.getId(), r);
-        return add(a);
+        if (has(r.getId())) {
+            return null;
+        }
+        add(a);
+        return a;
     }
 
     /**
