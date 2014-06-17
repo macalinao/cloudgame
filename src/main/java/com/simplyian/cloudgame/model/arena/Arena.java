@@ -100,6 +100,10 @@ public class Arena extends Model {
         spawns.clear();
     }
 
+    public void setSpawn(int index, Location location) {
+        spawns.put(index, location);
+    }
+
     public Location getSpawn(int index) {
         return spawns.get(index);
     }
