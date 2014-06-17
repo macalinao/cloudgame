@@ -11,7 +11,9 @@ import com.simplyian.cloudgame.model.region.Region;
 import net.og_mc.mattkoth.KOTHState;
 import net.og_mc.mattkoth.MattKOTH;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 /**
@@ -41,8 +43,30 @@ public class KOTHCaptureListener extends GameListener<KOTHState> {
         }
 
         // Initial capture!
-        game.getState().setCapturer(e.getPlayer());
-        game.broadcast(ChatColor.RED + e.getPlayer().getName() + " is now holding the koth point! "
-                + "Kill them or knock them out of the ring within two minutes or they'll claim their prize! ");
+        setCapturer(game, e.getPlayer());
+    }
+
+    @EventHandler
+    public void onUsurp(PlayerDeathEvent e) {
+        Game<KOTHState> game = game(e.getEntity());
+        if (game == null || !game.getState().isStarted()
+                || (game.getState().getCapturer() == null)
+                || !game.getState().getCapturer().equals(e.getEntity())) {
+            return;
+        }
+
+        Player usurper = e.getEntity().getKiller();
+        if (usurper == null) {
+            game.getState().setCapturer(null);
+            return;
+        }
+
+        setCapturer(game, usurper);
+    }
+
+    private void setCapturer(Game<KOTHState> game, Player player) {
+        game.getState().setCapturer(player);
+        game.broadcast(ChatColor.RED + player.getName() + " is now holding the koth point! "
+                + "Kill them or knock them out of the ring within two minutes or they'll claim their prize!");
     }
 }

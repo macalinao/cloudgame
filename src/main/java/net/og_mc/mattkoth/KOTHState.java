@@ -35,6 +35,12 @@ public class KOTHState extends FFAState {
     }
 
     public void setCapturer(Player capturer) {
+        if (capturer == null) {
+            this.capturer = null;
+            this.captureStart = -1;
+            return;
+        }
+
         this.capturer = capturer.getUniqueId();
         this.captureStart = System.currentTimeMillis();
     }
