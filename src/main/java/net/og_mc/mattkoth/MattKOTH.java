@@ -9,6 +9,7 @@ import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.model.arena.Arena;
+import com.simplyian.cloudgame.model.region.Region;
 import com.simplyian.cloudgame.util.Messaging;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,13 @@ public class MattKOTH extends Gameplay<KOTHState> {
         }
         game = getPlugin().getGameManager().createGame(this, arena);
         return true;
+    }
+
+    @Override
+    public boolean canUse(Arena arena) {
+        String hillRegion = arena.getProperty("koth.hill").toString();
+        Region region = getPlugin().getModelManager().getRegions().findById(hillRegion);
+        return region != null;
     }
 
     @Override

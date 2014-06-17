@@ -7,6 +7,7 @@ package com.simplyian.cloudgame.gameplay;
 
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
+import com.simplyian.cloudgame.model.arena.Arena;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
@@ -77,6 +78,14 @@ public abstract class Gameplay<T extends State> {
     public void sendGameMessage(Player p, String message) {
         p.sendMessage(ChatColor.DARK_RED + "[" + id + "] " + ChatColor.RED + message);
     }
+
+    /**
+     * Returns true if this Gameplay can use the given arena.
+     *
+     * @param arena
+     * @return
+     */
+    public abstract boolean canUse(Arena arena);
 
     /**
      * Sets up the gameplay.
