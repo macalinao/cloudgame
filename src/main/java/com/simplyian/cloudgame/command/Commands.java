@@ -34,7 +34,7 @@ public class Commands {
 
     public void registerDefaultCommands() {
         registerCommand("arenacreate", new ArenaCreateCommand(plugin));
-        registerCommand("arenalistspawns", new ArenaInfoCommand(plugin));
+        registerCommand("arenainfo", new ArenaInfoCommand(plugin));
         registerCommand("arenalistspawns", new ArenaListSpawnsCommand(plugin));
         registerCommand("arenaresetspawns", new ArenaResetSpawnsCommand(plugin));
         registerCommand("arenasetname", new ArenaSetNameCommand(plugin));
