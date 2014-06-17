@@ -10,12 +10,11 @@ import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.model.region.Region;
-import com.simplyian.cloudgame.util.Messaging;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
+import net.og_mc.mattkoth.handlers.JoinHandler;
+import net.og_mc.mattkoth.handlers.LeaveHandler;
+import net.og_mc.mattkoth.handlers.StartHandler;
 import org.bukkit.entity.Player;
 
 /**
@@ -33,6 +32,10 @@ public class MattKOTH extends Gameplay<KOTHState> {
     @Override
     public void onEnable() {
         getPlugin().getCommand("koth").setExecutor(new KOTHCommand(this));
+
+        addHandler("START", new StartHandler(getPlugin()));
+        addHandler("JOIN", new JoinHandler(getPlugin()));
+        addHandler("LEAVE", new LeaveHandler(getPlugin()));
     }
 
     public boolean createGame(Arena arena) {
@@ -53,95 +56,6 @@ public class MattKOTH extends Gameplay<KOTHState> {
     @Override
     public void setup(Game<KOTHState> g) {
         (new KOTHAnnouncerTask(g)).runTaskTimer(getPlugin(), 2L, 2L);
-    }
-
-    @Override
-    public void onReceive(Game<KOTHState> game, String type, Map<String, Object> message) {
-        switch (type) {
-            case "START":
-                onStart(game, message);
-                break;
-            case "JOIN":
-                onJoin(game, message);
-                break;
-            case "LEAVE":
-                onLeave(game, message);
-                break;
-        }
-    }
-
-    private void onStart(Game<KOTHState> game, Map<String, Object> message) {
-        KOTHState state = game.getState();
-        for (Player p : state.getPlayers()) {
-            getPlugin().getInventoryManager().backupInventory(p);
-
-            Location spawn = game.getArena().getNextSpawn();
-            p.teleport(spawn);
-        }
-
-        state.setStarted(true);
-        (new KOTHTimer(game)).runTaskTimer(getPlugin(), 20L * 10, 20L * 10);
-    }
-
-    private void onJoin(Game<KOTHState> game, Map<String, Object> message) {
-        KOTHState state = game.getState();
-        Player p = (Player) message.get("player");
-
-        if (state.isStarted()) {
-            sendGameMessage(p, "You can't join a KOTH that is already in progress.");
-            return;
-        }
-
-        state.addPlayer(p);
-        Messaging.sendBanner(p, "You've joined the KOTH! Pay attention to the countdown.",
-                "Want to leave the game? Type " + ChatColor.DARK_GREEN + "/koth leave" + ChatColor.GREEN + "!");
-    }
-
-    private void onLeave(Game<KOTHState> game, Map<String, Object> message) {
-        KOTHState state = game.getState();
-        Player p = (Player) message.get("player");
-
-        if (!state.isStarted()) {
-            game.getState().removePlayer(p);
-            sendGameMessage(p, "You've left the KOTH. To rejoin, type " + ChatColor.YELLOW + "/koth join" + ChatColor.RED + "!");
-            return;
-        }
-
-        // Kills check
-        boolean failedKillsCheck = game.getStats().getKillCount(p) == 0;
-
-        // Distance check
-        boolean failedDistanceCheck = false;
-        for (Player player : state.getPlayers()) {
-            if (p.getLocation().distanceSquared(player.getLocation()) < 20 * 20) {
-                failedDistanceCheck = true;
-                break;
-            }
-        }
-
-        if (failedKillsCheck) {
-            sendGameMessage(p, "You must kill at least one person before leaving!");
-        }
-        if (failedDistanceCheck) {
-            sendGameMessage(p, "You must be at least 20 blocks away from another player!");
-        }
-
-        if (!failedKillsCheck && !failedDistanceCheck) {
-            restorePlayer(game, p);
-            sendGameMessage(p, "You have left the game.");
-        }
-    }
-
-    /**
-     * Restores the player to how they were before.
-     *
-     * @param game
-     * @param p
-     */
-    private void restorePlayer(Game<KOTHState> game, Player p) {
-        game.getState().removePlayer(p);
-        getPlugin().getInventoryManager().restoreInventory(p);
-        // TODO restore old location
     }
 
     @Override

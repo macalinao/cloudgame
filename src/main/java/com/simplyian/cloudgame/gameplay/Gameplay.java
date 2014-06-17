@@ -9,6 +9,7 @@ import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.model.arena.Arena;
 import java.lang.reflect.ParameterizedType;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -28,9 +29,12 @@ public abstract class Gameplay<T extends State> {
 
     private final String id;
 
+    private final Map<String, MessageHandler> handlers;
+
     protected Gameplay(CloudGame plugin, String id) {
         this.plugin = plugin;
         this.id = id;
+        handlers = new HashMap<>();
     }
 
     public CloudGame getPlugin() {
@@ -80,6 +84,26 @@ public abstract class Gameplay<T extends State> {
     }
 
     /**
+     * Adds a message handler to this Gameplay.
+     *
+     * @param type
+     * @param handler
+     */
+    protected void addHandler(String type, MessageHandler<T> handler) {
+        handlers.put(type.toUpperCase(), handler);
+    }
+
+    /**
+     * Gets a handler for a message.
+     *
+     * @param type
+     * @return
+     */
+    public MessageHandler<T> getHandler(String type) {
+        return handlers.get(type.toUpperCase());
+    }
+
+    /**
      * Returns true if this Gameplay can use the given arena.
      *
      * @param arena
@@ -93,15 +117,6 @@ public abstract class Gameplay<T extends State> {
      * @param g
      */
     public abstract void setup(Game<T> g);
-
-    /**
-     * Called when a message is sent.
-     *
-     * @param game
-     * @param type
-     * @param message
-     */
-    public abstract void onReceive(Game<T> game, String type, Map<String, Object> message);
 
     /**
      * Gets a list of all players in a game.

@@ -6,6 +6,7 @@
 package com.simplyian.cloudgame.game;
 
 import com.simplyian.cloudgame.gameplay.Gameplay;
+import com.simplyian.cloudgame.gameplay.MessageHandler;
 import com.simplyian.cloudgame.gameplay.State;
 import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.stats.Stats;
@@ -56,7 +57,10 @@ public class Game<T extends State> {
      * @param message
      */
     public void send(String type, Map<String, Object> message) {
-        gameplay.onReceive(this, type.toUpperCase(), message);
+        MessageHandler<T> handler = gameplay.getHandler(type);
+        if (handler != null) {
+            handler.onReceive(this, message);
+        }
     }
 
 }
