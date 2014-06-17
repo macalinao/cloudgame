@@ -33,6 +33,10 @@ public class MattKOTH extends Gameplay<KOTHState> {
         getPlugin().getServer().getPluginManager().registerEvents(new KOTHListener(this), getPlugin());
     }
 
+    public Game<KOTHState> getGame() {
+        return game;
+    }
+
     public boolean createGame(Arena arena) {
         if (game != null) {
             return false;
