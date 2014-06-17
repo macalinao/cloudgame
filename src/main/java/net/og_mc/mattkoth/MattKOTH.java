@@ -30,7 +30,11 @@ public class MattKOTH extends Gameplay<KOTHState> {
 
     @Override
     public void onEnable() {
-        super.onEnable(); //To change body of generated methods, choose Tools | Templates.
+        getPlugin().getCommand("koth").setExecutor(new KOTHCommand(this));
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     @Override

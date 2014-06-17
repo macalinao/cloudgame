@@ -28,6 +28,9 @@ public class GameplayManager {
      */
     public void onEnable() {
         for (Gameplay g : gameplays.values()) {
+            // Add core listener to game
+            plugin.getServer().getPluginManager().registerEvents(new CoreGameListener(g), plugin);
+
             g.onEnable();
         }
     }
