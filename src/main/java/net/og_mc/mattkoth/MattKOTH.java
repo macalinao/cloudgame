@@ -14,6 +14,7 @@ import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.model.region.Region;
 import net.og_mc.mattkoth.listeners.KOTHCaptureListener;
 import net.og_mc.mattkoth.listeners.KOTHCommandListener;
+import net.og_mc.mattkoth.listeners.KOTHRespawnListener;
 
 /**
  *
@@ -34,6 +35,7 @@ public class MattKOTH extends Gameplay<KOTHState> {
         getPlugin().getServer().getPluginManager().registerEvents(new KOTHCaptureListener(this), getPlugin());
         getPlugin().getServer().getPluginManager().registerEvents(new KOTHCommandListener(this), getPlugin());
         getPlugin().getServer().getPluginManager().registerEvents(new KOTHGameListener(this), getPlugin());
+        getPlugin().getServer().getPluginManager().registerEvents(new KOTHRespawnListener(this), getPlugin());
     }
 
     public Game<KOTHState> getGame() {
