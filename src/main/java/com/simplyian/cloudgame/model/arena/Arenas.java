@@ -47,21 +47,6 @@ public class Arenas extends Models<Arena> {
     }
 
     /**
-     * Finds an arena from its lobby.
-     *
-     * @param r
-     * @return
-     */
-    public Arena findByLobby(Region r) {
-        for (Arena a : findAll()) {
-            if (a.getLobby() != null && a.getLobby().equals(r)) {
-                return a;
-            }
-        }
-        return null;
-    }
-
-    /**
      * Finds an arena from its main region.
      *
      * @param r
@@ -83,10 +68,6 @@ public class Arenas extends Models<Arena> {
      * @return
      */
     public Arena findByRegion(Region r) {
-        Arena a = findByLobby(r);
-        if (a != null) {
-            return a;
-        }
         return findByMain(r);
     }
 
@@ -97,9 +78,7 @@ public class Arenas extends Models<Arena> {
 
             String id = sect.getString("id");
             String name = sect.getString("name");
-            Region lobby = getModelManager().getRegions().findById(sect.getString("lobby"));
             Region main = getModelManager().getRegions().findById(sect.getString("main"));
-            Location lobbySpawn = LocationUtils.deserialize(sect.getString("lobby-spawn"));
 
             Map<Integer, Location> spawns = new HashMap<>();
             ConfigurationSection spawnsSect = sect.getConfigurationSection("spawns");
@@ -117,7 +96,7 @@ public class Arenas extends Models<Arena> {
                 properties = new HashMap<>();
             }
 
-            Arena a = new Arena(id, name, lobby, main, lobbySpawn, spawns, properties);
+            Arena a = new Arena(id, name, main, spawns, properties);
             add(a);
         }
     }
@@ -129,9 +108,7 @@ public class Arenas extends Models<Arena> {
 
             sect.set("id", a.getId());
             sect.set("name", a.getName());
-            sect.set("lobby", a.getLobby().getId());
             sect.set("main", a.getMain().getId());
-            sect.set("lobby-spawn", LocationUtils.serialize(a.getLobbySpawn()));
 
             ConfigurationSection spawnsSect = sect.createSection("spawns");
             for (Entry<Integer, Location> spawnEntry : a.getSpawns().entrySet()) {

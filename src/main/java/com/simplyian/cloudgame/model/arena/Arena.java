@@ -20,26 +20,20 @@ public class Arena extends Model {
 
     private String name;
 
-    private Region lobby;
-
     private Region main;
-
-    private Location lobbySpawn;
 
     private Map<Integer, Location> spawns;
 
     private Map<String, Object> properties;
 
     Arena(String id, Region main) {
-        this(id, id, null, main, null, new HashMap<Integer, Location>(), new HashMap<String, Object>());
+        this(id, id, main, new HashMap<Integer, Location>(), new HashMap<String, Object>());
     }
 
-    Arena(String id, String name, Region lobby, Region main, Location lobbySpawn, Map<Integer, Location> spawns, Map<String, Object> properties) {
+    Arena(String id, String name, Region main, Map<Integer, Location> spawns, Map<String, Object> properties) {
         super(id);
         this.name = name;
-        this.lobby = lobby;
         this.main = main;
-        this.lobbySpawn = lobbySpawn;
         this.spawns = spawns;
         this.properties = properties;
     }
@@ -52,28 +46,12 @@ public class Arena extends Model {
         this.name = name;
     }
 
-    public Region getLobby() {
-        return lobby;
-    }
-
-    public void setLobby(Region lobby) {
-        this.lobby = lobby;
-    }
-
     public Region getMain() {
         return main;
     }
 
     public void setMain(Region main) {
         this.main = main;
-    }
-
-    public Location getLobbySpawn() {
-        return lobbySpawn;
-    }
-
-    public void setLobbySpawn(Location lobbySpawn) {
-        this.lobbySpawn = lobbySpawn;
     }
 
     /**
