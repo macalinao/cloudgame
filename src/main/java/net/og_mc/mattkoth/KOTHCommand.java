@@ -8,6 +8,7 @@ package net.og_mc.mattkoth;
 import com.simplyian.cloudgame.command.PlayerCommandHandler;
 import com.simplyian.cloudgame.events.GameJoinEvent;
 import com.simplyian.cloudgame.events.GameLeaveEvent;
+import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.model.region.Region;
 import com.simplyian.cloudgame.util.Messaging;
@@ -86,12 +87,18 @@ public class KOTHCommand extends PlayerCommandHandler {
             return;
         }
 
-        boolean success = koth.createGame(arena);
-        if (!success) {
+        if (koth.getGame() != null) {
             player.sendMessage(ChatColor.RED + "A game has already been started.");
             return;
         }
 
+        Game<KOTHState> game = koth.getPlugin().getGameManager().createGame(koth, arena);
+        if (game == null) {
+            player.sendMessage(ChatColor.RED + "KOTH is not supported on the given arena.");
+            return;
+        }
+
+        koth.setGame(game);
         player.sendMessage(ChatColor.GREEN + "KOTH countdown started.");
     }
 

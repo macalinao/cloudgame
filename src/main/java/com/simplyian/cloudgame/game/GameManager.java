@@ -34,13 +34,31 @@ public class GameManager {
      * @param <T>
      * @param gameplay
      * @param arena
-     * @return
+     * @return Null if the game could not be created due to canUse restrictions.
      */
     public <T extends State> Game<T> createGame(Gameplay<T> gameplay, Arena arena) {
+        if (!gameplay.canUse(arena)) {
+            return null;
+        }
+
+        if (gameAt(arena) != null) {
+            return null;
+        }
+
         Game<T> game = new Game<>(gameplay, arena);
         games.put(arena, game);
         gameplay.setup(game);
         return game;
+    }
+
+    /**
+     * Gets the game at the given arena.
+     *
+     * @param a
+     * @return
+     */
+    public Game gameAt(Arena a) {
+        return games.get(a);
     }
 
     /**
@@ -54,7 +72,7 @@ public class GameManager {
         if (a == null) {
             return null;
         }
-        return games.get(a);
+        return gameAt(a);
     }
 
     /**

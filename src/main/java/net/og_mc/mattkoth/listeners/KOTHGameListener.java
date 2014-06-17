@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.og_mc.mattkoth;
+package net.og_mc.mattkoth.listeners;
 
 import com.simplyian.cloudgame.events.GameJoinEvent;
 import com.simplyian.cloudgame.events.GameLeaveEvent;
@@ -12,6 +12,9 @@ import com.simplyian.cloudgame.events.GameStartEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.GameListener;
 import com.simplyian.cloudgame.util.Messaging;
+import net.og_mc.mattkoth.KOTHState;
+import net.og_mc.mattkoth.tasks.KOTHTimer;
+import net.og_mc.mattkoth.MattKOTH;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -21,9 +24,9 @@ import org.bukkit.event.EventHandler;
  *
  * @author ian
  */
-public class KOTHListener extends GameListener<KOTHState> {
+public class KOTHGameListener extends GameListener<KOTHState> {
 
-    public KOTHListener(MattKOTH koth) {
+    public KOTHGameListener(MattKOTH koth) {
         super(koth);
     }
 

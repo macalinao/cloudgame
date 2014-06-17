@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.og_mc.mattkoth;
+package net.og_mc.mattkoth.tasks;
 
 import com.simplyian.cloudgame.game.Game;
+import net.og_mc.mattkoth.KOTHState;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;

@@ -5,6 +5,8 @@
  */
 package net.og_mc.mattkoth;
 
+import net.og_mc.mattkoth.tasks.KOTHAnnouncerTask;
+import net.og_mc.mattkoth.listeners.KOTHGameListener;
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.Gameplay;
@@ -30,19 +32,15 @@ public class MattKOTH extends Gameplay<KOTHState> {
     public void onEnable() {
         getPlugin().getCommands().registerCommand("koth", new KOTHCommand(this));
 
-        getPlugin().getServer().getPluginManager().registerEvents(new KOTHListener(this), getPlugin());
+        getPlugin().getServer().getPluginManager().registerEvents(new KOTHGameListener(this), getPlugin());
     }
 
     public Game<KOTHState> getGame() {
         return game;
     }
 
-    public boolean createGame(Arena arena) {
-        if (game != null) {
-            return false;
-        }
-        game = getPlugin().getGameManager().createGame(this, arena);
-        return true;
+    public void setGame(Game<KOTHState> game) {
+        this.game = game;
     }
 
     @Override

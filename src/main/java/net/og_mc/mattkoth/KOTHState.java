@@ -6,6 +6,9 @@
 package net.og_mc.mattkoth;
 
 import com.simplyian.cloudgame.gameplay.states.FFAState;
+import java.util.UUID;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 /**
  *
@@ -15,12 +18,22 @@ public class KOTHState extends FFAState {
 
     private boolean started = false;
 
+    private UUID capturer;
+
     public boolean isStarted() {
         return started;
     }
 
     public void setStarted(boolean started) {
         this.started = started;
+    }
+
+    public Player getCapturer() {
+        return Bukkit.getPlayer(capturer);
+    }
+
+    public void setCapturer(Player capturer) {
+        this.capturer = capturer.getUniqueId();
     }
 
 }
