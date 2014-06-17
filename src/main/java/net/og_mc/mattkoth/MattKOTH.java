@@ -8,6 +8,7 @@ package net.og_mc.mattkoth;
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.Gameplay;
+import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.util.Messaging;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ import org.bukkit.entity.Player;
  */
 public class MattKOTH extends Gameplay<KOTHState> {
 
-    private Game game;
+    private Game<KOTHState> game;
 
     public MattKOTH(CloudGame plugin) {
         super(plugin, "KOTH");
@@ -33,8 +34,12 @@ public class MattKOTH extends Gameplay<KOTHState> {
         getPlugin().getCommand("koth").setExecutor(new KOTHCommand(this));
     }
 
-    public Game getGame() {
-        return game;
+    public boolean createGame(Arena arena) {
+        if (game != null) {
+            return false;
+        }
+        game = getPlugin().getGameManager().createGame(this, arena);
+        return true;
     }
 
     @Override
