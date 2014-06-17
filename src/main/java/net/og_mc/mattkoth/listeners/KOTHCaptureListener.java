@@ -42,6 +42,7 @@ public class KOTHCaptureListener extends GameListener<KOTHState> {
 
         // Initial capture!
         game.getState().setCapturer(e.getPlayer());
-        game.broadcast(e.getPlayer().getName() + " has taken control of the hill!");
+        game.broadcast(ChatColor.RED + e.getPlayer().getName() + " is now holding the koth point! "
+                + "Kill them or knock them out of the ring within two minutes or they'll claim their prize! ");
     }
 }
