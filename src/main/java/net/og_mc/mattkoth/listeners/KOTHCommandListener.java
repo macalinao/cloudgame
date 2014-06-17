@@ -25,7 +25,7 @@ public class KOTHCommandListener extends GameListener<KOTHState> {
     @EventHandler
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
         Game<KOTHState> game = game(e.getPlayer());
-        if (game != null && !e.getMessage().startsWith("/koth")) {
+        if (game != null && game.getState().isStarted() && !e.getMessage().startsWith("/koth")) {
             e.setCancelled(true);
         }
     }
