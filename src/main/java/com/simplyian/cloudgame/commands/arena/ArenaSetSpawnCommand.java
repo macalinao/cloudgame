@@ -18,8 +18,10 @@ import org.bukkit.entity.Player;
  */
 public class ArenaSetSpawnCommand extends PlayerCommandHandler {
 
+    private final CloudGame plugin;
+
     public ArenaSetSpawnCommand(CloudGame plugin) {
-        super(plugin);
+        this.plugin = plugin;
     }
 
     @Override

@@ -17,8 +17,10 @@ import org.bukkit.entity.Player;
  */
 public class KOTHCommand extends PlayerCommandHandler {
 
-    public KOTHCommand(CloudGame plugin) {
-        super(plugin);
+    private final MattKOTH koth;
+
+    public KOTHCommand(MattKOTH koth) {
+        this.koth = koth;
     }
 
     @Override

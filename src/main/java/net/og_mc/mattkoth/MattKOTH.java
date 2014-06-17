@@ -22,8 +22,15 @@ import org.bukkit.entity.Player;
  */
 public class MattKOTH extends Gameplay<KOTHState> {
 
+    private Game game;
+
     public MattKOTH(CloudGame plugin) {
         super(plugin, "KOTH");
+    }
+
+    @Override
+    public void onEnable() {
+        super.onEnable(); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

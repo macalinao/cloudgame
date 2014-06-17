@@ -19,8 +19,10 @@ import org.bukkit.entity.Player;
  */
 public class ArenaListSpawnsCommand extends PlayerCommandHandler {
 
+    private final CloudGame plugin;
+
     public ArenaListSpawnsCommand(CloudGame plugin) {
-        super(plugin);
+        this.plugin = plugin;
     }
 
     @Override

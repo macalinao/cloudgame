@@ -16,10 +16,6 @@ import org.bukkit.entity.Player;
  */
 public abstract class PlayerCommandHandler extends CommandHandler {
 
-    public PlayerCommandHandler(CloudGame plugin) {
-        super(plugin);
-    }
-
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {

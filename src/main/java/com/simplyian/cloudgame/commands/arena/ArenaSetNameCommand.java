@@ -19,8 +19,10 @@ import org.bukkit.entity.Player;
  */
 public class ArenaSetNameCommand extends PlayerCommandHandler {
 
+    private final CloudGame plugin;
+
     public ArenaSetNameCommand(CloudGame plugin) {
-        super(plugin);
+        this.plugin = plugin;
     }
 
     @Override

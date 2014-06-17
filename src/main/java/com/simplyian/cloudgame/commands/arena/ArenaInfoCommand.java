@@ -19,8 +19,10 @@ import org.bukkit.entity.Player;
  */
 public class ArenaInfoCommand extends PlayerCommandHandler {
 
+    private final CloudGame plugin;
+
     public ArenaInfoCommand(CloudGame plugin) {
-        super(plugin);
+        this.plugin = plugin;
     }
 
     @Override

@@ -17,13 +17,7 @@ import org.bukkit.command.CommandSender;
  */
 public abstract class CommandHandler implements CommandExecutor {
 
-    protected final CloudGame plugin;
-
     private Command command = null;
-
-    public CommandHandler(CloudGame plugin) {
-        this.plugin = plugin;
-    }
 
     protected void setCommand(Command command) {
         if (command == null) {
