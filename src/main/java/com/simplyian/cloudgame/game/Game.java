@@ -6,11 +6,10 @@
 package com.simplyian.cloudgame.game;
 
 import com.simplyian.cloudgame.gameplay.Gameplay;
-import com.simplyian.cloudgame.gameplay.MessageHandler;
 import com.simplyian.cloudgame.gameplay.State;
 import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.stats.Stats;
-import java.util.Map;
+import org.bukkit.entity.Player;
 
 /**
  *
@@ -48,6 +47,17 @@ public class Game<T extends State> {
 
     public Stats getStats() {
         return stats;
+    }
+
+    /**
+     * Broadcasts a message to all players in the game.
+     *
+     * @param message
+     */
+    public void broadcast(String message) {
+        for (Player player : state.getPlayers()) {
+            gameplay.sendGameMessage(player, message);
+        }
     }
 
 }

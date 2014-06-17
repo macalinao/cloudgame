@@ -7,6 +7,8 @@ package com.simplyian.cloudgame.model.region;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.simplyian.cloudgame.model.Model;
+import com.sk89q.worldedit.Vector;
+import org.bukkit.Location;
 import org.bukkit.World;
 
 /**
@@ -37,5 +39,15 @@ public class Region extends Model {
      */
     public ProtectedRegion getRegion() {
         return region;
+    }
+
+    /**
+     * Returns true if this region contains the given location.
+     *
+     * @param loc
+     * @return
+     */
+    public boolean contains(Location loc) {
+        return loc.getWorld().equals(world) && region.contains(new Vector(loc.getX(), loc.getY(), loc.getZ()));
     }
 }

@@ -10,6 +10,7 @@ import com.simplyian.cloudgame.gameplay.GameListener;
 import com.simplyian.cloudgame.model.region.Region;
 import net.og_mc.mattkoth.KOTHState;
 import net.og_mc.mattkoth.MattKOTH;
+import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 
@@ -23,10 +24,14 @@ public class KOTHCaptureListener extends GameListener<KOTHState> {
         super(koth);
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onInitialCapture(PlayerMoveEvent e) {
         Game<KOTHState> game = game(e.getPlayer());
         if (game == null) {
+            return;
+        }
+
+        if (game.getState().getCapturer() != null) {
             return;
         }
 
@@ -35,6 +40,12 @@ public class KOTHCaptureListener extends GameListener<KOTHState> {
         }
 
         Region hill = getGameplay().getPlugin().getModelManager().getRegions().findById(game.getArena().getProperty("koth.hill").toString());
-        
+        if (!hill.contains(e.getTo())) {
+            return;
+        }
+
+        // Initial capture!
+        game.getState().setCapturer(e.getPlayer());
+        game.broadcast(e.getPlayer().getName() + " has taken control of the hill!");
     }
 }
