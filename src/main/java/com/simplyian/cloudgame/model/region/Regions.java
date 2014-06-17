@@ -7,12 +7,10 @@ package com.simplyian.cloudgame.model.region;
 
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import java.util.ArrayList;
-import java.util.List;
-import com.simplyian.cloudgame.CloudGame;
 import static com.simplyian.cloudgame.CloudGame.wg;
 import com.simplyian.cloudgame.model.ModelManager;
 import com.simplyian.cloudgame.model.Models;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -30,6 +28,25 @@ public class Regions extends Models<Region> {
 
     public Region create(World world, ProtectedRegion pr) {
         return add(new Region(id(world, pr), world, pr));
+    }
+
+    @Override
+    public Region findById(String id) {
+        Region r = super.findById(id);
+        if (r == null) {
+            String[] split = id.split(";");
+            World world = Bukkit.getWorld(split[0]);
+            if (world == null) {
+                return null;
+            }
+            ProtectedRegion region = WorldGuardPlugin.inst().getRegionManager(world).getRegion(split[1]);
+            if (region == null) {
+                return null;
+            }
+            r = new Region(id, world, region);
+            add(r);
+        }
+        return r;
     }
 
     public Region find(World world, ProtectedRegion pr) {
@@ -60,26 +77,12 @@ public class Regions extends Models<Region> {
 
     @Override
     protected void load(YamlConfiguration modelsConf) {
-        List<String> regionIds = modelsConf.getStringList("regions");
-        if (regionIds == null || regionIds.isEmpty()) {
-            return;
-        }
-        for (String regionId : regionIds) {
-            String[] split = regionId.split(";");
-            World world = Bukkit.getWorld(split[0]);
-            ProtectedRegion region = wg().getRegionManager(world).getRegion(split[1]);
-            Region r = new Region(regionId, world, region);
-            add(r);
-        }
+        // no loading. lazy loaded
     }
 
     @Override
     protected void save(YamlConfiguration modelsConf) {
-        List<String> ids = new ArrayList<>();
-        for (Region r : findAll()) {
-            ids.add(r.getId());
-        }
-        modelsConf.set("regions", ids);
+        // no saving. lazy loaded
     }
 
     private String id(World world, ProtectedRegion pr) {

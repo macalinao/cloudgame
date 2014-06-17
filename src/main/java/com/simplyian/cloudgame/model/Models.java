@@ -63,7 +63,7 @@ public abstract class Models<T extends Model> {
     }
 
     public List<T> findAll() {
-        return new ArrayList<T>(map.values());
+        return new ArrayList<>(map.values());
     }
 
     /**
