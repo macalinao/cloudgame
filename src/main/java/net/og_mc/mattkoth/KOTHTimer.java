@@ -6,6 +6,8 @@
 package net.og_mc.mattkoth;
 
 import com.simplyian.cloudgame.game.Game;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 /**
@@ -24,7 +26,18 @@ public class KOTHTimer extends BukkitRunnable {
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        announceTimeLeft();
     }
 
+    private void announceTimeLeft() {
+        int secsElapsed = (((int) (System.currentTimeMillis() - start)) / 1000);
+        int remainingTime = (10 * 60) - secsElapsed;
+        int halfMins = remainingTime / 30;
+        int mins = halfMins / 2;
+        boolean halfMin = halfMins % 2 == 1;
+
+        for (Player p : game.getState().getPlayers()) {
+            game.getGameplay().sendGameMessage(p, "There are " + mins + " minutes " + (halfMin ? "and 30 seconds " : "") + "left!");
+        }
+    }
 }
