@@ -50,17 +50,4 @@ public class Game<T extends State> {
         return stats;
     }
 
-    /**
-     * Sends a message to this game.
-     *
-     * @param type
-     * @param message
-     */
-    public void send(String type, Map<String, Object> message) {
-        MessageHandler<T> handler = gameplay.getHandler(type);
-        if (handler != null) {
-            handler.onReceive(this, message);
-        }
-    }
-
 }

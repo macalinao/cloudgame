@@ -5,6 +5,7 @@
  */
 package net.og_mc.mattkoth;
 
+import com.simplyian.cloudgame.events.GameStartEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.util.Messaging;
 import org.bukkit.Bukkit;
@@ -49,7 +50,7 @@ public class KOTHAnnouncerTask extends BukkitRunnable {
             announceCount++;
         } else if (secsLeft <= 0 && announceCount == 5) {
             announceStart();
-            game.send("START", null);
+            Bukkit.getPluginManager().callEvent(new GameStartEvent(game));
             announceCount++; // just in case
             cancel();
         }

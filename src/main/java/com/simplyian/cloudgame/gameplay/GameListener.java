@@ -6,6 +6,7 @@
 package com.simplyian.cloudgame.gameplay;
 
 import com.simplyian.cloudgame.CloudGame;
+import com.simplyian.cloudgame.events.GameEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.model.region.Region;
 import org.bukkit.Location;
@@ -23,6 +24,10 @@ public class GameListener<T extends State> implements Listener {
 
     public GameListener(Gameplay<T> gameplay) {
         this.gameplay = gameplay;
+    }
+
+    public Gameplay<T> getGameplay() {
+        return gameplay;
     }
 
     /**
@@ -61,5 +66,18 @@ public class GameListener<T extends State> implements Listener {
             return null;
         }
         return (Game<T>) game;
+    }
+
+    /**
+     * Gets the game of the given game event.
+     *
+     * @param g
+     * @return
+     */
+    public Game<T> game(GameEvent g) {
+        if (!g.getGame().getGameplay().equals(gameplay)) {
+            return null;
+        }
+        return (Game<T>) g.getGame();
     }
 }

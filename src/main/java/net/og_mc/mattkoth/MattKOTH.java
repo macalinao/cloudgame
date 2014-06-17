@@ -12,10 +12,6 @@ import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.model.region.Region;
 import java.util.ArrayList;
 import java.util.List;
-import net.og_mc.mattkoth.handlers.JoinHandler;
-import net.og_mc.mattkoth.handlers.LeaveHandler;
-import net.og_mc.mattkoth.handlers.QuitHandler;
-import net.og_mc.mattkoth.handlers.StartHandler;
 import org.bukkit.entity.Player;
 
 /**
@@ -34,10 +30,7 @@ public class MattKOTH extends Gameplay<KOTHState> {
     public void onEnable() {
         getPlugin().getCommand("koth").setExecutor(new KOTHCommand(this));
 
-        addHandler("START", new StartHandler(getPlugin()));
-        addHandler("JOIN", new JoinHandler(getPlugin()));
-        addHandler("LEAVE", new LeaveHandler(getPlugin()));
-        addHandler("QUIT", new QuitHandler(getPlugin()));
+        getPlugin().getServer().getPluginManager().registerEvents(new KOTHListener(this), getPlugin());
     }
 
     public boolean createGame(Arena arena) {

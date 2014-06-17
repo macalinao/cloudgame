@@ -5,12 +5,11 @@
  */
 package com.simplyian.cloudgame.gameplay;
 
-import static com.avaje.ebeaninternal.server.core.Message.msg;
+import com.simplyian.cloudgame.events.GameQuitEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.stats.Death;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -63,9 +62,7 @@ public class CoreGameListener<T extends State> extends GameListener<T> {
     public void onPlayerQuit(PlayerQuitEvent e) {
         Game<T> g = game(e.getPlayer());
         if (g != null) {
-            Map<String, Object> msg = new HashMap<>();
-            msg.put("player", e.getPlayer());
-            g.send("QUIT", msg);
+            Bukkit.getPluginManager().callEvent(new GameQuitEvent(g, e.getPlayer()));
         }
     }
 
