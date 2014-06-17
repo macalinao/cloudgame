@@ -20,7 +20,7 @@ public abstract class CommandHandler implements CommandExecutor {
     private Command command = null;
 
     protected void setCommand(Command command) {
-        if (command == null) {
+        if (this.command == null) {
             this.command = command;
         }
     }

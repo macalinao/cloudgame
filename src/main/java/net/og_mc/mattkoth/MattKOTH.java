@@ -28,7 +28,7 @@ public class MattKOTH extends Gameplay<KOTHState> {
 
     @Override
     public void onEnable() {
-        getPlugin().getCommand("koth").setExecutor(new KOTHCommand(this));
+        getPlugin().getCommands().registerCommand("koth", new KOTHCommand(this));
 
         getPlugin().getServer().getPluginManager().registerEvents(new KOTHListener(this), getPlugin());
     }
