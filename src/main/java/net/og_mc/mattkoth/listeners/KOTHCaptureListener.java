@@ -27,11 +27,7 @@ public class KOTHCaptureListener extends GameListener<KOTHState> {
     @EventHandler(ignoreCancelled = true)
     public void onInitialCapture(PlayerMoveEvent e) {
         Game<KOTHState> game = game(e.getPlayer());
-        if (game == null) {
-            return;
-        }
-
-        if (game.getState().getCapturer() != null) {
+        if (game == null || !game.getState().isStarted() || (game.getState().getCapturer() != null)) {
             return;
         }
 
