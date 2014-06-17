@@ -126,12 +126,4 @@ public abstract class Gameplay<T extends State> {
      */
     public abstract List<Player> getPlayers(Game<T> game);
 
-    /**
-     * Handles the quitting of a player.
-     *
-     * @param game
-     * @param p
-     */
-    public abstract void handleQuit(Game<T> game, Player p);
-
 }

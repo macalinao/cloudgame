@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.og_mc.mattkoth.handlers.JoinHandler;
 import net.og_mc.mattkoth.handlers.LeaveHandler;
+import net.og_mc.mattkoth.handlers.QuitHandler;
 import net.og_mc.mattkoth.handlers.StartHandler;
 import org.bukkit.entity.Player;
 
@@ -36,6 +37,7 @@ public class MattKOTH extends Gameplay<KOTHState> {
         addHandler("START", new StartHandler(getPlugin()));
         addHandler("JOIN", new JoinHandler(getPlugin()));
         addHandler("LEAVE", new LeaveHandler(getPlugin()));
+        addHandler("QUIT", new QuitHandler(getPlugin()));
     }
 
     public boolean createGame(Arena arena) {
@@ -61,10 +63,5 @@ public class MattKOTH extends Gameplay<KOTHState> {
     @Override
     public List<Player> getPlayers(Game<KOTHState> game) {
         return new ArrayList<>(game.getState().getPlayers());
-    }
-
-    @Override
-    public void handleQuit(Game<KOTHState> game, Player p) {
-        game.getState().removePlayer(p); // TODO handle it better
     }
 }
