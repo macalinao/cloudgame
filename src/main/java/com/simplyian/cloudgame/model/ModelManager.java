@@ -37,6 +37,7 @@ public class ModelManager {
     public void load() {
         modelsFolder.mkdirs();
         try {
+            regions.load();
             arenas.load();
         } catch (IOException ex) {
             plugin.getLogger().log(Level.SEVERE, "Error loading models!", ex);
@@ -46,6 +47,7 @@ public class ModelManager {
     public void save() {
         modelsFolder.mkdirs();
         try {
+            regions.save();
             arenas.save();
         } catch (IOException ex) {
             plugin.getLogger().log(Level.SEVERE, "Error saving models!", ex);
