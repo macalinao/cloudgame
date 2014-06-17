@@ -126,14 +126,14 @@ public class Arena extends Model {
         int spawnCt = spawns.size();
         int spawnsPerTeam = spawnCt / numTeams;
         int spawnId = Rand.r.nextInt(spawnsPerTeam);
-        return getSpawn(teamId * spawnsPerTeam + spawnId);
+        return getSpawn(teamId * spawnsPerTeam + spawnId + 1);
     }
 
     public Location getNextSpawn() {
         if (spawns.isEmpty()) {
             return null;
         }
-        return getSpawn(Rand.r.nextInt(spawns.size()));
+        return getSpawn(Rand.r.nextInt(spawns.size()) + 1);
     }
 
     /**
