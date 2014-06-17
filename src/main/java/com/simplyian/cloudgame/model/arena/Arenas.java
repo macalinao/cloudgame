@@ -54,7 +54,7 @@ public class Arenas extends Models<Arena> {
      */
     public Arena findByLobby(Region r) {
         for (Arena a : findAll()) {
-            if (a.getLobby().equals(r)) {
+            if (a.getLobby() != null && a.getLobby().equals(r)) {
                 return a;
             }
         }
