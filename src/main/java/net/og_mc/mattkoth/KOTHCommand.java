@@ -143,7 +143,7 @@ public class KOTHCommand extends PlayerCommandHandler {
             return;
         }
 
-        arena.setSpawn(spawnNumber, player.getLocation());
+        // TODO set the spawn.
         player.sendMessage(ChatColor.GREEN + "Spawn " + spawnNumber + " has been set.");
     }
 }

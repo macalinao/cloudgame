@@ -83,7 +83,7 @@ public class Arena extends Model {
      * @return The index of the created spawn.
      */
     public int addSpawn(Location l) {
-        for (int i = 1;; i++) {
+        for (int i = 0;; i++) {
             if (spawns.containsKey(i)) {
                 continue;
             }
@@ -91,16 +91,6 @@ public class Arena extends Model {
             spawns.put(i, l);
             return i;
         }
-    }
-
-    /**
-     * Sets a spawn.
-     *
-     * @param index
-     * @param l
-     */
-    public void setSpawn(int index, Location l) {
-        spawns.put(index, l);
     }
 
     /**
