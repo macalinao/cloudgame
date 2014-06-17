@@ -112,7 +112,7 @@ public class Arenas extends Models<Arena> {
 
             ConfigurationSection spawnsSect = sect.createSection("spawns");
             for (Entry<Integer, Location> spawnEntry : a.getSpawns().entrySet()) {
-                spawnsSect.set(spawnEntry.getKey().toString(), spawnEntry.getValue());
+                spawnsSect.set(spawnEntry.getKey().toString(), LocationUtils.serialize(spawnEntry.getValue()));
             }
 
             sect.set("properties", a.getProperties());
