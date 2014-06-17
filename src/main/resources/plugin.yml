@@ -33,6 +33,10 @@ commands:
         permission: mattkoth.admin
         usage: /arenasetspawn
 
+    koth:
+        description: KOTH command
+        usage: /koth <command>
+
 permissions:
     mattkoth.admin:
         description: Allows managing of MattKOTH.
