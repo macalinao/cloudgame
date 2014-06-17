@@ -12,9 +12,8 @@ import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.model.region.Region;
-import java.util.ArrayList;
-import java.util.List;
-import org.bukkit.entity.Player;
+import net.og_mc.mattkoth.listeners.KOTHCaptureListener;
+import net.og_mc.mattkoth.listeners.KOTHCommandListener;
 
 /**
  *
@@ -32,6 +31,8 @@ public class MattKOTH extends Gameplay<KOTHState> {
     public void onEnable() {
         getPlugin().getCommands().registerCommand("koth", new KOTHCommand(this));
 
+        getPlugin().getServer().getPluginManager().registerEvents(new KOTHCaptureListener(this), getPlugin());
+        getPlugin().getServer().getPluginManager().registerEvents(new KOTHCommandListener(this), getPlugin());
         getPlugin().getServer().getPluginManager().registerEvents(new KOTHGameListener(this), getPlugin());
     }
 
@@ -53,10 +54,5 @@ public class MattKOTH extends Gameplay<KOTHState> {
     @Override
     public void setup(Game<KOTHState> g) {
         (new KOTHAnnouncerTask(g)).runTaskTimer(getPlugin(), 2L, 2L);
-    }
-
-    @Override
-    public List<Player> getPlayers(Game<KOTHState> game) {
-        return new ArrayList<>(game.getState().getPlayers());
     }
 }

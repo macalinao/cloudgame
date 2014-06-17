@@ -118,12 +118,4 @@ public abstract class Gameplay<T extends State> {
      */
     public abstract void setup(Game<T> g);
 
-    /**
-     * Gets a list of all players in a game.
-     *
-     * @param game
-     * @return
-     */
-    public abstract List<Player> getPlayers(Game<T> game);
-
 }

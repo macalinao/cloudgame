@@ -83,7 +83,7 @@ public class GameManager {
      */
     public Game gameOf(Player p) {
         for (Game g : games.values()) {
-            if (g.getGameplay().getPlayers(g).contains(p)) {
+            if (g.getState().getPlayers().contains(p)) {
                 return g;
             }
         }
