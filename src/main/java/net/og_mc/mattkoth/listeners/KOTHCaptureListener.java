@@ -64,7 +64,7 @@ public class KOTHCaptureListener extends GameListener<KOTHState> {
 
         Player usurper = e.getEntity().getKiller();
         if (usurper == null) {
-            game.getState().setCapturer(null);
+            setCapturer(game, null);
             return;
         }
 
