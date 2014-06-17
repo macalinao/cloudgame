@@ -105,7 +105,15 @@ public class Arenas extends Models<Arena> {
                 spawns.put(spawnIndex, loc);
             }
 
-            Arena a = new Arena(id, name, lobby, main, lobbySpawn, spawns);
+            ConfigurationSection propertiesSection = sect.getConfigurationSection("properties");
+            Map<String, Object> properties = null;
+            if (propertiesSection != null) {
+                properties = propertiesSection.getValues(false);
+            } else {
+                properties = new HashMap<>();
+            }
+
+            Arena a = new Arena(id, name, lobby, main, lobbySpawn, spawns, properties);
             add(a);
         }
     }
@@ -125,6 +133,8 @@ public class Arenas extends Models<Arena> {
             for (Entry<Integer, Location> spawnEntry : a.getSpawns().entrySet()) {
                 spawnsSect.set(spawnEntry.getKey().toString(), spawnEntry.getValue());
             }
+
+            sect.set("properties", a.getProperties());
         }
     }
 

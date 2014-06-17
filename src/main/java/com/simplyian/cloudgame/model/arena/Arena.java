@@ -28,17 +28,20 @@ public class Arena extends Model {
 
     private Map<Integer, Location> spawns;
 
+    private Map<String, Object> properties;
+
     Arena(String id, Region main) {
-        this(id, id, null, main, null, new HashMap<Integer, Location>());
+        this(id, id, null, main, null, new HashMap<Integer, Location>(), new HashMap<String, Object>());
     }
 
-    Arena(String id, String name, Region lobby, Region main, Location lobbySpawn, Map<Integer, Location> spawns) {
+    Arena(String id, String name, Region lobby, Region main, Location lobbySpawn, Map<Integer, Location> spawns, Map<String, Object> properties) {
         super(id);
         this.name = name;
         this.lobby = lobby;
         this.main = main;
         this.lobbySpawn = lobbySpawn;
         this.spawns = spawns;
+        this.properties = properties;
     }
 
     public String getName() {
@@ -120,5 +123,34 @@ public class Arena extends Model {
             return null;
         }
         return getSpawn(Rand.r.nextInt(spawns.size()));
+    }
+
+    /**
+     * Gets a map of all properties of this arena.
+     *
+     * @return
+     */
+    public Map<String, Object> getProperties() {
+        return new HashMap<>(properties);
+    }
+
+    /**
+     * Gets a property of this arena.
+     *
+     * @param name
+     * @return
+     */
+    public Object getProperty(String name) {
+        return properties.get(name);
+    }
+
+    /**
+     * Sets a property of this arena.
+     *
+     * @param name
+     * @param property
+     */
+    public void setProperty(String name, Object property) {
+        properties.put(name, property);
     }
 }
