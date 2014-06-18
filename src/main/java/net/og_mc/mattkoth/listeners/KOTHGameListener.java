@@ -11,6 +11,7 @@ import com.simplyian.cloudgame.events.GameLeaveEvent;
 import com.simplyian.cloudgame.events.GameQuitEvent;
 import com.simplyian.cloudgame.events.GameSpectateEvent;
 import com.simplyian.cloudgame.events.GameStartEvent;
+import com.simplyian.cloudgame.events.GameUnspectateEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.listeners.GameListener;
 import com.simplyian.cloudgame.util.Messaging;
@@ -168,5 +169,20 @@ public class KOTHGameListener extends GameListener<KOTHState> {
         p.teleport(game.getArena().getNextSpawn());
 
         game.getGameplay().sendGameMessage(p, "Type /koth spectate again to exit the mode!");
+    }
+
+    @EventHandler
+    public void onGameUnspectate(GameUnspectateEvent event) {
+        Game<KOTHState> game = game(event);
+        if (game == null) {
+            return;
+        }
+
+        Player p = event.getPlayer();
+
+        game.getState().removeSpectator(p);
+        getGameplay().getPlugin().getPlayerStateManager().loadState(p);
+
+        game.getGameplay().sendGameMessage(p, "You are no longer spectating the game.");
     }
 }

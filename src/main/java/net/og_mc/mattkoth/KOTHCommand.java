@@ -9,6 +9,7 @@ import com.simplyian.cloudgame.command.PlayerCommandHandler;
 import com.simplyian.cloudgame.events.GameJoinEvent;
 import com.simplyian.cloudgame.events.GameLeaveEvent;
 import com.simplyian.cloudgame.events.GameSpectateEvent;
+import com.simplyian.cloudgame.events.GameUnspectateEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.model.region.Region;
@@ -159,6 +160,14 @@ public class KOTHCommand extends PlayerCommandHandler {
     }
 
     private void spectate(Player player, String[] args) {
-        Bukkit.getPluginManager().callEvent(new GameSpectateEvent(koth.getGame(), player));
+        if (koth.getGame() == null) {
+            koth.sendGameMessage(player, "There is currently no game to spectate.");
+        }
+
+        if (koth.getGame().getState().hasSpectator(player)) {
+            Bukkit.getPluginManager().callEvent(new GameUnspectateEvent(koth.getGame(), player));
+        } else {
+            Bukkit.getPluginManager().callEvent(new GameSpectateEvent(koth.getGame(), player));
+        }
     }
 }
