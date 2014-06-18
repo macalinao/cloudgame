@@ -10,6 +10,7 @@ import com.simplyian.cloudgame.commands.arena.ArenaCreateCommand;
 import com.simplyian.cloudgame.commands.arena.ArenaDeleteCommand;
 import com.simplyian.cloudgame.commands.arena.ArenaInfoCommand;
 import com.simplyian.cloudgame.commands.arena.ArenaListSpawnsCommand;
+import com.simplyian.cloudgame.commands.arena.ArenaReloadCommand;
 import com.simplyian.cloudgame.commands.arena.ArenaResetSpawnsCommand;
 import com.simplyian.cloudgame.commands.arena.ArenaSetNameCommand;
 import com.simplyian.cloudgame.commands.arena.ArenaSetSpawnCommand;
@@ -35,9 +36,10 @@ public class Commands {
 
     public void registerDefaultCommands() {
         registerCommand("arenacreate", new ArenaCreateCommand(plugin));
-        registerCommand("arenacreate", new ArenaDeleteCommand(plugin));
+        registerCommand("arenadelete", new ArenaDeleteCommand(plugin));
         registerCommand("arenainfo", new ArenaInfoCommand(plugin));
         registerCommand("arenalistspawns", new ArenaListSpawnsCommand(plugin));
+        registerCommand("arenareload", new ArenaReloadCommand(plugin));
         registerCommand("arenaresetspawns", new ArenaResetSpawnsCommand(plugin));
         registerCommand("arenasetname", new ArenaSetNameCommand(plugin));
         registerCommand("arenasetspawn", new ArenaSetSpawnCommand(plugin));

@@ -24,6 +24,10 @@ commands:
         description: Lists the spawns of an arena.
         permission: mattkoth.admin
         usage: /arenalistspawns
+    arenareload:
+        description: Reloads all arenas from the arenas.yml
+        permission: mattkoth.admin
+        usage: /arenareload
     arenaresetspawns:
         description: Resets the spawns of an arena
         permission: mattkoth.admin
