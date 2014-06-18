@@ -4,7 +4,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.simplyian.cloudgame.command.Commands;
 import com.simplyian.cloudgame.game.GameManager;
 import com.simplyian.cloudgame.gameplay.GameplayManager;
-import com.simplyian.cloudgame.inventory.InventoryManager;
+import com.simplyian.cloudgame.playerstate.PlayerStateManager;
 import com.simplyian.cloudgame.model.ModelManager;
 import net.og_mc.mattkoth.MattKOTH;
 import org.bukkit.Bukkit;
@@ -22,7 +22,7 @@ public class CloudGame extends JavaPlugin {
 
     private GameplayManager gameplayManager;
 
-    private InventoryManager inventoryManager;
+    private PlayerStateManager playerStateManager;
 
     @Override
     public void onEnable() {
@@ -40,13 +40,13 @@ public class CloudGame extends JavaPlugin {
         gameplayManager.addGameplay(new MattKOTH(this));
         gameplayManager.onEnable();
 
-        inventoryManager = new InventoryManager(this);
-        inventoryManager.load();
+        playerStateManager = new PlayerStateManager(this);
+        playerStateManager.load();
     }
 
     @Override
     public void onDisable() {
-        inventoryManager.save();
+        playerStateManager.save();
         gameplayManager.onDisable();
         modelManager.save();
 
@@ -54,7 +54,7 @@ public class CloudGame extends JavaPlugin {
         modelManager = null;
         gameManager = null;
         gameplayManager = null;
-        inventoryManager = null;
+        playerStateManager = null;
 
         i = null;
     }
@@ -71,8 +71,8 @@ public class CloudGame extends JavaPlugin {
         return gameManager;
     }
 
-    public InventoryManager getInventoryManager() {
-        return inventoryManager;
+    public PlayerStateManager getPlayerStateManager() {
+        return playerStateManager;
     }
 
     public static WorldGuardPlugin wg() {

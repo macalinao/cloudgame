@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.simplyian.cloudgame.inventory;
+package com.simplyian.cloudgame.playerstate;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -13,17 +13,17 @@ import org.bukkit.inventory.ItemStack;
  *
  * @author simplyianm
  */
-public class InventoryStore {
+public class PlayerState {
 
     public float xp;
     public ItemStack[] main;
     public ItemStack[] armor;
 
-    public InventoryStore(ConfigurationSection store) {
+    public PlayerState(ConfigurationSection store) {
         load(store);
     }
 
-    public InventoryStore(Player p) {
+    public PlayerState(Player p) {
         xp = p.getExp();
         main = p.getInventory().getContents();
         armor = p.getInventory().getArmorContents();

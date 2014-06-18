@@ -39,7 +39,7 @@ public class KOTHGameListener extends GameListener<KOTHState> {
 
         KOTHState state = game.getState();
         for (Player p : state.getPlayers()) {
-            getGameplay().getPlugin().getInventoryManager().backupInventory(p);
+            getGameplay().getPlugin().getPlayerStateManager().saveState(p);
 
             Location spawn = game.getArena().getNextSpawn();
             p.teleport(spawn);
@@ -127,7 +127,7 @@ public class KOTHGameListener extends GameListener<KOTHState> {
      */
     private void restorePlayer(Game<KOTHState> game, Player p) {
         game.getState().removePlayer(p);
-        getGameplay().getPlugin().getInventoryManager().restoreInventory(p);
+        getGameplay().getPlugin().getPlayerStateManager().loadState(p);
         // TODO restore old location
     }
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.simplyian.cloudgame.inventory;
+package com.simplyian.cloudgame.playerstate;
 
 import com.simplyian.cloudgame.CloudGame;
 import java.io.File;
@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -23,20 +24,20 @@ import org.bukkit.inventory.PlayerInventory;
  *
  * @author simplyianm
  */
-public class InventoryManager {
+public class PlayerStateManager {
 
     private final CloudGame plugin;
 
     private File invsFile;
 
-    private Map<String, InventoryStore> invs = new HashMap<>();
+    private Map<UUID, PlayerState> states = new HashMap<>();
 
-    public InventoryManager(CloudGame plugin) {
+    public PlayerStateManager(CloudGame plugin) {
         this.plugin = plugin;
     }
 
     public void load() {
-        invs = new HashMap<>();
+        states = new HashMap<>();
 
         invsFile = new File(plugin.getDataFolder(), "invs.yml");
         if (!invsFile.exists()) {
@@ -44,9 +45,9 @@ public class InventoryManager {
         }
 
         YamlConfiguration store = YamlConfiguration.loadConfiguration(invsFile);
-        for (String pn : store.getKeys(false)) {
-            InventoryStore inv = new InventoryStore(store.getConfigurationSection(pn));
-            invs.put(pn, inv);
+        for (String uuids : store.getKeys(false)) {
+            PlayerState inv = new PlayerState(store.getConfigurationSection(uuids));
+            states.put(UUID.fromString(uuids), inv);
         }
     }
 
@@ -55,36 +56,46 @@ public class InventoryManager {
             invsFile.getParentFile().mkdirs();
             invsFile.createNewFile();
         } catch (IOException ex) {
-            Logger.getLogger(InventoryManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PlayerStateManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         YamlConfiguration store = new YamlConfiguration();
 
-        for (Entry<String, InventoryStore> inv : invs.entrySet()) {
-            inv.getValue().save(store.createSection(inv.getKey()));
+        for (Entry<UUID, PlayerState> inv : states.entrySet()) {
+            inv.getValue().save(store.createSection(inv.getKey().toString()));
         }
 
         try {
             store.save(invsFile);
         } catch (IOException ex) {
-            Logger.getLogger(InventoryManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PlayerStateManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void backupInventory(Player p) {
+    /**
+     * Loads a player's saved state.
+     *
+     * @param p
+     */
+    public void loadState(Player p) {
+        PlayerState is = states.get(p.getUniqueId());
+        if (is == null) {
+            return;
+        }
+
+        is.restore(p);
+        states.remove(p.getUniqueId());
+    }
+
+    /**
+     * Saves the current state of a player.
+     *
+     * @param p
+     */
+    public void saveState(Player p) {
         PlayerInventory i = p.getInventory();
-        invs.put(p.getName(), new InventoryStore(p));
+        states.put(p.getUniqueId(), new PlayerState(p));
         i.clear();
         i.setArmorContents(new ItemStack[4]);
-    }
-
-    public void restoreInventory(Player p) {
-        InventoryStore is = invs.get(p.getName());
-        if (is == null) {
-            p.getInventory().clear();
-        } else {
-            is.restore(p);
-        }
-        invs.remove(p.getName());
     }
 }
