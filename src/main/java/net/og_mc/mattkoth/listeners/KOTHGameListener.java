@@ -163,9 +163,13 @@ public class KOTHGameListener extends GameListener<KOTHState> {
         }
 
         Player p = event.getPlayer();
-
         if (!game.getState().isStarted()) {
             p.sendMessage(ChatColor.RED + "The game hasn't started yet!");
+            return;
+        }
+
+        if (game.getState().hasPlayer(p)) {
+            p.sendMessage(ChatColor.RED + "You can't use this command as a player!");
             return;
         }
 
