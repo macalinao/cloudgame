@@ -148,6 +148,10 @@ public class KOTHGameListener extends GameListener<KOTHState> {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ccrates give 3 " + winner.getName() + " 3");
         }
 
+        for (Player p : game.getState().getPlayers()) {
+            getGameplay().getPlugin().getPlayerStateManager().loadState(p);
+            // Restore previous locations and inventories
+        }
         getGameplay().getPlugin().getGameManager().removeGame(game);
         ((MattKOTH) getGameplay()).setGame(null);
     }
