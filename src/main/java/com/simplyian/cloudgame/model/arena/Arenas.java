@@ -47,8 +47,18 @@ public class Arenas extends Models<Arena> {
         return findByRegion(r);
     }
 
+    /**
+     * Finds an arena from a player requesting an arena.
+     *
+     * @param player
+     * @param name
+     * @return
+     */
     public Arena find(Player player, String name) {
-        Region r = getModelManager().getRegions().find(player.getWorld(), name);
+        Region r = getModelManager().getRegions().findById(name);
+        if (r == null) {
+            r = getModelManager().getRegions().find(player.getWorld(), name);
+        }
         return findByRegion(r);
     }
 
