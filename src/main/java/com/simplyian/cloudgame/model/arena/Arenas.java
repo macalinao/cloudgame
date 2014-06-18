@@ -102,7 +102,12 @@ public class Arenas extends Models<Arena> {
             Map<Integer, Location> spawns = new HashMap<>();
             ConfigurationSection spawnsSect = sect.getConfigurationSection("spawns");
             for (String spawnIndexStr : spawnsSect.getKeys(false)) {
-                int spawnIndex = Integer.getInteger(spawnIndexStr);
+                int spawnIndex = -1;
+                try {
+                    spawnIndex = Integer.parseInt(spawnIndexStr);
+                } catch (NumberFormatException ex) {
+                    continue;
+                }
                 Location loc = LocationUtils.deserialize(spawnsSect.getString(spawnIndexStr));
                 spawns.put(spawnIndex, loc);
             }
