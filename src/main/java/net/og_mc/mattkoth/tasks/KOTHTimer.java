@@ -29,12 +29,14 @@ public class KOTHTimer extends BukkitRunnable {
 
         if (game.getState().secondsCaptured() > 120) {
             Bukkit.getPluginManager().callEvent(new GameEndEvent(game));
+            cancel();
             return;
         }
 
         if (game.getState().remainingTime() <= 0 // Should the game end?
                 && game.getState().secondsCaptured() != -1) { // Overtime check
             Bukkit.getPluginManager().callEvent(new GameEndEvent(game));
+            cancel();
         }
     }
 
