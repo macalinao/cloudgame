@@ -8,6 +8,7 @@ package net.og_mc.mattkoth;
 import com.simplyian.cloudgame.command.PlayerCommandHandler;
 import com.simplyian.cloudgame.events.GameJoinEvent;
 import com.simplyian.cloudgame.events.GameLeaveEvent;
+import com.simplyian.cloudgame.events.GameSpectateEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.model.region.Region;
@@ -51,6 +52,9 @@ public class KOTHCommand extends PlayerCommandHandler {
                 return;
             case "setspawn":
                 setspawn(player, args);
+                return;
+            case "spectate":
+                spectate(player, args);
                 return;
         }
 
@@ -152,5 +156,9 @@ public class KOTHCommand extends PlayerCommandHandler {
 
         arena.setSpawn(spawnNumber - 1, player.getLocation());
         player.sendMessage(ChatColor.GREEN + "Spawn " + spawnNumber + " has been set.");
+    }
+
+    private void spectate(Player player, String[] args) {
+        Bukkit.getPluginManager().callEvent(new GameSpectateEvent(koth.getGame(), player));
     }
 }
