@@ -7,6 +7,7 @@ package com.simplyian.cloudgame.playerstate;
 
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.util.InventoryUtils;
+import com.simplyian.cloudgame.util.LocationUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -53,9 +55,10 @@ public class PlayerStateManager {
             float xp = (float) sect.getDouble("xp", 0);
             ItemStack[] main = InventoryUtils.loadSection(sect.getConfigurationSection("main"), 36);
             ItemStack[] armor = InventoryUtils.loadSection(sect.getConfigurationSection("armor"), 4);
+            Location location = LocationUtils.deserialize(sect.getString("location"));
 
-            PlayerState inv = new PlayerState(xp, main, armor);
-            states.put(UUID.fromString(uuids), inv);
+            PlayerState state = new PlayerState(xp, main, armor, location);
+            states.put(UUID.fromString(uuids), state);
         }
     }
 
@@ -69,13 +72,14 @@ public class PlayerStateManager {
 
         YamlConfiguration store = new YamlConfiguration();
 
-        for (Entry<UUID, PlayerState> inv : states.entrySet()) {
-            ConfigurationSection sect = store.createSection(inv.getKey().toString());
+        for (Entry<UUID, PlayerState> stateEntry : states.entrySet()) {
+            ConfigurationSection sect = store.createSection(stateEntry.getKey().toString());
 
-            PlayerState state = inv.getValue();
+            PlayerState state = stateEntry.getValue();
             sect.set("xp", state.getXp());
             InventoryUtils.saveSection(sect.createSection("main"), state.getMain());
             InventoryUtils.saveSection(sect.createSection("armor"), state.getArmor());
+            sect.set("location", state.getLocation());
         }
 
         try {
