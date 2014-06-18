@@ -15,6 +15,7 @@ import com.simplyian.cloudgame.util.LocationUtils;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 /**
  *
@@ -46,6 +47,11 @@ public class Arenas extends Models<Arena> {
         return findByRegion(r);
     }
 
+    public Arena find(Player player, String name) {
+        Region r = getModelManager().getRegions().find(player.getWorld(), name);
+        return findByRegion(r);
+    }
+
     /**
      * Finds an arena from its main region.
      *
@@ -53,6 +59,9 @@ public class Arenas extends Models<Arena> {
      * @return
      */
     public Arena findByMain(Region r) {
+        if (r == null) {
+            return null;
+        }
         for (Arena a : findAll()) {
             if (a.getMain().equals(r)) {
                 return a;
