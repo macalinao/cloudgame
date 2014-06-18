@@ -60,4 +60,13 @@ public class Game<T extends State> {
         }
     }
 
+    /**
+     * Restores the state of all players in this game.
+     */
+    public void restorePlayers() {
+        for (Player player : state.getPlayers()) {
+            gameplay.getPlugin().getPlayerStateManager().loadState(player);
+        }
+    }
+
 }
