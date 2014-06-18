@@ -105,7 +105,7 @@ public class KOTHCommand extends PlayerCommandHandler {
             return;
         }
 
-        Arena arena = koth.getPlugin().getModelManager().getArenas().findById(args[1]);
+        Arena arena = koth.getPlugin().getModelManager().getArenas().find(player, args[1]);
         if (arena == null) {
             player.sendMessage(ChatColor.RED + "That arena does not exist.");
             return;
