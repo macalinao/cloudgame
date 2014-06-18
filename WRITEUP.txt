@@ -43,6 +43,10 @@ King of the hill minigame.
 ' &2/koth leave&a!
 ' &7&m-&8&m--------------------------------------------------&7&m-'
 
+*Spectating
+/koth spectate
+- When a user starts to spectate, save their inventory, and use hideplayer packets to completely block them from everyone's view. When they first type the command, send them this message '&cType /koth spectate again to exit the mode!'. Upon leaving, give them their inventory, and show packets again. If the server reboots, do the /koth spectate leaving event upon login.
+
 *Leaving a game in progress
 /koth leave
 - The user must have killed at least one person in the koth to leave. If they leave and this hasn't been done, send them:
