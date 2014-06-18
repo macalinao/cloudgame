@@ -57,6 +57,10 @@ public class Regions extends Models<Region> {
         return findById(id(world, pr));
     }
 
+    public Region find(World world, String regionId) {
+        return findById(world.getName() + ";" + regionId);
+    }
+
     /**
      * Finds a region from its location.
      *

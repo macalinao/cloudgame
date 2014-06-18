@@ -113,7 +113,13 @@ public class KOTHCommand extends PlayerCommandHandler {
             return;
         }
 
-        Region region = koth.getPlugin().getModelManager().getRegions().findById(args[1]);
+        Region region = null;
+        if (args[1].contains(";")) {
+            region = koth.getPlugin().getModelManager().getRegions().findById(args[1]);
+        } else {
+            region = koth.getPlugin().getModelManager().getRegions().find(player.getWorld(), args[1]);
+        }
+
         if (region == null) {
             player.sendMessage(ChatColor.RED + "Invalid region.");
             return;
@@ -121,7 +127,13 @@ public class KOTHCommand extends PlayerCommandHandler {
 
         Arena arena = koth.getPlugin().getModelManager().getArenas().findById(args[2]);
         if (arena == null) {
-            Region arenaRegion = koth.getPlugin().getModelManager().getRegions().findById(args[2]);
+            Region arenaRegion = null;
+            if (args[2].contains(";")) {
+                arenaRegion = koth.getPlugin().getModelManager().getRegions().findById(args[2]);
+            } else {
+                arenaRegion = koth.getPlugin().getModelManager().getRegions().find(player.getWorld(), args[2]);
+            }
+
             if (arenaRegion == null) {
                 player.sendMessage(ChatColor.RED + "Invalid arena region.");
                 return;
