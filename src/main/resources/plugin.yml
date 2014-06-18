@@ -12,6 +12,10 @@ commands:
         description: Creates an arena
         permission: mattkoth.admin
         usage: /arenacreate <region> [world=current]
+    arenadelete:
+        description: Deletes an arena
+        permission: mattkoth.admin
+        usage: /arenadelete
     arenainfo:
         description: Gets information about the arena
         permission: mattkoth.admin

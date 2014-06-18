@@ -7,6 +7,7 @@ package com.simplyian.cloudgame.command;
 
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.commands.arena.ArenaCreateCommand;
+import com.simplyian.cloudgame.commands.arena.ArenaDeleteCommand;
 import com.simplyian.cloudgame.commands.arena.ArenaInfoCommand;
 import com.simplyian.cloudgame.commands.arena.ArenaListSpawnsCommand;
 import com.simplyian.cloudgame.commands.arena.ArenaResetSpawnsCommand;
@@ -34,6 +35,7 @@ public class Commands {
 
     public void registerDefaultCommands() {
         registerCommand("arenacreate", new ArenaCreateCommand(plugin));
+        registerCommand("arenacreate", new ArenaDeleteCommand(plugin));
         registerCommand("arenainfo", new ArenaInfoCommand(plugin));
         registerCommand("arenalistspawns", new ArenaListSpawnsCommand(plugin));
         registerCommand("arenaresetspawns", new ArenaResetSpawnsCommand(plugin));
