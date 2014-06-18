@@ -48,7 +48,7 @@ public class KOTHGameListener extends GameListener<KOTHState> {
         }
 
         state.setStarted();
-        (new KOTHTimer(game)).runTaskTimer(getGameplay().getPlugin(), 20L * 10, 20L * 10);
+        (new KOTHTimer(game)).runTaskTimer(getGameplay().getPlugin(), 2L, 2L);
     }
 
     @EventHandler
