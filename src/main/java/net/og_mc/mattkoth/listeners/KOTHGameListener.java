@@ -66,6 +66,11 @@ public class KOTHGameListener extends GameListener<KOTHState> {
             return;
         }
 
+        if (state.hasPlayer(p)) {
+            game.getGameplay().sendGameMessage(p, "You have already joined the KOTH queue!");
+            return;
+        }
+
         state.addPlayer(p);
         Messaging.sendBanner(p, "You've joined the KOTH! Pay attention to the countdown.",
                 "Want to leave the game? Type " + ChatColor.DARK_GREEN + "/koth leave" + ChatColor.GREEN + "!");

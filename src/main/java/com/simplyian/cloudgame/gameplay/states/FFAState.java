@@ -26,6 +26,10 @@ public class FFAState implements State {
         players.add(p.getUniqueId());
     }
 
+    public boolean hasPlayer(Player p) {
+        return players.contains(p.getUniqueId());
+    }
+
     public void removePlayer(Player p) {
         players.remove(p.getUniqueId());
     }
