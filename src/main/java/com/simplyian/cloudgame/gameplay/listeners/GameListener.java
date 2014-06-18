@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.simplyian.cloudgame.gameplay;
+package com.simplyian.cloudgame.gameplay.listeners;
 
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.events.GameEvent;
 import com.simplyian.cloudgame.game.Game;
+import com.simplyian.cloudgame.gameplay.Gameplay;
+import com.simplyian.cloudgame.gameplay.State;
 import com.simplyian.cloudgame.model.region.Region;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -79,5 +81,22 @@ public class GameListener<T extends State> implements Listener {
             return null;
         }
         return (Game<T>) g.getGame();
+    }
+
+    /**
+     * Gets the game spectated by the given player.
+     *
+     * @param p
+     * @return
+     */
+    public Game<T> gameSpectated(Player p) {
+        Game game = CloudGame.i.getGameManager().spectatedGameOf(p);
+        if (game == null) {
+            return null;
+        }
+        if (!game.getGameplay().equals(gameplay)) {
+            return null;
+        }
+        return (Game<T>) game;
     }
 }

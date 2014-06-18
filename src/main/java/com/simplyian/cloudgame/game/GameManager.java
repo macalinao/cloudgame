@@ -87,6 +87,21 @@ public class GameManager {
     }
 
     /**
+     * Gets the spectated game of the given player.
+     *
+     * @param p
+     * @return
+     */
+    public Game<?> spectatedGameOf(Player p) {
+        for (Game g : games.values()) {
+            if (g.getState().getSpectators().contains(p)) {
+                return g;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Gets the game of the given player.
      *
      * @param p

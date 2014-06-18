@@ -6,7 +6,7 @@
 package net.og_mc.mattkoth.listeners;
 
 import com.simplyian.cloudgame.game.Game;
-import com.simplyian.cloudgame.gameplay.GameListener;
+import com.simplyian.cloudgame.gameplay.listeners.GameListener;
 import com.simplyian.cloudgame.model.region.Region;
 import net.og_mc.mattkoth.KOTHState;
 import net.og_mc.mattkoth.MattKOTH;

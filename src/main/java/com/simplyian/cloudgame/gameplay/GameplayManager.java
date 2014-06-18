@@ -8,6 +8,7 @@ package com.simplyian.cloudgame.gameplay;
 import java.util.HashMap;
 import java.util.Map;
 import com.simplyian.cloudgame.CloudGame;
+import com.simplyian.cloudgame.gameplay.listeners.SpectatorListener;
 
 /**
  *
@@ -30,6 +31,7 @@ public class GameplayManager {
         for (Gameplay g : gameplays.values()) {
             // Add core listener to game
             plugin.getServer().getPluginManager().registerEvents(new CoreGameListener(g), plugin);
+            plugin.getServer().getPluginManager().registerEvents(new SpectatorListener(g), plugin);
 
             g.onEnable();
         }

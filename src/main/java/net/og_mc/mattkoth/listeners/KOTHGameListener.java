@@ -11,7 +11,7 @@ import com.simplyian.cloudgame.events.GameLeaveEvent;
 import com.simplyian.cloudgame.events.GameQuitEvent;
 import com.simplyian.cloudgame.events.GameStartEvent;
 import com.simplyian.cloudgame.game.Game;
-import com.simplyian.cloudgame.gameplay.GameListener;
+import com.simplyian.cloudgame.gameplay.listeners.GameListener;
 import com.simplyian.cloudgame.util.Messaging;
 import net.og_mc.mattkoth.KOTHState;
 import net.og_mc.mattkoth.tasks.KOTHTimer;
