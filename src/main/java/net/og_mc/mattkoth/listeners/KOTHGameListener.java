@@ -171,6 +171,9 @@ public class KOTHGameListener extends GameListener<KOTHState> {
 
         getGameplay().getPlugin().getPlayerStateManager().saveState(p);
         game.getState().addSpectator(p);
+        for (Player other : Bukkit.getOnlinePlayers()) {
+            p.hidePlayer(other);
+        }
         p.teleport(game.getArena().getNextSpawn());
 
         game.getGameplay().sendGameMessage(p, "Type /koth spectate again to exit the mode!");
