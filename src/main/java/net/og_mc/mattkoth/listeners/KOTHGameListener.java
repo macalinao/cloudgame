@@ -107,7 +107,8 @@ public class KOTHGameListener extends GameListener<KOTHState> {
         }
 
         if (!failedKillsCheck && !failedDistanceCheck) {
-            restorePlayer(game, p);
+            game.getState().removePlayer(p);
+            getGameplay().getPlugin().getPlayerStateManager().loadState(p);
             game.getGameplay().sendGameMessage(p, "You have left the game.");
         }
     }
@@ -119,6 +120,7 @@ public class KOTHGameListener extends GameListener<KOTHState> {
             return;
         }
         game.getState().removePlayer(event.getPlayer());
+        getGameplay().getPlugin().getPlayerStateManager().loadState(event.getPlayer());
     }
 
     @EventHandler
@@ -138,17 +140,5 @@ public class KOTHGameListener extends GameListener<KOTHState> {
 
         getGameplay().getPlugin().getGameManager().removeGame(game);
         ((MattKOTH) getGameplay()).setGame(null);
-    }
-
-    /**
-     * Restores the player to how they were before.
-     *
-     * @param game
-     * @param p
-     */
-    private void restorePlayer(Game<KOTHState> game, Player p) {
-        game.getState().removePlayer(p);
-        getGameplay().getPlugin().getPlayerStateManager().loadState(p);
-        // TODO restore old location
     }
 }
