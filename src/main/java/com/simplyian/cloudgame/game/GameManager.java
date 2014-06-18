@@ -8,10 +8,12 @@ package com.simplyian.cloudgame.game;
 import java.util.HashMap;
 import java.util.Map;
 import com.simplyian.cloudgame.CloudGame;
+import com.simplyian.cloudgame.events.GameEndEvent;
 import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.gameplay.State;
 import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.model.region.Region;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 /**
@@ -22,7 +24,7 @@ public class GameManager {
 
     private final CloudGame plugin;
 
-    private final Map<Arena, Game> games = new HashMap<>();
+    private final Map<Arena, Game<?>> games = new HashMap<>();
 
     public GameManager(CloudGame plugin) {
         this.plugin = plugin;
@@ -97,5 +99,15 @@ public class GameManager {
             }
         }
         return null;
+    }
+
+    /**
+     * Forces all games to end.
+     */
+    public void endAllGames() {
+        for (Game<?> game : games.values()) {
+            Bukkit.getPluginManager().callEvent(new GameEndEvent(game));
+        }
+        games.clear();
     }
 }

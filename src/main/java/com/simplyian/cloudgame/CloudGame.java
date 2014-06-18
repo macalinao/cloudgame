@@ -34,18 +34,19 @@ public class CloudGame extends JavaPlugin {
         modelManager = new ModelManager(this);
         modelManager.load();
 
-        gameManager = new GameManager(this);
-
         gameplayManager = new GameplayManager(this);
         gameplayManager.addGameplay(new MattKOTH(this));
         gameplayManager.onEnable();
 
         playerStateManager = new PlayerStateManager(this);
         playerStateManager.load();
+
+        gameManager = new GameManager(this);
     }
 
     @Override
     public void onDisable() {
+        gameManager.endAllGames();
         playerStateManager.save();
         gameplayManager.onDisable();
         modelManager.save();
