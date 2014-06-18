@@ -161,7 +161,12 @@ public class KOTHGameListener extends GameListener<KOTHState> {
             return;
         }
 
-        getGameplay().getPlugin().getPlayerStateManager().saveState(event.getPlayer());
-        game.getState().addSpectator(event.getPlayer());
+        Player p = event.getPlayer();
+
+        getGameplay().getPlugin().getPlayerStateManager().saveState(p);
+        game.getState().addSpectator(p);
+        p.teleport(game.getArena().getNextSpawn());
+
+        game.getGameplay().sendGameMessage(p, "Type /koth spectate again to exit the mode!");
     }
 }
