@@ -164,6 +164,11 @@ public class KOTHGameListener extends GameListener<KOTHState> {
 
         Player p = event.getPlayer();
 
+        if (!game.getState().isStarted()) {
+            p.sendMessage(ChatColor.RED + "The game hasn't started yet!");
+            return;
+        }
+
         getGameplay().getPlugin().getPlayerStateManager().saveState(p);
         game.getState().addSpectator(p);
         p.teleport(game.getArena().getNextSpawn());
