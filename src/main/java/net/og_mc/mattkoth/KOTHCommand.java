@@ -149,7 +149,7 @@ public class KOTHCommand extends PlayerCommandHandler {
             return;
         }
 
-        Arena arena = koth.getPlugin().getModelManager().getArenas().findById(args[2]);
+        Arena arena = koth.getPlugin().getModelManager().getArenas().find(player, args[2]);
         if (arena == null) {
             Region arenaRegion = null;
             if (args[2].contains(";")) {
