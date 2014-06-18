@@ -87,7 +87,12 @@ public class KOTHGameListener extends GameListener<KOTHState> {
         Player p = event.getPlayer();
 
         if (!state.isStarted()) {
-            game.getState().removePlayer(p);
+            if (!state.hasPlayer(p)) {
+                game.getGameplay().sendGameMessage(p, "You aren't part of the KOTH queue.");
+                return;
+            }
+
+            state.removePlayer(p);
             game.getGameplay().sendGameMessage(p, "You've left the KOTH. To rejoin, type " + ChatColor.YELLOW + "/koth join" + ChatColor.RED + "!");
             return;
         }
