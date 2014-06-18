@@ -82,6 +82,18 @@ public class KOTHCommand extends PlayerCommandHandler {
         Bukkit.getPluginManager().callEvent(new GameLeaveEvent(koth.getGame(), player));
     }
 
+    private void spectate(Player player, String[] args) {
+        if (koth.getGame() == null) {
+            koth.sendGameMessage(player, "There is currently no game to spectate.");
+        }
+
+        if (koth.getGame().getState().hasSpectator(player)) {
+            Bukkit.getPluginManager().callEvent(new GameUnspectateEvent(koth.getGame(), player));
+        } else {
+            Bukkit.getPluginManager().callEvent(new GameSpectateEvent(koth.getGame(), player));
+        }
+    }
+
     private void start(Player player, String[] args) {
         if (!player.hasPermission("mattkoth.admin")) {
             player.sendMessage(ChatColor.RED + "You can't use this command.");
@@ -192,17 +204,5 @@ public class KOTHCommand extends PlayerCommandHandler {
 
         arena.setSpawn(spawnNumber - 1, player.getLocation());
         player.sendMessage(ChatColor.GREEN + "Spawn " + spawnNumber + " has been set.");
-    }
-
-    private void spectate(Player player, String[] args) {
-        if (koth.getGame() == null) {
-            koth.sendGameMessage(player, "There is currently no game to spectate.");
-        }
-
-        if (koth.getGame().getState().hasSpectator(player)) {
-            Bukkit.getPluginManager().callEvent(new GameUnspectateEvent(koth.getGame(), player));
-        } else {
-            Bukkit.getPluginManager().callEvent(new GameSpectateEvent(koth.getGame(), player));
-        }
     }
 }
