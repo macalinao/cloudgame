@@ -5,6 +5,7 @@
  */
 package com.simplyian.cloudgame.playerstate;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -42,6 +43,11 @@ public class PlayerState {
         p.getInventory().setContents(main);
         p.getInventory().setArmorContents(armor);
         p.teleport(location);
+
+        // Make the player visible again. No reason to store this imo
+        for (Player other : Bukkit.getOnlinePlayers()) {
+            p.showPlayer(other);
+        }
     }
 
     public float getXp() {

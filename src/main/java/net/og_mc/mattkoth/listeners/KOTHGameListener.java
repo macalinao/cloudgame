@@ -9,6 +9,7 @@ import com.simplyian.cloudgame.events.GameEndEvent;
 import com.simplyian.cloudgame.events.GameJoinEvent;
 import com.simplyian.cloudgame.events.GameLeaveEvent;
 import com.simplyian.cloudgame.events.GameQuitEvent;
+import com.simplyian.cloudgame.events.GameSpectateEvent;
 import com.simplyian.cloudgame.events.GameStartEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.listeners.GameListener;
@@ -151,5 +152,16 @@ public class KOTHGameListener extends GameListener<KOTHState> {
         game.restorePlayers();
         getGameplay().getPlugin().getGameManager().removeGame(game);
         ((MattKOTH) getGameplay()).setGame(null);
+    }
+
+    @EventHandler
+    public void onGameSpectate(GameSpectateEvent event) {
+        Game<KOTHState> game = game(event);
+        if (game == null) {
+            return;
+        }
+
+        getGameplay().getPlugin().getPlayerStateManager().saveState(event.getPlayer());
+        game.getState().addSpectator(event.getPlayer());
     }
 }
