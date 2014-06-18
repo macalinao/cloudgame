@@ -33,8 +33,7 @@ public class KOTHTimer extends BukkitRunnable {
         int mins = halfMins / 2;
         boolean halfMin = halfMins % 2 == 1;
 
-        for (Player p : game.getState().getPlayers()) {
-            game.getGameplay().sendGameMessage(p, "There are " + mins + " minutes " + (halfMin ? "and 30 seconds " : "") + "left!");
-        }
+        game.broadcast("There are " + mins + " minutes " + (halfMin ? "and 30 seconds " : "") + "left!");
+        // TODO do what matt wants
     }
 }
