@@ -131,11 +131,13 @@ public class KOTHGameListener extends GameListener<KOTHState> {
         Player winner = game.getState().getCapturer();
         if (winner == null) {
             game.broadcast("Game over! Nobody won!");
-            return;
+        } else {
+            game.broadcast(ChatColor.YELLOW + winner.getName() + ChatColor.RED + " has won the KOTH!");
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ccrates give 3 " + winner.getName() + " 3");
         }
 
-        game.broadcast(ChatColor.YELLOW + winner.getName() + ChatColor.RED + " has won the KOTH!");
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ccrates give 3 " + winner.getName() + " 3");
+        getGameplay().getPlugin().getGameManager().removeGame(game);
+        ((MattKOTH) getGameplay()).setGame(null);
     }
 
     /**

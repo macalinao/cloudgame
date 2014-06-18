@@ -52,6 +52,15 @@ public class GameManager {
     }
 
     /**
+     * Removes a game from the game manager.
+     *
+     * @param game
+     */
+    public void removeGame(Game<?> game) {
+        games.remove(game.getArena());
+    }
+
+    /**
      * Gets the game at the given arena.
      *
      * @param a
