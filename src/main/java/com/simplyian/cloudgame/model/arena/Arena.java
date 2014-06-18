@@ -135,4 +135,14 @@ public class Arena extends Model {
     public void setProperty(String name, Object property) {
         properties.put(name, property);
     }
+
+    /**
+     * Checks if this arena has the given property.
+     *
+     * @param name
+     * @return
+     */
+    public boolean hasProperty(String name) {
+        return properties.containsKey(name);
+    }
 }
