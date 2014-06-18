@@ -5,10 +5,10 @@
  */
 package net.og_mc.mattkoth.tasks;
 
+import com.simplyian.cloudgame.events.GameEndEvent;
 import com.simplyian.cloudgame.game.Game;
 import net.og_mc.mattkoth.KOTHState;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
+import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 /**
@@ -26,6 +26,16 @@ public class KOTHTimer extends BukkitRunnable {
     @Override
     public void run() {
         announceTimeLeft();
+
+        if (game.getState().secondsCaptured() > 120) {
+            Bukkit.getPluginManager().callEvent(new GameEndEvent(game));
+            return;
+        }
+
+        if (game.getState().remainingTime() <= 0 // Should the game end?
+                && game.getState().secondsCaptured() != -1) { // Overtime check
+            Bukkit.getPluginManager().callEvent(new GameEndEvent(game));
+        }
     }
 
     private void announceTimeLeft() {

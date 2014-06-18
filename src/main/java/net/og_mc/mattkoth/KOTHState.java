@@ -51,7 +51,7 @@ public class KOTHState extends FFAState {
 
     public int secondsCaptured() {
         if (captureStart == -1) {
-            return 0;
+            return -1;
         }
         return (int) ((System.currentTimeMillis() - captureStart) / 1000);
     }
