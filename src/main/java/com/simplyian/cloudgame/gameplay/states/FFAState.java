@@ -20,6 +20,8 @@ import org.bukkit.entity.Player;
  */
 public class FFAState implements State {
 
+    private final Set<UUID> spectators = new HashSet<>();
+
     private final Set<UUID> players = new HashSet<>();
 
     public void addPlayer(Player p) {
@@ -34,14 +36,31 @@ public class FFAState implements State {
         players.remove(p.getUniqueId());
     }
 
-    /**
-     * Gets all online players in the FFA state
-     *
-     * @return
-     */
+    @Override
     public List<Player> getPlayers() {
         List<Player> ret = new ArrayList<>();
         for (UUID u : players) {
+            ret.add(Bukkit.getPlayer(u));
+        }
+        return ret;
+    }
+
+    public void addSpectator(Player p) {
+        spectators.add(p.getUniqueId());
+    }
+
+    public boolean hasSpectator(Player p) {
+        return spectators.contains(p.getUniqueId());
+    }
+
+    public void removeSpectator(Player p) {
+        spectators.remove(p.getUniqueId());
+    }
+
+    @Override
+    public List<Player> getSpectators() {
+        List<Player> ret = new ArrayList<>();
+        for (UUID u : spectators) {
             ret.add(Bukkit.getPlayer(u));
         }
         return ret;

@@ -15,6 +15,13 @@ import org.bukkit.entity.Player;
 public interface State {
 
     /**
+     * Gets a list of all spectators of this game.
+     *
+     * @return
+     */
+    public List<Player> getSpectators();
+
+    /**
      * Gets a list of all players in this game.
      *
      * @return

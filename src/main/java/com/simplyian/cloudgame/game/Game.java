@@ -61,9 +61,12 @@ public class Game<T extends State> {
     }
 
     /**
-     * Restores the state of all players in this game.
+     * Restores the state of all players and spectators in this game.
      */
     public void restorePlayers() {
+        for (Player player : state.getSpectators()) {
+            gameplay.getPlugin().getPlayerStateManager().loadState(player);
+        }
         for (Player player : state.getPlayers()) {
             gameplay.getPlugin().getPlayerStateManager().loadState(player);
         }
