@@ -37,6 +37,9 @@ public class Regions extends Models<Region> {
         Region r = super.findById(id);
         if (r == null) {
             String[] split = id.split(";");
+            if (split.length != 2) {
+                return null;
+            }
             World world = Bukkit.getWorld(split[0]);
             if (world == null) {
                 return null;
