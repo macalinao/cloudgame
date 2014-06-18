@@ -5,6 +5,7 @@
  */
 package net.og_mc.mattkoth.listeners;
 
+import com.simplyian.cloudgame.events.GameEndEvent;
 import com.simplyian.cloudgame.events.GameJoinEvent;
 import com.simplyian.cloudgame.events.GameLeaveEvent;
 import com.simplyian.cloudgame.events.GameQuitEvent;
@@ -15,6 +16,7 @@ import com.simplyian.cloudgame.util.Messaging;
 import net.og_mc.mattkoth.KOTHState;
 import net.og_mc.mattkoth.tasks.KOTHTimer;
 import net.og_mc.mattkoth.MattKOTH;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -117,6 +119,23 @@ public class KOTHGameListener extends GameListener<KOTHState> {
             return;
         }
         game.getState().removePlayer(event.getPlayer());
+    }
+
+    @EventHandler
+    public void onGameEnd(GameEndEvent event) {
+        Game<KOTHState> game = game(event);
+        if (game == null) {
+            return;
+        }
+
+        Player winner = game.getState().getCapturer();
+        if (winner == null) {
+            game.broadcast("Game over! Nobody won!");
+            return;
+        }
+
+        game.broadcast(ChatColor.YELLOW + winner.getName() + ChatColor.RED + " has won the KOTH!");
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ccrates give 3 " + winner.getName() + " 3");
     }
 
     /**
