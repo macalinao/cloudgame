@@ -63,13 +63,15 @@ public class KOTHCommand extends PlayerCommandHandler {
     }
 
     private void noArgs(Player player) {
-        // TODO add to help menu based on permissions
         Messaging.sendBanner(player,
                 "/koth join - Join the koth",
                 "/koth leave - Leaves the koth",
-                "/koth start - Starts a KOTH if there isn't already one going on",
-                "/koth setregion - Set the koth region",
-                "/koth setspawn - Sets a spawn on the koth map");
+                "/koth spectate - Spectates the current koth");
+        if (player.hasPermission("mattkoth.admin")) {
+            Messaging.sendBanner(player, "/koth start - Starts a KOTH if there isn't already one going on",
+                    "/koth setregion - Set the koth region",
+                    "/koth setspawn - Sets a spawn on the koth map");
+        }
     }
 
     private void join(Player player, String[] args) {
@@ -81,6 +83,11 @@ public class KOTHCommand extends PlayerCommandHandler {
     }
 
     private void start(Player player, String[] args) {
+        if (!player.hasPermission("mattkoth.admin")) {
+            player.sendMessage(ChatColor.RED + "You can't use this command.");
+            return;
+        }
+
         if (args.length <= 1) {
             player.sendMessage(ChatColor.RED + "Usage: /koth start <arena>");
             return;
@@ -108,6 +115,11 @@ public class KOTHCommand extends PlayerCommandHandler {
     }
 
     private void setregion(Player player, String[] args) {
+        if (!player.hasPermission("mattkoth.admin")) {
+            player.sendMessage(ChatColor.RED + "You can't use this command.");
+            return;
+        }
+
         if (args.length <= 2) {
             player.sendMessage(ChatColor.RED + "Usage: /koth setregion <region> <arena>");
             return;
@@ -149,6 +161,11 @@ public class KOTHCommand extends PlayerCommandHandler {
     }
 
     private void setspawn(Player player, String[] args) {
+        if (!player.hasPermission("mattkoth.admin")) {
+            player.sendMessage(ChatColor.RED + "You can't use this command.");
+            return;
+        }
+
         if (args.length <= 2) {
             player.sendMessage(ChatColor.RED + "Usage: /koth setspawn <arena> <spawn number>");
             return;
