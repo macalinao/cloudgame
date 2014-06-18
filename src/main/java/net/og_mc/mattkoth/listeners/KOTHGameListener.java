@@ -105,7 +105,7 @@ public class KOTHGameListener extends GameListener<KOTHState> {
         // Distance check
         boolean failedDistanceCheck = false;
         for (Player player : state.getPlayers()) {
-            if (p.getLocation().distanceSquared(player.getLocation()) < 20 * 20) {
+            if (p.getWorld().equals(player.getWorld()) && p.getLocation().distanceSquared(player.getLocation()) < 20 * 20) {
                 failedDistanceCheck = true;
                 break;
             }
