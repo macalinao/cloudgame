@@ -15,12 +15,16 @@ import org.bukkit.inventory.ItemStack;
  */
 public class PlayerState {
 
-    public float xp;
-    public ItemStack[] main;
-    public ItemStack[] armor;
+    private final float xp;
 
-    public PlayerState(ConfigurationSection store) {
-        load(store);
+    private final ItemStack[] main;
+
+    private final ItemStack[] armor;
+
+    public PlayerState(float xp, ItemStack[] main, ItemStack[] armor) {
+        this.xp = xp;
+        this.main = main;
+        this.armor = armor;
     }
 
     public PlayerState(Player p) {
@@ -35,37 +39,16 @@ public class PlayerState {
         p.getInventory().setArmorContents(armor);
     }
 
-    public void load(ConfigurationSection store) {
-        xp = (float) store.getDouble("xp", 0);
-        main = loadSection(store, "main", 36);
-        armor = loadSection(store, "armor", 4);
+    public float getXp() {
+        return xp;
     }
 
-    private ItemStack[] loadSection(ConfigurationSection store, String name, int length) {
-        ConfigurationSection sectStore = store.getConfigurationSection(name);
-        ItemStack[] ret = new ItemStack[length];
-        if (sectStore == null) {
-            return ret;
-        }
-
-        for (String iid : sectStore.getKeys(false)) {
-            int id = Integer.parseInt(iid);
-            ret[id] = (ItemStack) sectStore.getItemStack(iid);
-        }
-
-        return ret;
+    public ItemStack[] getMain() {
+        return main;
     }
 
-    public void save(ConfigurationSection store) {
-        store.set("xp", xp);
-        saveSection(store, "main", main);
-        saveSection(store, "armor", armor);
+    public ItemStack[] getArmor() {
+        return armor;
     }
 
-    private void saveSection(ConfigurationSection store, String name, ItemStack[] contents) {
-        ConfigurationSection sectStore = store.createSection(name);
-        for (int i = 0; i < contents.length; i++) {
-            sectStore.set(Integer.toString(i), contents[i]);
-        }
-    }
 }
