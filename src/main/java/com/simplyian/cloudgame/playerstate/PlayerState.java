@@ -22,27 +22,22 @@ public class PlayerState {
 
     private final ItemStack[] armor;
 
-    private final Location location;
-
-    public PlayerState(float xp, ItemStack[] main, ItemStack[] armor, Location location) {
+    public PlayerState(float xp, ItemStack[] main, ItemStack[] armor) {
         this.xp = xp;
         this.main = main;
         this.armor = armor;
-        this.location = location;
     }
 
     public PlayerState(Player p) {
         xp = p.getExp();
         main = p.getInventory().getContents();
         armor = p.getInventory().getArmorContents();
-        location = p.getLocation();
     }
 
     public void restore(Player p) {
         p.setExp(xp);
         p.getInventory().setContents(main);
         p.getInventory().setArmorContents(armor);
-        p.teleport(location);
 
         // Make the player visible again. No reason to store this imo
         for (Player other : Bukkit.getOnlinePlayers()) {
@@ -60,10 +55,6 @@ public class PlayerState {
 
     public ItemStack[] getArmor() {
         return armor;
-    }
-
-    public Location getLocation() {
-        return location;
     }
 
 }

@@ -43,8 +43,6 @@ public class KOTHGameListener extends GameListener<KOTHState> {
 
         KOTHState state = game.getState();
         for (Player p : state.getPlayers()) {
-            getGameplay().getPlugin().getPlayerStateManager().saveState(p);
-
             Location spawn = game.getArena().getNextSpawn();
             p.teleport(spawn);
         }
@@ -120,7 +118,7 @@ public class KOTHGameListener extends GameListener<KOTHState> {
 
         if (!failedKillsCheck && !failedDistanceCheck) {
             game.getState().removePlayer(p);
-            getGameplay().getPlugin().getPlayerStateManager().loadState(p);
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
             game.getGameplay().sendGameMessage(p, "You have left the game.");
         }
     }
@@ -131,8 +129,9 @@ public class KOTHGameListener extends GameListener<KOTHState> {
         if (game == null) {
             return;
         }
-        game.getState().removePlayer(event.getPlayer());
-        getGameplay().getPlugin().getPlayerStateManager().loadState(event.getPlayer());
+        Player p = event.getPlayer();
+        game.getState().removePlayer(p);
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
     }
 
     @EventHandler

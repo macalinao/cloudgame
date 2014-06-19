@@ -39,7 +39,6 @@ public class CloudGame extends JavaPlugin {
         gameplayManager.onEnable();
 
         playerStateManager = new PlayerStateManager(this);
-        playerStateManager.load();
 
         gameManager = new GameManager(this);
     }
@@ -47,7 +46,6 @@ public class CloudGame extends JavaPlugin {
     @Override
     public void onDisable() {
         gameManager.endAllGames();
-        playerStateManager.save();
         gameplayManager.onDisable();
         modelManager.save();
 

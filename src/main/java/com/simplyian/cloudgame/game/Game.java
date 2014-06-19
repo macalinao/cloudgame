@@ -67,9 +67,6 @@ public class Game<T extends State> {
         for (Player player : state.getSpectators()) {
             gameplay.getPlugin().getPlayerStateManager().loadState(player);
         }
-        for (Player player : state.getPlayers()) {
-            gameplay.getPlugin().getPlayerStateManager().loadState(player);
-        }
     }
 
 }

@@ -40,55 +40,6 @@ public class PlayerStateManager {
         this.plugin = plugin;
     }
 
-    public void load() {
-        states = new HashMap<>();
-
-        statesFile = new File(plugin.getDataFolder(), "states.yml");
-        if (!statesFile.exists()) {
-            return;
-        }
-
-        YamlConfiguration store = YamlConfiguration.loadConfiguration(statesFile);
-        for (String uuids : store.getKeys(false)) {
-            ConfigurationSection sect = store.getConfigurationSection(uuids);
-
-            float xp = (float) sect.getDouble("xp", 0);
-            ItemStack[] main = InventoryUtils.loadSection(sect.getConfigurationSection("main"), 36);
-            ItemStack[] armor = InventoryUtils.loadSection(sect.getConfigurationSection("armor"), 4);
-            Location location = LocationUtils.deserialize(sect.getString("location"));
-
-            PlayerState state = new PlayerState(xp, main, armor, location);
-            states.put(UUID.fromString(uuids), state);
-        }
-    }
-
-    public void save() {
-        try {
-            statesFile.getParentFile().mkdirs();
-            statesFile.createNewFile();
-        } catch (IOException ex) {
-            Logger.getLogger(PlayerStateManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        YamlConfiguration store = new YamlConfiguration();
-
-        for (Entry<UUID, PlayerState> stateEntry : states.entrySet()) {
-            ConfigurationSection sect = store.createSection(stateEntry.getKey().toString());
-
-            PlayerState state = stateEntry.getValue();
-            sect.set("xp", state.getXp());
-            InventoryUtils.saveSection(sect.createSection("main"), state.getMain());
-            InventoryUtils.saveSection(sect.createSection("armor"), state.getArmor());
-            sect.set("location", state.getLocation());
-        }
-
-        try {
-            store.save(statesFile);
-        } catch (IOException ex) {
-            Logger.getLogger(PlayerStateManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     /**
      * Loads a player's saved state.
      *
