@@ -62,7 +62,8 @@ public class KOTHAnnouncerTask extends BukkitRunnable {
             Messaging.sendBanner(p,
                     "A KOTH on map " + ChatColor.DARK_GREEN + game.getArena().getName() + " "
                     + ChatColor.GREEN + "is starting in " + ChatColor.DARK_GREEN + time + ChatColor.GREEN + "!",
-                    "Type " + ChatColor.DARK_GREEN + "/koth join " + ChatColor.GREEN + "to join! (armor not provided)");
+                    "Type " + ChatColor.DARK_GREEN + "/koth join " + ChatColor.GREEN + "to join "
+                    + ChatColor.DARK_GREEN + game.getState().getPlayers().size() + ChatColor.GREEN + " other players! (armor not provided)");
         }
     }
 
