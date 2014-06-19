@@ -8,7 +8,7 @@ package com.simplyian.cloudgame.game;
 import java.util.HashMap;
 import java.util.Map;
 import com.simplyian.cloudgame.CloudGame;
-import com.simplyian.cloudgame.events.GameEndEvent;
+import com.simplyian.cloudgame.events.GameStopEvent;
 import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.gameplay.State;
 import com.simplyian.cloudgame.model.arena.Arena;
@@ -117,11 +117,11 @@ public class GameManager {
     }
 
     /**
-     * Forces all games to end.
+     * Forces all games to stop.
      */
-    public void endAllGames() {
+    public void stopAll() {
         for (Game<?> game : games.values()) {
-            Bukkit.getPluginManager().callEvent(new GameEndEvent(game));
+            Bukkit.getPluginManager().callEvent(new GameStopEvent(game));
         }
         games.clear();
     }

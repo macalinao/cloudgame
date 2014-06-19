@@ -45,7 +45,7 @@ public class CloudGame extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        gameManager.endAllGames();
+        gameManager.stopAll();
         gameplayManager.onDisable();
         modelManager.save();
 

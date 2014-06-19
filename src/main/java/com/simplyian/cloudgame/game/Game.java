@@ -5,10 +5,12 @@
  */
 package com.simplyian.cloudgame.game;
 
+import com.simplyian.cloudgame.events.GameStopEvent;
 import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.gameplay.State;
 import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.stats.Stats;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 /**
@@ -61,12 +63,10 @@ public class Game<T extends State> {
     }
 
     /**
-     * Restores the state of all players and spectators in this game.
+     * Stops this game.
      */
-    public void restorePlayers() {
-        for (Player player : state.getSpectators()) {
-            gameplay.getPlugin().getPlayerStateManager().loadState(player);
-        }
+    public void stop() {
+        Bukkit.getPluginManager().callEvent(new GameStopEvent(this));
     }
 
 }
