@@ -71,8 +71,16 @@ public class KOTHGameListener extends GameListener<KOTHState> {
             return;
         }
 
-        for (Player player : game.getState().getSpectators()) {
-            getGameplay().getPlugin().getPlayerStateManager().loadState(player);
+        if (!game.getState().isStarted()) {
+            game.broadcast("The KOTH has been cancelled.");
+        } else {
+            for (Player player : game.getState().getPlayers()) {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + player.getName());
+            }
+            for (Player player : game.getState().getSpectators()) {
+                getGameplay().getPlugin().getPlayerStateManager().loadState(player);
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + player.getName());
+            }
         }
         getGameplay().getPlugin().getGameManager().removeGame(game);
         ((MattKOTH) getGameplay()).setGame(null);
