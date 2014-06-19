@@ -76,7 +76,6 @@ public class KOTHGameListener extends GameListener<KOTHState> {
         }
         getGameplay().getPlugin().getGameManager().removeGame(game);
         ((MattKOTH) getGameplay()).setGame(null);
-
     }
 
 }

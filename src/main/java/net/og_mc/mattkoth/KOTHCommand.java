@@ -48,6 +48,9 @@ public class KOTHCommand extends PlayerCommandHandler {
             case "start":
                 start(player, args);
                 return;
+            case "stop":
+                stop(player, args);
+                return;
             case "setregion":
                 setregion(player, args);
                 return;
@@ -124,6 +127,15 @@ public class KOTHCommand extends PlayerCommandHandler {
 
         koth.setGame(game);
         player.sendMessage(ChatColor.GREEN + "KOTH countdown started.");
+    }
+
+    private void stop(Player player, String[] args) {
+        if (!player.hasPermission("mattkoth.admin")) {
+            player.sendMessage(ChatColor.RED + "You can't use this command.");
+            return;
+        }
+        koth.getGame().stop();
+        player.sendMessage(ChatColor.GREEN + "Game stopped.");
     }
 
     private void setregion(Player player, String[] args) {
