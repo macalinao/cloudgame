@@ -107,24 +107,31 @@ public class KOTHCaptureListener extends GameListener<KOTHState> {
     }
 
     private void setCapturer(Game<KOTHState> game, Player player) {
-        Player old = game.getState().getCapturer();
+        KOTHState state = game.getState();
+        Player old = state.getCapturer();
         if (old != null) {
             old.getInventory().setHelmet(null);
         }
 
-        if (game.getState().remainingTime() < 0) {
-            game.getState().setCapturer(null);
+        if (state.remainingTime() < 0) {
+            state.setCapturer(null);
             Bukkit.getPluginManager().callEvent(new GameEndEvent(game));
             return;
         }
 
+        if (state.getCapturer() != null) {
+            state.getCapturer().getInventory().setHelmet(state.getCapturerHelmet());
+        }
+
         if (player != null) {
+            state.setCapturerHelmet(player.getInventory().getHelmet()); // save the helmet
+
+            state.setCapturer(player);
             player.getInventory().setHelmet(CAPTURER_HELMET);
-            game.getState().setCapturer(player);
             game.broadcast(ChatColor.RED + player.getName() + " is now holding the koth point! "
                     + "Kill them or knock them out of the ring within two minutes or they'll claim their prize!");
         } else {
-            game.getState().setCapturer(null);
+            state.setCapturer(null);
             // new capturer will be determined by a random moving player
         }
     }

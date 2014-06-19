@@ -9,6 +9,7 @@ import com.simplyian.cloudgame.gameplay.states.FFAState;
 import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 /**
  *
@@ -21,6 +22,8 @@ public class KOTHState extends FFAState {
     private UUID capturer;
 
     private long captureStart = -1;
+
+    private ItemStack capturerHelmet;
 
     public boolean isStarted() {
         return start != -1;
@@ -59,6 +62,14 @@ public class KOTHState extends FFAState {
     public int remainingTime() {
         int secsElapsed = (((int) (System.currentTimeMillis() - start)) / 1000);
         return (10 * 60) - secsElapsed;
+    }
+
+    public ItemStack getCapturerHelmet() {
+        return capturerHelmet;
+    }
+
+    public void setCapturerHelmet(ItemStack capturerHelmet) {
+        this.capturerHelmet = capturerHelmet;
     }
 
 }

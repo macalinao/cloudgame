@@ -70,14 +70,19 @@ public class KOTHGameListener extends GameListener<KOTHState> {
         if (game == null) {
             return;
         }
+        KOTHState state = game.getState();
 
-        if (!game.getState().isStarted()) {
+        if (!state.isStarted()) {
             game.broadcast("The KOTH has been cancelled.");
         } else {
-            for (Player player : game.getState().getPlayers()) {
+            if (state.getCapturer() != null) {
+                state.getCapturer().getInventory().setHelmet(state.getCapturerHelmet());
+            }
+
+            for (Player player : state.getPlayers()) {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + player.getName());
             }
-            for (Player player : game.getState().getSpectators()) {
+            for (Player player : state.getSpectators()) {
                 getGameplay().getPlugin().getPlayerStateManager().loadState(player);
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + player.getName());
             }

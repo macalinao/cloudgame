@@ -5,22 +5,18 @@
  */
 package net.og_mc.mattkoth.listeners;
 
-import com.simplyian.cloudgame.events.GameEndEvent;
 import com.simplyian.cloudgame.events.GameJoinEvent;
 import com.simplyian.cloudgame.events.GameLeaveEvent;
 import com.simplyian.cloudgame.events.GameQuitEvent;
 import com.simplyian.cloudgame.events.GameSpectateEvent;
-import com.simplyian.cloudgame.events.GameStartEvent;
 import com.simplyian.cloudgame.events.GameUnspectateEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.listeners.GameListener;
 import com.simplyian.cloudgame.util.Messaging;
 import net.og_mc.mattkoth.KOTHState;
-import net.og_mc.mattkoth.tasks.KOTHTimer;
 import net.og_mc.mattkoth.MattKOTH;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 
