@@ -14,19 +14,12 @@ import org.bukkit.event.HandlerList;
  *
  * @author ian
  */
-public class GameQuitEvent extends GameEvent {
+public class GameQuitEvent extends GamePlayerEvent {
 
     private static final HandlerList handlers = new HandlerList();
 
-    private final Player player;
-
     public GameQuitEvent(Game<?> game, Player player) {
-        super(game);
-        this.player = player;
-    }
-
-    public Player getPlayer() {
-        return player;
+        super(game, player);
     }
 
     @Override
