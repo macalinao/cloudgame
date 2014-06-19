@@ -70,13 +70,13 @@ public class KOTHTimer extends BukkitRunnable {
         if (secsLeft <= 2 * 60 && captureAnnounceCount == 0) {
             announceCaptureTime("2 minutes");
             captureAnnounceCount++;
-        } else if (secsLeft <= 2 * 60 && captureAnnounceCount == 1) {
+        } else if (secsLeft <= 1 * 60 && captureAnnounceCount == 1) {
             announceCaptureTime("1 minute");
             captureAnnounceCount++;
-        } else if (secsLeft <= 2 * 60 && captureAnnounceCount == 2) {
+        } else if (secsLeft <= 30 && captureAnnounceCount == 2) {
             announceCaptureTime("30 seconds");
             captureAnnounceCount++;
-        } else if (secsLeft <= 2 * 60 && captureAnnounceCount == 3) {
+        } else if (secsLeft <= 10 && captureAnnounceCount == 3) {
             announceCaptureTime("10 seconds");
             captureAnnounceCount++;
         } else if (secsLeft <= 0 && captureAnnounceCount == 4) {
