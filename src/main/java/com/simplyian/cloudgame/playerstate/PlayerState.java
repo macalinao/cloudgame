@@ -41,7 +41,7 @@ public class PlayerState {
 
         // Make the player visible again. No reason to store this imo
         for (Player other : Bukkit.getOnlinePlayers()) {
-            p.showPlayer(other);
+            other.showPlayer(p);
         }
     }
 

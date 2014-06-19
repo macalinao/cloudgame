@@ -139,7 +139,7 @@ public class KOTHGamePlayerListener extends GameListener<KOTHState> {
         getGameplay().getPlugin().getPlayerStateManager().saveState(p);
         game.getState().addSpectator(p);
         for (Player other : Bukkit.getOnlinePlayers()) {
-            p.hidePlayer(other);
+            other.hidePlayer(p);
         }
         p.teleport(game.getArena().getNextSpawn());
         p.setAllowFlight(true);
@@ -160,7 +160,7 @@ public class KOTHGamePlayerListener extends GameListener<KOTHState> {
         game.getState().removeSpectator(p);
         getGameplay().getPlugin().getPlayerStateManager().loadState(p);
         for (Player other : Bukkit.getOnlinePlayers()) {
-            p.showPlayer(other);
+            other.showPlayer(p);
         }
         p.setFlying(false);
 
