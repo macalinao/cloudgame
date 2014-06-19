@@ -41,7 +41,6 @@ public abstract class CloudGame extends JavaPlugin {
 
         gameplayManager = new GameplayManager(this);
         addGameplays();
-        gameplayManager.addGameplay(new MattKOTH(this));
         gameplayManager.onEnable();
 
         playerStateManager = new PlayerStateManager(this);
