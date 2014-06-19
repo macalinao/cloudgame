@@ -39,11 +39,11 @@ public class GameListener<T extends State> implements Listener {
      * @return
      */
     public Game<T> game(Location loc) {
-        Region r = CloudGame.i.getModelManager().getRegions().find(loc);
+        Region r = gameplay.getPlugin().getModelManager().getRegions().find(loc);
         if (r == null) {
             return null;
         }
-        Game game = CloudGame.i.getGameManager().gameAt(r);
+        Game game = gameplay.getPlugin().getGameManager().gameAt(r);
         if (game == null) {
             return null;
         }
@@ -60,7 +60,7 @@ public class GameListener<T extends State> implements Listener {
      * @return
      */
     public Game<T> game(Player p) {
-        Game game = CloudGame.i.getGameManager().gameOf(p);
+        Game game = gameplay.getPlugin().getGameManager().gameOf(p);
         if (game == null) {
             return null;
         }
@@ -90,7 +90,7 @@ public class GameListener<T extends State> implements Listener {
      * @return
      */
     public Game<T> gameSpectated(Player p) {
-        Game game = CloudGame.i.getGameManager().spectatedGameOf(p);
+        Game game = gameplay.getPlugin().getGameManager().spectatedGameOf(p);
         if (game == null) {
             return null;
         }

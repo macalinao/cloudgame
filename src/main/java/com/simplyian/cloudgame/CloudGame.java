@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class CloudGame extends JavaPlugin {
 
-    public static CloudGame i;
+    private static CloudGame i;
 
     private Commands commands;
 
@@ -72,6 +72,10 @@ public class CloudGame extends JavaPlugin {
 
     public PlayerStateManager getPlayerStateManager() {
         return playerStateManager;
+    }
+
+    public static CloudGame inst() {
+        return i;
     }
 
     public static WorldGuardPlugin wg() {
