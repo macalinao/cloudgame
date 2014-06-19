@@ -57,7 +57,7 @@ public class Game<T extends State> {
      * @param message
      */
     public void broadcast(String message) {
-        for (Player player : state.getPlayers()) {
+        for (Player player : state.getParticipants()) {
             gameplay.sendGameMessage(player, message);
         }
     }

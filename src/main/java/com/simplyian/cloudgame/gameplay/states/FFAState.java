@@ -18,7 +18,7 @@ import org.bukkit.entity.Player;
  *
  * @author ian
  */
-public class FFAState implements State {
+public abstract class FFAState implements State {
 
     private final Set<UUID> spectators = new HashSet<>();
 

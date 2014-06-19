@@ -6,6 +6,8 @@
 package net.og_mc.mattkoth;
 
 import com.simplyian.cloudgame.gameplay.states.FFAState;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -17,6 +19,8 @@ import org.bukkit.inventory.ItemStack;
  */
 public class KOTHState extends FFAState {
 
+    private UUID host;
+
     private long start = -1;
 
     private UUID capturer;
@@ -24,6 +28,14 @@ public class KOTHState extends FFAState {
     private long captureStart = -1;
 
     private ItemStack capturerHelmet;
+
+    public Player getHost() {
+        return Bukkit.getPlayer(host);
+    }
+
+    public void setHost(Player player) {
+        host = player.getUniqueId();
+    }
 
     public boolean isStarted() {
         return start != -1;
@@ -70,6 +82,18 @@ public class KOTHState extends FFAState {
 
     public void setCapturerHelmet(ItemStack capturerHelmet) {
         this.capturerHelmet = capturerHelmet;
+    }
+
+    @Override
+    public List<Player> getParticipants() {
+        List<Player> participants = new ArrayList<>();
+        participants.addAll(getSpectators());
+        participants.addAll(getPlayers());
+        Player host = getHost();
+        if (host != null) {
+            participants.add(host);
+        }
+        return participants;
     }
 
 }

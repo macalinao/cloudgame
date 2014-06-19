@@ -126,6 +126,8 @@ public class KOTHCommand extends PlayerCommandHandler {
         }
 
         koth.setGame(game);
+        game.getState().setHost(player);
+        player.teleport(game.getArena().getNextSpawn());
         player.sendMessage(ChatColor.GREEN + "KOTH countdown started.");
     }
 
