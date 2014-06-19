@@ -176,6 +176,7 @@ public class KOTHCommand extends PlayerCommandHandler {
             }
 
             arena = koth.getPlugin().getModelManager().getArenas().create(arenaRegion);
+            arena.setName(arenaRegion.getRegion().getId());
             player.sendMessage(ChatColor.YELLOW + "The arena did not exist, so one was created on that region.");
         }
 
