@@ -48,11 +48,14 @@ public class MattKOTH extends Gameplay<KOTHState> {
 
     @Override
     public boolean canUse(Arena arena) {
-        if (!arena.hasProperty("koth.hill")) {
+        if (!arena.hasProperty("koth-hill")) {
             return false;
         }
-        String hillRegion = arena.getProperty("koth.hill").toString();
+        String hillRegion = arena.getProperty("koth-hill").toString();
         Region region = getPlugin().getModelManager().getRegions().findById(hillRegion);
+        if (region == null) {
+            arena.removeProperty("koth-hill");
+        }
         return region != null;
     }
 

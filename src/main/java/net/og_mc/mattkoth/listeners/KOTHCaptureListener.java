@@ -46,7 +46,7 @@ public class KOTHCaptureListener extends GameListener<KOTHState> {
             return;
         }
 
-        Region hill = getGameplay().getPlugin().getModelManager().getRegions().findById(game.getArena().getProperty("koth.hill").toString());
+        Region hill = getGameplay().getPlugin().getModelManager().getRegions().findById(game.getArena().getProperty("koth-hill").toString());
         if (!hill.contains(e.getTo())) {
             return;
         }
@@ -86,7 +86,7 @@ public class KOTHCaptureListener extends GameListener<KOTHState> {
             return;
         }
 
-        Region hill = getGameplay().getPlugin().getModelManager().getRegions().findById(game.getArena().getProperty("koth.hill").toString());
+        Region hill = getGameplay().getPlugin().getModelManager().getRegions().findById(game.getArena().getProperty("koth-hill").toString());
         if (hill.contains(e.getTo())) {
             return;
         }

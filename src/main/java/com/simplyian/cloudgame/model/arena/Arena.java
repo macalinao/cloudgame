@@ -145,4 +145,13 @@ public class Arena extends Model {
     public boolean hasProperty(String name) {
         return properties.containsKey(name);
     }
+
+    /**
+     * Removes a property from the arena.
+     *
+     * @param property
+     */
+    public void removeProperty(String property) {
+        properties.remove(property);
+    }
 }

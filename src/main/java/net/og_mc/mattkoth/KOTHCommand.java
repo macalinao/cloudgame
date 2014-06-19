@@ -167,7 +167,7 @@ public class KOTHCommand extends PlayerCommandHandler {
             player.sendMessage(ChatColor.YELLOW + "The arena did not exist, so one was created on that region.");
         }
 
-        arena.setProperty("koth.hill", region.getId());
+        arena.setProperty("koth-hill", region.getId());
         player.sendMessage(ChatColor.GREEN + "The hill of arena " + ChatColor.YELLOW + arena.getId()
                 + ChatColor.GREEN + " has been set to " + ChatColor.YELLOW + region.getId() + ChatColor.GREEN + ".");
     }
