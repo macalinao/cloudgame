@@ -50,6 +50,11 @@ public class KOTHGamePlayerListener extends GameListener<KOTHState> {
             return;
         }
 
+        if (state.getHost() != null && state.getHost().equals(p)) {
+            game.getGameplay().sendGameMessage(p, "You can't join the game if you are the host!");
+            return;
+        }
+
         state.addPlayer(p);
         Messaging.sendBanner(p, "You've joined the KOTH! Pay attention to the countdown.",
                 "Want to leave the game? Type " + ChatColor.DARK_GREEN + "/koth leave" + ChatColor.GREEN + "!");
