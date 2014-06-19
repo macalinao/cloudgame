@@ -62,7 +62,7 @@ public class KOTHTimer extends BukkitRunnable {
     private void updateCaptureTime() {
         KOTHState state = game.getState();
         Player capturer = state.getCapturer();
-        if (capturer == null || !lastCapturer.equals(capturer.getUniqueId())) {
+        if (capturer == null || (lastCapturer != null && !lastCapturer.equals(capturer.getUniqueId()))) {
             if (captureAnnounceCount != 0) {
                 captureAnnounceCount = 0;
             }
