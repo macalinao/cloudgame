@@ -7,7 +7,6 @@ import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.gameplay.GameplayManager;
 import com.simplyian.cloudgame.playerstate.PlayerStateManager;
 import com.simplyian.cloudgame.model.ModelManager;
-import net.og_mc.mattkoth.MattKOTH;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
