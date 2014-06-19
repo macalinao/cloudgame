@@ -3,6 +3,7 @@ package com.simplyian.cloudgame;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.simplyian.cloudgame.command.Commands;
 import com.simplyian.cloudgame.game.GameManager;
+import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.gameplay.GameplayManager;
 import com.simplyian.cloudgame.playerstate.PlayerStateManager;
 import com.simplyian.cloudgame.model.ModelManager;
@@ -10,9 +11,13 @@ import net.og_mc.mattkoth.MattKOTH;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class CloudGame extends JavaPlugin {
+public abstract class CloudGame extends JavaPlugin {
 
     private static CloudGame i;
+
+    public static CloudGame inst() {
+        return i;
+    }
 
     private Commands commands;
 
@@ -35,6 +40,7 @@ public class CloudGame extends JavaPlugin {
         modelManager.load();
 
         gameplayManager = new GameplayManager(this);
+        addGameplays();
         gameplayManager.addGameplay(new MattKOTH(this));
         gameplayManager.onEnable();
 
@@ -74,8 +80,10 @@ public class CloudGame extends JavaPlugin {
         return playerStateManager;
     }
 
-    public static CloudGame inst() {
-        return i;
+    public abstract void addGameplays();
+
+    protected void addGameplay(Gameplay gameplay) {
+        gameplayManager.addGameplay(gameplay);
     }
 
     public static WorldGuardPlugin wg() {

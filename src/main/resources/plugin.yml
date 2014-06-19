@@ -4,7 +4,7 @@ version: $version
 author: AlbireoX
 website: http://og-mc.net/
 
-main: com.simplyian.cloudgame.CloudGame
+main: net.og_mc.mattkoth.MattKOTHPlugin
 depend: [WorldGuard]
 
 commands:
