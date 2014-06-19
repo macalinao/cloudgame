@@ -179,6 +179,8 @@ public class KOTHGameListener extends GameListener<KOTHState> {
             p.hidePlayer(other);
         }
         p.teleport(game.getArena().getNextSpawn());
+        p.setAllowFlight(true);
+        p.setFlying(true);
 
         game.getGameplay().sendGameMessage(p, "Type /koth spectate again to exit the mode!");
     }
@@ -194,6 +196,10 @@ public class KOTHGameListener extends GameListener<KOTHState> {
 
         game.getState().removeSpectator(p);
         getGameplay().getPlugin().getPlayerStateManager().loadState(p);
+        for (Player other : Bukkit.getOnlinePlayers()) {
+            p.showPlayer(other);
+        }
+        p.setFlying(false);
 
         game.getGameplay().sendGameMessage(p, "You are no longer spectating the game.");
     }
