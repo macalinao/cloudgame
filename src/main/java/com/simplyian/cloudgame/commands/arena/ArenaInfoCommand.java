@@ -37,8 +37,12 @@ public class ArenaInfoCommand extends PlayerCommandHandler {
         player.sendMessage(ChatColor.YELLOW + "========== ARENA INFO ==========");
         player.sendMessage(ChatColor.GREEN + "Id: " + ChatColor.YELLOW + a.getId()
                 + "    " + ChatColor.GREEN + "Name: " + ChatColor.YELLOW + a.getName());
-        player.sendMessage(ChatColor.GREEN + "Main: " + ChatColor.YELLOW + a.getMain().getId());
-        player.sendMessage(ChatColor.GREEN + "Spawns: " + ChatColor.YELLOW + "Use /arenalistspawns");
+        player.sendMessage(ChatColor.GREEN + "Main: " + ChatColor.YELLOW + a.getMain().getId()
+                + "    " + ChatColor.GREEN + "Spawns: " + ChatColor.YELLOW + a.getSpawns().size() + " - Use /arenalistspawns to show locations");
+        player.sendMessage(ChatColor.YELLOW + "---------- PROPERTIES ----------");
+        for (Entry<String, Object> property : a.getProperties().entrySet()) {
+            player.sendMessage(ChatColor.GREEN + property.getKey() + ": " + ChatColor.YELLOW + property.getValue().toString());
+        }
     }
 
 }
