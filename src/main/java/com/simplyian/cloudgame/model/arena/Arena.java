@@ -104,7 +104,8 @@ public class Arena extends Model {
         if (spawns.isEmpty()) {
             return null;
         }
-        return getSpawn(Rand.r.nextInt(spawns.size()));
+        Location spawn = getSpawn(Rand.r.nextInt(spawns.size()));
+        return (spawn == null) ? getNextSpawn() : spawn;
     }
 
     /**
