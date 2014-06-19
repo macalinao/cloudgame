@@ -28,7 +28,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public class KOTHCaptureListener extends GameListener<KOTHState> {
 
-    private static final ItemStack CAPTURER_HELMET = new ItemStack(Material.WOOL, 1, (byte) 0xc); // Red wool
+    private static final ItemStack CAPTURER_HELMET = new ItemStack(Material.WOOL, 1, (byte) 0xe); // Red wool
 
     public KOTHCaptureListener(MattKOTH koth) {
         super(koth);
