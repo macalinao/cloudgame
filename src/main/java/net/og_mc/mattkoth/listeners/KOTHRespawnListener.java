@@ -10,7 +10,9 @@ import com.simplyian.cloudgame.gameplay.listeners.GameListener;
 import net.og_mc.mattkoth.KOTHState;
 import net.og_mc.mattkoth.MattKOTH;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
 /**
  *
@@ -30,5 +32,15 @@ public class KOTHRespawnListener extends GameListener<KOTHState> {
         }
 
         e.getEntity().teleport(game.getArena().getNextSpawn());
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerRespawn(PlayerRespawnEvent e) {
+        Game<KOTHState> game = game(e.getPlayer());
+        if (game == null || !game.getState().isStarted()) {
+            return;
+        }
+
+        e.setRespawnLocation(game.getArena().getNextSpawn());
     }
 }
