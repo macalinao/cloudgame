@@ -7,6 +7,7 @@ package net.og_mc.mattkoth.tasks;
 
 import com.simplyian.cloudgame.events.GameEndEvent;
 import com.simplyian.cloudgame.game.Game;
+import java.util.UUID;
 import net.og_mc.mattkoth.KOTHState;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,6 +23,8 @@ public class KOTHTimer extends BukkitRunnable {
     private final Game<KOTHState> game;
 
     private int announceCount = 0;
+
+    private UUID lastCapturer;
 
     private int captureAnnounceCount = 0;
 
@@ -59,12 +62,14 @@ public class KOTHTimer extends BukkitRunnable {
     private void updateCaptureTime() {
         KOTHState state = game.getState();
         Player capturer = state.getCapturer();
-        if (capturer == null) {
+        if (capturer == null || !lastCapturer.equals(capturer.getUniqueId())) {
             if (captureAnnounceCount != 0) {
                 captureAnnounceCount = 0;
             }
+            lastCapturer = (capturer == null) ? null : capturer.getUniqueId();
             return;
         }
+        lastCapturer = capturer.getUniqueId();
 
         int secsLeft = 120 - state.secondsCaptured();
         if (secsLeft <= 2 * 60 && captureAnnounceCount == 0) {
