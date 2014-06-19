@@ -131,8 +131,9 @@ public class KOTHCaptureListener extends GameListener<KOTHState> {
             game.broadcast(ChatColor.RED + player.getName() + " is now holding the koth point! "
                     + "Kill them or knock them out of the ring within two minutes or they'll claim their prize!");
         } else {
-            state.setCapturer(null);
             // new capturer will be determined by a random moving player
+            state.setCapturer(null);
+            state.setCapturerHelmet(null);
         }
     }
 }
