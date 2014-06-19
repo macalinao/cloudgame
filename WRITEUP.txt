@@ -1,0 +1,87 @@
+MattKoth --
+ 
+King of the hill minigame.
+ 
+** Commands
+ 
+*Starting the game
+/koth start <map>
+- This starts the KOTH, but puts it on a cooldown. In chat, it will post this:
+' &7&m-&8&m--------------------------------------------------&7&m-'
+' &aA KOTH on map &2<map name> &ais starting in &2<count down>&2!'
+' &aType &2/koth join &ato join! (armor not provided)
+' &7&m-&8&m--------------------------------------------------&7&m-'
+ 
+- The executer of the start command will be tped to spawn1 of the KOTH map after saving their inventory (vital). They will turn invisible when tped to the map.
+ 
+- There will be a five minute cool down from when the command is executed and when it actually happens. The countdown will repeat the message on these marks:
+5 minutes
+3 minutes
+1 minute
+30 seconds
+10 seconds
+ 
+- After it reaches the cooldown, it will send this message:
+' &7&m-&8&m--------------------------------------------------&7&m-'
+' &aA KOTH on map &2<map name> &ahas started!'
+' &aType &2/koth spectate &ato spectate it!'
+' &7&m-&8&m--------------------------------------------------&7&m-'
+ 
+*Joining the game
+/koth join
+- When a user (can't be the host of the koth) joins, they will be sent this message:
+' &7&m-&8&m--------------------------------------------------&7&m-'
+' &aYou've joined the KOTH! Pay attention to the countdown.'
+' &aWant to leave the que? Type &2/koth leave&a!
+' &7&m-&8&m--------------------------------------------------&7&m-'
+ 
+-- If a user types /koth leave during the countdown after joining, remove them from the que.
+ 
+- When the countdown is finished. The users in que will be distributed to the different map spawns (may be one spawn, may be five. There will be odd numbers). This message will also be sent to them:
+' &7&m-&8&m--------------------------------------------------&7&m-'
+' &aKoth started! Want to leave the game in progress, type'
+' &2/koth leave&a!
+' &7&m-&8&m--------------------------------------------------&7&m-'
+ 
+*Spectating
+/koth spectate
+- When a user starts to spectate, save their inventory, and use hideplayer packets to completely block them from everyone's view. When they first type the command, send them this message '&cType /koth spectate again to exit the mode!'. Upon leaving, give them their inventory, and show packets again. If the server reboots, do the /koth spectate leaving event upon login.
+ 
+*Leaving a game in progress
+/koth leave
+- The user must have killed at least one person in the koth to leave. If they leave and this hasn't been done, send them:
+'&4[KOTH] &cYou must kill one person before leaving!
+ 
+- The user also can't be within 20 blocks of another player. If they are, send them this message:
+'&4KOTH] &cYou must be 20 blocks away from another player!'
+ 
+- If they haven't done both, send them both messages.
+ 
+*Setting koth point
+/koth setpoint <region name> <koth map name)
+- You will be able to make a region the koth point for specific maps.
+ 
+*Setting koth spawnpoints
+/koth setspawn <koth map name> 1-5 (be able to set a number within that range)
+ 
+*Setting koth region
+/koth setregion <region name> <koth map name>
+ 
+** Game
+ 
+- Rules are simple. There is a 10 minute time limit. Someone must hold down the hill point for two minutes. First person to reach the hill point becomes the 'capturer'. When a user becomes the capturer, put a red wool block on their head and send the *koth hold message* to all users in the koth. If the koth isn't captured by the end of 10 minutes, end the game. If it's being captured, let it run overtime until the capturer captures or dies. The willer will recieve 3 knight crates. No teams, just faction rules (meaning you basically just tp them). Disallow all commands (besides koth commands) while in the arena. While koth is going, display the *countdown message*.
+ 
+Execute when to the winner of KOTH:
+/ccrates give 3 <winnername> 3
+ 
+*koth hold message*
+&c<holdername> is now holding the koth point! Kill them or knock them out of the ring within two minutes or they'll claim their prize!
+ 
+*countdown message*
+&cThere's <time> left!
+ 
+Display countdown in these intervals:
+7 minutes left
+5 mins
+3 mins
+1 min

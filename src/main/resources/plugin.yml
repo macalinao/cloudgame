@@ -1,44 +1,44 @@
-name: CloudGame
-description: Cloud minigame framework.
+name: MattKOTH
+description: King of the hill minigame.
 version: $version
 author: AlbireoX
 website: http://og-mc.net/
 
-main: updateme
+main: net.og_mc.mattkoth.MattKOTHPlugin
 depend: [WorldGuard]
 
 commands:
     arenacreate:
         description: Creates an arena
-        permission: cloudgame.admin
+        permission: mattkoth.admin
         usage: /arenacreate <region> [world=current]
     arenadelete:
         description: Deletes an arena
-        permission: cloudgame.admin
+        permission: mattkoth.admin
         usage: /arenadelete
     arenainfo:
         description: Gets information about the arena
-        permission: cloudgame.admin
+        permission: mattkoth.admin
         usage: /arenainfo
     arenalistspawns:
         description: Lists the spawns of an arena.
-        permission: cloudgame.admin
+        permission: mattkoth.admin
         usage: /arenalistspawns
     arenareload:
         description: Reloads all arenas from the arenas.yml
-        permission: cloudgame.admin
+        permission: mattkoth.admin
         usage: /arenareload
     arenaresetspawns:
         description: Resets the spawns of an arena
-        permission: cloudgame.admin
+        permission: mattkoth.admin
         usage: /arenaresetspawns
     arenasetname:
         description: Sets the name of an arena
-        permission: cloudgame.admin
+        permission: mattkoth.admin
         usage: /arenasetname
     arenasetspawn:
         description: Sets a spawn of an arena
-        permission: cloudgame.admin
+        permission: mattkoth.admin
         usage: /arenasetspawn
 
     koth:
@@ -46,5 +46,5 @@ commands:
         usage: /koth <command>
 
 permissions:
-    cloudgame.admin:
-        description: Allows managing of cloudgame internals.
+    mattkoth.admin:
+        description: Allows managing of MattKOTH.
