@@ -40,7 +40,10 @@ public abstract class FFAState implements State {
     public List<Player> getPlayers() {
         List<Player> ret = new ArrayList<>();
         for (UUID u : players) {
-            ret.add(Bukkit.getPlayer(u));
+            Player player = Bukkit.getPlayer(u);
+            if (player != null) {
+                ret.add(player);
+            }
         }
         return ret;
     }
@@ -61,7 +64,10 @@ public abstract class FFAState implements State {
     public List<Player> getSpectators() {
         List<Player> ret = new ArrayList<>();
         for (UUID u : spectators) {
-            ret.add(Bukkit.getPlayer(u));
+            Player player = Bukkit.getPlayer(u);
+            if (player != null) {
+                ret.add(player);
+            }
         }
         return ret;
     }
