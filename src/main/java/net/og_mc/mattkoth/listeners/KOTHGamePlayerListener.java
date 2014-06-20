@@ -163,6 +163,7 @@ public class KOTHGamePlayerListener extends GameListener<KOTHState> {
             other.showPlayer(p);
         }
         p.setFlying(false);
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
 
         game.getGameplay().sendGameMessage(p, "You are no longer spectating the game.");
     }
