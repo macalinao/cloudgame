@@ -32,6 +32,11 @@ public class KOTHAnnouncerTask extends BukkitRunnable {
 
     @Override
     public void run() {
+        if (game.getState().isStarted()) {
+            cancel();
+            return;
+        }
+
         int secsLeft = 5 * 60 - (((int) (System.currentTimeMillis() - start)) / 1000);
 
         if (secsLeft <= 5 * 60 && announceCount == 0) {
@@ -50,9 +55,7 @@ public class KOTHAnnouncerTask extends BukkitRunnable {
             announceTime("10 seconds");
             announceCount++;
         } else if (secsLeft <= 0 && announceCount == 5) {
-            announceStart();
             Bukkit.getPluginManager().callEvent(new GameStartEvent(game));
-            announceCount++; // just in case
             cancel();
         }
     }
@@ -64,13 +67,6 @@ public class KOTHAnnouncerTask extends BukkitRunnable {
                     + ChatColor.GREEN + "is starting in " + ChatColor.DARK_GREEN + time + ChatColor.GREEN + "!",
                     "Type " + ChatColor.DARK_GREEN + "/koth join " + ChatColor.GREEN + "to join "
                     + ChatColor.DARK_GREEN + game.getState().getPlayers().size() + ChatColor.GREEN + " other players! (armor not provided)");
-        }
-    }
-
-    private void announceStart() {
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            Messaging.sendBanner(p, "A KOTH on map " + ChatColor.DARK_GREEN + game.getArena().getName() + " " + ChatColor.GREEN + "has started!",
-                    "Type " + ChatColor.DARK_GREEN + "/koth spectate " + ChatColor.GREEN + "to spectate it!");
         }
     }
 

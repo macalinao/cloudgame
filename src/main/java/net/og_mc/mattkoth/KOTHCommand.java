@@ -9,6 +9,7 @@ import com.simplyian.cloudgame.command.PlayerCommandHandler;
 import com.simplyian.cloudgame.events.GameJoinEvent;
 import com.simplyian.cloudgame.events.GameLeaveEvent;
 import com.simplyian.cloudgame.events.GameSpectateEvent;
+import com.simplyian.cloudgame.events.GameStartEvent;
 import com.simplyian.cloudgame.events.GameUnspectateEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.model.arena.Arena;
@@ -50,6 +51,9 @@ public class KOTHCommand extends PlayerCommandHandler {
                 return;
             case "stop":
                 stop(player, args);
+                return;
+            case "forcestart":
+                forcestart(player, args);
                 return;
             case "setregion":
                 setregion(player, args);
@@ -138,6 +142,14 @@ public class KOTHCommand extends PlayerCommandHandler {
         }
         koth.getGame().stop();
         player.sendMessage(ChatColor.GREEN + "Game stopped.");
+    }
+
+    private void forcestart(Player player, String[] args) {
+        if (!player.hasPermission("mattkoth.admin")) {
+            player.sendMessage(ChatColor.RED + "You can't use this command.");
+            return;
+        }
+        Bukkit.getPluginManager().callEvent(new GameStartEvent(koth.getGame()));
     }
 
     private void setregion(Player player, String[] args) {

@@ -10,6 +10,7 @@ import com.simplyian.cloudgame.events.GameStartEvent;
 import com.simplyian.cloudgame.events.GameStopEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.listeners.GameListener;
+import com.simplyian.cloudgame.util.Messaging;
 import net.og_mc.mattkoth.KOTHState;
 import net.og_mc.mattkoth.tasks.KOTHTimer;
 import net.og_mc.mattkoth.MattKOTH;
@@ -34,6 +35,11 @@ public class KOTHGameListener extends GameListener<KOTHState> {
         Game<KOTHState> game = game(event);
         if (game == null) {
             return;
+        }
+
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            Messaging.sendBanner(p, "A KOTH on map " + ChatColor.DARK_GREEN + game.getArena().getName() + " " + ChatColor.GREEN + "has started!",
+                    "Type " + ChatColor.DARK_GREEN + "/koth spectate " + ChatColor.GREEN + "to spectate it!");
         }
 
         KOTHState state = game.getState();
