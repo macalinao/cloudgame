@@ -38,11 +38,15 @@ repositories {
     maven {
         url 'http://maven.sk89q.com/repo/'
     }
+    maven {
+        url 'http://ci.frostcast.net/plugin/repository/everything'
+    }
 }
 
 dependencies {
     compile group: 'org.bukkit', name: 'bukkit', version: '1.7.5-R0.1-SNAPSHOT'
     compile 'com.sk89q:worldguard:5.9.1-SNAPSHOT'
+    compile 'me.confuser:BarAPI:3.0'
     compile fileTree(dir: 'libs', includes: ['*.jar']) 
 }
 
