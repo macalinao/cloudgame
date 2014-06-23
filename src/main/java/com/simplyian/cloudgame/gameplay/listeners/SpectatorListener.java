@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 
 /**
  *
@@ -22,6 +23,16 @@ public class SpectatorListener<T extends State> extends GameListener<T> {
 
     public SpectatorListener(Gameplay<T> gameplay) {
         super(gameplay);
+    }
+
+    @EventHandler
+    public void onSpectatorPickupItem(PlayerPickupItemEvent e) {
+        Game<T> game = gameSpectated(e.getPlayer());
+        if (game == null) {
+            return;
+        }
+
+        e.setCancelled(true);
     }
 
     @EventHandler
