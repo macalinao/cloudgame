@@ -8,7 +8,9 @@ package com.simplyian.cloudgame.gameplay.listeners;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.gameplay.State;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 /**
@@ -20,6 +22,20 @@ public class SpectatorListener<T extends State> extends GameListener<T> {
 
     public SpectatorListener(Gameplay<T> gameplay) {
         super(gameplay);
+    }
+
+    @EventHandler
+    public void onSpectatorDamage(EntityDamageByEntityEvent e) {
+        if (!(e.getDamager() instanceof Player)) {
+            return;
+        }
+
+        Game<T> game = gameSpectated((Player) e.getDamager());
+        if (game == null) {
+            return;
+        }
+
+        e.setCancelled(true);
     }
 
     @EventHandler
