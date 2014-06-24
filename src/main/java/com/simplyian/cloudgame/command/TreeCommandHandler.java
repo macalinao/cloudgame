@@ -62,6 +62,15 @@ public abstract class TreeCommandHandler extends CommandHandler {
     /**
      * Adds a subcommand to this tree command handler
      *
+     * @param handler
+     */
+    protected void addSubcommand(CommandHandler handler) {
+        addSubcommand(handler.getName(), handler);
+    }
+
+    /**
+     * Adds a subcommand to this tree command handler
+     *
      * @param name
      * @param handler
      */
