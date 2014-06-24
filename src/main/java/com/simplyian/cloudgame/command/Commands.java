@@ -28,6 +28,9 @@ public class Commands {
     public void registerCommand(String name, CommandHandler handler) {
         PluginCommand cmd = plugin.getCommand(name);
         cmd.setExecutor(handler);
+        if (handler instanceof TreeCommandHandler) {
+            ((TreeCommandHandler) handler).setupSubcommands();
+        }
     }
 
     public void registerDefaultCommands() {

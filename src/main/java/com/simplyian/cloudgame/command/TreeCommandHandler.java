@@ -26,7 +26,6 @@ public abstract class TreeCommandHandler extends CommandHandler {
 
     public TreeCommandHandler(String name) {
         super(name);
-        setupSubcommands();
     }
 
     /**
