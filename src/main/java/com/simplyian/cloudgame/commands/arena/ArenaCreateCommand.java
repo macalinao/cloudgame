@@ -37,7 +37,7 @@ public class ArenaCreateCommand extends CommandHandler {
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(getUsage());
+            sendUsageMessage(sender);
             return;
         }
         String regionName = args[0];
