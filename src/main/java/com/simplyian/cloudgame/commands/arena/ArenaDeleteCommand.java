@@ -22,7 +22,10 @@ public class ArenaDeleteCommand extends PlayerCommandHandler {
     private final CloudGame plugin;
 
     public ArenaDeleteCommand(CloudGame plugin) {
+        super("delete");
         this.plugin = plugin;
+        setUsage("/arena delete");
+        setDescription("Deletes an arena.");
     }
 
     @Override

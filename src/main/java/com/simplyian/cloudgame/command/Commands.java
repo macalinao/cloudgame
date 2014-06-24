@@ -31,7 +31,6 @@ public class Commands {
     public void registerCommand(String command, CommandHandler handler) {
         PluginCommand cmd = plugin.getCommand(command);
         cmd.setExecutor(handler);
-        handler.setCommand(cmd);
     }
 
     public void registerDefaultCommands() {

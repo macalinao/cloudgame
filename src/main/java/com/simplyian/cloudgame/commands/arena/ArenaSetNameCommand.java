@@ -22,7 +22,10 @@ public class ArenaSetNameCommand extends PlayerCommandHandler {
     private final CloudGame plugin;
 
     public ArenaSetNameCommand(CloudGame plugin) {
+        super("setname");
         this.plugin = plugin;
+        setUsage("/arena setname");
+        setDescription("Sets the name of the arena.");
     }
 
     @Override
@@ -35,7 +38,7 @@ public class ArenaSetNameCommand extends PlayerCommandHandler {
         }
 
         if (args.length == 0) {
-            player.sendMessage(usage());
+            sendUsageMessage(player);
             return;
         }
 

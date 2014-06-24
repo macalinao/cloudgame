@@ -8,42 +8,10 @@ main: updateme
 depend: [WorldGuard]
 
 commands:
-    arenacreate:
-        description: Creates an arena
+    arena:
+        description: Allows management of arenas
         permission: cloudgame.admin
-        usage: /arenacreate <region> [world=current]
-    arenadelete:
-        description: Deletes an arena
-        permission: cloudgame.admin
-        usage: /arenadelete
-    arenainfo:
-        description: Gets information about the arena
-        permission: cloudgame.admin
-        usage: /arenainfo
-    arenalistspawns:
-        description: Lists the spawns of an arena.
-        permission: cloudgame.admin
-        usage: /arenalistspawns
-    arenareload:
-        description: Reloads all arenas from the arenas.yml
-        permission: cloudgame.admin
-        usage: /arenareload
-    arenaresetspawns:
-        description: Resets the spawns of an arena
-        permission: cloudgame.admin
-        usage: /arenaresetspawns
-    arenasetname:
-        description: Sets the name of an arena
-        permission: cloudgame.admin
-        usage: /arenasetname
-    arenasetspawn:
-        description: Sets a spawn of an arena
-        permission: cloudgame.admin
-        usage: /arenasetspawn
-
-    koth:
-        description: KOTH command
-        usage: /koth <command>
+        usage: /arena <subcommand> [args]
 
 permissions:
     cloudgame.admin:

@@ -8,6 +8,7 @@ package com.simplyian.cloudgame.command;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 /**
@@ -17,6 +18,10 @@ import org.bukkit.command.CommandSender;
 public abstract class TreeCommandHandler extends CommandHandler {
 
     private final Map<String, CommandHandler> subcommands = new HashMap<>();
+
+    public TreeCommandHandler(String name) {
+        super(name);
+    }
 
     /**
      * Sets up the subcommands in this command handler
@@ -28,14 +33,30 @@ public abstract class TreeCommandHandler extends CommandHandler {
      *
      * @param sender
      */
-    public abstract void onCommandNoArgs(CommandSender sender);
+    public void onCommandNoArgs(CommandSender sender) {
+        sendHelpMenu(sender);
+    }
 
     /**
      * Called when the command has an invalid subcommand name.
      *
      * @param sender
      */
-    public abstract void onCommandInvalidArgs(CommandSender sender);
+    public void onCommandInvalidArgs(CommandSender sender) {
+        sendHelpMenu(sender);
+    }
+
+    /**
+     * Sends the given player a help menu about the command.
+     *
+     * @param sender
+     */
+    public void sendHelpMenu(CommandSender sender) {
+        for (CommandHandler handler : subcommands.values()) {
+            sender.sendMessage(ChatColor.GREEN + "/" + getName() + " " + handler.getName() + " - "
+                    + ChatColor.YELLOW + handler.getDescription());
+        }
+    }
 
     /**
      * Adds a subcommand to this tree command handler

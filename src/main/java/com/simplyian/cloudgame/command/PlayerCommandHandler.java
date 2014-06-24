@@ -16,6 +16,10 @@ import org.bukkit.entity.Player;
  */
 public abstract class PlayerCommandHandler extends CommandHandler {
 
+    public PlayerCommandHandler(String name) {
+        super(name);
+    }
+
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {

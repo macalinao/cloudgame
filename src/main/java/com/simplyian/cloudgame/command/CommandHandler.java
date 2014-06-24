@@ -5,7 +5,6 @@
  */
 package com.simplyian.cloudgame.command;
 
-import com.simplyian.cloudgame.CloudGame;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,16 +16,60 @@ import org.bukkit.command.CommandSender;
  */
 public abstract class CommandHandler implements CommandExecutor {
 
-    private Command command = null;
+    private final String name;
 
-    protected void setCommand(Command command) {
-        if (this.command == null) {
-            this.command = command;
-        }
+    private String usage;
+
+    private String description;
+
+    public CommandHandler(String name) {
+        this.name = name;
+        usage = "/" + name;
+        description = usage;
     }
 
-    public String usage() {
-        return ChatColor.RED + "Usage: " + command.getUsage();
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @return the usage
+     */
+    public String getUsage() {
+        return usage;
+    }
+
+    /**
+     * @param usage the usage to set
+     */
+    public void setUsage(String usage) {
+        this.usage = usage;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Sends the usage message to the given CommandSender.
+     *
+     * @param sender
+     */
+    public void sendUsageMessage(CommandSender sender) {
+        sender.sendMessage(ChatColor.RED + "Usage: " + usage);
     }
 
     @Override

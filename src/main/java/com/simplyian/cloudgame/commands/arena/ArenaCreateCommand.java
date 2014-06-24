@@ -28,13 +28,16 @@ public class ArenaCreateCommand extends CommandHandler {
     private final CloudGame plugin;
 
     public ArenaCreateCommand(CloudGame plugin) {
+        super("create");
         this.plugin = plugin;
+        setUsage("/arena create <region> [world=current]");
+        setDescription("Creates an arena.");
     }
 
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(usage());
+            sender.sendMessage(getUsage());
             return;
         }
         String regionName = args[0];
