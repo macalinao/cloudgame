@@ -54,8 +54,11 @@ public abstract class TreeCommandHandler extends CommandHandler {
      */
     public void sendHelpMenu(CommandSender sender) {
         for (CommandHandler handler : subcommands.values()) {
-            sender.sendMessage(ChatColor.GREEN + "/" + getName() + " " + handler.getName() + " - "
-                    + ChatColor.YELLOW + handler.getDescription());
+            if (handler.getPermission() == null
+                    || sender.hasPermission(handler.getPermission())) {
+                sender.sendMessage(ChatColor.GREEN + "/" + getName() + " " + handler.getName() + " - "
+                        + ChatColor.YELLOW + handler.getDescription());
+            }
         }
     }
 
