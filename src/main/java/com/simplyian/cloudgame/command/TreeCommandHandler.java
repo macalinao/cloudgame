@@ -5,8 +5,12 @@
  */
 package com.simplyian.cloudgame.command;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -53,7 +57,16 @@ public abstract class TreeCommandHandler extends CommandHandler {
      * @param sender
      */
     public void sendHelpMenu(CommandSender sender) {
-        for (CommandHandler handler : subcommands.values()) {
+        List<CommandHandler> cmds = new ArrayList<>(subcommands.values());
+        Collections.sort(cmds, new Comparator<CommandHandler>() {
+
+            @Override
+            public int compare(CommandHandler t, CommandHandler t1) {
+                return t.getName().compareToIgnoreCase(t1.getName());
+            }
+        });
+
+        for (CommandHandler handler : cmds) {
             if (handler.getPermission() == null
                     || sender.hasPermission(handler.getPermission())) {
                 sender.sendMessage(ChatColor.GREEN + "/" + getName() + " " + handler.getName() + " - "
