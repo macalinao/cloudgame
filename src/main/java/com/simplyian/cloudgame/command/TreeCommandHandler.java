@@ -5,6 +5,7 @@
  */
 package com.simplyian.cloudgame.command;
 
+import com.simplyian.cloudgame.util.Messaging;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -66,13 +67,17 @@ public abstract class TreeCommandHandler extends CommandHandler {
             }
         });
 
+        List<String> msgs = new ArrayList<>();
+
         for (CommandHandler handler : cmds) {
             if (handler.getPermission() == null
                     || sender.hasPermission(handler.getPermission())) {
-                sender.sendMessage(ChatColor.GREEN + "/" + getName() + " " + handler.getName() + " - "
+                msgs.add(ChatColor.GREEN + "/" + getName() + " " + handler.getName() + " - "
                         + ChatColor.YELLOW + handler.getDescription());
             }
         }
+
+        Messaging.sendBanner(sender, msgs.toArray());
     }
 
     /**
