@@ -15,6 +15,13 @@ import org.bukkit.entity.Player;
 public interface State {
 
     /**
+     * Checks if the game is over.
+     *
+     * @return
+     */
+    public boolean isOver();
+
+    /**
      * Gets all participants in the game (ones that will hear broadcasts)
      *
      * @return
