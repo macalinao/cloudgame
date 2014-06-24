@@ -22,7 +22,11 @@ public class Commands {
     }
 
     public void registerCommand(CommandHandler handler) {
-        PluginCommand cmd = plugin.getCommand(handler.getName());
+        registerCommand(handler.getName(), handler);
+    }
+
+    public void registerCommand(String name, CommandHandler handler) {
+        PluginCommand cmd = plugin.getCommand(name);
         cmd.setExecutor(handler);
     }
 
