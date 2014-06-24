@@ -21,12 +21,12 @@ public class Commands {
         this.plugin = plugin;
     }
 
-    public void registerCommand(String command, CommandHandler handler) {
-        PluginCommand cmd = plugin.getCommand(command);
+    public void registerCommand(CommandHandler handler) {
+        PluginCommand cmd = plugin.getCommand(handler.getName());
         cmd.setExecutor(handler);
     }
 
     public void registerDefaultCommands() {
-        registerCommand("arena", new ArenaCommand(plugin));
+        registerCommand(new ArenaCommand(plugin));
     }
 }
