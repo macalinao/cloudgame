@@ -22,10 +22,13 @@ public abstract class CommandHandler implements CommandExecutor {
 
     private String description;
 
+    private String permission;
+
     public CommandHandler(String name) {
         this.name = name;
         usage = "/" + name;
         description = usage;
+        permission = null;
     }
 
     /**
@@ -61,6 +64,14 @@ public abstract class CommandHandler implements CommandExecutor {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
 
     /**
