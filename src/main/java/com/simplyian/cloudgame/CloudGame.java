@@ -45,6 +45,7 @@ public abstract class CloudGame extends JavaPlugin {
         playerStateManager = new PlayerStateManager(this);
 
         gameManager = new GameManager(this);
+        getServer().getPluginManager().registerEvents(new CoreListener(this), this);
     }
 
     @Override
