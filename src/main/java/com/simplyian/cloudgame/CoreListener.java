@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  *
@@ -30,6 +31,13 @@ public class CoreListener implements Listener {
             return;
         }
 
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + e.getPlayer().getName());
+        final String spawnName = e.getPlayer().getName();
+        (new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + spawnName);
+            }
+        }).runTaskLater(plugin, 1L);
     }
 }
