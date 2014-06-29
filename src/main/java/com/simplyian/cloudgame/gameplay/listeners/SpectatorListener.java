@@ -8,10 +8,12 @@ package com.simplyian.cloudgame.gameplay.listeners;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.gameplay.State;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
@@ -62,6 +64,22 @@ public class SpectatorListener<T extends State> extends GameListener<T> {
         }
 
         e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onSpectatorPotionSplash(PotionSplashEvent e) {
+        for (LivingEntity ent : e.getAffectedEntities()) {
+            if (!(ent instanceof Player)) {
+                continue;
+            }
+
+            Game<T> game = gameSpectated((Player) ent);
+            if (game == null) {
+                continue;
+            }
+
+            e.setIntensity(ent, 0);
+        }
     }
 
     @EventHandler
