@@ -8,6 +8,9 @@ package com.simplyian.cloudgame.gameplay.hostedffa;
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.Gameplay;
+import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFACommandListener;
+import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFADeathListener;
+import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFAGamePlayerListener;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -27,6 +30,13 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
 
     protected HostedFFA(CloudGame plugin, String name) {
         super(plugin, name);
+    }
+
+    @Override
+    public void onEnable() {
+        getPlugin().getServer().getPluginManager().registerEvents(new FFACommandListener(this), getPlugin());
+        getPlugin().getServer().getPluginManager().registerEvents(new FFAGamePlayerListener(this), getPlugin());
+        getPlugin().getServer().getPluginManager().registerEvents(new FFADeathListener(this), getPlugin());
     }
 
     public Game<T> getGame() {
