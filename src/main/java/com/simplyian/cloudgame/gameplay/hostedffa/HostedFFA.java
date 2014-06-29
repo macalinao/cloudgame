@@ -17,6 +17,7 @@ import org.bukkit.entity.Player;
 /**
  *
  * @author ian
+ * @param <T>
  */
 public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
 
