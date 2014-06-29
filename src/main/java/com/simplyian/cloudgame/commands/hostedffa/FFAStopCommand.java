@@ -20,14 +20,14 @@ public class FFAStopCommand extends PlayerCommandHandler {
     public FFAStopCommand(HostedFFA ffa) {
         super("stop");
         this.ffa = ffa;
-        setDescription("Stops the " + ffa.getId() + " in progress.");
+        setDescription("Stops the " + ffa.getName() + " in progress.");
         setUsage("/" + ffa.getId() + " stop");
-        setPermission("HostedFFA.admin");
+        setPermission("mattgame.admin");
     }
 
     @Override
     public void onCommand(Player player, String[] args) {
-        if (!player.hasPermission("HostedFFA.admin")) {
+        if (!player.hasPermission("mattmg.admin")) {
             ffa.sendGameMessage(player, "You can't use this command.");
             return;
         }

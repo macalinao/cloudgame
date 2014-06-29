@@ -21,14 +21,14 @@ public class FFASetSpawnCommand extends PlayerCommandHandler {
     public FFASetSpawnCommand(HostedFFA ffa) {
         super("setspawn");
         this.ffa = ffa;
-        setDescription("Sets a spawn on the " + ffa.getId() + " map.");
+        setDescription("Sets a spawn on the " + ffa.getName() + " map.");
         setUsage("/" + ffa.getId() + " setspawn <hill region> <main region>");
         setPermission("mattmg.admin");
     }
 
     @Override
     public void onCommand(Player player, String[] args) {
-        if (!player.hasPermission("HostedFFA.admin")) {
+        if (!player.hasPermission("matttmg.admin")) {
             ffa.sendGameMessage(player, "You can't use this command.");
             return;
         }

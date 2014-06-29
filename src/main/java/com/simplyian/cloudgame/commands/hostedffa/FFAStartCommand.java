@@ -23,14 +23,14 @@ public class FFAStartCommand extends PlayerCommandHandler {
     public FFAStartCommand(HostedFFA ffa) {
         super("start");
         this.ffa = ffa;
-        setDescription("Starts a " + ffa.getId() + " if there isn't already one going on.");
+        setDescription("Starts a " + ffa.getName() + " if there isn't already one going on.");
         setUsage("/" + ffa.getId() + " start <arena>");
         setPermission("mattmg.admin");
     }
 
     @Override
     public void onCommand(Player player, String[] args) {
-        if (!player.hasPermission("HostedFFA.admin")) {
+        if (!player.hasPermission("mattmg.admin")) {
             ffa.sendGameMessage(player, "You can't use this command.");
             return;
         }
@@ -53,7 +53,7 @@ public class FFAStartCommand extends PlayerCommandHandler {
 
         Game<HostedFFAState> game = ffa.getPlugin().getGameManager().createGame(ffa, arena);
         if (game == null) {
-            ffa.sendGameMessage(player, "FFA is not supported on the given arena.");
+            ffa.sendGameMessage(player, ffa.getName() + " is not supported on the given arena.");
             return;
         }
 
@@ -71,7 +71,7 @@ public class FFAStartCommand extends PlayerCommandHandler {
         game.getState().setHost(player);
         game.getState().setMins(mins);
         player.teleport(game.getArena().getNextSpawn());
-        ffa.sendGameMessage(player, "FFA countdown started for a " + mins + " minute FFA game.");
+        ffa.sendGameMessage(player, ffa.getName() + " countdown started for a " + mins + " minute " + ffa.getName() + " game.");
     }
 
 }

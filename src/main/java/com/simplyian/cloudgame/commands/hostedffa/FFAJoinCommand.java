@@ -22,7 +22,7 @@ public class FFAJoinCommand extends PlayerCommandHandler {
     public FFAJoinCommand(HostedFFA ffa) {
         super("join");
         this.ffa = ffa;
-        setDescription("Joins the " + ffa.getId() + ".");
+        setDescription("Joins the " + ffa.getName() + ".");
         setUsage("/" + ffa.getId() + " join");
     }
 

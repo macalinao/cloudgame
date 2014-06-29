@@ -25,7 +25,7 @@ public class FFASpectateCommand extends PlayerCommandHandler {
     public FFASpectateCommand(HostedFFA ffa) {
         super("spectate");
         this.ffa = ffa;
-        setDescription("Spectates the " + ffa.getId() + ".");
+        setDescription("Spectates the " + ffa.getName() + ".");
         setUsage("/" + ffa.getId() + " spectate");
     }
 

@@ -22,14 +22,14 @@ public class FFAForceStartCommand extends PlayerCommandHandler {
     public FFAForceStartCommand(HostedFFA ffa) {
         super("forcestart");
         this.ffa = ffa;
-        setDescription("Bypasses the " + ffa.getId() + " countdown.");
+        setDescription("Bypasses the " + ffa.getName() + " countdown.");
         setUsage("/" + ffa.getId() + " forcestart");
         setPermission("mattmg.admin");
     }
 
     @Override
     public void onCommand(Player player, String[] args) {
-        if (!player.hasPermission("HostedFFA.admin")) {
+        if (!player.hasPermission("mattmg.admin")) {
             ffa.sendGameMessage(player, "You can't use this command.");
             return;
         }
