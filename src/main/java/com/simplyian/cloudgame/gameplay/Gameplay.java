@@ -87,7 +87,7 @@ public abstract class Gameplay<T extends State> {
      * @param message
      */
     public void sendGameMessage(Player p, String message) {
-        p.sendMessage(ChatColor.DARK_RED + "[" + id + "] " + ChatColor.RED + message);
+        p.sendMessage(ChatColor.DARK_RED + "[" + name + "] " + ChatColor.RED + message);
     }
 
     /**
