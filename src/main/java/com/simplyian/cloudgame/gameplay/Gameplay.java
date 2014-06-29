@@ -29,11 +29,14 @@ public abstract class Gameplay<T extends State> {
 
     private final String id;
 
+    private final String name;
+
     private final Map<String, MessageHandler> handlers;
 
     protected Gameplay(CloudGame plugin, String id) {
         this.plugin = plugin;
-        this.id = id;
+        this.id = id.toLowerCase();
+        this.name = id.toUpperCase();
         handlers = new HashMap<>();
     }
 
@@ -43,6 +46,10 @@ public abstract class Gameplay<T extends State> {
 
     public String getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     /**
