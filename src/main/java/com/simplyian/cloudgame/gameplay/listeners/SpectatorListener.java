@@ -11,6 +11,7 @@ import com.simplyian.cloudgame.gameplay.State;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
@@ -42,6 +43,20 @@ public class SpectatorListener<T extends State> extends GameListener<T> {
         }
 
         Game<T> game = gameSpectated((Player) e.getDamager());
+        if (game == null) {
+            return;
+        }
+
+        e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onSpectatorDamaged(EntityDamageEvent e) {
+        if (!(e.getEntity() instanceof Player)) {
+            return;
+        }
+
+        Game<T> game = gameSpectated((Player) e.getEntity());
         if (game == null) {
             return;
         }
