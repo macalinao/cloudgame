@@ -5,6 +5,7 @@
  */
 package com.simplyian.cloudgame.gameplay.hostedffa.listeners;
 
+import com.simplyian.cloudgame.events.GameQuitEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.hostedffa.HostedFFA;
 import com.simplyian.cloudgame.gameplay.hostedffa.HostedFFAState;
@@ -33,8 +34,6 @@ public class FFADeathListener extends GameListener<HostedFFAState> {
             return;
         }
 
-        game.getState().removePlayer(p);
-        BarAPI.removeBar(p);
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
+        Bukkit.getPluginManager().callEvent(new GameQuitEvent(game, e.getEntity()));
     }
 }
