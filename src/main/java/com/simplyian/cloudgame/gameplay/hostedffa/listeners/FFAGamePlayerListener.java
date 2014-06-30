@@ -58,7 +58,7 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
 
         state.addPlayer(p);
         getGameplay().sendBanner(p, "You've joined the " + getGameplay().getId() + "! Pay attention to the countdown.",
-                "Want to leave the game? Type " + ChatColor.DARK_GREEN + "/" + getGameplay().getId() + " leave" + ChatColor.GREEN + "!");
+                "Want to leave the game? Type $D/" + getGameplay().getId() + " leave$L!");
     }
 
     @EventHandler
@@ -78,7 +78,7 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
             }
 
             state.removePlayer(p);
-            game.getGameplay().sendGameMessage(p, "You've left the " + getGameplay().getId() + ". To rejoin, type " + ChatColor.YELLOW + "/koth join" + ChatColor.RED + "!");
+            game.getGameplay().sendGameMessage(p, "You've left the " + getGameplay().getId() + ". To rejoin, type $H/koth join$M!");
             return;
         }
 

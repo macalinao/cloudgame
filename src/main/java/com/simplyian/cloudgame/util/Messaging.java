@@ -21,7 +21,7 @@ public class Messaging {
     public static void sendBanner(ColorScheme scheme, CommandSender sender, Object... message) {
         sender.sendMessage(ChatColor.GRAY + " " + ChatColor.STRIKETHROUGH + "-" + ChatColor.DARK_GRAY + ChatColor.STRIKETHROUGH + "--------------------------------------------------" + ChatColor.GRAY + ChatColor.STRIKETHROUGH + "-");
         for (Object line : message) {
-            sender.sendMessage(scheme.getLight() + " " + line);
+            sender.sendMessage(scheme.getLight() + " " + scheme.replaceColors(line.toString()));
         }
         sender.sendMessage(ChatColor.GRAY + " " + ChatColor.STRIKETHROUGH + "-" + ChatColor.DARK_GRAY + ChatColor.STRIKETHROUGH + "--------------------------------------------------" + ChatColor.GRAY + ChatColor.STRIKETHROUGH + "-");
     }

@@ -30,7 +30,7 @@ public abstract class Gameplay<T extends State> {
 
     private final String name;
 
-    private ColorScheme colorScheme;
+    private ColorScheme colorScheme = ColorScheme.DEFAULT;
 
     protected Gameplay(CloudGame plugin, String id) {
         this.plugin = plugin;
@@ -91,7 +91,7 @@ public abstract class Gameplay<T extends State> {
      * @param message
      */
     public void sendGameMessage(Player p, String message) {
-        p.sendMessage(colorScheme.getPrefix() + "[" + name + "] " + colorScheme.getMsg() + message);
+        p.sendMessage(colorScheme.getPrefix() + "[" + name + "] " + colorScheme.getMsg() + colorScheme.replaceColors(message));
     }
 
     /**
