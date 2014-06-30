@@ -8,7 +8,7 @@ package com.simplyian.cloudgame.gameplay.hostedffa.listeners;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.hostedffa.HostedFFA;
 import com.simplyian.cloudgame.gameplay.hostedffa.HostedFFAState;
-import com.simplyian.cloudgame.gameplay.listeners.GameListener;
+import com.simplyian.cloudgame.gameplay.GameListener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 

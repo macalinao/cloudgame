@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.simplyian.cloudgame.gameplay.states;
+package com.simplyian.cloudgame.gameplay;
 
 import com.simplyian.cloudgame.gameplay.State;
 import java.util.ArrayList;

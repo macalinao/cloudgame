@@ -8,7 +8,6 @@ package com.simplyian.cloudgame.gameplay;
 import java.util.HashMap;
 import java.util.Map;
 import com.simplyian.cloudgame.CloudGame;
-import com.simplyian.cloudgame.gameplay.listeners.SpectatorListener;
 
 /**
  *

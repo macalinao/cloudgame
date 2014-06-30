@@ -5,7 +5,7 @@
  */
 package com.simplyian.cloudgame.gameplay.hostedffa;
 
-import com.simplyian.cloudgame.gameplay.states.FFAState;
+import com.simplyian.cloudgame.gameplay.FFAState;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

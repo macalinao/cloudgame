@@ -9,7 +9,7 @@ import com.simplyian.cloudgame.events.GameQuitEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.hostedffa.HostedFFA;
 import com.simplyian.cloudgame.gameplay.hostedffa.HostedFFAState;
-import com.simplyian.cloudgame.gameplay.listeners.GameListener;
+import com.simplyian.cloudgame.gameplay.GameListener;
 import me.confuser.barapi.BarAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
