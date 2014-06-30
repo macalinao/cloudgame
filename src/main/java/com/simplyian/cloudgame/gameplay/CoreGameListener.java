@@ -41,6 +41,10 @@ public class CoreGameListener<T extends State> extends GameListener<T> {
             return;
         }
 
+        if (!game.getState().isStarted()) {
+            return;
+        }
+
         if (game.getArena().getMain().contains(e.getTo())) {
             return;
         }

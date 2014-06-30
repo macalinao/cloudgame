@@ -15,6 +15,13 @@ import org.bukkit.entity.Player;
 public interface State {
 
     /**
+     * Checks if the game has been started.
+     *
+     * @return
+     */
+    public boolean isStarted();
+
+    /**
      * Checks if the game is over.
      *
      * @return
