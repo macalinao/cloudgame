@@ -30,6 +30,8 @@ public abstract class Gameplay<T extends State> {
 
     private final String name;
 
+    private ColorScheme colorScheme;
+
     protected Gameplay(CloudGame plugin, String id) {
         this.plugin = plugin;
         this.id = id.toLowerCase();
@@ -46,6 +48,14 @@ public abstract class Gameplay<T extends State> {
 
     public String getName() {
         return name;
+    }
+
+    public ColorScheme getColorScheme() {
+        return colorScheme;
+    }
+
+    public void setColorScheme(ColorScheme colorScheme) {
+        this.colorScheme = colorScheme;
     }
 
     /**
@@ -68,9 +78,7 @@ public abstract class Gameplay<T extends State> {
     public T newState() {
         try {
             return (T) ((Class) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0]).newInstance();
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -83,7 +91,7 @@ public abstract class Gameplay<T extends State> {
      * @param message
      */
     public void sendGameMessage(Player p, String message) {
-        p.sendMessage(ChatColor.DARK_RED + "[" + name + "] " + ChatColor.RED + message);
+        p.sendMessage(colorScheme.getPrefix() + "[" + name + "] " + colorScheme.getMsg() + message);
     }
 
     /**
@@ -93,7 +101,7 @@ public abstract class Gameplay<T extends State> {
      * @param message
      */
     public void sendBanner(CommandSender sender, Object... message) {
-        Messaging.sendBanner(ChatColor.GREEN, sender, message);
+        Messaging.sendBanner(colorScheme, sender, message);
     }
 
     /**

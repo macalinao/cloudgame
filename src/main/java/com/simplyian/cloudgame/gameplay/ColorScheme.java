@@ -13,13 +13,24 @@ import org.bukkit.ChatColor;
  */
 public class ColorScheme {
 
+    public static final ColorScheme DEFAULT = new ColorScheme(ChatColor.GREEN, ChatColor.DARK_GREEN, ChatColor.DARK_RED, ChatColor.WHITE, ChatColor.YELLOW);
+
     private final ChatColor light;
 
     private final ChatColor dark;
 
-    public ColorScheme(ChatColor light, ChatColor dark) {
+    private final ChatColor prefix;
+
+    private final ChatColor msg;
+
+    private final ChatColor highlight;
+
+    public ColorScheme(ChatColor light, ChatColor dark, ChatColor prefix, ChatColor msg, ChatColor highlight) {
         this.light = light;
         this.dark = dark;
+        this.prefix = prefix;
+        this.msg = msg;
+        this.highlight = highlight;
     }
 
     public ChatColor getLight() {
@@ -28,6 +39,18 @@ public class ColorScheme {
 
     public ChatColor getDark() {
         return dark;
+    }
+
+    public ChatColor getPrefix() {
+        return prefix;
+    }
+
+    public ChatColor getMsg() {
+        return msg;
+    }
+
+    public ChatColor getHighlight() {
+        return highlight;
     }
 
 }
