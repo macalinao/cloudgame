@@ -16,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 /**
@@ -27,6 +28,24 @@ public class CoreGameListener<T extends State> extends GameListener<T> {
 
     public CoreGameListener(Gameplay<T> gameplay) {
         super(gameplay);
+    }
+
+    @EventHandler
+    public void onPlayerMoveOutOfArena(PlayerMoveEvent e) {
+        if (e.getFrom().getBlock().equals(e.getTo().getBlock())) {
+            return;
+        }
+
+        Game<T> game = game(e.getPlayer());
+        if (game == null) {
+            return;
+        }
+
+        if (game.getArena().getMain().contains(e.getTo())) {
+            return;
+        }
+
+        Bukkit.getPluginManager().callEvent(new GameQuitEvent(game, e.getPlayer()));
     }
 
     @EventHandler
