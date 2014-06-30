@@ -8,13 +8,14 @@ package com.simplyian.cloudgame.gameplay;
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.model.arena.Arena;
+import com.simplyian.cloudgame.util.Messaging;
 import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
@@ -88,6 +89,16 @@ public abstract class Gameplay<T extends State> {
      */
     public void sendGameMessage(Player p, String message) {
         p.sendMessage(ChatColor.DARK_RED + "[" + name + "] " + ChatColor.RED + message);
+    }
+
+    /**
+     * Sends a banner to the given commandsender.
+     *
+     * @param sender
+     * @param message
+     */
+    public void sendBanner(CommandSender sender, Object... message) {
+        Messaging.sendBanner(ChatColor.GREEN, sender, message);
     }
 
     /**

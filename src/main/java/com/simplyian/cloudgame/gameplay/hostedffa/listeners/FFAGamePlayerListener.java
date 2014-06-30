@@ -57,7 +57,7 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
         }
 
         state.addPlayer(p);
-        Messaging.sendBanner(p, "You've joined the " + getGameplay().getId() + "! Pay attention to the countdown.",
+        getGameplay().sendBanner(p, "You've joined the " + getGameplay().getId() + "! Pay attention to the countdown.",
                 "Want to leave the game? Type " + ChatColor.DARK_GREEN + "/" + getGameplay().getId() + " leave" + ChatColor.GREEN + "!");
     }
 

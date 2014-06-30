@@ -5,6 +5,7 @@
  */
 package com.simplyian.cloudgame.command;
 
+import com.simplyian.cloudgame.gameplay.Gameplay;
 import com.simplyian.cloudgame.util.Messaging;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +24,8 @@ import org.bukkit.command.CommandSender;
 public abstract class TreeCommandHandler extends CommandHandler {
 
     private final Map<String, CommandHandler> subcommands = new HashMap<>();
+
+    private Gameplay gameplay = null;
 
     public TreeCommandHandler(String name) {
         super(name);
@@ -76,7 +79,11 @@ public abstract class TreeCommandHandler extends CommandHandler {
             }
         }
 
-        Messaging.sendBanner(sender, msgs.toArray());
+        if (gameplay == null) {
+            Messaging.sendBanner(ChatColor.GREEN, sender, msgs.toArray());
+        } else {
+            gameplay.sendBanner(sender, msgs.toArray());
+        }
     }
 
     /**

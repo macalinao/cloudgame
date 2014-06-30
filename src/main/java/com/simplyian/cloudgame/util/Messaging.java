@@ -17,10 +17,10 @@ public class Messaging {
     private Messaging() {
     }
 
-    public static void sendBanner(CommandSender sender, Object... message) {
+    public static void sendBanner(ChatColor color, CommandSender sender, Object... message) {
         sender.sendMessage(ChatColor.GRAY + " " + ChatColor.STRIKETHROUGH + "-" + ChatColor.DARK_GRAY + ChatColor.STRIKETHROUGH + "--------------------------------------------------" + ChatColor.GRAY + ChatColor.STRIKETHROUGH + "-");
         for (Object line : message) {
-            sender.sendMessage(ChatColor.GREEN + " " + line);
+            sender.sendMessage(color + " " + line);
         }
         sender.sendMessage(ChatColor.GRAY + " " + ChatColor.STRIKETHROUGH + "-" + ChatColor.DARK_GRAY + ChatColor.STRIKETHROUGH + "--------------------------------------------------" + ChatColor.GRAY + ChatColor.STRIKETHROUGH + "-");
     }
