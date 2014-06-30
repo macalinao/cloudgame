@@ -10,8 +10,6 @@ import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.util.Messaging;
 import java.lang.reflect.ParameterizedType;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.ChatColor;
@@ -32,13 +30,10 @@ public abstract class Gameplay<T extends State> {
 
     private final String name;
 
-    private final Map<String, MessageHandler> handlers;
-
     protected Gameplay(CloudGame plugin, String id) {
         this.plugin = plugin;
         this.id = id.toLowerCase();
         this.name = id.toUpperCase();
-        handlers = new HashMap<>();
     }
 
     public CloudGame getPlugin() {
@@ -99,26 +94,6 @@ public abstract class Gameplay<T extends State> {
      */
     public void sendBanner(CommandSender sender, Object... message) {
         Messaging.sendBanner(ChatColor.GREEN, sender, message);
-    }
-
-    /**
-     * Adds a message handler to this Gameplay.
-     *
-     * @param type
-     * @param handler
-     */
-    protected void addHandler(String type, MessageHandler<T> handler) {
-        handlers.put(type.toUpperCase(), handler);
-    }
-
-    /**
-     * Gets a handler for a message.
-     *
-     * @param type
-     * @return
-     */
-    public MessageHandler<T> getHandler(String type) {
-        return handlers.get(type.toUpperCase());
     }
 
     /**
