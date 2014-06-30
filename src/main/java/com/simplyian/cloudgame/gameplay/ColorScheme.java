@@ -55,9 +55,9 @@ public class ColorScheme {
 
     public String replaceColors(String msg) {
         return msg
-                .replaceAll("$D", dark.toString()).replaceAll("$L", light.toString())
-                .replaceAll("$M", this.msg.toString()).replaceAll("$H", highlight.toString())
-                .replaceAll("$P", prefix.toString());
+                .replaceAll("\\$D", dark.toString()).replaceAll("\\$L", light.toString())
+                .replaceAll("\\$M", this.msg.toString()).replaceAll("\\$H", highlight.toString())
+                .replaceAll("\\$P", prefix.toString());
     }
 
 }
