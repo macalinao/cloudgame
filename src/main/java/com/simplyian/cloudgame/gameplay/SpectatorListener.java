@@ -5,9 +5,9 @@
  */
 package com.simplyian.cloudgame.gameplay;
 
+import com.simplyian.cloudgame.events.GameUnspectateEvent;
 import com.simplyian.cloudgame.game.Game;
-import com.simplyian.cloudgame.gameplay.Gameplay;
-import com.simplyian.cloudgame.gameplay.State;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,6 +15,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
 /**
@@ -26,6 +27,24 @@ public class SpectatorListener<T extends State> extends GameListener<T> {
 
     public SpectatorListener(Gameplay<T> gameplay) {
         super(gameplay);
+    }
+
+    @EventHandler
+    public void onSpectatorMoveOutOfArena(PlayerMoveEvent e) {
+        if (e.getFrom().getBlock().equals(e.getTo().getBlock())) {
+            return;
+        }
+
+        Game<T> game = gameSpectated(e.getPlayer());
+        if (game == null) {
+            return;
+        }
+
+        if (game.getArena().getMain().contains(e.getTo())) {
+            return;
+        }
+
+        Bukkit.getPluginManager().callEvent(new GameUnspectateEvent(game, e.getPlayer()));
     }
 
     @EventHandler
