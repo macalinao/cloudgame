@@ -26,6 +26,8 @@ public class HostedFFAState extends FFAState {
 
     private int mins;
 
+    private boolean easy;
+
     public Player getHost() {
         return Bukkit.getPlayer(host);
     }
@@ -77,6 +79,14 @@ public class HostedFFAState extends FFAState {
 
     public void setMins(int mins) {
         this.mins = mins;
+    }
+
+    public void setEasy(boolean easy) {
+        this.easy = easy;
+    }
+
+    public boolean isEasy() {
+        return easy;
     }
 
 }

@@ -36,7 +36,7 @@ public class FFAStartCommand extends PlayerCommandHandler {
         }
 
         if (args.length == 0) {
-            ffa.sendGameMessage(player, "Usage: /" + ffa.getId() + " start <arena> [mins = 10]");
+            ffa.sendGameMessage(player, "Usage: /" + ffa.getId() + " start <arena> [mins] [easy/hard]");
             return;
         }
 
@@ -67,9 +67,15 @@ public class FFAStartCommand extends PlayerCommandHandler {
             }
         }
 
+        boolean easy = false;
+        if (args.length >= 3) {
+            easy = args[2].equalsIgnoreCase("easy");
+        }
+
         ffa.setGame(game);
         game.getState().setHost(player);
         game.getState().setMins(mins);
+        game.getState().setEasy(easy);
         player.teleport(game.getArena().getNextSpawn());
         ffa.sendGameMessage(player, ffa.getName() + " countdown started for a " + mins + " minute " + ffa.getName() + " game.");
     }
