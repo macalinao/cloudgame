@@ -18,6 +18,8 @@ import org.bukkit.entity.Player;
  */
 public class FFAStartCommand extends PlayerCommandHandler {
 
+    private static final int TWELVE_YEARS_A_GAME = 24 * 60 * 365 * 12;
+
     private final HostedFFA ffa;
 
     public FFAStartCommand(HostedFFA ffa) {
@@ -57,7 +59,7 @@ public class FFAStartCommand extends PlayerCommandHandler {
             return;
         }
 
-        int mins = 10;
+        int mins = TWELVE_YEARS_A_GAME; // Game is default 1 year, which for our purposes is unlimited
         if (args.length >= 2) {
             try {
                 mins = Integer.parseInt(args[1]);
@@ -77,7 +79,11 @@ public class FFAStartCommand extends PlayerCommandHandler {
         game.getState().setMins(mins);
         game.getState().setEasy(easy);
         player.teleport(game.getArena().getNextSpawn());
-        ffa.sendGameMessage(player, ffa.getName() + " countdown started for a " + mins + " minute " + ffa.getName() + " game.");
+        if (mins == TWELVE_YEARS_A_GAME) {
+            ffa.sendGameMessage(player, ffa.getName() + " countdown started for an infinite time " + ffa.getName() + " game.");
+        } else {
+            ffa.sendGameMessage(player, ffa.getName() + " countdown started for a " + mins + " minute " + ffa.getName() + " game.");
+        }
     }
 
 }
