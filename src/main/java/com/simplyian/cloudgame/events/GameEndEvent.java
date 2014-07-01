@@ -6,6 +6,7 @@
 package com.simplyian.cloudgame.events;
 
 import com.simplyian.cloudgame.game.Game;
+import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
 /**
@@ -16,8 +17,15 @@ public class GameEndEvent extends GameEvent {
 
     private static final HandlerList handlers = new HandlerList();
 
-    public GameEndEvent(Game<?> game) {
+    private final Player winner;
+
+    public GameEndEvent(Game<?> game, Player winner) {
         super(game);
+        this.winner = winner;
+    }
+
+    public Player getWinner() {
+        return winner;
     }
 
     @Override
