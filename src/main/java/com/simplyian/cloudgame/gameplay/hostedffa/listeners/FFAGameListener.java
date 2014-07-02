@@ -70,7 +70,7 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void postGameEnd(GameEndEvent event) {
         Game<HostedFFAState> game = game(event);
         if (game == null) {
@@ -79,8 +79,8 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
         game.stop();
     }
 
-    @EventHandler
-    public void onGameStop(GameStopEvent event) {
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void preGameStop(GameStopEvent event) {
         Game<HostedFFAState> game = game(event);
         if (game == null) {
             return;
@@ -98,7 +98,15 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
                 Bukkit.getPluginManager().callEvent(new GameQuitEvent(game, player));
             }
         }
-        state.setOver();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void postGameStop(GameStopEvent event) {
+        Game<HostedFFAState> game = game(event);
+        if (game == null) {
+            return;
+        }
+        game.getState().setOver();
         getGameplay().getPlugin().getGameManager().removeGame(game);
         ((HostedFFA) getGameplay()).setGame(null);
     }
