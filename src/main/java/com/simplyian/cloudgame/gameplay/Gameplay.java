@@ -110,7 +110,9 @@ public abstract class Gameplay<T extends State> {
      * @param arena
      * @return
      */
-    public abstract boolean canUse(Arena arena);
+    public boolean canUse(Arena arena) {
+        return !arena.getSpawns().isEmpty();
+    }
 
     /**
      * Sets up the gameplay.
