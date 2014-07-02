@@ -66,7 +66,7 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
         } else {
             game.broadcast("$H" + winner.getName() + "$M has won the " + getGameplay().getName() + "!");
             getGameplay().sendGameMessage(winner, "To redeem your prize, type $H/" + getGameplay().getId() + " redeem$M!");
-            ((HostedFFA) getGameplay()).addPrize(winner);
+            ((HostedFFA) getGameplay()).addPrize(winner, game.getState().isEasy() ? "easy" : "hard");
         }
     }
 

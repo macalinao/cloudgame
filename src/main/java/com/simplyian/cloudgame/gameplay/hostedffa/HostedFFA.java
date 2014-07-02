@@ -12,7 +12,8 @@ import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFACommandListener;
 import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFADeathListener;
 import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFAGameListener;
 import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFAGamePlayerListener;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import org.bukkit.Bukkit;
@@ -27,7 +28,7 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
 
     private Game<T> game;
 
-    private Set<UUID> prizes = new HashSet<>();
+    private final Map<UUID, String> prizes = new HashMap<>();
 
     protected HostedFFA(CloudGame plugin, String name) {
         super(plugin, name);
@@ -59,8 +60,8 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
      *
      * @param p
      */
-    public void addPrize(Player p) {
-        prizes.add(p.getUniqueId());
+    public void addPrize(Player p, String type) {
+        prizes.put(p.getUniqueId(), type);
     }
 
     /**
@@ -70,11 +71,15 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
      * @return
      */
     public boolean redeemPrize(Player p) {
-        if (!prizes.contains(p.getUniqueId())) {
+        if (!prizes.containsKey(p.getUniqueId())) {
             return false;
         }
-        prizes.remove(p.getUniqueId());
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ccrates give 3 " + p.getName() + " 3");
+        String type = prizes.remove(p.getUniqueId());
+        if (type.equalsIgnoreCase("easy")) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ccrates give 2 " + p.getName() + " 3");
+        } else {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ccrates give 3 " + p.getName() + " 3");
+        }
         return true;
     }
 }
