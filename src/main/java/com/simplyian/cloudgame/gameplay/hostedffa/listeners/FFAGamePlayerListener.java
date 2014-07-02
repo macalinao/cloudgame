@@ -147,6 +147,8 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
         p.teleport(game.getArena().getNextSpawn());
         p.setAllowFlight(true);
         p.setFlying(true);
+        p.setHealth(p.getMaxHealth());
+        p.setFoodLevel(20);
 
         game.getGameplay().sendGameMessage(p, "Type /" + getGameplay().getId() + " spectate again to exit the mode!");
     }
