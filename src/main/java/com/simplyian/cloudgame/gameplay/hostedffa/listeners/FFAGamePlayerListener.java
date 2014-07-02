@@ -115,7 +115,12 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
         if (game == null) {
             return;
         }
+
         Player p = event.getPlayer();
+        if (game.getState().isEasy()) {
+            getGameplay().getPlugin().getPlayerStateManager().loadState(event.getPlayer());
+        }
+
         game.getState().removePlayer(p);
         BarAPI.removeBar(p);
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
