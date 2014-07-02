@@ -80,9 +80,9 @@ public class FFAStartCommand extends PlayerCommandHandler {
         game.getState().setEasy(easy);
         player.teleport(game.getArena().getNextSpawn());
         if (mins == TWELVE_YEARS_A_GAME) {
-            ffa.sendGameMessage(player, ffa.getName() + " countdown started for an infinite time " + ffa.getName() + " game.");
+            ffa.sendGameMessage(player, ffa.getName() + " countdown started for an infinite time " + ffa.getName() + " " + (easy ? "easy" : "hard") + " game.");
         } else {
-            ffa.sendGameMessage(player, ffa.getName() + " countdown started for a " + mins + " minute " + ffa.getName() + " game.");
+            ffa.sendGameMessage(player, ffa.getName() + " countdown started for a " + mins + " minute " + ffa.getName() + " " + (easy ? "easy" : "hard") + " game.");
         }
     }
 
