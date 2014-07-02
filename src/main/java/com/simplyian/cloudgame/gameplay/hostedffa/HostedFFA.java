@@ -39,6 +39,11 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
         getPlugin().getServer().getPluginManager().registerEvents(new FFADeathListener(this), getPlugin());
     }
 
+    @Override
+    public void setup(Game<T> g) {
+        (new HostedFFAAnnouncerTask<T>(g)).runTaskTimer(getPlugin(), 2L, 2L);
+    }
+
     public Game<T> getGame() {
         return game;
     }

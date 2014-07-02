@@ -13,16 +13,18 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * Announces the game and starts it when the time is up.
+ *
+ * @param <T>
  */
-public class HostedFFAAnnouncerTask extends BukkitRunnable {
+public class HostedFFAAnnouncerTask<T extends HostedFFAState> extends BukkitRunnable {
 
-    private final Game<HostedFFAState> game;
+    private final Game<T> game;
 
     private final long start = System.currentTimeMillis();
 
     private int announceCount = 0;
 
-    public HostedFFAAnnouncerTask(Game<HostedFFAState> game) {
+    public HostedFFAAnnouncerTask(Game<T> game) {
         this.game = game;
     }
 
