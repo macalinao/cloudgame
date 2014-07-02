@@ -8,6 +8,7 @@ package com.simplyian.cloudgame.gameplay.hostedffa;
 import com.simplyian.cloudgame.events.GameStartEvent;
 import com.simplyian.cloudgame.game.Game;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -61,10 +62,10 @@ public class HostedFFAAnnouncerTask<T extends HostedFFAState> extends BukkitRunn
     private void announceTime(String time) {
         for (Player p : Bukkit.getOnlinePlayers()) {
             game.getGameplay().sendBanner(p,
-                    "A " + game.getGameplay().getName() + " on map $D" + game.getArena().getName() + " "
-                    + "$Lis starting in $D" + time + "$L!",
+                    "A " + game.getGameplay().getName() + " on map $D" + game.getArena().getName() + " $Lis starting in $D" + time + "$L!",
                     "Type $D/" + game.getGameplay().getId() + " join $Lto join $D"
-                    + game.getState().getPlayers().size() + " $Lother players! (armor " + (game.getState().isEasy() ? "" : "not ") + "provided)");
+                    + game.getState().getPlayers().size() + " $Lother players! "
+                    + (game.getState().isEasy() ? "(armor provided)" : ChatColor.RED + "(armor not provided)"));
         }
     }
 
