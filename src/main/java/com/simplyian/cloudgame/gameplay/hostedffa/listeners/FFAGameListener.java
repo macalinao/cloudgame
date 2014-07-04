@@ -91,7 +91,7 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
             game.broadcast("The " + getGameplay().getName() + " has been cancelled.");
         } else {
             for (Player player : state.getSpectators()) {
-                getGameplay().getPlugin().getPlayerStateManager().loadState(player);
+                getGameplay().getPlugin().getPlayerStateManager().queueLoadState(player);
             }
 
             for (Player player : state.getParticipants()) {

@@ -118,7 +118,7 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
 
         Player p = event.getPlayer();
         if (game.getState().isEasy()) {
-            getGameplay().getPlugin().getPlayerStateManager().addToStateRestoreQueue(p);
+            getGameplay().getPlugin().getPlayerStateManager().queueLoadState(event.getPlayer());
         }
 
         game.getState().removePlayer(p);
@@ -168,7 +168,7 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
         Player p = event.getPlayer();
 
         game.getState().removeSpectator(p);
-        getGameplay().getPlugin().getPlayerStateManager().loadState(p);
+        getGameplay().getPlugin().getPlayerStateManager().queueLoadState(p);
         for (Player other : Bukkit.getOnlinePlayers()) {
             other.showPlayer(p);
         }

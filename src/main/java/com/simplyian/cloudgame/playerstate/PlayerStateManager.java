@@ -42,11 +42,20 @@ public class PlayerStateManager {
     }
 
     /**
+     * Queues loading of a player's saved state. Use this method!!
+     *
+     * @param p
+     */
+    public void queueLoadState(Player p) {
+        stateRestoreQueue.add(p.getUniqueId());
+    }
+
+    /**
      * Loads a player's saved state.
      *
      * @param p
      */
-    public void loadState(Player p) {
+    private void loadState(Player p) {
         PlayerState is = states.get(p.getUniqueId());
         if (is == null) {
             return;
@@ -66,15 +75,6 @@ public class PlayerStateManager {
         states.put(p.getUniqueId(), new PlayerState(p));
         i.clear();
         i.setArmorContents(new ItemStack[4]);
-    }
-
-    /**
-     * Adds a player to the state restore queue.
-     *
-     * @param player
-     */
-    public void addToStateRestoreQueue(Player player) {
-        stateRestoreQueue.add(player.getUniqueId());
     }
 
     /**
