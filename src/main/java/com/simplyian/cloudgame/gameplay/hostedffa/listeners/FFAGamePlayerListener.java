@@ -118,7 +118,7 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
 
         Player p = event.getPlayer();
         if (game.getState().isEasy()) {
-            getGameplay().getPlugin().getPlayerStateManager().loadState(event.getPlayer());
+            getGameplay().getPlugin().getPlayerStateManager().addToStateRestoreQueue(p);
         }
 
         game.getState().removePlayer(p);
