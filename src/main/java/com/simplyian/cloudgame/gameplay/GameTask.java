@@ -17,8 +17,11 @@ public abstract class GameTask<T extends State> {
 
     private final Game<T> game;
 
+    private GameTaskBukkitRunnable task;
+
     public GameTask(Game<T> game) {
         this.game = game;
+        this.task = new GameTaskBukkitRunnable();
     }
 
     public void runTimer() {
@@ -26,7 +29,12 @@ public abstract class GameTask<T extends State> {
     }
 
     public void runTimer(long interval) {
-        (new GameTaskBukkitRunnable()).runTaskTimer(game.getGameplay().getPlugin(), 0L, interval);
+        task.runTaskTimer(game.getGameplay().getPlugin(), 0L, interval);
+    }
+
+    protected void cancel() {
+        task.cancel();
+        task = null;
     }
 
     public abstract void run();

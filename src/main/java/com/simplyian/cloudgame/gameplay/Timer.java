@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
-
 import com.simplyian.cloudgame.game.Game;
 import java.util.Collections;
 
-public abstract class Timer<T extends State> extends BukkitRunnable {
+public abstract class Timer<T extends State> extends GameTask<T> {
 
     private final Game<T> game;
 
@@ -26,6 +22,7 @@ public abstract class Timer<T extends State> extends BukkitRunnable {
     private int current = 0;
 
     public Timer(Game<T> game, Map<Integer, String> messages) {
+        super(game);
         this.game = game;
         this.messages = messages;
 
@@ -38,7 +35,7 @@ public abstract class Timer<T extends State> extends BukkitRunnable {
 
     @Override
     public void run() {
-        if (game.getState().isStarted() || game.getState().isOver()) {
+        if (game.getState().isStarted()) {
             cancel();
             return;
         }
@@ -56,9 +53,7 @@ public abstract class Timer<T extends State> extends BukkitRunnable {
         }
     }
 
-    public void onCheckpoint(int seconds, String time) {
-    }
+    public abstract void onCheckpoint(int seconds, String time);
 
-    public void onEnd() {
-    }
+    public abstract void onEnd();
 }

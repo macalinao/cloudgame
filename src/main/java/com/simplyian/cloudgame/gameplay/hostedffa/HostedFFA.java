@@ -43,7 +43,7 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
 
     @Override
     public void setup(Game<T> g) {
-        (new HostedFFAAnnouncerTask<>(g)).runTaskTimer(getPlugin(), 2L, 2L);
+        (new HostedFFAAnnouncerTask<>(g)).runTimer();
     }
 
     public Game<T> getGame() {
