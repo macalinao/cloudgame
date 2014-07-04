@@ -14,6 +14,7 @@ import com.simplyian.cloudgame.gameplay.GameListener;
 import com.simplyian.cloudgame.gameplay.hostedffa.HostedFFA;
 import com.simplyian.cloudgame.gameplay.hostedffa.HostedFFAState;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -47,6 +48,7 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
             if (state.isEasy()) {
                 getGameplay().getPlugin().getPlayerStateManager().saveState(p);
             }
+            p.setGameMode(GameMode.ADVENTURE);
             p.teleport(spawn);
         }
 

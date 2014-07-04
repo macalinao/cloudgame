@@ -18,6 +18,7 @@ import com.simplyian.cloudgame.util.Messaging;
 import me.confuser.barapi.BarAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 
@@ -120,6 +121,7 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
         if (game.getState().isEasy()) {
             getGameplay().getPlugin().getPlayerStateManager().queueLoadState(event.getPlayer());
         }
+        p.setGameMode(GameMode.SURVIVAL);
 
         game.getState().removePlayer(p);
         BarAPI.removeBar(p);
