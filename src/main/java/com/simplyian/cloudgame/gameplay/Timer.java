@@ -5,11 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.simplyian.cloudgame.events.GameStartEvent;
 import com.simplyian.cloudgame.game.Game;
 
 public abstract class Timer<T extends State> extends BukkitRunnable {
@@ -45,7 +43,6 @@ public abstract class Timer<T extends State> extends BukkitRunnable {
         int secsRemaining = length - (((int) (System.currentTimeMillis() - start)) / 1000);
 
         if (secsRemaining <= 0) {
-            Bukkit.getPluginManager().callEvent(new GameStartEvent(game));
             onEnd();
             cancel();
         } else if (secsRemaining <= times.get(current)) {

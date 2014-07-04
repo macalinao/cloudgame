@@ -5,6 +5,7 @@
  */
 package com.simplyian.cloudgame.gameplay.hostedffa;
 
+import com.simplyian.cloudgame.events.GameStartEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import com.simplyian.cloudgame.gameplay.Timer;
  * @param <T>
  */
 public class HostedFFAAnnouncerTask<T extends HostedFFAState> extends Timer<T> {
+
     private static final Map<Integer, String> messages = new HashMap<>();
 
     static {
@@ -47,6 +49,11 @@ public class HostedFFAAnnouncerTask<T extends HostedFFAState> extends Timer<T> {
                     + game.getState().getPlayers().size() + " $Lother players! "
                     + (game.getState().isEasy() ? "(armor provided)" : ChatColor.RED + "(armor not provided)"));
         }
+    }
+
+    @Override
+    public void onEnd() {
+        Bukkit.getPluginManager().callEvent(new GameStartEvent(game));
     }
 
 }

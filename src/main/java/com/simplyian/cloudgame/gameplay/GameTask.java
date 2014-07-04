@@ -11,6 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 /**
  *
  * @author ian
+ * @param <T>
  */
 public abstract class GameTask<T extends State> {
 

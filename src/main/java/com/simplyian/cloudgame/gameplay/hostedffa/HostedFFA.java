@@ -14,7 +14,6 @@ import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFAGameListener;
 import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFAGamePlayerListener;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
