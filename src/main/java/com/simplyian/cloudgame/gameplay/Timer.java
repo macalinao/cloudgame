@@ -43,11 +43,14 @@ public abstract class Timer<T extends State> extends GameTask<T> {
         // Expect that the times are in length order
         int secsRemaining = length - (((int) (System.currentTimeMillis() - start)) / 1000);
 
-        int nextSecs = times.get(current);
-        if (secsRemaining <= 0) {
+        if (secsRemaining <= 0 || current < 0) {
             onEnd();
             cancel();
-        } else if (secsRemaining <= nextSecs) {
+            return;
+        }
+
+        int nextSecs = times.get(current);
+        if (secsRemaining <= nextSecs) {
             onCheckpoint(nextSecs, messages.get(nextSecs));
             current--;
         }
