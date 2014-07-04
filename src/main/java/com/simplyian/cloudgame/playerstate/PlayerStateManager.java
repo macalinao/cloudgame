@@ -6,19 +6,13 @@
 package com.simplyian.cloudgame.playerstate;
 
 import com.simplyian.cloudgame.CloudGame;
-import com.simplyian.cloudgame.util.InventoryUtils;
-import com.simplyian.cloudgame.util.LocationUtils;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Set;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.bukkit.Location;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -32,12 +26,19 @@ public class PlayerStateManager {
 
     private final CloudGame plugin;
 
-    private File statesFile;
+    private final Map<UUID, PlayerState> states = new HashMap<>();
 
-    private Map<UUID, PlayerState> states = new HashMap<>();
+    private final Set<UUID> stateRestoreQueue = new HashSet<>();
 
     public PlayerStateManager(CloudGame plugin) {
         this.plugin = plugin;
+    }
+
+    /**
+     * Sets up the task
+     */
+    public void setupStateRestoreQueueProcessTask() {
+        (new PlayerStateRestoreQueueProcessTask(this)).runTaskTimer(plugin, 1L, 1L);
     }
 
     /**
@@ -65,5 +66,29 @@ public class PlayerStateManager {
         states.put(p.getUniqueId(), new PlayerState(p));
         i.clear();
         i.setArmorContents(new ItemStack[4]);
+    }
+
+    /**
+     * Adds a player to the state restore queue.
+     *
+     * @param player
+     */
+    public void addToStateRestoreQueue(Player player) {
+        stateRestoreQueue.add(player.getUniqueId());
+    }
+
+    /**
+     * Processes the state restore queue. Should be executed every tick.
+     */
+    public void processStateRestoreQueue() {
+        Iterator<UUID> it = stateRestoreQueue.iterator();
+        while (it.hasNext()) {
+            UUID uuid = it.next();
+            Player p = Bukkit.getPlayer(uuid);
+            if (p != null && p.isValid()) { // Check if alive
+                loadState(p);
+                it.remove();
+            }
+        }
     }
 }

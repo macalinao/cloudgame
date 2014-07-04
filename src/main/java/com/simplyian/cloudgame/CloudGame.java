@@ -43,6 +43,7 @@ public abstract class CloudGame extends JavaPlugin {
         gameplayManager.onEnable();
 
         playerStateManager = new PlayerStateManager(this);
+        playerStateManager.setupStateRestoreQueueProcessTask();
 
         gameManager = new GameManager(this);
         getServer().getPluginManager().registerEvents(new CoreListener(this), this);
