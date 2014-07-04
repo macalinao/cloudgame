@@ -26,11 +26,11 @@ public class HostedFFAAnnouncerTask<T extends HostedFFAState> extends Timer<T> {
     private static final Map<Integer, String> messages = new HashMap<>();
 
     static {
-        messages.put(5 * 60, "5 minutes");
-        messages.put(3 * 60, "3 minutes");
-        messages.put(1 * 60, "1 minute");
-        messages.put(30, "30 seconds");
         messages.put(10, "10 seconds");
+        messages.put(30, "30 seconds");
+        messages.put(1 * 60, "1 minute");
+        messages.put(3 * 60, "3 minutes");
+        messages.put(5 * 60, "5 minutes");
     }
 
     private final Game<T> game;
@@ -41,7 +41,7 @@ public class HostedFFAAnnouncerTask<T extends HostedFFAState> extends Timer<T> {
     }
 
     @Override
-    protected void announceTime(String time) {
+    public void onCheckpoint(int seconds, String time) {
         for (Player p : Bukkit.getOnlinePlayers()) {
             game.getGameplay().sendBanner(p,
                     "A " + game.getGameplay().getName() + " on map $D" + game.getArena().getName() + " $Lis starting in $D" + time + "$L!",

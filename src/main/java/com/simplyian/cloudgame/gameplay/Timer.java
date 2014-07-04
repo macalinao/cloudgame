@@ -9,8 +9,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.simplyian.cloudgame.game.Game;
+import java.util.Collections;
 
 public abstract class Timer<T extends State> extends BukkitRunnable {
+
     private final Game<T> game;
 
     private final Map<Integer, String> messages;
@@ -28,8 +30,10 @@ public abstract class Timer<T extends State> extends BukkitRunnable {
         this.messages = messages;
 
         times = new ArrayList<>(messages.keySet());
+        Collections.sort(times);
         length = times.get(times.size() - 1);
         start = System.currentTimeMillis();
+        current = times.size() - 1;
     }
 
     @Override
@@ -42,28 +46,19 @@ public abstract class Timer<T extends State> extends BukkitRunnable {
         // Expect that the times are in length order
         int secsRemaining = length - (((int) (System.currentTimeMillis() - start)) / 1000);
 
+        int nextSecs = times.get(current);
         if (secsRemaining <= 0) {
             onEnd();
             cancel();
-        } else if (secsRemaining <= times.get(current)) {
-            announceTime(messages.get(current));
-            current++;
+        } else if (secsRemaining <= nextSecs) {
+            onCheckpoint(nextSecs, messages.get(nextSecs));
+            current--;
         }
+    }
+
+    public void onCheckpoint(int seconds, String time) {
     }
 
     public void onEnd() {
-    }
-
-    /**
-     * Default announcement message. Can be overriden in subclasses
-     * 
-     * @param time
-     */
-    protected void announceTime(String time) {
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            game.getGameplay().sendBanner(p,
-                    "A " + game.getGameplay().getName() + " on map $D" + game.getArena().getName() + " $Lis starting in $D" + time + "$L!",
-                    "Type $D/" + game.getGameplay().getId() + " join $Lto join $D" + game.getState().getPlayers().size() + " $Lother players! ");
-        }
     }
 }
