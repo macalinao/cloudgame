@@ -8,13 +8,17 @@ package com.simplyian.cloudgame.gameplay.hostedffa;
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.Gameplay;
+import com.simplyian.cloudgame.gameplay.State;
+import com.simplyian.cloudgame.gameplay.Winner;
 import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFACommandListener;
 import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFADeathListener;
 import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFAGameListener;
 import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFAGamePlayerListener;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -58,9 +62,22 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
      * Adds the player to the list of people who deserve prizes.
      *
      * @param p
+     * @param type
      */
     public void addPrize(Player p, String type) {
         prizes.put(p.getUniqueId(), type);
+    }
+
+    /**
+     * Adds all players who won to the list of people who deserve prizes.
+     *
+     * @param w
+     * @param type
+     */
+    public void addPrize(Winner<? extends State> w, String type) {
+        for (UUID id : w.getWinners()) {
+            prizes.put(id, type);
+        }
     }
 
     /**

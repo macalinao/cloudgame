@@ -11,8 +11,10 @@ import com.simplyian.cloudgame.events.GameStartEvent;
 import com.simplyian.cloudgame.events.GameStopEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.GameListener;
+import com.simplyian.cloudgame.gameplay.Winner;
 import com.simplyian.cloudgame.gameplay.hostedffa.HostedFFA;
 import com.simplyian.cloudgame.gameplay.hostedffa.HostedFFAState;
+
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -62,11 +64,11 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
             return;
         }
 
-        Player winner = event.getWinner();
+        Winner<?> winner = event.getWinner();
         if (winner == null) {
             game.broadcast("Game over! Nobody won!");
         } else {
-            game.broadcast("$H" + winner.getName() + "$M has won the " + getGameplay().getName() + "!");
+            game.broadcast("$H" + winner + "$M has won the " + getGameplay().getName() + "!");
             getGameplay().sendGameMessage(winner, "To redeem your prize, type $H/" + getGameplay().getId() + " redeem$M!");
             ((HostedFFA) getGameplay()).addPrize(winner, game.getState().isEasy() ? "easy" : "hard");
         }
