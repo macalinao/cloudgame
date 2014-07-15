@@ -20,6 +20,7 @@ public class FFACommand extends TreeCommandHandler {
     public FFACommand(HostedFFA ffa) {
         super(ffa.getId());
         this.ffa = ffa;
+        setColorScheme(ffa.getColorScheme());
     }
 
     @Override
