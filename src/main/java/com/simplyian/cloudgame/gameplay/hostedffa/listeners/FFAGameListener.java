@@ -45,7 +45,7 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
         HostedFFAState state = game.getState();
         for (Player p : state.getPlayers()) {
             Location spawn = game.getArena().getNextSpawn();
-            if (state.isEasy()) {
+            if (state.isProvideArmor()) {
                 getGameplay().getPlugin().getPlayerStateManager().saveState(p);
             }
             p.setGameMode(GameMode.ADVENTURE);
@@ -68,7 +68,7 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
         } else {
             game.broadcast("$H" + winner.getName() + "$M has won the " + getGameplay().getName() + "!");
             getGameplay().sendGameMessage(winner, "To redeem your prize, type $H/" + getGameplay().getId() + " redeem$M!");
-            ((HostedFFA) getGameplay()).addPrize(winner, game.getState().isEasy() ? "easy" : "hard");
+            ((HostedFFA) getGameplay()).addPrize(winner, game.getState().isProvideArmor() ? "easy" : "hard");
         }
     }
 

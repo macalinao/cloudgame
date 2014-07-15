@@ -5,7 +5,6 @@
  */
 package com.simplyian.cloudgame.gameplay;
 
-import com.simplyian.cloudgame.gameplay.State;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

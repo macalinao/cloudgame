@@ -58,6 +58,7 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
      * Adds the player to the list of people who deserve prizes.
      *
      * @param p
+     * @param type
      */
     public void addPrize(Player p, String type) {
         prizes.put(p.getUniqueId(), type);

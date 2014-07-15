@@ -118,7 +118,7 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
         }
 
         Player p = event.getPlayer();
-        if (game.getState().isEasy()) {
+        if (game.getState().isProvideArmor()) {
             getGameplay().getPlugin().getPlayerStateManager().queueLoadState(event.getPlayer());
         }
         p.setGameMode(GameMode.SURVIVAL);

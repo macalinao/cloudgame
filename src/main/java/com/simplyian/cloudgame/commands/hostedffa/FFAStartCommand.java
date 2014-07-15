@@ -26,7 +26,7 @@ public class FFAStartCommand extends PlayerCommandHandler {
         super("start");
         this.ffa = ffa;
         setDescription("Starts a " + ffa.getName() + " if there isn't already one going on.");
-        setUsage("/" + ffa.getId() + " start <arena>");
+        setUsage("/" + ffa.getId() + " start <arena> [mins]");
         setPermission("mattmg.admin");
     }
 
@@ -38,7 +38,7 @@ public class FFAStartCommand extends PlayerCommandHandler {
         }
 
         if (args.length == 0) {
-            ffa.sendGameMessage(player, "Usage: /" + ffa.getId() + " start <arena> [mins] [easy/hard]");
+            sendUsageMessage(player);
             return;
         }
 
@@ -77,12 +77,11 @@ public class FFAStartCommand extends PlayerCommandHandler {
         ffa.setGame(game);
         game.getState().setHost(player);
         game.getState().setMins(mins);
-        game.getState().setEasy(easy);
         player.teleport(game.getArena().getNextSpawn());
         if (mins == TWELVE_YEARS_A_GAME) {
-            ffa.sendGameMessage(player, ffa.getName() + " countdown started for an infinite time " + ffa.getName() + " " + (easy ? "easy" : "hard") + " game.");
+            ffa.sendGameMessage(player, ffa.getName() + " countdown started for an infinite time " + ffa.getName() + " game.");
         } else {
-            ffa.sendGameMessage(player, ffa.getName() + " countdown started for a " + mins + " minute " + ffa.getName() + " " + (easy ? "easy" : "hard") + " game.");
+            ffa.sendGameMessage(player, ffa.getName() + " countdown started for a " + mins + " minute " + ffa.getName() + " game.");
         }
     }
 

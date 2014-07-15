@@ -47,7 +47,7 @@ public class HostedFFAAnnouncerTask<T extends HostedFFAState> extends Timer<T> {
                     "A " + game.getGameplay().getName() + " on map $D" + game.getArena().getName() + " $Lis starting in $D" + time + "$L!",
                     "Type $D/" + game.getGameplay().getId() + " join $Lto join $D"
                     + game.getState().getPlayers().size() + " $Lother players! "
-                    + (game.getState().isEasy() ? "(armor provided)" : ChatColor.RED + "(armor not provided)"));
+                    + (game.getState().isProvideArmor() ? "(armor provided)" : ChatColor.RED + "(armor not provided)"));
         }
     }
 

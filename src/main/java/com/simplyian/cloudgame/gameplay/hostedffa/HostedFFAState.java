@@ -26,7 +26,7 @@ public class HostedFFAState extends FFAState {
 
     private int mins;
 
-    private boolean easy;
+    private boolean provideArmor;
 
     public Player getHost() {
         return Bukkit.getPlayer(host);
@@ -81,12 +81,12 @@ public class HostedFFAState extends FFAState {
         this.mins = mins;
     }
 
-    public void setEasy(boolean easy) {
-        this.easy = easy;
+    public void setProvideArmor(boolean provideArmor) {
+        this.provideArmor = provideArmor;
     }
 
-    public boolean isEasy() {
-        return easy;
+    public boolean isProvideArmor() {
+        return provideArmor;
     }
 
 }
