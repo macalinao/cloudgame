@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import com.simplyian.cloudgame.game.Game;
 
-public class Winner<T extends State> {
+public abstract class Winner<T extends State> {
 
     private final Game<T> game;
 
@@ -26,7 +26,7 @@ public class Winner<T extends State> {
     public List<UUID> getWinners() {
         return winners;
     }
-    
+   
     public String winnersString() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < winners.size(); i++) {
