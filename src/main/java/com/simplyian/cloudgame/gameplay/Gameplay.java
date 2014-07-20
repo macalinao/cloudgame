@@ -104,9 +104,7 @@ public abstract class Gameplay<T extends State> {
      * @param message
      */
     public void sendGameMessage(Winner<? extends State> w, String message) {
-        for (UUID id : w.getWinners()) {
-            plugin.getServer().getPlayer(id).sendMessage(colorScheme.getPrefix() + "[" + name + "]" + colorScheme.getMsg() + colorScheme.replaceColors(message));
-        }
+        w.sendMessage(colorScheme.getPrefix() + "[" + name + "]" + colorScheme.getMsg() + colorScheme.replaceColors(message));
     }
 
     /**

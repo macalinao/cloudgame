@@ -31,7 +31,7 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
 
     private Game<T> game;
 
-    private final Map<UUID, String> prizes = new HashMap<>();
+    private final Map<Winner, String> prizes = new HashMap<>();
 
     protected HostedFFA(CloudGame plugin, String name) {
         super(plugin, name);
@@ -59,43 +59,42 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
     }
 
     /**
-     * Adds the player to the list of people who deserve prizes.
+     * Adds the winner to the list of people who deserve prizes.
      *
      * @param p
      * @param type
      */
-    public void addPrize(Player p, String type) {
-        prizes.put(p.getUniqueId(), type);
-    }
-
-    /**
-     * Adds all players who won to the list of people who deserve prizes.
-     *
-     * @param w
-     * @param type
-     */
-    public void addPrize(Winner<? extends State> w, String type) {
-        for (UUID id : w.getWinners()) {
-            prizes.put(id, type);
-        }
+    public void addPrize(Winner w, String type) {
+        prizes.put(w, type);
     }
 
     /**
      * Tries to redeem a prize.
      *
-     * @param p
+     * @param w
      * @return
      */
     public boolean redeemPrize(Player p) {
-        if (!prizes.containsKey(p.getUniqueId())) {
+    	for (Winner w : prizes.keySet()) {
+    		if (w.includes(p.getUniqueId())) {
+    			return redeemPrize(w);
+    		}
+    	}
+    	return false;
+    }
+
+    /**
+     * Tries to redeem a prize.
+     *
+     * @param w
+     * @return
+     */
+    public boolean redeemPrize(Winner w) {
+        if (!prizes.containsKey(w)) {
             return false;
         }
-        String type = prizes.remove(p.getUniqueId());
-        if (type.equalsIgnoreCase("easy")) {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ccrates give 2 " + p.getName() + " 3");
-        } else {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ccrates give 3 " + p.getName() + " 3");
-        }
+        String type = prizes.remove(w);
+        w.givePrize(type);
         return true;
     }
 }
