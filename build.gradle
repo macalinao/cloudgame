@@ -38,7 +38,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.bukkit', name: 'bukkit', version: '1.7.5-R0.1-SNAPSHOT'
+    compile 'org.bukkit:bukkit:1.7.9-R0.3-SNAPSHOT'
     compile fileTree(dir: 'libs', includes: ['*.jar']) 
 }
 
