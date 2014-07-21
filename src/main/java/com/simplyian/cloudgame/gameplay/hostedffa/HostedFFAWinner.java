@@ -27,14 +27,6 @@ public class HostedFFAWinner extends Winner<HostedFFAState> {
 		getPlayer().sendMessage(message);
 	}
 
-	public String getWinnersString() {
-		return getPlayer().getName();
-	}
-
-	public boolean is(UUID player) {
-		return player.equals(winner);
-	}
-
 	public void givePrize(String type) {
 		if (type.equalsIgnoreCase("easy")) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ccrates give 2 " + getPlayer().getName() + " 3");

@@ -76,10 +76,7 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
      */
     public boolean redeemPrize(Player p) {
     	for (Winner w : prizes.keySet()) {
-    		if (!(w instanceof HostedFFAWinner)) {
-    			continue;
-    		}
-    		if (((HostedFFAWinner) w).is(p.getUniqueId())) {
+    		if (((HostedFFAWinner) w).getPlayer().getUniqueId().equals(p.getUniqueId())) {
     			return redeemPrize(w);
     		}
     	}
@@ -95,9 +92,6 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
     public boolean redeemPrize(Winner w) {
         if (!prizes.containsKey(w)) {
             return false;
-        }
-        if (!(w instanceof HostedFFAWinner)) {
-        	return false;
         }
         String type = prizes.remove(w);
         ((HostedFFAWinner) w).givePrize(type);
