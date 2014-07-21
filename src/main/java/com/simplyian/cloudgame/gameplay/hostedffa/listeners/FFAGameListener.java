@@ -14,6 +14,7 @@ import com.simplyian.cloudgame.gameplay.GameListener;
 import com.simplyian.cloudgame.gameplay.Winner;
 import com.simplyian.cloudgame.gameplay.hostedffa.HostedFFA;
 import com.simplyian.cloudgame.gameplay.hostedffa.HostedFFAState;
+import com.simplyian.cloudgame.gameplay.hostedffa.HostedFFAWinner;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -64,7 +65,7 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
             return;
         }
 
-        Winner<?> winner = event.getWinner();
+        HostedFFAWinner winner = (HostedFFAWinner) event.getWinner();
         if (winner == null) {
             game.broadcast("Game over! Nobody won!");
         } else {

@@ -22,10 +22,4 @@ public abstract class Winner<T extends State> {
    
     public abstract void sendMessage(String message);
 
-    public abstract String getWinnersString();
-
-    public abstract boolean includes(UUID player);
-
-    public abstract void givePrize(String type);
-
 }
