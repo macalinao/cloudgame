@@ -5,12 +5,10 @@
  */
 package com.simplyian.cloudgame.commands.arena;
 
-import java.util.Map.Entry;
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.command.PlayerCommandHandler;
-import com.simplyian.cloudgame.model.arena.Arena;
+
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 /**

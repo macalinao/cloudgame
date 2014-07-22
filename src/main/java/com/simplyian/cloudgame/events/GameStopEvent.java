@@ -6,7 +6,6 @@
 package com.simplyian.cloudgame.events;
 
 import com.simplyian.cloudgame.game.Game;
-import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
 /**

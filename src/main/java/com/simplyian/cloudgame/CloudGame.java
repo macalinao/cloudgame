@@ -79,7 +79,7 @@ public class CloudGame extends JavaPlugin {
         return playerStateManager;
     }
 
-    public void addGameplay(Gameplay gameplay) {
+    public void addGameplay(Gameplay<?> gameplay) {
         gameplayManager.addGameplay(gameplay);
 
         if (gameplayManager != null && gameplayManager.isEnabled()) {

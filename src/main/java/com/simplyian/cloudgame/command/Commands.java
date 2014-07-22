@@ -7,7 +7,9 @@ package com.simplyian.cloudgame.command;
 
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.commands.arena.ArenaCommand;
+
 import org.bukkit.command.PluginCommand;
+import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  *
@@ -15,10 +17,13 @@ import org.bukkit.command.PluginCommand;
  */
 public class Commands {
 
-    private final CloudGame plugin;
+    private final JavaPlugin plugin;
+    private final CloudGame cg;
 
-    public Commands(CloudGame plugin) {
+    public Commands(JavaPlugin plugin) {
         this.plugin = plugin;
+
+        cg = (CloudGame) plugin.getServer().getPluginManager().getPlugin("CloudGame");
     }
 
     public void registerCommand(CommandHandler handler) {
@@ -34,6 +39,6 @@ public class Commands {
     }
 
     public void registerDefaultCommands() {
-        registerCommand(new ArenaCommand(plugin));
+        registerCommand(new ArenaCommand(cg));
     }
 }

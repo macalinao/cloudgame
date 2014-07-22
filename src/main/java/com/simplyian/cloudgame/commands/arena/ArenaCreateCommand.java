@@ -7,12 +7,15 @@ package com.simplyian.cloudgame.commands.arena;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.simplyian.cloudgame.CloudGame;
+
 import static com.simplyian.cloudgame.CloudGame.wg;
+
 import com.simplyian.cloudgame.command.CommandHandler;
 import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.model.arena.Arenas;
 import com.simplyian.cloudgame.model.region.Region;
 import com.simplyian.cloudgame.model.region.Regions;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -25,11 +28,11 @@ import org.bukkit.entity.Player;
  */
 public class ArenaCreateCommand extends CommandHandler {
 
-    private final CloudGame plugin;
+    private final CloudGame cg;
 
     public ArenaCreateCommand(CloudGame plugin) {
         super("create");
-        this.plugin = plugin;
+        this.cg = plugin;
         setUsage("/arena create <region> [world=current]");
         setDescription("Creates an arena.");
     }
@@ -61,10 +64,10 @@ public class ArenaCreateCommand extends CommandHandler {
             return;
         }
 
-        Regions regions = plugin.getModelManager().getRegions();
+        Regions regions = cg.getModelManager().getRegions();
         Region main = regions.find(world, pr);
         if (main != null) {
-            if (plugin.getModelManager().getArenas().findByRegion(main) != null) {
+            if (cg.getModelManager().getArenas().findByRegion(main) != null) {
                 sender.sendMessage(ChatColor.RED + "That region is already associated with an arena. Try using a different region.");
                 return;
             }
@@ -73,7 +76,7 @@ public class ArenaCreateCommand extends CommandHandler {
             main = regions.find(world, pr);
         }
 
-        Arenas arenas = plugin.getModelManager().getArenas();
+        Arenas arenas = cg.getModelManager().getArenas();
         Arena a = arenas.create(main);
         if (a == null) {
             sender.sendMessage(ChatColor.RED + "An arena already exists at that region.");

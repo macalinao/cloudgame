@@ -5,7 +5,6 @@
  */
 package com.simplyian.cloudgame.gameplay;
 
-import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.events.GameEvent;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.Gameplay;

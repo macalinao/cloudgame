@@ -6,7 +6,6 @@
 package com.simplyian.cloudgame.playerstate;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 

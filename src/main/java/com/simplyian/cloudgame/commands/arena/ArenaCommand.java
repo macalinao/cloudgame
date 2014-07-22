@@ -7,7 +7,6 @@ package com.simplyian.cloudgame.commands.arena;
 
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.command.TreeCommandHandler;
-import org.bukkit.command.CommandSender;
 
 /**
  *
@@ -17,9 +16,9 @@ public class ArenaCommand extends TreeCommandHandler {
 
     private final CloudGame plugin;
 
-    public ArenaCommand(CloudGame plugin) {
+    public ArenaCommand(CloudGame cloudGame) {
         super("arena");
-        this.plugin = plugin;
+        this.plugin = cloudGame;
         setUsage("/arena <subcommand> [args]");
         setDescription("Allows managing arenas.");
     }

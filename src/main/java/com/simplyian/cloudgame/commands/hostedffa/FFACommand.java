@@ -9,7 +9,7 @@ import com.simplyian.cloudgame.command.TreeCommandHandler;
 import com.simplyian.cloudgame.gameplay.hostedffa.HostedFFA;
 
 /**
- * The main command for all that shizzzzle
+ * The main command for all that shizzzzle (naughty ian)
  *
  * @author ian
  */
