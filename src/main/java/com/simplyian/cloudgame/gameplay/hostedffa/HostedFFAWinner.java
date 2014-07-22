@@ -22,6 +22,10 @@ public class HostedFFAWinner extends Winner<HostedFFAState> {
 		return Bukkit.getPlayer(winner);
 	}
 
+	public UUID getPlayerId() {
+		return winner;
+	}
+
 	@Override
 	public void sendMessage(String message) {
 		getPlayer().sendMessage(message);

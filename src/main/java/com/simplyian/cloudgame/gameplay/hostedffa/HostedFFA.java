@@ -76,7 +76,7 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
      */
     public boolean redeemPrize(Player p) {
     	for (Winner w : prizes.keySet()) {
-    		if (((HostedFFAWinner) w).getPlayer().getUniqueId().equals(p.getUniqueId())) {
+    		if (((HostedFFAWinner) w).getPlayerId().equals(p.getUniqueId())) {
     			return redeemPrize(w);
     		}
     	}
