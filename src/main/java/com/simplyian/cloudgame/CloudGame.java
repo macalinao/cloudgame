@@ -10,7 +10,7 @@ import com.simplyian.cloudgame.model.ModelManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public abstract class CloudGame extends JavaPlugin {
+public class CloudGame extends JavaPlugin {
 
     private static CloudGame i;
 
@@ -39,7 +39,6 @@ public abstract class CloudGame extends JavaPlugin {
         modelManager.load();
 
         gameplayManager = new GameplayManager(this);
-        addGameplays();
         gameplayManager.onEnable();
 
         playerStateManager = new PlayerStateManager(this);
@@ -80,10 +79,12 @@ public abstract class CloudGame extends JavaPlugin {
         return playerStateManager;
     }
 
-    public abstract void addGameplays();
-
-    protected void addGameplay(Gameplay gameplay) {
+    public void addGameplay(Gameplay gameplay) {
         gameplayManager.addGameplay(gameplay);
+
+        if (gameplayManager != null && gameplayManager.isEnabled()) {
+            gameplayManager.enableAdditionalGameplays();
+        }
     }
 
     public static WorldGuardPlugin wg() {

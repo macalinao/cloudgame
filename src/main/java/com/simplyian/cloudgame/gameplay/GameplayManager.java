@@ -5,7 +5,9 @@
  */
 package com.simplyian.cloudgame.gameplay;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.simplyian.cloudgame.CloudGame;
 
@@ -17,7 +19,11 @@ public class GameplayManager {
 
     private final CloudGame plugin;
 
-    private final Map<String, Gameplay> gameplays = new HashMap<>();
+    private final Map<String, Gameplay> gameplays = new HashMap<String, Gameplay>();
+
+    private final List<Gameplay> additionalGameplays = new ArrayList<Gameplay>();
+
+    private boolean enabled;
 
     public GameplayManager(CloudGame plugin) {
         this.plugin = plugin;
@@ -34,6 +40,8 @@ public class GameplayManager {
 
             g.onEnable();
         }
+
+        enabled = true;
     }
 
     /**
@@ -45,13 +53,32 @@ public class GameplayManager {
         }
     }
 
+    public void enableAdditionalGameplays() {
+        for (final Gameplay gameplay : additionalGameplays) {
+            gameplays.put(gameplay.getId(), gameplay);
+
+            plugin.getServer().getPluginManager().registerEvents(new CoreGameListener(gameplay), plugin);
+            plugin.getServer().getPluginManager().registerEvents(new SpectatorListener(gameplay), plugin);
+
+            gameplay.onEnable();
+        }
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
     /**
      * Adds a gameplay to the manager.
      *
      * @param gameplay
      */
     public void addGameplay(Gameplay gameplay) {
-        gameplays.put(gameplay.getId(), gameplay);
+        if (enabled) {
+            gameplays.put(gameplay.getId(), gameplay);
+        } else {
+            additionalGameplays.add(gameplay);
+        }
     }
 
     /**
