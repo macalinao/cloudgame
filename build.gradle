@@ -31,6 +31,7 @@ buildscript {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven { url 'http://repo.md-5.net/content/groups/public/' } // Bukkit is on here
     maven { url 'http://ci.frostcast.net/plugin/repository/everything' } // BarAPI
