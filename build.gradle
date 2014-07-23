@@ -3,13 +3,14 @@ import org.yaml.snakeyaml.Yaml
 
 apply plugin: 'java'
 apply plugin: 'nexus'
+apply plugin: 'signing'
 
 Yaml yaml = new Yaml()
 ext.plugin = yaml.load(new FileInputStream(new File(projectDir, "src/main/resources/plugin.yml")))
 
 jar.baseName = plugin.name
 
-defaultTasks 'clean', 'build', 'install'
+defaultTasks 'clean', 'build', 'install', 'copyJar'
 
 buildscript {
     repositories {
@@ -88,6 +89,59 @@ task remoteCopy << {
     cmd("scp $projectDir/build/libs/${jar.baseName}.jar $remotePluginDir")
 }
 
+// Copy resulting JAR to a nice name
+task copyJar(type: Copy) {
+    from 'build/libs/'
+    into 'build/'
+    include jar.archiveName
+    rename jar.archiveName, plugin.name + '.jar'
+}
+
 task wrapper(type: Wrapper) {
   gradleVersion = '2.0'
 }
+
+// Publishing stuff
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment {
+                MavenDeployment deployment -> signing.signPom(deployment)
+            }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name plugin.name
+                packaging 'jar'
+                description plugin.description
+                url plugin.url
+            }
+        }
+    }
+}
+
