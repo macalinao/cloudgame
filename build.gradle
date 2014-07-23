@@ -98,6 +98,11 @@ task remoteCopy << {
     cmd("scp $projectDir/build/libs/${jar.baseName}.jar $remotePluginDir")
 }
 
+// Gradle wrapper
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
+
 // Publishing stuff
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
