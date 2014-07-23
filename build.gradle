@@ -41,7 +41,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.bukkit', name: 'bukkit', version: '1.7.5-R0.1-SNAPSHOT'
+    compile 'org.bukkit:bukkit:1.7.9-R0.3-SNAPSHOT'
     compile 'me.confuser:BarAPI:3.0'
     compile fileTree(dir: 'libs', includes: ['*.jar']) 
 }
@@ -97,7 +97,6 @@ task scaffold << {
     
     if ((cmd('git remote -v') =~ /origin.+?bukkit-bootstrap\.git/).find()) {
         cmd('git remote rename origin bukkit-bootstrap')
-        cmd('git branch -u hub/master')
     }
 }
 
