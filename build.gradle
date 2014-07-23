@@ -2,7 +2,6 @@ import org.apache.tools.ant.filters.ReplaceTokens
 import org.yaml.snakeyaml.Yaml
 
 apply plugin: 'java'
-apply plugin: 'shadow'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
@@ -13,7 +12,7 @@ group = 'pw.ian'
 archivesBaseName = plugin.name.toLowerCase()
 version = '0.1.0-SNAPSHOT'
 
-defaultTasks 'clean', 'build', 'shadow', 'install'
+defaultTasks 'clean', 'build', 'install'
 
 buildscript {
     repositories {
@@ -64,14 +63,6 @@ processResources {
     from('src/main/resources') {
         include '*'
         filter { String line -> line.replace('$version', fullVersion) }
-    }
-}
-
-shadow {
-    artifactAttached = false
-    outputFile = jar.archivePath
-    artifactSet {
-        exclude '*'
     }
 }
 
