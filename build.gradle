@@ -9,7 +9,7 @@ ext.plugin = yaml.load(new FileInputStream(new File(projectDir, "src/main/resour
 
 jar.baseName = plugin.name
 
-defaultTasks 'clean', 'build', 'shadow'
+defaultTasks 'clean', 'build', 'install'
 
 buildscript {
     repositories {
