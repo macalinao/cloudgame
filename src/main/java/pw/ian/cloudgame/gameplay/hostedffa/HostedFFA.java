@@ -33,19 +33,15 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
 
     private final Map<Winner, String> prizes = new HashMap<>();
 
-    private final boolean barAPI;
-
     protected HostedFFA(CloudGame plugin, String name) {
         super(plugin, name);
-
-        barAPI = plugin.getServer().getPluginManager().isPluginEnabled("BarAPI");
     }
 
     @Override
     public void onEnable() {
         getPlugin().getServer().getPluginManager().registerEvents(new FFACommandListener(this), getPlugin());
         getPlugin().getServer().getPluginManager().registerEvents(new FFAGameListener(this), getPlugin());
-        getPlugin().getServer().getPluginManager().registerEvents(new FFAGamePlayerListener(this, barAPI), getPlugin());
+        getPlugin().getServer().getPluginManager().registerEvents(new FFAGamePlayerListener(this), getPlugin());
         getPlugin().getServer().getPluginManager().registerEvents(new FFADeathListener(this), getPlugin());
     }
 

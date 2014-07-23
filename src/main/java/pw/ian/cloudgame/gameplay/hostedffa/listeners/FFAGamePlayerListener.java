@@ -29,10 +29,10 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
 
     private boolean barAPI;
 
-    public FFAGamePlayerListener(HostedFFA koth, boolean barAPI) {
+    public FFAGamePlayerListener(HostedFFA koth) {
         super(koth);
 
-        this.barAPI = barAPI;
+        barAPI = koth.getPlugin().getServer().getPluginManager().isPluginEnabled("BarAPI");
     }
 
     @EventHandler
