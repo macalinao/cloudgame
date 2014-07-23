@@ -5,16 +5,14 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Winner;
 
-public class HostedFFAWinner extends Winner<HostedFFAState> {
+public class HostedFFAWinner<T extends HostedFFAState> implements Winner<T> {
 
     private final UUID winner;
 
-    public HostedFFAWinner(Game<HostedFFAState> game, UUID winner) {
-        super(game);
-        this.winner = winner;
+    public HostedFFAWinner(Player winner) {
+        this.winner = winner.getUniqueId();
     }
 
     public Player getPlayer() {
