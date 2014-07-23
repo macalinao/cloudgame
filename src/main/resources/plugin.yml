@@ -2,9 +2,9 @@ name: CloudGame
 description: Cloud minigame framework.
 version: $version
 author: AlbireoX
-website: http://og-mc.net/
+website: http://ian.pw/
 
-main: updateme
+main: pw.ian.cloudgame.CloudGame
 depend: [WorldGuard]
 
 commands:

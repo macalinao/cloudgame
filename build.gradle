@@ -2,16 +2,18 @@ import org.apache.tools.ant.filters.ReplaceTokens
 import org.yaml.snakeyaml.Yaml
 
 apply plugin: 'java'
-apply plugin: 'nexus'
 apply plugin: 'shadow'
-apply plugin: 'rebel'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 Yaml yaml = new Yaml()
-ext.plugin = yaml.load(new FileInputStream(new File(projectDir, "src/main/resources/plugin.yml")))
+ext.plugin = yaml.load(new FileInputStream(new File(projectDir, 'src/main/resources/plugin.yml')))
 
-jar.baseName = plugin.name
+group = 'pw.ian'
+archivesBaseName = plugin.name.toLowerCase()
+version = '0.1.0-SNAPSHOT'
 
-defaultTasks 'clean', 'build', 'shadow'
+defaultTasks 'clean', 'build', 'shadow', 'install'
 
 buildscript {
     repositories {
@@ -24,26 +26,23 @@ buildscript {
 
     dependencies {
         classpath group: 'org.yaml', name: 'snakeyaml', version: '1.5'
-        classpath group: 'org.gradle.api.plugins', name: 'gradle-nexus-plugin', version: '0.7'
-        classpath group: 'org.zeroturnaround', name: 'gradle-jrebel-plugin', version: '1.1.2'
         classpath 'org.gradle.plugins:shadow:0.7'
     }
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
-    maven {
-        url 'http://repo.md-5.net/content/groups/public/'
-    }
-    maven {
-        url 'http://ci.frostcast.net/plugin/repository/everything'
-    }
+    maven { url 'http://repo.md-5.net/content/groups/public/' } // Bukkit is on here
+    maven { url 'http://ci.frostcast.net/plugin/repository/everything' } // BarAPI
+    maven { url 'http://maven.sk89q.com/artifactory/repo/' } // sk89q
 }
 
 dependencies {
-    compile group: 'org.bukkit', name: 'bukkit', version: '1.7.5-R0.1-SNAPSHOT'
+    compile 'org.bukkit:bukkit:1.7.9-R0.3-SNAPSHOT'
     compile 'me.confuser:BarAPI:3.0'
-    compile fileTree(dir: 'libs', includes: ['*.jar']) 
+    compile 'com.sk89q:worldedit:5.6.2'
+    compile 'com.sk89q:worldguard:5.9'
 }
 
 def cmd(str) {
@@ -60,12 +59,11 @@ def cmd(str) {
     }
 }
 
-jar.dependsOn(generateRebel)
-
 processResources {
+    def fullVersion = version + '-g' + cmd('git describe --always --dirty=-dirty')
     from('src/main/resources') {
         include '*'
-        filter { String line -> line.replace('$version', 'v' + cmd('git describe --always --dirty=-dirty')) }
+        filter { String line -> line.replace('$version', fullVersion) }
     }
 }
 
@@ -97,7 +95,6 @@ task scaffold << {
     
     if ((cmd('git remote -v') =~ /origin.+?bukkit-bootstrap\.git/).find()) {
         cmd('git remote rename origin bukkit-bootstrap')
-        cmd('git branch -u hub/master')
     }
 }
 
@@ -110,19 +107,46 @@ task remoteCopy << {
     cmd("scp $projectDir/build/libs/${jar.baseName}.jar $remotePluginDir")
 }
 
-modifyPom {
-    project {
-        name plugin.name
-        description plugin.description
-        url plugin.website
-    }
+// Publishing stuff
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
 }
 
-nexus {
-    attachSources = true
-    attachTests = true
-    attachJavadoc = false
-    sign = true
-    if (hasProperty('deployRepoUrl')) repositoryUrl = deployRepoUrl
-    if (hasProperty('deploySnapshotRepoUrl')) snapshotRepositoryUrl = deploySnapshotRepoUrl
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment {
+                MavenDeployment deployment -> signing.signPom(deployment)
+            }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name plugin.name
+                packaging 'jar'
+                description plugin.description
+                url plugin.url
+            }
+        }
+    }
 }
