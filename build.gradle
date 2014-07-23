@@ -26,7 +26,6 @@ buildscript {
 
     dependencies {
         classpath group: 'org.yaml', name: 'snakeyaml', version: '1.5'
-        classpath group: 'org.gradle.api.plugins', name: 'gradle-nexus-plugin', version: '0.7'
         classpath 'org.gradle.plugins:shadow:0.7'
     }
 }
