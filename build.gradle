@@ -4,7 +4,6 @@ import org.yaml.snakeyaml.Yaml
 apply plugin: 'java'
 apply plugin: 'nexus'
 apply plugin: 'shadow'
-apply plugin: 'rebel'
 
 Yaml yaml = new Yaml()
 ext.plugin = yaml.load(new FileInputStream(new File(projectDir, "src/main/resources/plugin.yml")))
@@ -25,7 +24,6 @@ buildscript {
     dependencies {
         classpath group: 'org.yaml', name: 'snakeyaml', version: '1.5'
         classpath group: 'org.gradle.api.plugins', name: 'gradle-nexus-plugin', version: '0.7'
-        classpath group: 'org.zeroturnaround', name: 'gradle-jrebel-plugin', version: '1.1.2'
         classpath 'org.gradle.plugins:shadow:0.7'
     }
 }
@@ -55,8 +53,6 @@ def cmd(str) {
         return null;
     }
 }
-
-jar.dependsOn(generateRebel)
 
 processResources {
     from('src/main/resources') {
@@ -103,21 +99,4 @@ task testCopy << {
 
 task remoteCopy << {
     cmd("scp $projectDir/build/libs/${jar.baseName}.jar $remotePluginDir")
-}
-
-modifyPom {
-    project {
-        name plugin.name
-        description plugin.description
-        url plugin.website
-    }
-}
-
-nexus {
-    attachSources = true
-    attachTests = true
-    attachJavadoc = false
-    sign = true
-    if (hasProperty('deployRepoUrl')) repositoryUrl = deployRepoUrl
-    if (hasProperty('deploySnapshotRepoUrl')) snapshotRepositoryUrl = deploySnapshotRepoUrl
 }
