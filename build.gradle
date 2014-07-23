@@ -87,3 +87,7 @@ task testCopy << {
 task remoteCopy << {
     cmd("scp $projectDir/build/libs/${jar.baseName}.jar $remotePluginDir")
 }
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.0'
+}
