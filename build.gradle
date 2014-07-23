@@ -7,7 +7,7 @@ apply plugin: 'maven'
 
 
 Yaml yaml = new Yaml()
-ext.plugin = yaml.load(new FileInputStream(new File(projectDir, "src/main/resources/plugin.yml")))
+ext.plugin = yaml.load(new FileInputStream(new File(projectDir, 'src/main/resources/plugin.yml')))
 
 group = 'pw.ian'
 archivesBaseName = plugin.name.toLowerCase()
