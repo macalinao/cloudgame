@@ -27,8 +27,12 @@ import org.bukkit.event.EventHandler;
  */
 public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
 
-    public FFAGamePlayerListener(HostedFFA koth) {
+    private boolean barAPI;
+
+    public FFAGamePlayerListener(HostedFFA koth, boolean barAPI) {
         super(koth);
+
+        this.barAPI = barAPI;
     }
 
     @EventHandler
@@ -104,7 +108,9 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
         if (!failedKillsCheck && !failedDistanceCheck) {
             game.getState().removePlayer(p);
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
-            BarAPI.removeBar(p);
+            if (barAPI) {
+                BarAPI.removeBar(p);
+            }
             game.getGameplay().sendGameMessage(p, "You have left the game.");
         }
     }
@@ -123,7 +129,9 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
         p.setGameMode(GameMode.SURVIVAL);
 
         game.getState().removePlayer(p);
-        BarAPI.removeBar(p);
+        if (barAPI) {
+            BarAPI.removeBar(p);
+        }
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
     }
 
@@ -174,7 +182,9 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
             other.showPlayer(p);
         }
         p.setFlying(false);
-        BarAPI.removeBar(p);
+        if (barAPI) {
+            BarAPI.removeBar(p);
+        }
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
 
         game.getGameplay().sendGameMessage(p, "You are no longer spectating the game.");
