@@ -1,10 +1,5 @@
 package com.simplyian.cloudgame.gameplay;
 
-import java.util.List;
-import java.util.UUID;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 import com.simplyian.cloudgame.game.Game;
 

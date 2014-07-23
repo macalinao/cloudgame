@@ -94,7 +94,7 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
             return false;
         }
         String type = prizes.remove(w);
-        ((HostedFFAWinner) w).givePrize(type);
+        ((HostedFFAWinner) w).awardPrize(type);
         return true;
     }
 }
