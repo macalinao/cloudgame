@@ -9,6 +9,7 @@ import pw.ian.cloudgame.playerstate.PlayerStateManager;
 import pw.ian.cloudgame.model.ModelManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import pw.ian.cloudgame.commands.arena.ArenaCommand;
 
 public class CloudGame extends JavaPlugin {
 
@@ -17,8 +18,6 @@ public class CloudGame extends JavaPlugin {
     public static CloudGame inst() {
         return i;
     }
-
-    private Commands commands;
 
     private ModelManager modelManager;
 
@@ -32,8 +31,7 @@ public class CloudGame extends JavaPlugin {
     public void onEnable() {
         i = this;
 
-        commands = new Commands(this);
-        commands.registerDefaultCommands();
+        Commands.registerCommand(this, new ArenaCommand(this));
 
         modelManager = new ModelManager(this);
         modelManager.load();
@@ -54,17 +52,12 @@ public class CloudGame extends JavaPlugin {
         gameplayManager.onDisable();
         modelManager.save();
 
-        commands = null;
         modelManager = null;
         gameManager = null;
         gameplayManager = null;
         playerStateManager = null;
 
         i = null;
-    }
-
-    public Commands getCommands() {
-        return commands;
     }
 
     public ModelManager getModelManager() {

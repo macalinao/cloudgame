@@ -5,40 +5,46 @@
  */
 package pw.ian.cloudgame.command;
 
-import pw.ian.cloudgame.CloudGame;
-import pw.ian.cloudgame.commands.arena.ArenaCommand;
-
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
+ * Command registration class
  *
  * @author ian
  */
 public class Commands {
 
-    private final JavaPlugin plugin;
-    private final CloudGame cg;
-
-    public Commands(JavaPlugin plugin) {
-        this.plugin = plugin;
-
-        cg = (CloudGame) plugin.getServer().getPluginManager().getPlugin("CloudGame");
+    /**
+     * C'tor
+     *
+     * @param cg
+     */
+    private Commands() {
     }
 
-    public void registerCommand(CommandHandler handler) {
-        registerCommand(handler.getName(), handler);
+    /**
+     * Registers a command handler.
+     *
+     * @param plugin
+     * @param handler
+     */
+    public static void registerCommand(JavaPlugin plugin, CommandHandler handler) {
+        registerCommand(plugin, handler.getName(), handler);
     }
 
-    public void registerCommand(String name, CommandHandler handler) {
+    /**
+     * Registers a command handler with a custom name.
+     *
+     * @param plugin
+     * @param name
+     * @param handler
+     */
+    public static void registerCommand(JavaPlugin plugin, String name, CommandHandler handler) {
         PluginCommand cmd = plugin.getCommand(name);
         cmd.setExecutor(handler);
         if (handler instanceof TreeCommandHandler) {
             ((TreeCommandHandler) handler).setupSubcommands();
         }
-    }
-
-    public void registerDefaultCommands() {
-        registerCommand(new ArenaCommand(cg));
     }
 }
