@@ -32,18 +32,16 @@ buildscript {
 
 repositories {
     mavenCentral()
-    maven {
-        url 'http://repo.md-5.net/content/groups/public/'
-    }
-    maven {
-        url 'http://ci.frostcast.net/plugin/repository/everything'
-    }
+    maven { url 'http://repo.md-5.net/content/groups/public/' } // Bukkit is on here
+    maven { url 'http://ci.frostcast.net/plugin/repository/everything' } // BarAPI
+    maven { url 'http://maven.sk89q.com/artifactory/repo/' } // sk89q
 }
 
 dependencies {
     compile 'org.bukkit:bukkit:1.7.9-R0.3-SNAPSHOT'
     compile 'me.confuser:BarAPI:3.0'
-    compile fileTree(dir: 'libs', includes: ['*.jar']) 
+    compile 'com.sk89q:worldedit:5.6.2'
+    compile 'com.sk89q:worldguard:5.9'
 }
 
 def cmd(str) {
