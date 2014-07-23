@@ -9,9 +9,12 @@ import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.model.arena.Arena;
 import com.simplyian.cloudgame.util.Messaging;
+
 import java.lang.reflect.ParameterizedType;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -92,6 +95,16 @@ public abstract class Gameplay<T extends State> {
      */
     public void sendGameMessage(Player p, String message) {
         p.sendMessage(colorScheme.getPrefix() + "[" + name + "] " + colorScheme.getMsg() + colorScheme.replaceColors(message));
+    }
+
+    /**
+     * Sends a game related message to all the players given via the Winner object.
+     * 
+     * @param w
+     * @param message
+     */
+    public void sendGameMessage(Winner<? extends State> w, String message) {
+        w.sendMessage(colorScheme.getPrefix() + "[" + name + "]" + colorScheme.getMsg() + colorScheme.replaceColors(message));
     }
 
     /**

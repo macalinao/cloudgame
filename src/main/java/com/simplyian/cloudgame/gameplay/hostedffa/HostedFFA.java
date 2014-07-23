@@ -8,13 +8,17 @@ package com.simplyian.cloudgame.gameplay.hostedffa;
 import com.simplyian.cloudgame.CloudGame;
 import com.simplyian.cloudgame.game.Game;
 import com.simplyian.cloudgame.gameplay.Gameplay;
+import com.simplyian.cloudgame.gameplay.State;
+import com.simplyian.cloudgame.gameplay.Winner;
 import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFACommandListener;
 import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFADeathListener;
 import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFAGameListener;
 import com.simplyian.cloudgame.gameplay.hostedffa.listeners.FFAGamePlayerListener;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -27,7 +31,7 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
 
     private Game<T> game;
 
-    private final Map<UUID, String> prizes = new HashMap<>();
+    private final Map<Winner, String> prizes = new HashMap<>();
 
     protected HostedFFA(CloudGame plugin, String name) {
         super(plugin, name);
@@ -55,31 +59,42 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
     }
 
     /**
-     * Adds the player to the list of people who deserve prizes.
+     * Adds the winner to the list of people who deserve prizes.
      *
      * @param p
      * @param type
      */
-    public void addPrize(Player p, String type) {
-        prizes.put(p.getUniqueId(), type);
+    public void addPrize(Winner w, String type) {
+        prizes.put(w, type);
     }
 
     /**
      * Tries to redeem a prize.
      *
-     * @param p
+     * @param w
      * @return
      */
     public boolean redeemPrize(Player p) {
-        if (!prizes.containsKey(p.getUniqueId())) {
+    	for (Winner w : prizes.keySet()) {
+    		if (((HostedFFAWinner) w).getPlayerId().equals(p.getUniqueId())) {
+    			return redeemPrize(w);
+    		}
+    	}
+    	return false;
+    }
+
+    /**
+     * Tries to redeem a prize.
+     *
+     * @param w
+     * @return
+     */
+    public boolean redeemPrize(Winner w) {
+        if (!prizes.containsKey(w)) {
             return false;
         }
-        String type = prizes.remove(p.getUniqueId());
-        if (type.equalsIgnoreCase("easy")) {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ccrates give 2 " + p.getName() + " 3");
-        } else {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ccrates give 3 " + p.getName() + " 3");
-        }
+        String type = prizes.remove(w);
+        ((HostedFFAWinner) w).awardPrize(type);
         return true;
     }
 }
