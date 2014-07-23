@@ -4,7 +4,7 @@ import org.yaml.snakeyaml.Yaml
 apply plugin: 'java'
 apply plugin: 'shadow'
 apply plugin: 'maven'
-
+apply plugin: 'signing'
 
 Yaml yaml = new Yaml()
 ext.plugin = yaml.load(new FileInputStream(new File(projectDir, 'src/main/resources/plugin.yml')))
@@ -106,4 +106,8 @@ task testCopy << {
 
 task remoteCopy << {
     cmd("scp $projectDir/build/libs/${jar.baseName}.jar $remotePluginDir")
+}
+
+signing {
+    sign configurations.archives
 }
