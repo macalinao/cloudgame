@@ -119,6 +119,10 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
 }
 
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
 signing {
     sign configurations.archives
 }
