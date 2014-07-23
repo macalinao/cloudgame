@@ -12,7 +12,7 @@ group = 'pw.ian'
 archivesBaseName = plugin.name.toLowerCase()
 version = '0.1.0-SNAPSHOT'
 
-defaultTasks 'clean', 'build', 'install'
+defaultTasks 'clean', 'build', 'install', 'copyJar'
 
 buildscript {
     repositories {
@@ -101,6 +101,14 @@ task remoteCopy << {
 // Gradle wrapper
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
+}
+
+// Copy resulting JAR to a nice name
+task copyJar(type: Copy) {
+    from 'build/libs/'
+    into 'build/'
+    include jar.archiveName
+    rename jar.archiveName, plugin.name + '.jar'
 }
 
 // Publishing stuff
