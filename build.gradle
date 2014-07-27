@@ -1,19 +1,37 @@
 project.version = '0.1.0-SNAPSHOT'
 apply from: 'bootstrap/bootstrap.gradle'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.github.jengelman.gradle.plugins:shadow:1.0.2'
+  }
+}
 
 repositories {
-    mavenLocal()
-    mavenCentral()
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' } // Sonatype snapshots
-    maven { url 'http://ci.frostcast.net/plugin/repository/everything' } // BarAPI
-    maven { url 'http://maven.sk89q.com/artifactory/repo/' } // sk89q
+  mavenLocal()
+  mavenCentral()
+  maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' } // Sonatype snapshots
+  maven { url 'http://ci.frostcast.net/plugin/repository/everything' } // BarAPI
+  maven { url 'http://maven.sk89q.com/artifactory/repo/' } // sk89q
 }
 
 dependencies {
-    compile 'me.confuser:BarAPI:3.0'
-    compile 'com.sk89q:worldedit:5.6.2'
-    compile 'com.sk89q:worldguard:5.9'
-    compile 'pw.ian:albkit:0.1.0-SNAPSHOT'
+  compile 'me.confuser:BarAPI:3.0'
+  compile 'com.sk89q:worldedit:5.6.2'
+  compile 'com.sk89q:worldguard:5.9'
+  compile 'pw.ian:albkit:0.1.0-SNAPSHOT'
 }
 
-defaultTasks 'clean', 'copyPlugin', 'install'
+defaultTasks 'clean', 'build', 'shadowJar', 'install', 'copyPlugin'
+
+shadowJar {
+  archiveName = jar.archiveName
+  dependencies {
+    include(dependency('pw.ian:albkit:0.1.0-SNAPSHOT'))
+  }
+  relocate 'pw.ian.albkit', 'pw.ian.cloudgame.albkit'
+}
