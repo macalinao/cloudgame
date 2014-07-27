@@ -14,6 +14,7 @@ ext.plugin = (new Yaml()).load(new FileInputStream(new File(projectDir, "src/mai
 // Determine the group/artifact
 ext.pkg = plugin.main.substring(0, plugin.main.lastIndexOf('.'))
 
+// Our group/artifact ids. Version is declared in the main file
 group = pkg.substring(0, plugin.main.lastIndexOf('.'))
 archivesBaseName = plugin.name.toLowerCase()
 
@@ -50,6 +51,9 @@ processResources {
   }
 }
 
+/**
+ * Executes a command and returns its output.
+ */
 def cmd(str) {
   try {
     def output = new ByteArrayOutputStream()
@@ -103,9 +107,10 @@ task wrapper(type: Wrapper) {
 }
 
 // Copy resulting JAR to a nice name
-task copyJar(type: Copy) {
+task copyPlugin(type: Copy) {
+  description 'Copies the plugin from the libs/ directory into the main build directory.'
   from 'build/libs/'
-  into 'build/'
+  into 'dist/'
   include jar.archiveName
   rename jar.archiveName, plugin.name + '.jar'
 }
@@ -154,7 +159,3 @@ uploadArchives {
   }
 }
 
-// Task dependencies
-build.dependsOn clean
-copyJar.dependsOn build
-testCopy.dependsOn copyJar

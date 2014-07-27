@@ -1,6 +1,6 @@
 apply from: 'bootstrap/bootstrap.gradle'
 
-defaultTasks 'clean', 'copyJar', 'install'
+defaultTasks 'copyPlugin', 'install'
 
 repositories {
 }
