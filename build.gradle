@@ -1,7 +1,7 @@
 project.version = '0.1.0-SNAPSHOT'
 apply from: 'bootstrap/bootstrap.gradle'
 
-defaultTasks 'copyPlugin', 'install'
+defaultTasks 'clean', 'copyPlugin', 'install'
 
 repositories {
 }
