@@ -37,7 +37,6 @@ public class CloudGame extends JavaPlugin {
         modelManager.load();
 
         gameplayManager = new GameplayManager(this);
-        gameplayManager.onEnable();
 
         playerStateManager = new PlayerStateManager(this);
         playerStateManager.setupStateRestoreQueueProcessTask();
@@ -74,10 +73,6 @@ public class CloudGame extends JavaPlugin {
 
     public void addGameplay(Gameplay<?> gameplay) {
         gameplayManager.addGameplay(gameplay);
-
-        if (gameplayManager != null && gameplayManager.isEnabled()) {
-            gameplayManager.enableAdditionalGameplays();
-        }
     }
 
     public static WorldGuardPlugin wg() {
