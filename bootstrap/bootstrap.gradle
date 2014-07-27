@@ -15,7 +15,7 @@ ext.plugin = (new Yaml()).load(new FileInputStream(new File(projectDir, "src/mai
 ext.pkg = plugin.main.substring(0, plugin.main.lastIndexOf('.'))
 
 // Our group/artifact ids. Version is declared in the main file
-group = pkg.substring(0, plugin.main.lastIndexOf('.'))
+group = pkg.substring(0, pkg.lastIndexOf('.'))
 archivesBaseName = plugin.name.toLowerCase()
 version = project.version
 
