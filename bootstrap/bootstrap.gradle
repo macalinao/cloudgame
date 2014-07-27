@@ -17,6 +17,7 @@ ext.pkg = plugin.main.substring(0, plugin.main.lastIndexOf('.'))
 // Our group/artifact ids. Version is declared in the main file
 group = pkg.substring(0, plugin.main.lastIndexOf('.'))
 archivesBaseName = plugin.name.toLowerCase()
+version = project.version
 
 buildscript {
   repositories {
@@ -110,7 +111,7 @@ task wrapper(type: Wrapper) {
 task copyPlugin(type: Copy) {
   description 'Copies the plugin from the libs/ directory into the main build directory.'
   from 'build/libs/'
-  into 'dist/'
+  into 'build/'
   include jar.archiveName
   rename jar.archiveName, plugin.name + '.jar'
 }
