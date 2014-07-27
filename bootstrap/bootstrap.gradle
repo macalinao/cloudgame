@@ -107,8 +107,8 @@ task wrapper(type: Wrapper) {
   gradleVersion = '2.0'
 }
 
-// Copy resulting JAR to a nice name
 task copyPlugin(type: Copy) {
+  description 'Copy resulting JAR to a nice plugin name'
   dependsOn 'build'
 
   description 'Copies the plugin from the libs/ directory into the main build directory.'
