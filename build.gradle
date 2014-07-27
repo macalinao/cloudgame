@@ -1,4 +1,4 @@
-apply from: '.bootstrap/bootstrap.gradle'
+apply from: 'bootstrap/bootstrap.gradle'
 
 defaultTasks 'clean', 'copyJar', 'install'
 
