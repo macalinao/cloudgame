@@ -109,6 +109,8 @@ task wrapper(type: Wrapper) {
 
 // Copy resulting JAR to a nice name
 task copyPlugin(type: Copy) {
+  mustRunAfter 'clean', 'build'
+
   description 'Copies the plugin from the libs/ directory into the main build directory.'
   from 'build/libs/'
   into 'build/'
@@ -159,4 +161,3 @@ uploadArchives {
     }
   }
 }
-
