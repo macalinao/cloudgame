@@ -76,7 +76,7 @@ task scaffold << {
 
   // Copy plugin bootstrap file over
   copy {
-    from '.bootstrap/'
+    from 'bootstrap/'
     into artifactSrcDir.getPath()
     include 'PluginBootstrap.java'
     rename '.*', plugin.name + '.java'
