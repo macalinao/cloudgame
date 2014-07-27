@@ -34,3 +34,7 @@ dependencies {
   compile 'pw.ian:cloudgame:0.1.0-SNAPSHOT'
 }
 ```
+
+## License
+
+Copyright (c) 2014 Ian Macalinao. Released under the GPLv3.
