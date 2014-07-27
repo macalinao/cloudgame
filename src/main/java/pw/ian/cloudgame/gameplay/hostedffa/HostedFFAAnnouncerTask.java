@@ -5,14 +5,12 @@
  */
 package pw.ian.cloudgame.gameplay.hostedffa;
 
-import pw.ian.cloudgame.events.GameStartEvent;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-
+import pw.ian.cloudgame.events.GameStartEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Timer;
 

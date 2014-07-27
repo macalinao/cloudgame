@@ -5,7 +5,7 @@
  */
 package pw.ian.cloudgame.commands.hostedffa;
 
-import pw.ian.cloudgame.command.TreeCommandHandler;
+import pw.ian.albkit.command.TreeCommandHandler;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
 
 /**

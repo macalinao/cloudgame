@@ -5,8 +5,8 @@
  */
 package pw.ian.cloudgame.events;
 
-import pw.ian.cloudgame.game.Game;
 import org.bukkit.entity.Player;
+import pw.ian.cloudgame.game.Game;
 
 /**
  * Called when a player quits the game.

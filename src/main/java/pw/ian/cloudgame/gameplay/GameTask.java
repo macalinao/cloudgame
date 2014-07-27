@@ -5,8 +5,8 @@
  */
 package pw.ian.cloudgame.gameplay;
 
-import pw.ian.cloudgame.game.Game;
 import org.bukkit.scheduler.BukkitRunnable;
+import pw.ian.cloudgame.game.Game;
 
 /**
  *

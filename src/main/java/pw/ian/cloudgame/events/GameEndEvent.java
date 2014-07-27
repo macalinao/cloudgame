@@ -5,11 +5,9 @@
  */
 package pw.ian.cloudgame.events;
 
+import org.bukkit.event.HandlerList;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Winner;
-
-import org.bukkit.entity.Player;
-import org.bukkit.event.HandlerList;
 
 /**
  *

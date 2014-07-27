@@ -5,7 +5,6 @@
  */
 package pw.ian.cloudgame.playerstate;
 
-import pw.ian.cloudgame.CloudGame;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -16,6 +15,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import pw.ian.cloudgame.CloudGame;
 
 /**
  * Stores inventories when players enter the arena.

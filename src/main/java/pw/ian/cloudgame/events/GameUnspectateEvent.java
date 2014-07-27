@@ -5,9 +5,9 @@
  */
 package pw.ian.cloudgame.events;
 
-import pw.ian.cloudgame.game.Game;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
+import pw.ian.cloudgame.game.Game;
 
 /**
  * Called when a player spectates the game.

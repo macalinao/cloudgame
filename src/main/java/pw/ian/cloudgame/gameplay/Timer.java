@@ -1,11 +1,10 @@
 package pw.ian.cloudgame.gameplay;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
 import pw.ian.cloudgame.game.Game;
-import java.util.Collections;
 
 public abstract class Timer<T extends State> extends GameTask<T> {
 

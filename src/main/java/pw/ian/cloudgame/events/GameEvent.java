@@ -5,8 +5,8 @@
  */
 package pw.ian.cloudgame.events;
 
-import pw.ian.cloudgame.game.Game;
 import org.bukkit.event.Event;
+import pw.ian.cloudgame.game.Game;
 
 /**
  *

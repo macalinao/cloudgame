@@ -5,16 +5,16 @@
  */
 package pw.ian.cloudgame.gameplay;
 
-import pw.ian.cloudgame.CloudGame;
-import pw.ian.cloudgame.game.Game;
-import pw.ian.cloudgame.model.arena.Arena;
-import pw.ian.cloudgame.util.Messaging;
-
 import java.lang.reflect.ParameterizedType;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import pw.ian.albkit.util.ColorScheme;
+import pw.ian.albkit.util.Messaging;
+import pw.ian.cloudgame.CloudGame;
+import pw.ian.cloudgame.game.Game;
+import pw.ian.cloudgame.model.arena.Arena;
 
 /**
  * Contains all game gameplay.

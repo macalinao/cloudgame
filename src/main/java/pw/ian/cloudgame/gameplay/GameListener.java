@@ -5,14 +5,12 @@
  */
 package pw.ian.cloudgame.gameplay;
 
-import pw.ian.cloudgame.events.GameEvent;
-import pw.ian.cloudgame.game.Game;
-import pw.ian.cloudgame.gameplay.Gameplay;
-import pw.ian.cloudgame.gameplay.State;
-import pw.ian.cloudgame.model.region.Region;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import pw.ian.cloudgame.events.GameEvent;
+import pw.ian.cloudgame.game.Game;
+import pw.ian.cloudgame.model.region.Region;
 
 /**
  *
