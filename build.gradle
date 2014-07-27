@@ -35,3 +35,6 @@ shadowJar {
   }
   relocate 'pw.ian.albkit', 'pw.ian.cloudgame.albkit'
 }
+
+shadowJar.dependsOn build
+uploadArchives.dependsOn shadowJar
