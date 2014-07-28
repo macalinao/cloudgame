@@ -41,6 +41,7 @@ public class GameplayManager {
         gameplays.put(gameplay.getId(), gameplay);
         plugin.getServer().getPluginManager().registerEvents(new CoreGameListener(gameplay), plugin);
         plugin.getServer().getPluginManager().registerEvents(new SpectatorListener(gameplay), plugin);
+        gameplay.onEnable();
     }
 
     /**
