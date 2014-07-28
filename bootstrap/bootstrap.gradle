@@ -5,7 +5,6 @@ import org.yaml.snakeyaml.Yaml
 import org.apache.tools.ant.filters.ReplaceTokens
 
 apply plugin: 'java'
-apply plugin: 'signing'
 apply plugin: 'maven'
 
 // Plugin information loaded from the YML file
@@ -18,6 +17,20 @@ ext.pkg = plugin.main.substring(0, plugin.main.lastIndexOf('.'))
 group = pkg.substring(0, pkg.lastIndexOf('.'))
 archivesBaseName = plugin.name.toLowerCase()
 version = project.version
+
+// Default parameters
+if (!project.hasProperty('ossrhUsername')) {
+  ext.ossrhUsername = '';
+}
+if (!project.hasProperty('ossrhPassword')) {
+  ext.ossrhPassword = '';
+}
+if (!project.hasProperty('testPluginDir')) {
+  ext.testPluginDir = '';
+}
+if (!project.hasProperty('remotePluginDir')) {
+  ext.remotePluginDir = '';
+}
 
 buildscript {
   repositories {
@@ -137,9 +150,13 @@ artifacts {
   archives javadocJar, sourcesJar
 }
 
-signing {
-  sign configurations.archives
+if (project.hasProperty('signing.keyId')) {
+  apply plugin: 'signing'
+  signing {
+    sign configurations.archives
+  }
 }
+
 
 uploadArchives {
   repositories {
