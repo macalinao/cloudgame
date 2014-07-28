@@ -5,9 +5,9 @@
  */
 package pw.ian.cloudgame.commands.hostedffa;
 
-import pw.ian.cloudgame.command.PlayerCommandHandler;
-import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
 import org.bukkit.entity.Player;
+import pw.ian.albkit.command.PlayerCommandHandler;
+import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
 
 /**
  *

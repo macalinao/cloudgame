@@ -5,16 +5,16 @@
  */
 package pw.ian.cloudgame.model.region;
 
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import static pw.ian.cloudgame.CloudGame.wg;
-import pw.ian.cloudgame.model.ModelManager;
-import pw.ian.cloudgame.model.Models;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
+import static pw.ian.cloudgame.CloudGame.wg;
+import pw.ian.cloudgame.model.ModelManager;
+import pw.ian.cloudgame.model.Models;
 
 /**
  *

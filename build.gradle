@@ -1,129 +1,40 @@
-import org.apache.tools.ant.filters.ReplaceTokens
-import org.yaml.snakeyaml.Yaml
-
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'signing'
-
-Yaml yaml = new Yaml()
-ext.plugin = yaml.load(new FileInputStream(new File(projectDir, 'src/main/resources/plugin.yml')))
-
-group = 'pw.ian'
-archivesBaseName = plugin.name.toLowerCase()
-version = '0.1.0-SNAPSHOT'
-
-defaultTasks 'clean', 'build', 'install', 'copyJar'
+project.version = '0.1.0-SNAPSHOT'
+apply from: 'bootstrap/bootstrap.gradle'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-        ivy {
-            url 'http://dl.bintray.com/content/johnrengelman/gradle-plugins'
-        }
-    }
-
-    dependencies {
-        classpath group: 'org.yaml', name: 'snakeyaml', version: '1.5'
-        classpath 'org.gradle.plugins:shadow:0.7'
-    }
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.github.jengelman.gradle.plugins:shadow:1.0.2'
+  }
 }
 
 repositories {
-    mavenLocal()
-    mavenCentral()
-    maven { url 'http://repo.md-5.net/content/groups/public/' } // Bukkit is on here
-    maven { url 'http://ci.frostcast.net/plugin/repository/everything' } // BarAPI
-    maven { url 'http://maven.sk89q.com/artifactory/repo/' } // sk89q
+  mavenLocal()
+  mavenCentral()
+  maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' } // Sonatype snapshots
+  maven { url 'http://ci.frostcast.net/plugin/repository/everything' } // BarAPI
+  maven { url 'http://maven.sk89q.com/artifactory/repo/' } // sk89q
 }
 
 dependencies {
-    compile 'org.bukkit:bukkit:1.7.9-R0.3-SNAPSHOT'
-    compile 'me.confuser:BarAPI:3.0'
-    compile 'com.sk89q:worldedit:5.6.2'
-    compile 'com.sk89q:worldguard:5.9'
+  compile 'me.confuser:BarAPI:3.0'
+  compile 'com.sk89q:worldedit:5.6.2'
+  compile 'com.sk89q:worldguard:5.9'
+  compile 'pw.ian:albkit:0.1.0-SNAPSHOT'
 }
 
-def cmd(str) {
-    try {
-        def output = new ByteArrayOutputStream()
-        exec {
-            commandLine str.split(' ')
-            standardOutput = output
-        }
-        return output.toString().trim()
-    }
-    catch (ignored) {
-        return null;
-    }
+defaultTasks 'clean', 'build', 'shadowJar', 'install', 'copyPlugin'
+
+shadowJar {
+  archiveName = jar.archiveName
+  dependencies {
+    include(dependency('pw.ian:albkit:0.1.0-SNAPSHOT'))
+  }
+  relocate 'pw.ian.albkit', 'pw.ian.cloudgame.albkit'
 }
 
-processResources {
-    def fullVersion = version + '-g' + cmd('git describe --always --dirty=-dirty')
-    from('src/main/resources') {
-        include '*'
-        filter { String line -> line.replace('$version', fullVersion) }
-    }
-}
-
-task testCopy << {
-    cmd("mkdir -p $testPluginDir")
-    cmd("cp $projectDir/build/libs/${jar.baseName}.jar $testPluginDir")
-}
-
-// Gradle wrapper
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.0'
-}
-
-// Copy resulting JAR to a nice name
-task copyJar(type: Copy) {
-    from 'build/libs/'
-    into 'build/'
-    include jar.archiveName
-    rename jar.archiveName, plugin.name + '.jar'
-}
-
-// Publishing stuff
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc
-}
-
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives javadocJar, sourcesJar
-}
-
-signing {
-    sign configurations.archives
-}
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment {
-                MavenDeployment deployment -> signing.signPom(deployment)
-            }
-
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            pom.project {
-                name plugin.name
-                packaging 'jar'
-                description plugin.description
-                url plugin.url
-            }
-        }
-    }
-}
+shadowJar.dependsOn build
+uploadArchives.dependsOn shadowJar

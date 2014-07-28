@@ -5,8 +5,6 @@
  */
 package pw.ian.cloudgame.gameplay;
 
-import pw.ian.cloudgame.events.GameUnspectateEvent;
-import pw.ian.cloudgame.game.Game;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -17,6 +15,8 @@ import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
+import pw.ian.cloudgame.events.GameUnspectateEvent;
+import pw.ian.cloudgame.game.Game;
 
 /**
  *

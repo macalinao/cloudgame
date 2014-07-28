@@ -5,22 +5,17 @@
  */
 package pw.ian.cloudgame.gameplay.hostedffa;
 
+import java.util.HashMap;
+import java.util.Map;
+import org.bukkit.entity.Player;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
-import pw.ian.cloudgame.gameplay.State;
 import pw.ian.cloudgame.gameplay.Winner;
 import pw.ian.cloudgame.gameplay.hostedffa.listeners.FFACommandListener;
 import pw.ian.cloudgame.gameplay.hostedffa.listeners.FFADeathListener;
 import pw.ian.cloudgame.gameplay.hostedffa.listeners.FFAGameListener;
 import pw.ian.cloudgame.gameplay.hostedffa.listeners.FFAGamePlayerListener;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 /**
  *

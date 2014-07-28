@@ -5,13 +5,13 @@
  */
 package pw.ian.cloudgame.game;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import pw.ian.cloudgame.events.GameStopEvent;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.State;
 import pw.ian.cloudgame.model.arena.Arena;
 import pw.ian.cloudgame.stats.Stats;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 /**
  *

@@ -6,11 +6,11 @@
 package pw.ian.cloudgame.model.arena;
 
 import java.util.HashMap;
-import pw.ian.cloudgame.model.region.Region;
 import java.util.Map;
-import pw.ian.cloudgame.model.Model;
-import pw.ian.cloudgame.util.Rand;
 import org.bukkit.Location;
+import pw.ian.albkit.util.Rand;
+import pw.ian.cloudgame.model.Model;
+import pw.ian.cloudgame.model.region.Region;
 
 /**
  *

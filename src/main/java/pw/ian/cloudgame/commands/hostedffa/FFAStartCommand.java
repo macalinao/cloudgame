@@ -5,12 +5,12 @@
  */
 package pw.ian.cloudgame.commands.hostedffa;
 
-import pw.ian.cloudgame.command.PlayerCommandHandler;
+import org.bukkit.entity.Player;
+import pw.ian.albkit.command.PlayerCommandHandler;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
 import pw.ian.cloudgame.model.arena.Arena;
-import org.bukkit.entity.Player;
 
 /**
  *

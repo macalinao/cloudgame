@@ -5,9 +5,6 @@
  */
 package pw.ian.cloudgame.gameplay;
 
-import pw.ian.cloudgame.events.GameQuitEvent;
-import pw.ian.cloudgame.game.Game;
-import pw.ian.cloudgame.stats.Death;
 import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -18,6 +15,9 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import pw.ian.cloudgame.events.GameQuitEvent;
+import pw.ian.cloudgame.game.Game;
+import pw.ian.cloudgame.stats.Death;
 
 /**
  *

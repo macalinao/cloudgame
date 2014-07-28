@@ -5,11 +5,11 @@
  */
 package pw.ian.cloudgame.model.region;
 
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import pw.ian.cloudgame.model.Model;
 import com.sk89q.worldedit.Vector;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Location;
 import org.bukkit.World;
+import pw.ian.cloudgame.model.Model;
 
 /**
  *

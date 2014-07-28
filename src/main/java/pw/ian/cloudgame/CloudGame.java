@@ -1,15 +1,15 @@
 package pw.ian.cloudgame;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import pw.ian.cloudgame.command.Commands;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
+import pw.ian.albkit.command.Commands;
+import pw.ian.cloudgame.commands.arena.ArenaCommand;
 import pw.ian.cloudgame.game.GameManager;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.GameplayManager;
-import pw.ian.cloudgame.playerstate.PlayerStateManager;
 import pw.ian.cloudgame.model.ModelManager;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
-import pw.ian.cloudgame.commands.arena.ArenaCommand;
+import pw.ian.cloudgame.playerstate.PlayerStateManager;
 
 public class CloudGame extends JavaPlugin {
 
@@ -37,7 +37,6 @@ public class CloudGame extends JavaPlugin {
         modelManager.load();
 
         gameplayManager = new GameplayManager(this);
-        gameplayManager.onEnable();
 
         playerStateManager = new PlayerStateManager(this);
         playerStateManager.setupStateRestoreQueueProcessTask();
@@ -74,10 +73,6 @@ public class CloudGame extends JavaPlugin {
 
     public void addGameplay(Gameplay<?> gameplay) {
         gameplayManager.addGameplay(gameplay);
-
-        if (gameplayManager != null && gameplayManager.isEnabled()) {
-            gameplayManager.enableAdditionalGameplays();
-        }
     }
 
     public static WorldGuardPlugin wg() {

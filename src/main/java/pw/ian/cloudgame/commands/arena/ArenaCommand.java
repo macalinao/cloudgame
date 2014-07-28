@@ -5,8 +5,8 @@
  */
 package pw.ian.cloudgame.commands.arena;
 
+import pw.ian.albkit.command.TreeCommandHandler;
 import pw.ian.cloudgame.CloudGame;
-import pw.ian.cloudgame.command.TreeCommandHandler;
 
 /**
  *
