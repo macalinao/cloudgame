@@ -19,6 +19,20 @@ group = pkg.substring(0, pkg.lastIndexOf('.'))
 archivesBaseName = plugin.name.toLowerCase()
 version = project.version
 
+// Default parameters
+if (!project.hasProperty('ossrhUsername')) {
+  ext.ossrhUsername = '';
+}
+if (!project.hasProperty('ossrhPassword')) {
+  ext.ossrhPassword = '';
+}
+if (!project.hasProperty('testPluginDir')) {
+  ext.testPluginDir = '';
+}
+if (!project.hasProperty('remotePluginDir')) {
+  ext.remotePluginDir = '';
+}
+
 buildscript {
   repositories {
     mavenCentral()
