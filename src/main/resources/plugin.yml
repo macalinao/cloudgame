@@ -5,7 +5,8 @@ author: AlbireoX
 website: http://ian.pw/
 
 main: pw.ian.cloudgame.CloudGame
-depend: [WorldGuard, BarAPI]
+depend: [WorldGuard]
+softdepend: [BarAPI]
 
 commands:
     arena:
