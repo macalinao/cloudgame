@@ -1,0 +1,69 @@
+/**
+ * For publishing plugins to a Sonatype Nexus repo.
+ * Some people might not want to do this, so that's why it's
+ * in a separate file.
+ */
+// Default parameters
+if (!project.hasProperty('ossrhUsername')) {
+  ext.ossrhUsername = '';
+}
+if (!project.hasProperty('ossrhPassword')) {
+  ext.ossrhPassword = '';
+}
+if (!project.hasProperty('testPluginDir')) {
+  ext.testPluginDir = '';
+}
+if (!project.hasProperty('remotePluginDir')) {
+  ext.remotePluginDir = '';
+}
+
+
+javadoc {
+  failOnError = false
+}
+
+task javadocJar(type: Jar) {
+  classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+  classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+  archives javadocJar, sourcesJar
+}
+
+if (project.hasProperty('signing.keyId')) { // Sign if we have signing stuff
+  apply plugin: 'signing'
+  signing {
+    sign configurations.archives
+  }
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment {
+        MavenDeployment deployment -> signing.signPom(deployment)
+      }
+
+      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      pom.project {
+        name plugin.name
+        packaging 'jar'
+        description plugin.description
+        url plugin.url
+      }
+    }
+  }
+}
