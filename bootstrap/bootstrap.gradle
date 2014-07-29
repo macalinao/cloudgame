@@ -136,6 +136,10 @@ task copyPlugin(type: Copy) {
 }
 
 // Publishing stuff
+javadoc {
+  failOnError = false
+}
+
 task javadocJar(type: Jar) {
   classifier = 'javadoc'
     from javadoc
