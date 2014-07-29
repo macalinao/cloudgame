@@ -7,6 +7,18 @@ import org.apache.tools.ant.filters.ReplaceTokens
 apply plugin: 'java'
 apply plugin: 'maven'
 
+buildscript {
+  repositories {
+    mavenCentral()
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'org.yaml:snakeyaml:1.5'
+    classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.7.1'
+  }
+}
+
 // Plugin information loaded from the YML file
 ext.plugin = (new Yaml()).load(new FileInputStream(new File(projectDir, "src/main/resources/plugin.yml")))
 
@@ -30,18 +42,6 @@ if (!project.hasProperty('testPluginDir')) {
 }
 if (!project.hasProperty('remotePluginDir')) {
   ext.remotePluginDir = '';
-}
-
-buildscript {
-  repositories {
-    mavenCentral()
-    jcenter()
-  }
-
-  dependencies {
-    classpath 'org.yaml:snakeyaml:1.5'
-    classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.7.1'
-  }
 }
 
 repositories {
