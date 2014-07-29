@@ -10,6 +10,7 @@ buildscript {
 
 project.version = '0.1.0-SNAPSHOT'
 apply from: 'bootstrap/bootstrap.gradle'
+apply from: 'bootstrap/albkit.gradle'
 
 defaultTasks 'clean', 'copyPlugin', 'install'
 
