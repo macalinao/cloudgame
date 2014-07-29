@@ -10,13 +10,6 @@ if (!project.hasProperty('ossrhUsername')) {
 if (!project.hasProperty('ossrhPassword')) {
   ext.ossrhPassword = '';
 }
-if (!project.hasProperty('testPluginDir')) {
-  ext.testPluginDir = '';
-}
-if (!project.hasProperty('remotePluginDir')) {
-  ext.remotePluginDir = '';
-}
-
 
 javadoc {
   failOnError = false
