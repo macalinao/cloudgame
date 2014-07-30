@@ -1,7 +1,6 @@
 /**
  * bukkit-bootstrap (c) 2013-2014 Ian Macalinao
  */
-import org.apache.tools.ant.filters.ReplaceTokens
 
 apply plugin: 'java'
 apply plugin: 'maven'

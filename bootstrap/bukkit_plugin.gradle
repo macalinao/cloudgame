@@ -9,6 +9,7 @@ buildscript {
 }
 
 import org.yaml.snakeyaml.Yaml
+import org.apache.tools.ant.filters.ReplaceTokens
 
 // Plugin information loaded from the YML file
 ext.plugin = (new Yaml()).load(new FileInputStream(new File(projectDir, "src/main/resources/plugin.yml")))
