@@ -1,2 +1,3 @@
-# Put your sample config stuff here.
+# Sample config
 ---
+register-commands: true
