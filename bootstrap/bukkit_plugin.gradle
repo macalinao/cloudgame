@@ -42,9 +42,7 @@ task scaffold << {
     filter(ReplaceTokens, tokens: [pkg: pkg, pluginName: mainClass])
   }
 
-  delete {
-    delete 'README.md'
-  }
+  delete 'README.md'
 }
 
 if (!project.hasProperty('testPluginDir')) {
