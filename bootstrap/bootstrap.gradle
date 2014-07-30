@@ -7,6 +7,18 @@ import org.apache.tools.ant.filters.ReplaceTokens
 apply plugin: 'java'
 apply plugin: 'maven'
 
+buildscript {
+  repositories {
+    mavenCentral()
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'org.yaml:snakeyaml:1.5'
+    classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.7.1'
+  }
+}
+
 // Plugin information loaded from the YML file
 ext.plugin = (new Yaml()).load(new FileInputStream(new File(projectDir, "src/main/resources/plugin.yml")))
 
@@ -18,30 +30,11 @@ group = pkg.substring(0, pkg.lastIndexOf('.'))
 archivesBaseName = plugin.name.toLowerCase()
 version = project.version
 
-// Default parameters
-if (!project.hasProperty('ossrhUsername')) {
-  ext.ossrhUsername = '';
-}
-if (!project.hasProperty('ossrhPassword')) {
-  ext.ossrhPassword = '';
-}
 if (!project.hasProperty('testPluginDir')) {
   ext.testPluginDir = '';
 }
 if (!project.hasProperty('remotePluginDir')) {
   ext.remotePluginDir = '';
-}
-
-buildscript {
-  repositories {
-    mavenCentral()
-    jcenter()
-  }
-
-  dependencies {
-    classpath 'org.yaml:snakeyaml:1.5'
-    classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.7.1'
-  }
 }
 
 repositories {
@@ -134,54 +127,3 @@ task copyPlugin(type: Copy) {
   rename jar.archiveName, plugin.name + '.jar'
 }
 
-// Publishing stuff
-javadoc {
-  failOnError = false
-}
-
-task javadocJar(type: Jar) {
-  classifier = 'javadoc'
-    from javadoc
-}
-
-task sourcesJar(type: Jar) {
-  classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-  archives javadocJar, sourcesJar
-}
-
-if (project.hasProperty('signing.keyId')) {
-  apply plugin: 'signing'
-  signing {
-    sign configurations.archives
-  }
-}
-
-
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      beforeDeployment {
-        MavenDeployment deployment -> signing.signPom(deployment)
-      }
-
-      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-        authentication(userName: ossrhUsername, password: ossrhPassword)
-      }
-
-      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-        authentication(userName: ossrhUsername, password: ossrhPassword)
-      }
-
-      pom.project {
-        name plugin.name
-        packaging 'jar'
-        description plugin.description
-        url plugin.url
-      }
-    }
-  }
-}

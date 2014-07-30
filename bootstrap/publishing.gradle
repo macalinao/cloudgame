@@ -1,0 +1,33 @@
+/**
+ * For publishing plugins to a Sonatype Nexus repo.
+ * Some people might not want to do this, so that's why it's
+ * in a separate file.
+ */
+apply plugin: 'nexus'
+
+// Default parameters
+if (!project.hasProperty('ossrhUsername')) {
+  ext.ossrhUsername = '';
+}
+if (!project.hasProperty('ossrhPassword')) {
+  ext.ossrhPassword = '';
+}
+
+javadoc {
+  failOnError = false
+}
+
+if (project.hasProperty('signing.keyId')) { // Sign if we have signing stuff
+  apply plugin: 'signing'
+  signing {
+    sign configurations.archives
+  }
+}
+
+modifyPom { 
+  project {
+    name plugin.name
+    description plugin.description
+    url plugin.url
+  }
+}

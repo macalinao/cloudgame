@@ -1,6 +1,18 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'com.github.jengelman.gradle.plugins:shadow:1.0.2'
+    classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.7.1'
+  }
+}
+
 project.version = '0.1.0-SNAPSHOT'
 apply from: 'bootstrap/bootstrap.gradle'
-apply plugin: 'com.github.johnrengelman.shadow'
+apply from: 'bootstrap/publishing.gradle'
+apply from: 'bootstrap/albkit.gradle'
 
 buildscript {
   repositories {
@@ -27,14 +39,3 @@ dependencies {
 }
 
 defaultTasks 'clean', 'build', 'shadowJar', 'install', 'copyPlugin'
-
-shadowJar {
-  archiveName = jar.archiveName
-  dependencies {
-    include(dependency('pw.ian:albkit:0.1.0-SNAPSHOT'))
-  }
-  relocate 'pw.ian.albkit', 'pw.ian.cloudgame.albkit'
-}
-
-shadowJar.dependsOn build
-uploadArchives.dependsOn shadowJar
