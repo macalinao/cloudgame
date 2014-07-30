@@ -19,7 +19,7 @@ import pw.ian.cloudgame.game.Game;
 public class GameStopCommand extends PlayerCommandHandler {
 
     public GameStopCommand() {
-        super(CloudGame.inst(), "stop");
+        super("stop");
         setDescription("Stops a game in progress.");
         setUsage("/game stop <id>");
         setPermission("mattgame.admin");

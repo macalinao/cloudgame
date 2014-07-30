@@ -6,7 +6,6 @@
 package pw.ian.cloudgame.commands.game;
 
 import pw.ian.albkit.command.TreeCommandHandler;
-import pw.ian.cloudgame.CloudGame;
 
 /**
  *
@@ -15,7 +14,7 @@ import pw.ian.cloudgame.CloudGame;
 public class GameCommand extends TreeCommandHandler {
 
     public GameCommand() {
-        super(CloudGame.inst(), "game");
+        super("game");
         setUsage("/game <subcommand> [args...]");
         setDescription("Handles games.");
     }

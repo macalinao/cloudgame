@@ -21,7 +21,7 @@ import pw.ian.cloudgame.game.Game;
 public class GameJoinCommand extends PlayerCommandHandler {
 
     public GameJoinCommand() {
-        super(CloudGame.inst(), "join");
+        super("join");
         setDescription("Joins a game.");
         setUsage("/game join <id>");
     }

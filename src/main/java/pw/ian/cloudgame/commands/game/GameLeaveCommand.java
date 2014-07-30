@@ -21,7 +21,7 @@ import pw.ian.cloudgame.game.Game;
 public class GameLeaveCommand extends PlayerCommandHandler {
 
     public GameLeaveCommand() {
-        super(CloudGame.inst(), "leave");
+        super("leave");
         setDescription("Leaves a game.");
         setUsage("/game leave");
     }
