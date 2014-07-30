@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/simplyianm/cloudgame.png?label=ready&title=Ready)](https://waffle.io/simplyianm/cloudgame)
 # CloudGame
 A cloud-based minigame framework.
 
