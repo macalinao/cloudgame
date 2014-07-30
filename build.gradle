@@ -10,6 +10,9 @@ buildscript {
 }
 
 project.version = '0.1.0-SNAPSHOT'
+
+ext.albkitVersion = '+'
+
 apply from: 'bootstrap/bootstrap.gradle'
 apply from: 'bootstrap/publishing.gradle'
 apply from: 'bootstrap/bukkit_plugin.gradle'
