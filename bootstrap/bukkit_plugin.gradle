@@ -48,14 +48,25 @@ task scaffold << {
 if (!project.hasProperty('testPluginDir')) {
   ext.testPluginDir = '';
 }
+
 if (!project.hasProperty('remotePluginDir')) {
   ext.remotePluginDir = '';
 }
 
+task testCopy(type: Copy) {
+  description 'Copies the plugin to the test plugin directory.'
+  dependsOn 'copyPlugin'
 
-task testCopy << {
-  cmd("mkdir -p $testPluginDir")
-  cmd("cp $projectDir/build/${plugin.name}.jar $testPluginDir")
+  if (testPluginDir.equals('')) {
+    throw new GradleException('Test plugin directory not specified. To fix this error, specify the "testPluginDir" property in your gradle.properties.')
+  }
+
+  def dir = new File(testPluginDir);
+  dir.mkdirs()
+
+  from "$projectDir/build/"
+  into dir
+  include '*.jar'
 }
 
 task remoteCopy << {
@@ -66,7 +77,6 @@ task copyPlugin(type: Copy) {
   description 'Copy resulting JAR to a nice plugin name'
   dependsOn 'build'
 
-  description 'Copies the plugin from the libs/ directory into the main build directory.'
   from 'build/libs/'
   into 'build/'
   include jar.archiveName

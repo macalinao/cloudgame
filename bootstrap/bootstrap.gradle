@@ -15,13 +15,6 @@ buildscript {
   }
 }
 
-if (!project.hasProperty('testPluginDir')) {
-  ext.testPluginDir = '';
-}
-if (!project.hasProperty('remotePluginDir')) {
-  ext.remotePluginDir = '';
-}
-
 repositories {
   mavenCentral()
   maven {
@@ -39,23 +32,6 @@ processResources {
     filter { String line ->
       line.replace('$version', 'v' + cmd('git describe --always --dirty=-dirty'))
     }
-  }
-}
-
-/**
- * Executes a command and returns its output.
- */
-def cmd(str) {
-  try {
-    def output = new ByteArrayOutputStream()
-    exec {
-      commandLine str.split(' ')
-      standardOutput = output
-    }
-    return output.toString().trim()
-  }
-  catch (ignored) {
-    return null;
   }
 }
 
