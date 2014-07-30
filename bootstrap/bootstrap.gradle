@@ -34,8 +34,8 @@ dependencies {
 processResources {
   from('src/main/resources') {
     include '*'
-    filter { String line ->
-      line.replace('$version', version + '-g' + repo.head().abbreviatedId);
+    filter {
+      it.replace('$version', version + '-g' + repo.head().abbreviatedId);
     }
   }
 }

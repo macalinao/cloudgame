@@ -39,10 +39,19 @@ task scaffold << {
     include 'PluginBootstrap.java'
     rename '.*', plugin.name + '.java'
 
-    filter(ReplaceTokens, tokens: [pkg: pkg, pluginName: mainClass])
+    filter(ReplaceTokens, tokens: [pkg: pkg, mainClass: mainClass])
   }
 
   delete 'README.md'
+
+  copy {
+    from 'bootstrap/'
+    into '.'
+    include 'README.tmpl.md'
+    rename 'README.tmpl.md', 'README.md'
+
+    filter(ReplaceTokens, tokens: [name: plugin.name, description: plugin.description, author: plugin.author])
+  }
 }
 
 if (!project.hasProperty('testPluginDir')) {
