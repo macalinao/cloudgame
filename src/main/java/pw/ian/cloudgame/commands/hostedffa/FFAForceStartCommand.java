@@ -20,7 +20,7 @@ public class FFAForceStartCommand extends PlayerCommandHandler {
     private final HostedFFA ffa;
 
     public FFAForceStartCommand(HostedFFA ffa) {
-        super("forcestart");
+        super(ffa.getPlugin(), "forcestart");
         this.ffa = ffa;
         setDescription("Bypasses the " + ffa.getName() + " countdown.");
         setUsage("/" + ffa.getId() + " forcestart");

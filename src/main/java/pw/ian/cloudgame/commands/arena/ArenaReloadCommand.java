@@ -22,7 +22,7 @@ public class ArenaReloadCommand extends PlayerCommandHandler {
     private final CloudGame plugin;
 
     public ArenaReloadCommand(CloudGame plugin) {
-        super("reload");
+        super(plugin, "reload");
         this.plugin = plugin;
         setUsage("/arena reload");
         setDescription("Reloads all arenas from the arenas.yml");

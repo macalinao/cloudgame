@@ -22,7 +22,7 @@ public class ArenaListSpawnsCommand extends PlayerCommandHandler {
     private final CloudGame plugin;
 
     public ArenaListSpawnsCommand(CloudGame plugin) {
-        super("listspawns");
+        super(plugin, "listspawns");
         this.plugin = plugin;
         setUsage("/arena listspawns");
         setDescription("Lists the spawns of an arena.");

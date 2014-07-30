@@ -28,7 +28,7 @@ public class ArenaCreateCommand extends CommandHandler {
     private final CloudGame cg;
 
     public ArenaCreateCommand(CloudGame plugin) {
-        super("create");
+        super(plugin, "create");
         this.cg = plugin;
         setUsage("/arena create <region> [world=current]");
         setDescription("Creates an arena.");

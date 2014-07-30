@@ -8,6 +8,7 @@ package pw.ian.cloudgame.commands.hostedffa;
 import org.bukkit.entity.Player;
 import pw.ian.albkit.command.PlayerCommandHandler;
 import pw.ian.cloudgame.game.Game;
+import pw.ian.cloudgame.gameplay.core.HostGameMaster;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
 import pw.ian.cloudgame.model.arena.Arena;
@@ -23,7 +24,7 @@ public class FFAStartCommand extends PlayerCommandHandler {
     private final HostedFFA ffa;
 
     public FFAStartCommand(HostedFFA ffa) {
-        super("start");
+        super(ffa.getPlugin(), "start");
         this.ffa = ffa;
         setDescription("Starts a " + ffa.getName() + " if there isn't already one going on.");
         setUsage("/" + ffa.getId() + " start <arena> [mins]");
@@ -75,7 +76,7 @@ public class FFAStartCommand extends PlayerCommandHandler {
         }
 
         ffa.setGame(game);
-        game.getState().setHost(player);
+        game.setGameMaster(new HostGameMaster(player.getUniqueId()));
         game.getState().setMins(mins);
         player.teleport(game.getArena().getNextSpawn());
         if (mins == TWELVE_YEARS_A_GAME) {

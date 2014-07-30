@@ -8,6 +8,8 @@ package pw.ian.cloudgame.gameplay;
 import java.util.HashMap;
 import java.util.Map;
 import pw.ian.cloudgame.CloudGame;
+import pw.ian.cloudgame.gameplay.core.CoreGameListener;
+import pw.ian.cloudgame.gameplay.core.SpectatorListener;
 
 /**
  *

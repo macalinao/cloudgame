@@ -8,6 +8,7 @@ package pw.ian.cloudgame.game;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import pw.ian.cloudgame.events.GameStopEvent;
+import pw.ian.cloudgame.gameplay.GameMaster;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.State;
 import pw.ian.cloudgame.model.arena.Arena;
@@ -27,6 +28,8 @@ public class Game<T extends State> {
     private final T state;
 
     private final Stats stats;
+
+    private GameMaster master;
 
     Game(Gameplay<T> gameplay, Arena arena) {
         this.gameplay = gameplay;
@@ -49,6 +52,14 @@ public class Game<T extends State> {
 
     public Stats getStats() {
         return stats;
+    }
+
+    public GameMaster getGameMaster() {
+        return master;
+    }
+
+    public void setGameMaster(final GameMaster master) {
+        this.master = master;
     }
 
     /**

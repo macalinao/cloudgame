@@ -17,7 +17,7 @@ public class ArenaCommand extends TreeCommandHandler {
     private final CloudGame plugin;
 
     public ArenaCommand(CloudGame cloudGame) {
-        super("arena");
+        super(cloudGame, "arena");
         this.plugin = cloudGame;
         setUsage("/arena <subcommand> [args]");
         setDescription("Allows managing arenas.");

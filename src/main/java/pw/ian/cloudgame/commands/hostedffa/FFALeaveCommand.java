@@ -20,7 +20,7 @@ public class FFALeaveCommand extends PlayerCommandHandler {
     private final HostedFFA ffa;
 
     public FFALeaveCommand(HostedFFA ffa) {
-        super("leave");
+        super(ffa.getPlugin(), "leave");
         this.ffa = ffa;
         setDescription("Leaves the " + ffa.getName() + ".");
         setUsage("/" + ffa.getId() + " leave");

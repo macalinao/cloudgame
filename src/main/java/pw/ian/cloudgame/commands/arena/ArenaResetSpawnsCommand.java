@@ -21,7 +21,7 @@ public class ArenaResetSpawnsCommand extends PlayerCommandHandler {
     private final CloudGame plugin;
 
     public ArenaResetSpawnsCommand(CloudGame plugin) {
-        super("resetspawns");
+        super(plugin, "resetspawns");
         this.plugin = plugin;
         setUsage("/arena resetspawns");
         setDescription("Resets the spawns of the arena.");

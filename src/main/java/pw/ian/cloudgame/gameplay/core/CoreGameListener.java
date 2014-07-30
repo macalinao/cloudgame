@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pw.ian.cloudgame.gameplay;
+package pw.ian.cloudgame.gameplay.core;
 
 import java.util.UUID;
 import org.bukkit.Bukkit;
@@ -17,6 +17,9 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import pw.ian.cloudgame.events.GameQuitEvent;
 import pw.ian.cloudgame.game.Game;
+import pw.ian.cloudgame.gameplay.GameListener;
+import pw.ian.cloudgame.gameplay.Gameplay;
+import pw.ian.cloudgame.gameplay.State;
 import pw.ian.cloudgame.stats.Death;
 
 /**

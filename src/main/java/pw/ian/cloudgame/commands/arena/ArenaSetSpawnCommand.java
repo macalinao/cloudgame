@@ -21,7 +21,7 @@ public class ArenaSetSpawnCommand extends PlayerCommandHandler {
     private final CloudGame plugin;
 
     public ArenaSetSpawnCommand(CloudGame plugin) {
-        super("setspawn");
+        super(plugin, "setspawn");
         this.plugin = plugin;
         setUsage("/arena setspawn");
         setDescription("Sets the spawn of the arena.");

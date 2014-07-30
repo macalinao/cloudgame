@@ -19,7 +19,7 @@ public class FFASetSpawnCommand extends PlayerCommandHandler {
     private final HostedFFA ffa;
 
     public FFASetSpawnCommand(HostedFFA ffa) {
-        super("setspawn");
+        super(ffa.getPlugin(), "setspawn");
         this.ffa = ffa;
         setDescription("Sets a spawn on the " + ffa.getName() + " map.");
         setUsage("/" + ffa.getId() + " setspawn <hill region> <main region>");
