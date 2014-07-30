@@ -1,24 +1,30 @@
 /**
  * Adds Albkit to the shadow task.
  * It is recommended to use 'clean', 'build', 'shadowJar', 'install', 'copyPlugin'
+ * Depends on bukkit_plugin.gradle.
  */
 apply plugin: 'com.github.johnrengelman.shadow'
+
+if (!project.hasProperty('albkitVersion')) {
+  ext.albkitVersion = '+'
+}
 
 repositories {
   maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' } // Sonatype snapshots
 }
 
 dependencies {
-  compile 'pw.ian:albkit:0.1.0-SNAPSHOT'
+  compile 'pw.ian:albkit:' + albkitVersion
 }
 
 shadowJar {
   archiveName = jar.archiveName
   dependencies {
-    include(dependency('pw.ian:albkit:0.1.0-SNAPSHOT'))
+    include(dependency('pw.ian:albkit'))
   }
-  relocate 'pw.ian.albkit', 'pw.ian.cloudgame.albkit'
+  relocate 'pw.ian.albkit', pkg + '.albkit'
 }
 
+copyPlugin.dependsOn shadowJar
 shadowJar.dependsOn build
 uploadArchives.dependsOn shadowJar

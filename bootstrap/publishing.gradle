@@ -9,10 +9,3 @@ javadoc {
   failOnError = false
 }
 
-modifyPom { 
-  project {
-    name plugin.name
-    description plugin.description
-    url plugin.url
-  }
-}
