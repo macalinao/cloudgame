@@ -16,16 +16,16 @@ public class GameCommand extends TreeCommandHandler {
 
     private final CloudGame plugin;
 
-    public GameCommand(CloudGame cloudGame) {
-        super(cloudGame, "game");
-        this.plugin = cloudGame;
+    public GameCommand(CloudGame plugin) {
+        super(plugin, "game");
+        this.plugin = plugin;
         setUsage("/game <subcommand> [args...]");
         setDescription("Handles games.");
     }
 
     @Override
     public void setupSubcommands() {
-        // Todo
+        
     }
 
 }
