@@ -57,7 +57,7 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
             return;
         }
 
-        if (game.getGameMaster() instanceof Host && p.getUniqueId().equals(((Host) game.getGameMaster()).getHost())) {
+        if (game.getGameMaster() instanceof Host && p.getUniqueId().equals(((Host) game.getGameMaster()).getUniqueId())) {
             game.getGameplay().sendGameMessage(p, "You can't join the game if you are the host!");
             return;
         }
