@@ -14,18 +14,15 @@ import pw.ian.cloudgame.CloudGame;
  */
 public class GameCommand extends TreeCommandHandler {
 
-    private final CloudGame plugin;
-
-    public GameCommand(CloudGame plugin) {
-        super(plugin, "game");
-        this.plugin = plugin;
+    public GameCommand() {
+        super(CloudGame.inst(), "game");
         setUsage("/game <subcommand> [args...]");
         setDescription("Handles games.");
     }
 
     @Override
     public void setupSubcommands() {
-        
+        addSubcommand(new GameJoinCommand());
     }
 
 }
