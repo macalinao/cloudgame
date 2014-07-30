@@ -21,5 +21,6 @@ shadowJar {
   relocate 'pw.ian.albkit', pkg + '.albkit'
 }
 
+copyPlugin.dependsOn shadowJar
 shadowJar.dependsOn build
 uploadArchives.dependsOn shadowJar
