@@ -5,14 +5,6 @@
  */
 apply plugin: 'nexus'
 
-// Default parameters
-if (!project.hasProperty('ossrhUsername')) {
-  ext.ossrhUsername = '';
-}
-if (!project.hasProperty('ossrhPassword')) {
-  ext.ossrhPassword = '';
-}
-
 javadoc {
   failOnError = false
 }
