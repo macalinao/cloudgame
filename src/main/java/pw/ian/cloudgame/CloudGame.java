@@ -36,7 +36,7 @@ public class CloudGame extends JavaPlugin {
 
         if (getConfig().getBoolean("register-commands", true)) {
             Commands.registerCommand(this, new ArenaCommand(this));
-            Commands.registerCommand(this, new GameCommand(this));
+            Commands.registerCommand(this, new GameCommand());
         }
 
         modelManager = new ModelManager(this);
