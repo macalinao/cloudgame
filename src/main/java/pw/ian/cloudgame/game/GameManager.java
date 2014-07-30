@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.events.GameStopEvent;
+import pw.ian.cloudgame.gameplay.GameMaster;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.State;
 import pw.ian.cloudgame.model.arena.Arena;
@@ -36,9 +37,11 @@ public class GameManager {
      * @param <T>
      * @param gameplay
      * @param arena
-     * @return Null if the game could not be created due to canUse restrictions.
+     * @param master The master of the game
+     * @return Null if the game could not be created due to canUse restrictions
+     * or there is already a game at the arena.
      */
-    public <T extends State> Game<T> createGame(Gameplay<T> gameplay, Arena arena) {
+    public <T extends State> Game<T> createGame(Gameplay<T> gameplay, Arena arena, GameMaster master) {
         if (!gameplay.canUse(arena)) {
             return null;
         }
@@ -47,7 +50,7 @@ public class GameManager {
             return null;
         }
 
-        Game<T> game = new Game<>(gameplay, arena);
+        Game<T> game = new Game<>(gameplay, arena, master);
         games.put(arena, game);
         gameplay.setup(game);
         return game;

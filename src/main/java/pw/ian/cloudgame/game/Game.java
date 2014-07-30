@@ -25,15 +25,16 @@ public class Game<T extends State> {
 
     private final Arena arena;
 
+    private final GameMaster master;
+
     private final T state;
 
     private final Stats stats;
 
-    private GameMaster master;
-
-    Game(Gameplay<T> gameplay, Arena arena) {
+    Game(Gameplay<T> gameplay, Arena arena, GameMaster master) {
         this.gameplay = gameplay;
         this.arena = arena;
+        this.master = master;
         state = gameplay.newState();
         stats = new Stats();
     }
@@ -56,10 +57,6 @@ public class Game<T extends State> {
 
     public GameMaster getGameMaster() {
         return master;
-    }
-
-    public void setGameMaster(final GameMaster master) {
-        this.master = master;
     }
 
     /**

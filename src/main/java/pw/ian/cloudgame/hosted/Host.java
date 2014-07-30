@@ -25,6 +25,15 @@ public class Host implements GameMaster {
     }
 
     /**
+     * C'tor
+     *
+     * @param player The player
+     */
+    public Host(Player player) {
+        this(player.getUniqueId());
+    }
+
+    /**
      * Gets the unique id of this Host.
      *
      * @return uuid

@@ -54,7 +54,7 @@ public class FFAStartCommand extends PlayerCommandHandler {
             return;
         }
 
-        Game<HostedFFAState> game = ffa.getPlugin().getGameManager().createGame(ffa, arena);
+        Game<HostedFFAState> game = ffa.getPlugin().getGameManager().createGame(ffa, arena, new Host(player));
         if (game == null) {
             ffa.sendGameMessage(player, ffa.getName() + " is not supported on the given arena.");
             return;
@@ -76,7 +76,6 @@ public class FFAStartCommand extends PlayerCommandHandler {
         }
 
         ffa.setGame(game);
-        game.setGameMaster(new Host(player.getUniqueId()));
         game.getState().setMins(mins);
         player.teleport(game.getArena().getNextSpawn());
         if (mins == TWELVE_YEARS_A_GAME) {
