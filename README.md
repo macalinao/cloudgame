@@ -2,6 +2,7 @@
 A cloud-based minigame framework.
 
 [![Stories in Ready](https://badge.waffle.io/simplyianm/cloudgame.png?label=ready&title=Ready)](https://waffle.io/simplyianm/cloudgame)
+[![Build Status](https://travis-ci.org/simplyianm/cloudgame.svg?branch=master)](https://travis-ci.org/simplyianm/cloudgame)
 
 ## Compiling
 CloudGame uses Gradle to manage building the JAR. To compile, just run either `gradlew` (*nix) or `gradlew.bat` (Windows) and everything should get built. The JAR should end up as `build/CloudGame.jar`.
