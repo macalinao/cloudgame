@@ -22,7 +22,7 @@ public class ArenaInfoCommand extends PlayerCommandHandler {
     private final CloudGame plugin;
 
     public ArenaInfoCommand(CloudGame plugin) {
-        super("info");
+        super(plugin, "info");
         this.plugin = plugin;
         setUsage("/arena info");
         setDescription("Gets information about the arena.");

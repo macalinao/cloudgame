@@ -21,7 +21,7 @@ public class FFASetRegionCommand extends PlayerCommandHandler {
     private final HostedFFA ffa;
 
     public FFASetRegionCommand(HostedFFA ffa) {
-        super("setregion");
+        super(ffa.getPlugin(), "setregion");
         this.ffa = ffa;
         setDescription("Sets a " + ffa.getName() + " arena.");
         setUsage("/" + ffa.getId() + " setregion <arena>");

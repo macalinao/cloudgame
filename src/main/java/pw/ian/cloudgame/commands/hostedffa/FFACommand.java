@@ -18,7 +18,7 @@ public class FFACommand extends TreeCommandHandler {
     private final HostedFFA ffa;
 
     public FFACommand(HostedFFA ffa) {
-        super(ffa.getId());
+        super(ffa.getPlugin(), ffa.getId());
         this.ffa = ffa;
         setColorScheme(ffa.getColorScheme());
     }

@@ -23,7 +23,7 @@ public class FFASpectateCommand extends PlayerCommandHandler {
     private final HostedFFA ffa;
 
     public FFASpectateCommand(HostedFFA ffa) {
-        super("spectate");
+        super(ffa.getPlugin(), "spectate");
         this.ffa = ffa;
         setDescription("Spectates the " + ffa.getName() + ".");
         setUsage("/" + ffa.getId() + " spectate");

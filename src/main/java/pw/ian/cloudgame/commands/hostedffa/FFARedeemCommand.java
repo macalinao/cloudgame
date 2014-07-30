@@ -20,7 +20,7 @@ public class FFARedeemCommand extends PlayerCommandHandler {
     private final HostedFFA ffa;
 
     public FFARedeemCommand(HostedFFA ffa) {
-        super("redeem");
+        super(ffa.getPlugin(), "redeem");
         this.ffa = ffa;
         setDescription("Redeems a " + ffa.getName() + " prize.");
         setUsage("/" + ffa.getId() + " redeem");

@@ -18,8 +18,6 @@ import pw.ian.cloudgame.gameplay.FFAState;
  */
 public class HostedFFAState extends FFAState {
 
-    private UUID host;
-
     private long start = -1;
 
     private boolean over = false;
@@ -27,14 +25,6 @@ public class HostedFFAState extends FFAState {
     private int mins;
 
     private boolean provideArmor;
-
-    public Player getHost() {
-        return Bukkit.getPlayer(host);
-    }
-
-    public void setHost(Player player) {
-        host = player.getUniqueId();
-    }
 
     public boolean isStarted() {
         return start != -1;
@@ -58,10 +48,6 @@ public class HostedFFAState extends FFAState {
         List<Player> participants = new ArrayList<>();
         participants.addAll(getSpectators());
         participants.addAll(getPlayers());
-        Player host = getHost();
-        if (host != null) {
-            participants.add(host);
-        }
         return participants;
     }
 

@@ -18,7 +18,7 @@ public class FFAStopCommand extends PlayerCommandHandler {
     private final HostedFFA ffa;
 
     public FFAStopCommand(HostedFFA ffa) {
-        super("stop");
+        super(ffa.getPlugin(), "stop");
         this.ffa = ffa;
         setDescription("Stops the " + ffa.getName() + " in progress.");
         setUsage("/" + ffa.getId() + " stop");
