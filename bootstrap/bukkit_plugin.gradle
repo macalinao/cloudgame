@@ -55,10 +55,11 @@ if (!project.hasProperty('remotePluginDir')) {
 
 task testCopy(type: Copy) {
   description 'Copies the plugin to the test plugin directory.'
-  dependsOn 'copyPlugin'
 
-  if (testPluginDir.equals('')) {
-    throw new GradleException('Test plugin directory not specified. To fix this error, specify the "testPluginDir" property in your gradle.properties.')
+  doFirst {
+    if (testPluginDir.equals('')) {
+      throw new GradleException('Test plugin directory not specified. To fix this error, specify the "testPluginDir" property in your gradle.properties.')
+    }
   }
 
   def dir = new File(testPluginDir);
@@ -90,3 +91,5 @@ modifyPom {
     url plugin.url
   }
 }
+
+testCopy.dependsOn copyPlugin
