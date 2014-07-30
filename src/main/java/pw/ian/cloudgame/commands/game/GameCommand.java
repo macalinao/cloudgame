@@ -23,6 +23,7 @@ public class GameCommand extends TreeCommandHandler {
     @Override
     public void setupSubcommands() {
         addSubcommand(new GameJoinCommand());
+        addSubcommand(new GameLeaveCommand());
     }
 
 }

@@ -26,7 +26,6 @@ public class FFACommand extends TreeCommandHandler {
     @Override
     public void setupSubcommands() {
         addSubcommand("forcestart", new FFAForceStartCommand(ffa));
-        addSubcommand("leave", new FFALeaveCommand(ffa));
         addSubcommand("redeem", new FFARedeemCommand(ffa));
         addSubcommand("spectate", new FFASpectateCommand(ffa));
         addSubcommand("start", new FFAStartCommand(ffa));
