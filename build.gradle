@@ -39,7 +39,6 @@ dependencies {
   compile 'me.confuser:BarAPI:3.0'
   compile 'com.sk89q:worldedit:5.6.2'
   compile 'com.sk89q:worldguard:5.9'
-  compile 'pw.ian:albkit:0.1.0-SNAPSHOT'
 }
 
 defaultTasks 'clean', 'build', 'shadowJar', 'install', 'copyPlugin'
