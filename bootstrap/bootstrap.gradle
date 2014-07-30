@@ -1,19 +1,24 @@
 /**
  * bukkit-bootstrap (c) 2013-2014 Ian Macalinao
  */
-
-apply plugin: 'java'
-apply plugin: 'maven'
-
 buildscript {
   repositories {
+    mavenCentral()
     jcenter()
   }
 
   dependencies {
+    classpath 'org.ajoberstar:gradle-git:0.9.0'
     classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.7.1'
   }
 }
+
+import org.ajoberstar.grgit.*
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+ext.repo = Grgit.open(project.file('.'))
 
 repositories {
   mavenCentral()
@@ -30,7 +35,7 @@ processResources {
   from('src/main/resources') {
     include '*'
     filter { String line ->
-      line.replace('$version', 'v' + cmd('git describe --always --dirty=-dirty'))
+      line.replace('$version', version + '-g' + repo.head().abbreviatedId);
     }
   }
 }
