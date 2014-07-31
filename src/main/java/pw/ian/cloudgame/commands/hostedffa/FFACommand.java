@@ -28,6 +28,5 @@ public class FFACommand extends TreeCommandHandler {
         addSubcommand("forcestart", new FFAForceStartCommand(ffa));
         addSubcommand("redeem", new FFARedeemCommand(ffa));
         addSubcommand("spectate", new FFASpectateCommand(ffa));
-        addSubcommand("start", new FFAStartCommand(ffa));
     }
 }
