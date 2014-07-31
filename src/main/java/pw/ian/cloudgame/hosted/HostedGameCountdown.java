@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pw.ian.cloudgame.gameplay.hostedffa;
+package pw.ian.cloudgame.hosted;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,13 +13,14 @@ import org.bukkit.entity.Player;
 import pw.ian.cloudgame.events.GameStartEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Timer;
+import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
 
 /**
  * Announces the game and starts it when the time is up.
  *
  * @param <T>
  */
-public class HostedFFAAnnouncerTask<T extends HostedFFAState> extends Timer<T> {
+public class HostedGameCountdown<T extends HostedFFAState> extends Timer<T> {
 
     private static final Map<Integer, String> messages = new HashMap<>();
 
@@ -33,7 +34,7 @@ public class HostedFFAAnnouncerTask<T extends HostedFFAState> extends Timer<T> {
 
     private final Game<T> game;
 
-    public HostedFFAAnnouncerTask(Game<T> game) {
+    public HostedGameCountdown(Game<T> game) {
         super(game, messages);
         this.game = game;
     }
