@@ -24,8 +24,6 @@ import pw.ian.cloudgame.gameplay.hostedffa.listeners.FFAGamePlayerListener;
  */
 public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
 
-    private Game<T> game;
-
     private final Map<Winner, String> prizes = new HashMap<>();
 
     protected HostedFFA(CloudGame plugin, String name) {
@@ -45,18 +43,10 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
         (new HostedFFAAnnouncerTask<>(g)).runTimer();
     }
 
-    public Game<T> getGame() {
-        return game;
-    }
-
-    public void setGame(Game<T> game) {
-        this.game = game;
-    }
-
     /**
      * Adds the winner to the list of people who deserve prizes.
      *
-     * @param p
+     * @param w
      * @param type
      */
     public void addPrize(Winner w, String type) {
@@ -66,7 +56,7 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
     /**
      * Tries to redeem a prize.
      *
-     * @param w
+     * @param p
      * @return
      */
     public boolean redeemPrize(Player p) {

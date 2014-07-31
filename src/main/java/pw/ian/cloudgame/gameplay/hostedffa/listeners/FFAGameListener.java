@@ -112,7 +112,6 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
         }
         game.getState().setOver();
         getGameplay().getPlugin().getGameManager().removeGame(game);
-        ((HostedFFA) getGameplay()).setGame(null);
     }
 
 }

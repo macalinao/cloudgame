@@ -17,7 +17,7 @@ import pw.ian.cloudgame.model.region.Region;
  * @author ian
  * @param <T> The type of state
  */
-public class GameListener<T extends State> implements Listener {
+@SuppressWarnings("ALL") public class GameListener<T extends State> implements Listener {
 
     private final Gameplay<T> gameplay;
 
