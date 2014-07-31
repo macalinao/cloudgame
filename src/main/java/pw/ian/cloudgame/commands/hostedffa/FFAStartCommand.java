@@ -33,11 +33,6 @@ public class FFAStartCommand extends PlayerCommandHandler {
 
     @Override
     public void onCommand(Player player, String[] args) {
-        if (!player.hasPermission("mattmg.admin")) {
-            ffa.sendGameMessage(player, "You can't use this command.");
-            return;
-        }
-
         if (args.length == 0) {
             sendUsageMessage(player);
             return;
