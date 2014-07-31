@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import pw.ian.albkit.command.Commands;
 import pw.ian.cloudgame.commands.arena.ArenaCommand;
+import pw.ian.cloudgame.commands.game.GameCommand;
 import pw.ian.cloudgame.game.GameManager;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.GameplayManager;
@@ -31,7 +32,12 @@ public class CloudGame extends JavaPlugin {
     public void onEnable() {
         i = this;
 
-        Commands.registerCommand(this, new ArenaCommand(this));
+        saveDefaultConfig();
+
+        if (getConfig().getBoolean("register-commands", true)) {
+            Commands.registerCommand(this, new ArenaCommand(this));
+            Commands.registerCommand(this, new GameCommand());
+        }
 
         modelManager = new ModelManager(this);
         modelManager.load();

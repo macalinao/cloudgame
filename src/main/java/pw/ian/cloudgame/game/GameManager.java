@@ -63,6 +63,16 @@ public class GameManager {
     }
 
     /**
+     * Gets the game at a certain identifier (fuzzy).
+     *
+     * @param fuzzy Fuzzy
+     * @return The Game, or null
+     */
+    public Game gameAt(String fuzzy) {
+        return gameAt(plugin.getModelManager().getArenas().find(fuzzy));
+    }
+
+    /**
      * Gets the game at the given arena.
      *
      * @param a

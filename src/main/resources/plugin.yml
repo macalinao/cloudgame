@@ -13,6 +13,9 @@ commands:
         description: Allows management of arenas
         permission: cloudgame.admin
         usage: /arena <subcommand> [args]
+    game:
+        description: Handles games.
+        usage: /game <subcommand> [args]
 
 permissions:
     cloudgame.admin:

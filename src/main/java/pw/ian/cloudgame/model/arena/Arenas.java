@@ -37,6 +37,33 @@ public class Arenas extends Models<Arena> {
     }
 
     /**
+     * Finds an arena.
+     *
+     * @param fuzzy Search string
+     * @return Arena, or null if no matches.
+     */
+    public Arena find(String fuzzy) {
+        Arena bestMatch = findById(fuzzy);
+        if (bestMatch != null) {
+            return bestMatch;
+        }
+
+        if (fuzzy.contains(";")) { // Not found
+            return null;
+        }
+
+        // We are trusting that they have it spelled right; they just have case wrong if anything.
+        for (Arena a : findAll()) {
+            if (a.getMain().getId().equals(fuzzy)) {
+                return a;
+            } else if (a.getMain().getId().equalsIgnoreCase(fuzzy)) {
+                bestMatch = a;
+            }
+        }
+        return bestMatch;
+    }
+
+    /**
      * Finds an arena from a given location.
      *
      * @param location

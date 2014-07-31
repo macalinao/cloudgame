@@ -27,6 +27,7 @@ public abstract class FFAState implements State {
         players.add(p.getUniqueId());
     }
 
+    @Override
     public boolean hasPlayer(Player p) {
         return players.contains(p.getUniqueId());
     }
@@ -51,6 +52,7 @@ public abstract class FFAState implements State {
         spectators.add(p.getUniqueId());
     }
 
+    @Override
     public boolean hasSpectator(Player p) {
         return spectators.contains(p.getUniqueId());
     }
