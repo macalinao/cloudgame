@@ -8,19 +8,19 @@ package pw.ian.cloudgame.hosted;
 import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import pw.ian.albkit.util.Countdown;
+import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.events.GameStartEvent;
 import pw.ian.cloudgame.game.Game;
-import pw.ian.cloudgame.gameplay.Timer;
-import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
+import pw.ian.cloudgame.gameplay.State;
 
 /**
  * Announces the game and starts it when the time is up.
  *
  * @param <T>
  */
-public class HostedGameCountdown<T extends HostedFFAState> extends Timer<T> {
+public class HostedGameCountdown<T extends State> extends Countdown {
 
     private static final Map<Integer, String> messages = new HashMap<>();
 
@@ -35,8 +35,13 @@ public class HostedGameCountdown<T extends HostedFFAState> extends Timer<T> {
     private final Game<T> game;
 
     public HostedGameCountdown(Game<T> game) {
-        super(game, messages);
+        super(messages);
         this.game = game;
+    }
+
+    @Override
+    public boolean checkCondition() {
+        return !(game.getState().isStarted() || game.getState().isOver());
     }
 
     @Override
@@ -45,14 +50,17 @@ public class HostedGameCountdown<T extends HostedFFAState> extends Timer<T> {
             game.getGameplay().sendBanner(p,
                     "A " + game.getGameplay().getName() + " on map $D" + game.getArena().getName() + " $Lis starting in $D" + time + "$L!",
                     "Type $D/" + game.getGameplay().getId() + " join $Lto join $D"
-                    + game.getState().getPlayers().size() + " $Lother players! "
-                    + (game.getState().isProvideArmor() ? "(armor provided)" : ChatColor.RED + "(armor not provided)"));
+                    + game.getState().getPlayers().size() + " $Lother players!");
         }
     }
 
     @Override
     public void onEnd() {
         Bukkit.getPluginManager().callEvent(new GameStartEvent(game));
+    }
+
+    public void runTimer() {
+        runTaskTimer(CloudGame.inst(), 2, 2);
     }
 
 }

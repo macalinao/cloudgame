@@ -43,7 +43,7 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
 
     @Override
     public void setup(Game<T> g) {
-        (new HostedGameCountdown<>(g)).runTimer();
+        (new HostedGameCountdown<T>(g)).runTimer();
     }
 
     public Game<T> getGame() {
