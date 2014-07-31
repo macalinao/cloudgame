@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import pw.ian.albkit.command.PlayerCommandHandler;
 import pw.ian.albkit.command.parser.Arguments;
 import pw.ian.cloudgame.CloudGame;
+import pw.ian.cloudgame.events.GameEventFactory;
 import pw.ian.cloudgame.events.GameStartEvent;
 import pw.ian.cloudgame.game.Game;
 
@@ -40,7 +41,7 @@ public class GameStartCommand extends PlayerCommandHandler {
             return;
         }
 
-        Bukkit.getPluginManager().callEvent(new GameStartEvent(game));
+        GameEventFactory.callGameStartEvent(game);
     }
 
 }

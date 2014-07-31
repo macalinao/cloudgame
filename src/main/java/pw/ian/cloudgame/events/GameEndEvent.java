@@ -19,7 +19,7 @@ public class GameEndEvent extends GameEvent {
 
     private final Winner<?> winner;
 
-    public GameEndEvent(Game<?> game, Winner<?> winner) {
+    GameEndEvent(Game<?> game, Winner<?> winner) {
         super(game);
         this.winner = winner;
     }

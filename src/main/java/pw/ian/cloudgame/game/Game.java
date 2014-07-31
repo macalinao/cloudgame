@@ -7,6 +7,7 @@ package pw.ian.cloudgame.game;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import pw.ian.cloudgame.events.GameEventFactory;
 import pw.ian.cloudgame.events.GameStopEvent;
 import pw.ian.cloudgame.gameplay.GameMaster;
 import pw.ian.cloudgame.gameplay.Gameplay;
@@ -77,7 +78,7 @@ public class Game<T extends State> {
      * Stops this game.
      */
     public void stop() {
-        Bukkit.getPluginManager().callEvent(new GameStopEvent(this));
+        GameEventFactory.callGameStopEvent(this);
     }
 
 }

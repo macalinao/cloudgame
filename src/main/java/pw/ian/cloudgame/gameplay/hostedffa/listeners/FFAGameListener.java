@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import pw.ian.cloudgame.events.GameEndEvent;
+import pw.ian.cloudgame.events.GameEventFactory;
 import pw.ian.cloudgame.events.GameQuitEvent;
 import pw.ian.cloudgame.events.GameStartEvent;
 import pw.ian.cloudgame.events.GameStopEvent;
@@ -98,7 +99,7 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
             }
 
             for (Player player : state.getParticipants()) {
-                Bukkit.getPluginManager().callEvent(new GameQuitEvent(game, player));
+                GameEventFactory.callGameQuitEvent(game, player);
             }
         }
     }

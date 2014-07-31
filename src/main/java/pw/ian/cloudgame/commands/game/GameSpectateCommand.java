@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import pw.ian.albkit.command.PlayerCommandHandler;
 import pw.ian.albkit.command.parser.Arguments;
 import pw.ian.cloudgame.CloudGame;
+import pw.ian.cloudgame.events.GameEventFactory;
 import pw.ian.cloudgame.events.GameSpectateEvent;
 import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
@@ -41,9 +42,9 @@ public class GameSpectateCommand extends PlayerCommandHandler {
         }
 
         if (game.getState().hasSpectator(player)) {
-            Bukkit.getPluginManager().callEvent(new GameUnspectateEvent(game, player));
+            GameEventFactory.callGameSpectateEvent(game, player);
         } else {
-            Bukkit.getPluginManager().callEvent(new GameSpectateEvent(game, player));
+            GameEventFactory.callGameUnspectateEvent(game, player);
         }
     }
 

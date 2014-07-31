@@ -15,6 +15,7 @@ import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
+import pw.ian.cloudgame.events.GameEventFactory;
 import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.GameListener;
@@ -47,7 +48,7 @@ public class SpectatorListener<T extends State> extends GameListener<T> {
             return;
         }
 
-        Bukkit.getPluginManager().callEvent(new GameUnspectateEvent(game, e.getPlayer()));
+        GameEventFactory.callGameUnspectateEvent(game, e.getPlayer());
     }
 
     @EventHandler

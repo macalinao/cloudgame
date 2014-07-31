@@ -15,6 +15,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import pw.ian.cloudgame.events.GameEventFactory;
 import pw.ian.cloudgame.events.GameQuitEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.GameListener;
@@ -52,7 +53,7 @@ public class CoreGameListener<T extends State> extends GameListener<T> {
             return;
         }
 
-        Bukkit.getPluginManager().callEvent(new GameQuitEvent(game, e.getPlayer()));
+        GameEventFactory.callGameQuitEvent(game, e.getPlayer());
     }
 
     @EventHandler
@@ -88,7 +89,7 @@ public class CoreGameListener<T extends State> extends GameListener<T> {
     public void onPlayerQuit(PlayerQuitEvent e) {
         Game<T> g = game(e.getPlayer());
         if (g != null) {
-            Bukkit.getPluginManager().callEvent(new GameQuitEvent(g, e.getPlayer()));
+            GameEventFactory.callGameQuitEvent(g, e.getPlayer());
         }
     }
 

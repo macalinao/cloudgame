@@ -5,13 +5,12 @@
  */
 package pw.ian.cloudgame.commands.game;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import pw.ian.albkit.command.PlayerCommandHandler;
 import pw.ian.albkit.command.parser.Arguments;
 import pw.ian.cloudgame.CloudGame;
-import pw.ian.cloudgame.events.GameLeaveEvent;
+import pw.ian.cloudgame.events.GameEventFactory;
 import pw.ian.cloudgame.game.Game;
 
 /**
@@ -32,7 +31,7 @@ public class GameLeaveCommand extends PlayerCommandHandler {
         if (game == null) {
             player.sendMessage(ChatColor.RED + "You aren't in a game.");
         }
-        Bukkit.getPluginManager().callEvent(new GameLeaveEvent(game, player));
+        GameEventFactory.callGameLeaveEvent(game, player);
     }
 
 }

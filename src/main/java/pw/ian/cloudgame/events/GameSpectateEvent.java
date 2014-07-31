@@ -18,7 +18,7 @@ public class GameSpectateEvent extends GamePlayerEvent {
 
     private static final HandlerList handlers = new HandlerList();
 
-    public GameSpectateEvent(Game<?> game, Player player) {
+    GameSpectateEvent(Game<?> game, Player player) {
         super(game, player);
     }
 

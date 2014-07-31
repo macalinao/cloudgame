@@ -10,6 +10,7 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import pw.ian.cloudgame.events.GameEventFactory;
 import pw.ian.cloudgame.events.GameStartEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Timer;
@@ -51,7 +52,7 @@ public class HostedFFAAnnouncerTask<T extends HostedFFAState> extends Timer<T> {
 
     @Override
     public void onEnd() {
-        Bukkit.getPluginManager().callEvent(new GameStartEvent(game));
+        GameEventFactory.callGameStartEvent(game);
     }
 
 }

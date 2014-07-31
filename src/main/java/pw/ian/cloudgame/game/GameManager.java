@@ -10,6 +10,7 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import pw.ian.cloudgame.CloudGame;
+import pw.ian.cloudgame.events.GameEventFactory;
 import pw.ian.cloudgame.events.GameStopEvent;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.State;
@@ -131,7 +132,7 @@ public class GameManager {
      */
     public void stopAll() {
         for (Game<?> game : games.values()) {
-            Bukkit.getPluginManager().callEvent(new GameStopEvent(game));
+            GameEventFactory.callGameStopEvent(game);
         }
         games.clear();
     }
