@@ -41,7 +41,7 @@ public class GameStartCommand extends PlayerCommandHandler {
             return;
         }
 
-        GameEventFactory.callGameStartEvent(game);
+        game.events().start();
     }
 
 }

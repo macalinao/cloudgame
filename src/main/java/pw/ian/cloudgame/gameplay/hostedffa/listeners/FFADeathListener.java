@@ -8,7 +8,6 @@ package pw.ian.cloudgame.gameplay.hostedffa.listeners;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import pw.ian.cloudgame.events.GameEventFactory;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.GameListener;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
@@ -32,6 +31,6 @@ public class FFADeathListener extends GameListener<HostedFFAState> {
             return;
         }
 
-        GameEventFactory.callGameQuitEvent(game, p);
+        game.events().quit(p);
     }
 }

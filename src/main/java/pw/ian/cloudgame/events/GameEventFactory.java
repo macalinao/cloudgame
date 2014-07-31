@@ -16,87 +16,82 @@ import pw.ian.cloudgame.gameplay.Winner;
  */
 public class GameEventFactory {
 
+    private final Game<?> game;
+
     /**
      * C'tor
+     *
+     * @param game
      */
-    private GameEventFactory() {
+    public GameEventFactory(Game<?> game) {
+        this.game = game;
     }
 
     /**
      * Game end event
      *
-     * @param game
      * @param w
      */
-    public static final void callGameEndEvent(Game<?> game, Winner w) {
+    public void end(Winner w) {
         Bukkit.getPluginManager().callEvent(new GameEndEvent(game, w));
     }
 
     /**
      * Game join event
      *
-     * @param game
      * @param p
      */
-    public static final void callGameJoinEvent(Game<?> game, Player p) {
+    public void join(Player p) {
         Bukkit.getPluginManager().callEvent(new GameJoinEvent(game, p));
     }
 
     /**
      * Game leave event
      *
-     * @param game
      * @param p
      */
-    public static final void callGameLeaveEvent(Game<?> game, Player p) {
+    public void leave(Player p) {
         Bukkit.getPluginManager().callEvent(new GameLeaveEvent(game, p));
     }
 
     /**
      * Game quit event
      *
-     * @param game
      * @param p
      */
-    public static final void callGameQuitEvent(Game<?> game, Player p) {
+    public void quit(Player p) {
         Bukkit.getPluginManager().callEvent(new GameQuitEvent(game, p));
     }
 
     /**
      * Game spectate event
      *
-     * @param game
      * @param p
      */
-    public static final void callGameSpectateEvent(Game<?> game, Player p) {
+    public void spectate(Player p) {
         Bukkit.getPluginManager().callEvent(new GameSpectateEvent(game, p));
     }
 
     /**
      * Game start event
-     *
-     * @param game
      */
-    public static final void callGameStartEvent(Game<?> game) {
+    public void start() {
         Bukkit.getPluginManager().callEvent(new GameStartEvent(game));
     }
 
     /**
      * Game stop event
-     *
-     * @param game
      */
-    public static final void callGameStopEvent(Game<?> game) {
+    public void stop() {
         Bukkit.getPluginManager().callEvent(new GameStopEvent(game));
     }
 
     /**
      * Game unspectate event
      *
-     * @param game
      * @param p
      */
-    public static final void callGameUnspectateEvent(Game<?> game, Player p) {
+    public void unspectate(Player p) {
         Bukkit.getPluginManager().callEvent(new GameUnspectateEvent(game, p));
     }
 }

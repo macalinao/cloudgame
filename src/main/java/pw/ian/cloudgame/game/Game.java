@@ -59,6 +59,10 @@ public class Game<T extends State> {
         return master;
     }
 
+    public GameEventFactory events() {
+        return new GameEventFactory(this);
+    }
+
     public void setGameMaster(final GameMaster master) {
         this.master = master;
     }
@@ -72,13 +76,6 @@ public class Game<T extends State> {
         for (Player player : state.getParticipants()) {
             gameplay.sendGameMessage(player, message);
         }
-    }
-
-    /**
-     * Stops this game.
-     */
-    public void stop() {
-        GameEventFactory.callGameStopEvent(this);
     }
 
 }

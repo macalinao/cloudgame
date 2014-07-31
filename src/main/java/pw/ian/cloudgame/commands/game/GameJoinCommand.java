@@ -5,14 +5,11 @@
  */
 package pw.ian.cloudgame.commands.game;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import pw.ian.albkit.command.PlayerCommandHandler;
 import pw.ian.albkit.command.parser.Arguments;
 import pw.ian.cloudgame.CloudGame;
-import pw.ian.cloudgame.events.GameEventFactory;
-import pw.ian.cloudgame.events.GameJoinEvent;
 import pw.ian.cloudgame.game.Game;
 
 /**
@@ -39,8 +36,8 @@ public class GameJoinCommand extends PlayerCommandHandler {
             player.sendMessage(ChatColor.RED + "Game not found.");
             return;
         }
-        
-        GameEventFactory.callGameJoinEvent(game, player);
+
+        game.events().join(player);
     }
 
 }

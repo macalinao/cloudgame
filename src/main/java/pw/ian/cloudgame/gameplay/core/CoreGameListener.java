@@ -53,7 +53,7 @@ public class CoreGameListener<T extends State> extends GameListener<T> {
             return;
         }
 
-        GameEventFactory.callGameQuitEvent(game, e.getPlayer());
+        game.events().quit(e.getPlayer());
     }
 
     @EventHandler
@@ -89,7 +89,7 @@ public class CoreGameListener<T extends State> extends GameListener<T> {
     public void onPlayerQuit(PlayerQuitEvent e) {
         Game<T> g = game(e.getPlayer());
         if (g != null) {
-            GameEventFactory.callGameQuitEvent(g, e.getPlayer());
+            g.events().quit(e.getPlayer());
         }
     }
 

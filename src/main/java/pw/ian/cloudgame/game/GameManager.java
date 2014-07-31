@@ -132,7 +132,7 @@ public class GameManager {
      */
     public void stopAll() {
         for (Game<?> game : games.values()) {
-            GameEventFactory.callGameStopEvent(game);
+            game.events().stop();
         }
         games.clear();
     }

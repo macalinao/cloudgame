@@ -52,7 +52,7 @@ public class HostedFFAAnnouncerTask<T extends HostedFFAState> extends Timer<T> {
 
     @Override
     public void onEnd() {
-        GameEventFactory.callGameStartEvent(game);
+        game.events().start();
     }
 
 }

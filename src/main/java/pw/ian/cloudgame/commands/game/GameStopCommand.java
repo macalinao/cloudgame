@@ -43,7 +43,7 @@ public class GameStopCommand extends PlayerCommandHandler {
             return;
         }
 
-        game.stop();
+        game.events().stop();
         player.sendMessage(ChatColor.RED + "Game stopped.");
     }
 

@@ -48,7 +48,7 @@ public class SpectatorListener<T extends State> extends GameListener<T> {
             return;
         }
 
-        GameEventFactory.callGameUnspectateEvent(game, e.getPlayer());
+        game.events().unspectate(e.getPlayer());
     }
 
     @EventHandler

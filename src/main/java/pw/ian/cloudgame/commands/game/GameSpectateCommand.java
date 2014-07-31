@@ -42,9 +42,9 @@ public class GameSpectateCommand extends PlayerCommandHandler {
         }
 
         if (game.getState().hasSpectator(player)) {
-            GameEventFactory.callGameSpectateEvent(game, player);
+            game.events().spectate(player);
         } else {
-            GameEventFactory.callGameUnspectateEvent(game, player);
+            game.events().unspectate(player);
         }
     }
 

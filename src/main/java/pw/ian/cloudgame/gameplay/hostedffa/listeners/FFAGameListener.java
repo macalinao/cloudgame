@@ -80,7 +80,7 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
         if (game == null) {
             return;
         }
-        game.stop();
+        game.events().stop();
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -99,7 +99,7 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
             }
 
             for (Player player : state.getParticipants()) {
-                GameEventFactory.callGameQuitEvent(game, player);
+                game.events().quit(player);
             }
         }
     }
