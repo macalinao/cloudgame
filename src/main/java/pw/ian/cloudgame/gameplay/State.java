@@ -18,10 +18,6 @@ public interface State {
 
     public boolean isOver();
 
-    public void addPlayer(Player p);
-
-    public void addSpectator(Player p);
-
     public List<Player> getPlayers();
 
     public List<Player> getSpectators();
@@ -29,10 +25,6 @@ public interface State {
     public boolean hasPlayer(Player p);
 
     public boolean hasSpectator(Player p);
-
-    public void removePlayer(Player p);
-
-    public void removeSpectator(Player p);
 
     public List<Player> getParticipants();
 

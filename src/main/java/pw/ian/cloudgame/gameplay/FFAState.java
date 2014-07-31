@@ -23,7 +23,6 @@ public abstract class FFAState implements State {
 
     private final Set<UUID> players = new HashSet<>();
 
-    @Override
     public void addPlayer(Player p) {
         players.add(p.getUniqueId());
     }
@@ -33,7 +32,6 @@ public abstract class FFAState implements State {
         return players.contains(p.getUniqueId());
     }
 
-    @Override
     public void removePlayer(Player p) {
         players.remove(p.getUniqueId());
     }
@@ -50,7 +48,6 @@ public abstract class FFAState implements State {
         return ret;
     }
 
-    @Override
     public void addSpectator(Player p) {
         spectators.add(p.getUniqueId());
     }
@@ -60,7 +57,6 @@ public abstract class FFAState implements State {
         return spectators.contains(p.getUniqueId());
     }
 
-    @Override
     public void removeSpectator(Player p) {
         spectators.remove(p.getUniqueId());
     }
