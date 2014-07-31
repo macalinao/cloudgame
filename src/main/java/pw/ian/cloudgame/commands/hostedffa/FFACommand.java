@@ -25,7 +25,6 @@ public class FFACommand extends TreeCommandHandler {
 
     @Override
     public void setupSubcommands() {
-        addSubcommand("forcestart", new FFAForceStartCommand(ffa));
         addSubcommand("redeem", new FFARedeemCommand(ffa));
     }
 }
