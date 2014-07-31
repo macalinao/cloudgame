@@ -23,6 +23,7 @@ public class GameCommand extends TreeCommandHandler {
     public void setupSubcommands() {
         addSubcommand(new GameJoinCommand());
         addSubcommand(new GameLeaveCommand());
+        addSubcommand(new GameSpectateCommand());
         addSubcommand(new GameStartCommand());
         addSubcommand(new GameStopCommand());
     }
