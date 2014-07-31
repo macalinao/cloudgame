@@ -9,43 +9,31 @@ import java.util.List;
 import org.bukkit.entity.Player;
 
 /**
- * Contains all information about the state of the game. Should be implemented
- * by a game.
+ *
+ * @author ian
  */
 public interface State {
 
-    /**
-     * Checks if the game has been started.
-     *
-     * @return
-     */
     public boolean isStarted();
 
-    /**
-     * Checks if the game is over.
-     *
-     * @return
-     */
     public boolean isOver();
 
-    /**
-     * Gets all participants in the game (ones that will hear broadcasts)
-     *
-     * @return
-     */
-    public List<Player> getParticipants();
+    public void addPlayer(Player p);
 
-    /**
-     * Gets a list of all spectators of this game.
-     *
-     * @return
-     */
+    public void addSpectator(Player p);
+
+    public List<Player> getPlayers();
+
     public List<Player> getSpectators();
 
-    /**
-     * Gets a list of all players in this game.
-     *
-     * @return
-     */
-    public List<Player> getPlayers();
+    public boolean hasPlayer(Player p);
+
+    public boolean hasSpectator(Player p);
+
+    public void removePlayer(Player p);
+
+    public void removeSpectator(Player p);
+
+    public List<Player> getParticipants();
+
 }
