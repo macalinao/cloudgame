@@ -73,6 +73,10 @@ public class CloudGame extends JavaPlugin {
         return gameManager;
     }
 
+    public GameplayManager getGameplayManager() {
+        return gameplayManager;
+    }
+
     public PlayerStateManager getPlayerStateManager() {
         return playerStateManager;
     }
