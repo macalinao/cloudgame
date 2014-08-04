@@ -53,6 +53,7 @@ public class ArenaCreateCommand extends CommandHandler {
 
         if (world == null) {
             sender.sendMessage(ChatColor.RED + "You need to specify a valid world.");
+            return;
         }
 
         ProtectedRegion pr = wg().getRegionManager(world).getRegionExact(regionName);
