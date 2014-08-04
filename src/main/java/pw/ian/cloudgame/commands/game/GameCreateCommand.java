@@ -5,7 +5,7 @@ import pw.ian.albkit.command.parser.Arguments;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
-import pw.ian.cloudgame.gameplay.core.HostGameMaster;
+import pw.ian.cloudgame.hosted.Host;
 import pw.ian.cloudgame.model.arena.Arena;
 
 import org.bukkit.ChatColor;
@@ -42,7 +42,7 @@ public class GameCreateCommand extends PlayerCommandHandler {
             return;
         }
 
-        Game game = cloudGame.getGameManager().createGame(gameplay, arena);
+        Game game = cloudGame.getGameManager().createGame(gameplay, arena, new Host(player.getUniqueId()));
         if (game == null) {
             gameplay.sendGameMessage(player, "Failed to create game!");
             return;
@@ -50,7 +50,6 @@ public class GameCreateCommand extends PlayerCommandHandler {
 
         // TODO: How do we handle gameplay-specific stuff like easy/hard & time
 
-        game.setGameMaster(new HostGameMaster(player.getUniqueId()));
         gameplay.sendGameMessage(player, "Scheduled game to start!");
     }
 }

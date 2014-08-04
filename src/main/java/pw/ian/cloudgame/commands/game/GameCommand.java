@@ -6,6 +6,7 @@
 package pw.ian.cloudgame.commands.game;
 
 import pw.ian.albkit.command.TreeCommandHandler;
+import pw.ian.cloudgame.CloudGame;
 
 /**
  *
@@ -26,6 +27,7 @@ public class GameCommand extends TreeCommandHandler {
         addSubcommand(new GameSpectateCommand());
         addSubcommand(new GameStartCommand());
         addSubcommand(new GameStopCommand());
+        addSubcommand(new GameCreateCommand(CloudGame.inst()));
     }
 
 }

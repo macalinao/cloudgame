@@ -5,6 +5,7 @@
  */
 package pw.ian.cloudgame.gameplay.hostedffa;
 
+import pw.ian.cloudgame.hosted.HostedGameCountdown;
 import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.entity.Player;
@@ -40,7 +41,7 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
 
     @Override
     public void setup(Game<T> g) {
-        (new HostedFFAAnnouncerTask<>(g)).runTimer();
+        (new HostedGameCountdown<T>(g)).runTimer();
     }
 
     /**
