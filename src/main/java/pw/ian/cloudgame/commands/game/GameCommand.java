@@ -6,6 +6,7 @@
 package pw.ian.cloudgame.commands.game;
 
 import pw.ian.albkit.command.TreeCommandHandler;
+import pw.ian.cloudgame.CloudGame;
 
 /**
  *
@@ -21,6 +22,7 @@ public class GameCommand extends TreeCommandHandler {
 
     @Override
     public void setupSubcommands() {
+        addSubcommand(new GameHostCommand());
         addSubcommand(new GameJoinCommand());
         addSubcommand(new GameLeaveCommand());
         addSubcommand(new GameSpectateCommand());

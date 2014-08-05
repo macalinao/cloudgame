@@ -5,6 +5,7 @@
  */
 package pw.ian.cloudgame.gameplay.hostedffa;
 
+import pw.ian.cloudgame.hosted.HostedGameCountdown;
 import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.entity.Player;
@@ -38,11 +39,6 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
         getPlugin().getServer().getPluginManager().registerEvents(new FFADeathListener(this), getPlugin());
     }
 
-    @Override
-    public void setup(Game<T> g) {
-        (new HostedFFAAnnouncerTask<>(g)).runTimer();
-    }
-
     /**
      * Adds the winner to the list of people who deserve prizes.
      *
@@ -60,12 +56,12 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
      * @return
      */
     public boolean redeemPrize(Player p) {
-    	for (Winner w : prizes.keySet()) {
-    		if (((HostedFFAWinner) w).getPlayerId().equals(p.getUniqueId())) {
-    			return redeemPrize(w);
-    		}
-    	}
-    	return false;
+        for (Winner w : prizes.keySet()) {
+            if (((HostedFFAWinner) w).getPlayerId().equals(p.getUniqueId())) {
+                return redeemPrize(w);
+            }
+        }
+        return false;
     }
 
     /**
