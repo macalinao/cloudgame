@@ -7,6 +7,7 @@ package pw.ian.cloudgame.gameplay;
 
 import org.bukkit.scheduler.BukkitRunnable;
 import pw.ian.cloudgame.game.Game;
+import pw.ian.cloudgame.states.Status;
 
 /**
  *
@@ -43,7 +44,7 @@ public abstract class GameTask<T extends Participants> {
 
         @Override
         public void run() {
-            if (GameTask.this.game.getParticipants().isOver()) {
+            if (GameTask.this.game.state(Status.class).isOver()) {
                 cancel();
                 return;
             }

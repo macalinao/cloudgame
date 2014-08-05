@@ -11,6 +11,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.mixin.Mixin;
+import pw.ian.cloudgame.states.Status;
 
 /**
  *
@@ -26,7 +27,7 @@ public class QuitOnDeath extends Mixin {
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player p = e.getEntity();
         Game game = game(p);
-        if (game == null || !game.getParticipants().isStarted()) {
+        if (game == null || !game.state(Status.class).isStarted()) {
             return;
         }
 

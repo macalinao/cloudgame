@@ -13,6 +13,7 @@ import pw.ian.albkit.util.Countdown;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Participants;
+import pw.ian.cloudgame.states.Status;
 
 /**
  * Announces the game and starts it when the time is up.
@@ -40,7 +41,7 @@ public class HostedGameCountdown extends Countdown {
 
     @Override
     public boolean checkCondition() {
-        return !(game.getParticipants().isStarted() || game.getParticipants().isOver());
+        return !(game.state(Status.class).isStarted() || game.state(Status.class).isOver());
     }
 
     @Override

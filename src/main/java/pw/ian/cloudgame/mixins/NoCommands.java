@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.mixin.Mixin;
+import pw.ian.cloudgame.states.Status;
 
 /**
  * Prevents usage of commands.
@@ -23,7 +24,7 @@ public class NoCommands extends Mixin {
     @EventHandler
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
         Game game = game(e.getPlayer());
-        if (game != null && game.getParticipants().isStarted() && !e.getMessage().startsWith("/" + getGameplay().getId())) {
+        if (game != null && game.state(Status.class).isStarted() && !e.getMessage().startsWith("/" + getGameplay().getId())) {
             e.setCancelled(true);
         }
     }
@@ -31,7 +32,7 @@ public class NoCommands extends Mixin {
     @EventHandler
     public void onSpectatorCommandPreprocess(PlayerCommandPreprocessEvent e) {
         Game game = gameSpectated(e.getPlayer());
-        if (game != null && game.getParticipants().isStarted()
+        if (game != null && game.state(Status.class).isStarted()
                 && !e.getMessage().startsWith("/" + getGameplay().getId()) && !e.getMessage().startsWith("/msg") && !e.getMessage().startsWith("/r ")) {
             e.setCancelled(true);
         }

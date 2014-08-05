@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import pw.ian.cloudgame.game.Game;
+import pw.ian.cloudgame.states.Status;
 
 public abstract class Timer<T extends Participants> extends GameTask<T> {
 
@@ -34,7 +35,7 @@ public abstract class Timer<T extends Participants> extends GameTask<T> {
 
     @Override
     public void run() {
-        if (game.getParticipants().isStarted()) {
+        if (game.state(Status.class).isStarted()) {
             cancel();
             return;
         }

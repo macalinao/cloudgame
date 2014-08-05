@@ -14,10 +14,6 @@ import org.bukkit.entity.Player;
  */
 public interface Participants {
 
-    public boolean isStarted();
-
-    public boolean isOver();
-
     public List<Player> getPlayers();
 
     public List<Player> getSpectators();

@@ -18,10 +18,10 @@ import pw.ian.cloudgame.events.GameSpectateEvent;
 import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.GameListener;
-import pw.ian.cloudgame.gameplay.Participants;
 import pw.ian.cloudgame.hosted.Host;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
+import pw.ian.cloudgame.states.Status;
 
 /**
  *
@@ -145,7 +145,7 @@ public class FFAGamePlayerListener extends GameListener {
         }
 
         Player p = event.getPlayer();
-        if (!game.getParticipants().isStarted()) {
+        if (!game.state(Status.class).isStarted()) {
             p.sendMessage(ChatColor.RED + "The game hasn't started yet!");
             return;
         }

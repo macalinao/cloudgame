@@ -17,6 +17,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.GameListener;
 import pw.ian.cloudgame.gameplay.Gameplay;
+import pw.ian.cloudgame.states.Status;
 import pw.ian.cloudgame.stats.Death;
 
 /**
@@ -41,7 +42,7 @@ public class CoreGameListener extends GameListener {
             return;
         }
 
-        if (!game.getParticipants().isStarted()) {
+        if (!game.state(Status.class).isStarted()) {
             return;
         }
 
