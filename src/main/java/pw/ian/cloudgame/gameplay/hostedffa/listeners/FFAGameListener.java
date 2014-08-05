@@ -53,8 +53,6 @@ public class FFAGameListener extends GameListener {
             p.setGameMode(GameMode.ADVENTURE);
             p.teleport(spawn);
         }
-
-        state.setStarted();
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -72,25 +70,6 @@ public class FFAGameListener extends GameListener {
             getGameplay().sendGameMessage(winner, "To redeem your prize, type $H/" + getGameplay().getId() + " redeem$M!");
             ((HostedFFA) getGameplay()).addPrize(winner, ((HostedFFAState) game.getParticipants()).isProvideArmor() ? "easy" : "hard");
         }
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void postGameEnd(GameEndEvent event) {
-        Game game = game(event);
-        if (game == null) {
-            return;
-        }
-        game.events().stop();
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void postGameStop(GameStopEvent event) {
-        Game game = game(event);
-        if (game == null) {
-            return;
-        }
-        ((HostedFFAState) game.getParticipants()).setOver();
-        getGameplay().getPlugin().getGameManager().removeGame(game);
     }
 
 }

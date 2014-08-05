@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Winner;
+import pw.ian.cloudgame.mixins.BasicFlowControl;
 import pw.ian.cloudgame.mixins.NoCommands;
 import pw.ian.cloudgame.mixins.QuitOnDeath;
 
@@ -29,6 +30,7 @@ public abstract class HostedFFA extends Gameplay {
 
     @Override
     public void onEnable() {
+        mixin(BasicFlowControl.class);
         mixin(NoCommands.class);
         mixin(QuitOnDeath.class);
 //        getPlugin().getServer().getPluginManager().registerEvents(new FFAGameListener(this), getPlugin());

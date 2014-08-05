@@ -5,13 +5,19 @@
  */
 package pw.ian.cloudgame.mixins;
 
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import pw.ian.cloudgame.events.GameEndEvent;
+import pw.ian.cloudgame.events.GameStartEvent;
 import pw.ian.cloudgame.events.GameStopEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Participants;
+import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
 import pw.ian.cloudgame.mixin.Mixin;
 import pw.ian.cloudgame.states.Status;
 
@@ -28,6 +34,16 @@ public class BasicFlowControl extends Mixin {
     @Override
     public void setup() {
         state(Status.class);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void preGameStart(GameStartEvent event) {
+        Game game = game(event);
+        if (game == null) {
+            return;
+        }
+
+        game.state(Status.class).setStarted(true);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -51,5 +67,25 @@ public class BasicFlowControl extends Mixin {
         for (Player player : participants.getParticipants()) {
             game.events().quit(player);
         }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void postGameEnd(GameEndEvent event) {
+        Game game = game(event);
+        if (game == null) {
+            return;
+        }
+        game.events().stop();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void postGameStop(GameStopEvent event) {
+        Game game = game(event);
+        if (game == null) {
+            return;
+        }
+
+        game.state(Status.class).setOver(true);
+        getGameplay().getPlugin().getGameManager().removeGame(game);
     }
 }
