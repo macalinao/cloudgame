@@ -11,7 +11,7 @@ import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.game.GameManager;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
-import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
+import pw.ian.cloudgame.gameplay.hostedffa.HFFAParticipants;
 
 /**
  *

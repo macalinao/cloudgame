@@ -19,7 +19,7 @@ import pw.ian.cloudgame.events.GameStopEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.GameListener;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
-import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
+import pw.ian.cloudgame.gameplay.hostedffa.HFFAParticipants;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAWinner;
 
 /**
@@ -44,7 +44,7 @@ public class FFAGameListener extends GameListener {
                     "Type $D/" + getGameplay().getId() + " spectate $Lto spectate it!");
         }
 
-        HostedFFAState state = (HostedFFAState) game.getParticipants();
+        HFFAParticipants state = (HFFAParticipants) game.getParticipants();
         for (Player p : state.getPlayers()) {
             Location spawn = game.getArena().getNextSpawn();
             if (state.isProvideArmor()) {
@@ -68,7 +68,7 @@ public class FFAGameListener extends GameListener {
         } else {
             game.broadcast("$H" + winner.getPlayer().getName() + "$M won the " + getGameplay().getName() + "!");
             getGameplay().sendGameMessage(winner, "To redeem your prize, type $H/" + getGameplay().getId() + " redeem$M!");
-            ((HostedFFA) getGameplay()).addPrize(winner, ((HostedFFAState) game.getParticipants()).isProvideArmor() ? "easy" : "hard");
+            ((HostedFFA) getGameplay()).addPrize(winner, ((HFFAParticipants) game.getParticipants()).isProvideArmor() ? "easy" : "hard");
         }
     }
 

@@ -5,8 +5,25 @@
  */
 package pw.ian.cloudgame.mixin;
 
+import pw.ian.cloudgame.game.Game;
+
 /**
  * Holds data.
  */
-public interface State {
+public abstract class State {
+
+    protected Game game = null;
+
+    /**
+     * Sets the game of this State.
+     *
+     * @param game
+     * @return
+     */
+    State withGame(Game game) {
+        if (this.game == null) {
+            this.game = game;
+        }
+        return this;
+    }
 }

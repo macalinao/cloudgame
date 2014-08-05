@@ -17,10 +17,11 @@ import pw.ian.cloudgame.events.GameQuitEvent;
 import pw.ian.cloudgame.events.GameSpectateEvent;
 import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
+import pw.ian.cloudgame.gameplay.FFAParticipants;
 import pw.ian.cloudgame.gameplay.GameListener;
 import pw.ian.cloudgame.hosted.Host;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
-import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
+import pw.ian.cloudgame.gameplay.hostedffa.HFFAParticipants;
 import pw.ian.cloudgame.states.Status;
 
 /**
@@ -44,15 +45,16 @@ public class FFAGamePlayerListener extends GameListener {
             return;
         }
 
-        HostedFFAState state = (HostedFFAState) game.getParticipants();
         Player p = event.getPlayer();
+        Status status = game.state(Status.class);
 
-        if (state.isStarted()) {
+        if (status.isStarted()) {
             game.getGameplay().sendGameMessage(p, "You can't join a " + getGameplay().getId() + " that is already in progress.");
             return;
         }
 
-        if (state.hasPlayer(p)) {
+        FFAParticipants parts = (FFAParticipants) game.getParticipants();
+        if (parts.hasPlayer(p)) {
             game.getGameplay().sendGameMessage(p, "You have already joined the " + getGameplay().getId() + " queue!");
             return;
         }
@@ -62,7 +64,7 @@ public class FFAGamePlayerListener extends GameListener {
             return;
         }
 
-        state.addPlayer(p);
+        parts.addPlayer(p);
         getGameplay().sendBanner(p, "You've joined the " + getGameplay().getId() + "! Pay attention to the countdown.",
                 "Want to leave the game? Type $D/" + getGameplay().getId() + " leave$L!");
     }
@@ -74,10 +76,11 @@ public class FFAGamePlayerListener extends GameListener {
             return;
         }
 
-        HostedFFAState state = (HostedFFAState) game.getParticipants();
         Player p = event.getPlayer();
+        Status status = game.state(Status.class);
+        FFAParticipants state = (FFAParticipants) game.getParticipants();
 
-        if (!state.isStarted()) {
+        if (!status.isStarted()) {
             if (!state.hasPlayer(p)) {
                 game.getGameplay().sendGameMessage(p, "You aren't part of the " + getGameplay().getId() + " queue.");
                 return;
@@ -108,7 +111,7 @@ public class FFAGamePlayerListener extends GameListener {
         }
 
         if (!failedKillsCheck && !failedDistanceCheck) {
-            ((HostedFFAState) game.getParticipants()).removePlayer(p);
+            ((HFFAParticipants) game.getParticipants()).removePlayer(p);
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
             if (barAPI) {
                 BarAPI.removeBar(p);
@@ -125,7 +128,7 @@ public class FFAGamePlayerListener extends GameListener {
         }
 
         Player p = event.getPlayer();
-        HostedFFAState state = (HostedFFAState) game.getParticipants();
+        HFFAParticipants state = (HFFAParticipants) game.getParticipants();
         if (state.isProvideArmor()) {
             getGameplay().getPlugin().getPlayerStateManager().queueLoadState(event.getPlayer());
         }
@@ -156,7 +159,7 @@ public class FFAGamePlayerListener extends GameListener {
         }
 
         getGameplay().getPlugin().getPlayerStateManager().saveState(p);
-        ((HostedFFAState) game.getParticipants()).addSpectator(p);
+        ((HFFAParticipants) game.getParticipants()).addSpectator(p);
         for (Player other : Bukkit.getOnlinePlayers()) {
             other.hidePlayer(p);
         }

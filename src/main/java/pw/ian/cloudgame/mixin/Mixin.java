@@ -45,7 +45,7 @@ public abstract class Mixin extends GameListener {
      */
     public void applyStates(Game game) {
         for (Class<? extends State> state : states) {
-            game.newState(state);
+            game.newState(state).withGame(game);
         }
     }
 

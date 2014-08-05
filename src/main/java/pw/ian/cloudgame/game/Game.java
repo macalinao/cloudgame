@@ -14,7 +14,7 @@ import pw.ian.cloudgame.events.GameEventFactory;
 import pw.ian.cloudgame.gameplay.GameMaster;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Participants;
-import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
+import pw.ian.cloudgame.gameplay.hostedffa.HFFAParticipants;
 import pw.ian.cloudgame.mixin.State;
 import pw.ian.cloudgame.model.arena.Arena;
 import pw.ian.cloudgame.stats.Stats;
@@ -42,7 +42,7 @@ public class Game {
         this.gameplay = gameplay;
         this.arena = arena;
         this.master = master;
-        participants = new HostedFFAState();
+        participants = new HFFAParticipants();
         stats = new Stats();
     }
 
@@ -86,14 +86,17 @@ public class Game {
      *
      * @param clazz
      */
-    public void newState(Class<? extends State> clazz) {
+    public State newState(Class<? extends State> clazz) {
         try {
-            states.put(clazz, clazz.newInstance());
+            State state = clazz.newInstance();
+            states.put(clazz, state);
+            return state;
         } catch (InstantiationException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     /**

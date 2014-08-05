@@ -21,7 +21,7 @@ import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Participants;
-import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
+import pw.ian.cloudgame.gameplay.hostedffa.HFFAParticipants;
 import pw.ian.cloudgame.hosted.Host;
 import pw.ian.cloudgame.mixin.Mixin;
 import pw.ian.cloudgame.states.Status;
@@ -81,7 +81,7 @@ public class BasicFlowControl extends Mixin {
             return;
         }
 
-        game.state(Status.class).setStarted(true);
+        game.state(Status.class).setStarted();
     }
 
     @EventHandler(priority = EventPriority.MONITOR)

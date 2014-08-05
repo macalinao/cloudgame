@@ -10,17 +10,22 @@ import pw.ian.cloudgame.mixin.State;
 /**
  * Stores game status
  */
-public class Status implements State {
+public class Status extends State {
 
-    private boolean started;
+    private long start = -1;
+
     private boolean over;
 
     public boolean isStarted() {
-        return started;
+        return start != -1;
     }
 
-    public void setStarted(boolean started) {
-        this.started = started;
+    public void setStarted() {
+        this.start = System.currentTimeMillis();
+    }
+
+    public long getStart() {
+        return start;
     }
 
     public boolean isOver() {
