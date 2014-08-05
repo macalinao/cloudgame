@@ -7,8 +7,6 @@ package pw.ian.cloudgame.gameplay.hostedffa;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import pw.ian.cloudgame.gameplay.FFAState;
 
