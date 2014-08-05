@@ -14,12 +14,12 @@ import pw.ian.cloudgame.gameplay.Winner;
 import pw.ian.cloudgame.mixins.BasicFlowControl;
 import pw.ian.cloudgame.mixins.NoCommands;
 import pw.ian.cloudgame.mixins.QuitOnDeath;
+import pw.ian.cloudgame.mixins.TransientInventories;
 import pw.ian.cloudgame.mixins.TimeLimit;
 
 /**
  *
  * @author ian
- * @param <T>
  */
 public abstract class HostedFFA extends Gameplay {
 
@@ -35,6 +35,7 @@ public abstract class HostedFFA extends Gameplay {
         mixin(TimeLimit.class);
         mixin(NoCommands.class);
         mixin(QuitOnDeath.class);
+        mixin(TransientInventories.class);
 //        getPlugin().getServer().getPluginManager().registerEvents(new FFAGameListener(this), getPlugin());
 //        getPlugin().getServer().getPluginManager().registerEvents(new FFAGamePlayerListener(this), getPlugin());
     }

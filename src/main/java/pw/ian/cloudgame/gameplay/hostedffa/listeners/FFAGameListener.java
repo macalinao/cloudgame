@@ -47,10 +47,6 @@ public class FFAGameListener extends GameListener {
         HFFAParticipants state = (HFFAParticipants) game.getParticipants();
         for (Player p : state.getPlayers()) {
             Location spawn = game.getArena().getNextSpawn();
-            if (state.isProvideArmor()) {
-                getGameplay().getPlugin().getPlayerStateManager().saveState(p);
-            }
-            p.setGameMode(GameMode.ADVENTURE);
             p.teleport(spawn);
         }
     }

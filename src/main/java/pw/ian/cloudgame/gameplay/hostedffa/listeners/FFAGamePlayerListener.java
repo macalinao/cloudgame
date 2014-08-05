@@ -128,10 +128,6 @@ public class FFAGamePlayerListener extends GameListener {
         }
 
         Player p = event.getPlayer();
-        HFFAParticipants state = (HFFAParticipants) game.getParticipants();
-        if (state.isProvideArmor()) {
-            getGameplay().getPlugin().getPlayerStateManager().queueLoadState(event.getPlayer());
-        }
         p.setGameMode(GameMode.SURVIVAL);
 
         if (barAPI) {
