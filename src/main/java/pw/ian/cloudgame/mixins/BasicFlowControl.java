@@ -13,6 +13,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import pw.ian.cloudgame.events.GameEndEvent;
+import pw.ian.cloudgame.events.GameJoinEvent;
+import pw.ian.cloudgame.events.GameQuitEvent;
 import pw.ian.cloudgame.events.GameStartEvent;
 import pw.ian.cloudgame.events.GameStopEvent;
 import pw.ian.cloudgame.events.GameUnspectateEvent;
@@ -20,6 +22,7 @@ import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Participants;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
+import pw.ian.cloudgame.hosted.Host;
 import pw.ian.cloudgame.mixin.Mixin;
 import pw.ian.cloudgame.states.Status;
 
@@ -38,8 +41,30 @@ public class BasicFlowControl extends Mixin {
         state(Status.class);
     }
 
-    @EventHandler
-    public void onGameUnspectate(GameUnspectateEvent event) {
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void handleGameQuit(GameQuitEvent event) {
+        Game game = game(event);
+        if (game == null) {
+            return;
+        }
+
+        Player p = event.getPlayer();
+        game.getParticipants().removePlayer(p);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void handleGameSpectate(GameUnspectateEvent event) {
+        Game game = game(event);
+        if (game == null) {
+            return;
+        }
+
+        Player p = event.getPlayer();
+        game.getParticipants().addSpectator(p);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void handleGameUnspectate(GameUnspectateEvent event) {
         Game game = game(event);
         if (game == null) {
             return;
@@ -49,14 +74,34 @@ public class BasicFlowControl extends Mixin {
         game.getParticipants().removeSpectator(p);
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void preGameStart(GameStartEvent event) {
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void handleGameStart(GameStartEvent event) {
         Game game = game(event);
         if (game == null) {
             return;
         }
 
         game.state(Status.class).setStarted(true);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void handleGameEnd(GameEndEvent event) {
+        Game game = game(event);
+        if (game == null) {
+            return;
+        }
+        game.events().stop();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void handleGameStop(GameStopEvent event) {
+        Game game = game(event);
+        if (game == null) {
+            return;
+        }
+
+        game.state(Status.class).setOver(true);
+        getGameplay().getPlugin().getGameManager().removeGame(game);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -80,25 +125,5 @@ public class BasicFlowControl extends Mixin {
         for (Player player : participants.getParticipants()) {
             game.events().quit(player);
         }
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void postGameEnd(GameEndEvent event) {
-        Game game = game(event);
-        if (game == null) {
-            return;
-        }
-        game.events().stop();
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void postGameStop(GameStopEvent event) {
-        Game game = game(event);
-        if (game == null) {
-            return;
-        }
-
-        game.state(Status.class).setOver(true);
-        getGameplay().getPlugin().getGameManager().removeGame(game);
     }
 }

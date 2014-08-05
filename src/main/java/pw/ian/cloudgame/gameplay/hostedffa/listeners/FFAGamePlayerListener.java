@@ -131,7 +131,6 @@ public class FFAGamePlayerListener extends GameListener {
         }
         p.setGameMode(GameMode.SURVIVAL);
 
-        state.removePlayer(p);
         if (barAPI) {
             BarAPI.removeBar(p);
         }

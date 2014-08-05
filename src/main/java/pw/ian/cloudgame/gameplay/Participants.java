@@ -22,10 +22,14 @@ public interface Participants {
 
     public List<Player> getSpectators();
 
+    public void removePlayer(Player p);
+
     public boolean hasPlayer(Player p);
 
     public boolean hasSpectator(Player p);
-    
+
+    public void addSpectator(Player p);
+
     public void removeSpectator(Player p);
 
     public List<Player> getParticipants();
