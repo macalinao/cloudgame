@@ -10,16 +10,18 @@ import pw.ian.cloudgame.model.arena.Arena;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import pw.ian.cloudgame.hosted.HostedGameCountdown;
 
-public class GameCreateCommand extends PlayerCommandHandler {
+public class GameHostCommand extends PlayerCommandHandler {
+
     private final CloudGame cloudGame;
 
-    public GameCreateCommand(CloudGame cloudGame) {
-        super("create");
-        this.cloudGame = cloudGame;
+    public GameHostCommand() {
+        super("host");
+        this.cloudGame = CloudGame.inst();
 
-        setDescription("Creates a new game of the given type");
-        setUsage("/game create <gameplay> <arena> [time]");
+        setDescription("Hosts a new game of the given type");
+        setUsage("/game host <gameplay> <arena> [time]");
         setPermission("cloudgame.admin");
     }
 
@@ -49,7 +51,7 @@ public class GameCreateCommand extends PlayerCommandHandler {
         }
 
         // TODO: How do we handle gameplay-specific stuff like easy/hard & time
-
+        (new HostedGameCountdown(game)).runTaskTimer(cloudGame, 2, 2);
         gameplay.sendGameMessage(player, "Scheduled game to start!");
     }
 }

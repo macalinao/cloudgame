@@ -22,12 +22,12 @@ public class GameCommand extends TreeCommandHandler {
 
     @Override
     public void setupSubcommands() {
+        addSubcommand(new GameHostCommand());
         addSubcommand(new GameJoinCommand());
         addSubcommand(new GameLeaveCommand());
         addSubcommand(new GameSpectateCommand());
         addSubcommand(new GameStartCommand());
         addSubcommand(new GameStopCommand());
-        addSubcommand(new GameCreateCommand(CloudGame.inst()));
     }
 
 }
