@@ -14,6 +14,7 @@ import pw.ian.cloudgame.gameplay.Winner;
 import pw.ian.cloudgame.mixins.BasicFlowControl;
 import pw.ian.cloudgame.mixins.NoCommands;
 import pw.ian.cloudgame.mixins.QuitOnDeath;
+import pw.ian.cloudgame.mixins.TimeLimit;
 
 /**
  *
@@ -31,6 +32,7 @@ public abstract class HostedFFA extends Gameplay {
     @Override
     public void onEnable() {
         mixin(BasicFlowControl.class);
+        mixin(TimeLimit.class);
         mixin(NoCommands.class);
         mixin(QuitOnDeath.class);
 //        getPlugin().getServer().getPluginManager().registerEvents(new FFAGameListener(this), getPlugin());
