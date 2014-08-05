@@ -5,6 +5,7 @@
  */
 package pw.ian.cloudgame.gameplay;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +15,7 @@ import pw.ian.albkit.util.ColorScheme;
 import pw.ian.albkit.util.Messaging;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.game.Game;
+import pw.ian.cloudgame.mixin.Mixin;
 import pw.ian.cloudgame.model.arena.Arena;
 
 /**
@@ -132,4 +134,23 @@ public abstract class Gameplay<T extends State> {
      */
     public abstract void setup(Game<T> g);
 
+    /**
+     * Applies a mixin to this Gameplay.
+     *
+     * @param clazz
+     */
+    protected void mixin(Class<? extends Mixin> clazz) {
+        try {
+            Mixin m = (Mixin) clazz.getConstructors()[0].newInstance(this); // will be reworked when we remove generics
+            m.setup();
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
