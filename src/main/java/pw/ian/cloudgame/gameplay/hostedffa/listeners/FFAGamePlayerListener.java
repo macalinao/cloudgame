@@ -140,7 +140,7 @@ public class FFAGamePlayerListener extends GameListener {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onGameSpectate(GameSpectateEvent event) {
         Game game = game(event);
         if (game == null) {
@@ -157,40 +157,13 @@ public class FFAGamePlayerListener extends GameListener {
         if (game.getParticipants().hasPlayer(p)) {
             p.sendMessage(ChatColor.RED + "You can't use this command as a player!");
             event.setCancelled(true);
-            return;
         }
-
-        getGameplay().getPlugin().getPlayerStateManager().saveState(p);
-        for (Player other : Bukkit.getOnlinePlayers()) {
-            other.hidePlayer(p);
-        }
-        p.teleport(game.getArena().getNextSpawn());
-        p.setAllowFlight(true);
-        p.setFlying(true);
-        p.setHealth(p.getMaxHealth());
-        p.setFoodLevel(20);
-
-        game.getGameplay().sendGameMessage(p, "Type /" + getGameplay().getId() + " spectate again to exit the mode!");
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onGameUnspectate(GameUnspectateEvent event) {
-        Game game = game(event);
-        if (game == null) {
-            return;
-        }
-
-        Player p = event.getPlayer();
-        getGameplay().getPlugin().getPlayerStateManager().queueLoadState(p);
-        for (Player other : Bukkit.getOnlinePlayers()) {
-            other.showPlayer(p);
-        }
-        p.setFlying(false);
         if (barAPI) {
-            BarAPI.removeBar(p);
+            BarAPI.removeBar(event.getPlayer());
         }
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
-
-        game.getGameplay().sendGameMessage(p, "You are no longer spectating the game.");
     }
 }
