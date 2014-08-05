@@ -30,8 +30,28 @@ public class Spectators extends Mixin {
         super(gameplay);
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onGameSpectate(GameSpectateEvent event) {
+        Game game = game(event);
+        if (game == null) {
+            return;
+        }
+
+        Player p = event.getPlayer();
+        if (!game.state(Status.class).isStarted()) {
+            p.sendMessage(ChatColor.RED + "The game hasn't started yet!");
+            event.setCancelled(true);
+            return;
+        }
+
+        if (game.getParticipants().hasPlayer(p)) {
+            p.sendMessage(ChatColor.RED + "You can't use this command as a player!");
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void handleGameSpectate(GameSpectateEvent event) {
         Game game = game(event);
         if (game == null) {
             return;
@@ -52,7 +72,7 @@ public class Spectators extends Mixin {
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onGameUnspectate(GameUnspectateEvent event) {
+    public void handleGameUnspectate(GameUnspectateEvent event) {
         Game game = game(event);
         if (game == null) {
             return;
