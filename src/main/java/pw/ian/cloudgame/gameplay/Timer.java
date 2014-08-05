@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 import pw.ian.cloudgame.game.Game;
 
-public abstract class Timer<T extends State> extends GameTask<T> {
+public abstract class Timer<T extends Participants> extends GameTask<T> {
 
-    private final Game<T> game;
+    private final Game game;
 
     private final Map<Integer, String> messages;
 
@@ -20,7 +20,7 @@ public abstract class Timer<T extends State> extends GameTask<T> {
 
     private int current = 0;
 
-    public Timer(Game<T> game, Map<Integer, String> messages) {
+    public Timer(Game game, Map<Integer, String> messages) {
         super(game);
         this.game = game;
         this.messages = messages;

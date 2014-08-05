@@ -5,13 +5,17 @@
  */
 package pw.ian.cloudgame.game;
 
-import org.bukkit.Bukkit;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.bukkit.entity.Player;
 import pw.ian.cloudgame.events.GameEventFactory;
-import pw.ian.cloudgame.events.GameStopEvent;
 import pw.ian.cloudgame.gameplay.GameMaster;
 import pw.ian.cloudgame.gameplay.Gameplay;
-import pw.ian.cloudgame.gameplay.State;
+import pw.ian.cloudgame.gameplay.Participants;
+import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
+import pw.ian.cloudgame.mixin.State;
 import pw.ian.cloudgame.model.arena.Arena;
 import pw.ian.cloudgame.stats.Stats;
 
@@ -20,23 +24,25 @@ import pw.ian.cloudgame.stats.Stats;
  * @author ian
  * @param <T> The type of state of this game
  */
-public class Game<T extends State> {
+public class Game {
 
-    private final Gameplay<T> gameplay;
+    private final Gameplay gameplay;
 
     private final Arena arena;
 
     private final GameMaster master;
 
-    private final T state;
+    private final Participants participants;
 
     private final Stats stats;
 
-    Game(Gameplay<T> gameplay, Arena arena, GameMaster master) {
+    private final Map<Class<? extends State>, State> states = new HashMap<>();
+
+    Game(Gameplay gameplay, Arena arena, GameMaster master) {
         this.gameplay = gameplay;
         this.arena = arena;
         this.master = master;
-        state = gameplay.newState();
+        participants = new HostedFFAState();
         stats = new Stats();
     }
 
@@ -48,8 +54,8 @@ public class Game<T extends State> {
         return arena;
     }
 
-    public T getState() {
-        return state;
+    public Participants getState() {
+        return participants;
     }
 
     public Stats getStats() {
@@ -70,9 +76,35 @@ public class Game<T extends State> {
      * @param message
      */
     public void broadcast(String message) {
-        for (Player player : state.getParticipants()) {
+        for (Player player : participants.getParticipants()) {
             gameplay.sendGameMessage(player, message);
         }
+    }
+
+    /**
+     * Adds a state to this Gameplay and replaces one if it already exists.
+     *
+     * @param clazz
+     */
+    public void newState(Class<? extends State> clazz) {
+        try {
+            states.put(clazz, clazz.newInstance());
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Gets a state associated with this Gameplay.
+     *
+     * @param <S>
+     * @param clazz
+     * @return Null if the state does not exist
+     */
+    public <S extends State> S state(Class<S> clazz) {
+        return (S) states.get(clazz);
     }
 
 }

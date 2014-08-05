@@ -6,7 +6,6 @@
 package pw.ian.cloudgame.gameplay;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.ParameterizedType;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.command.CommandSender;
@@ -16,15 +15,15 @@ import pw.ian.albkit.util.Messaging;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.mixin.Mixin;
+import pw.ian.cloudgame.mixin.State;
 import pw.ian.cloudgame.model.arena.Arena;
 
 /**
  * Contains all game gameplay.
  *
  * @author ian
- * @param <T> The type of state associated with this game.
  */
-public abstract class Gameplay<T extends State> {
+public abstract class Gameplay {
 
     private final CloudGame plugin;
 
@@ -73,20 +72,6 @@ public abstract class Gameplay<T extends State> {
     }
 
     /**
-     * Creates a new state associated with this game gameplay.
-     *
-     * @return
-     */
-    public T newState() {
-        try {
-            return (T) ((Class) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0]).newInstance();
-        } catch (InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
-    /**
      * Sends a game related message to the given player.
      *
      * @param p
@@ -103,7 +88,7 @@ public abstract class Gameplay<T extends State> {
      * @param w
      * @param message
      */
-    public void sendGameMessage(Winner<? extends State> w, String message) {
+    public void sendGameMessage(Winner<? extends Participants> w, String message) {
         w.sendMessage(colorScheme.getPrefix() + "[" + name + "]" + colorScheme.getMsg() + colorScheme.replaceColors(message));
     }
 
@@ -132,11 +117,12 @@ public abstract class Gameplay<T extends State> {
      *
      * @param g
      */
-    public abstract void setup(Game<T> g);
+    public abstract void setup(Game g);
 
     /**
      * Applies a mixin to this Gameplay.
      *
+     * @param game The game to set up
      * @param clazz
      */
     protected void mixin(Class<? extends Mixin> clazz) {

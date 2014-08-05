@@ -18,7 +18,7 @@ public class GameUnspectateEvent extends GamePlayerEvent {
 
     private static final HandlerList handlers = new HandlerList();
 
-    GameUnspectateEvent(Game<?> game, Player player) {
+    GameUnspectateEvent(Game game, Player player) {
         super(game, player);
     }
 

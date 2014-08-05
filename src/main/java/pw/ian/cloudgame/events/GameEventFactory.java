@@ -16,14 +16,14 @@ import pw.ian.cloudgame.gameplay.Winner;
  */
 public class GameEventFactory {
 
-    private final Game<?> game;
+    private final Game game;
 
     /**
      * C'tor
      *
      * @param game
      */
-    public GameEventFactory(Game<?> game) {
+    public GameEventFactory(Game game) {
         this.game = game;
     }
 

@@ -3,30 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pw.ian.cloudgame.gameplay.hostedffa.listeners;
+package pw.ian.cloudgame.mixins;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import pw.ian.cloudgame.game.Game;
-import pw.ian.cloudgame.gameplay.GameListener;
-import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
-import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
+import pw.ian.cloudgame.gameplay.Gameplay;
+import pw.ian.cloudgame.mixin.Mixin;
 
 /**
  *
  * @author ian
  */
-public class FFADeathListener extends GameListener<HostedFFAState> {
+public class QuitOnDeath extends Mixin {
 
-    public FFADeathListener(HostedFFA koth) {
-        super(koth);
+    public QuitOnDeath(Gameplay gameplay) {
+        super(gameplay);
     }
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player p = e.getEntity();
-        Game<HostedFFAState> game = game(p);
+        Game game = game(p);
         if (game == null || !game.getState().isStarted()) {
             return;
         }

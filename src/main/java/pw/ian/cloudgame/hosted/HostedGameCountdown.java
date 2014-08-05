@@ -12,14 +12,14 @@ import org.bukkit.entity.Player;
 import pw.ian.albkit.util.Countdown;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.game.Game;
-import pw.ian.cloudgame.gameplay.State;
+import pw.ian.cloudgame.gameplay.Participants;
 
 /**
  * Announces the game and starts it when the time is up.
  *
  * @param <T>
  */
-public class HostedGameCountdown<T extends State> extends Countdown {
+public class HostedGameCountdown extends Countdown {
 
     private static final Map<Integer, String> messages = new HashMap<>();
 
@@ -31,9 +31,9 @@ public class HostedGameCountdown<T extends State> extends Countdown {
         messages.put(5 * 60, "5 minutes");
     }
 
-    private final Game<T> game;
+    private final Game game;
 
-    public HostedGameCountdown(Game<T> game) {
+    public HostedGameCountdown(Game game) {
         super(messages);
         this.game = game;
     }

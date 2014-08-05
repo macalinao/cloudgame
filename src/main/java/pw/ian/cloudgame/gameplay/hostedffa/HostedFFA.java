@@ -11,17 +11,15 @@ import org.bukkit.entity.Player;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Winner;
-import pw.ian.cloudgame.gameplay.hostedffa.listeners.FFADeathListener;
-import pw.ian.cloudgame.gameplay.hostedffa.listeners.FFAGameListener;
-import pw.ian.cloudgame.gameplay.hostedffa.listeners.FFAGamePlayerListener;
 import pw.ian.cloudgame.mixins.NoCommands;
+import pw.ian.cloudgame.mixins.QuitOnDeath;
 
 /**
  *
  * @author ian
  * @param <T>
  */
-public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
+public abstract class HostedFFA extends Gameplay {
 
     private final Map<Winner, String> prizes = new HashMap<>();
 
@@ -32,9 +30,9 @@ public abstract class HostedFFA<T extends HostedFFAState> extends Gameplay<T> {
     @Override
     public void onEnable() {
         mixin(NoCommands.class);
-        getPlugin().getServer().getPluginManager().registerEvents(new FFAGameListener(this), getPlugin());
-        getPlugin().getServer().getPluginManager().registerEvents(new FFAGamePlayerListener(this), getPlugin());
-        getPlugin().getServer().getPluginManager().registerEvents(new FFADeathListener(this), getPlugin());
+        mixin(QuitOnDeath.class);
+//        getPlugin().getServer().getPluginManager().registerEvents(new FFAGameListener(this), getPlugin());
+//        getPlugin().getServer().getPluginManager().registerEvents(new FFAGamePlayerListener(this), getPlugin());
     }
 
     /**

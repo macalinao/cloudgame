@@ -17,7 +17,7 @@ public class GameStopEvent extends GameEvent {
 
     private static final HandlerList handlers = new HandlerList();
 
-    GameStopEvent(Game<?> game) {
+    GameStopEvent(Game game) {
         super(game);
     }
 

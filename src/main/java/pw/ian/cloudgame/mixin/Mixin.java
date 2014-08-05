@@ -5,18 +5,20 @@
  */
 package pw.ian.cloudgame.mixin;
 
+import java.util.HashSet;
+import java.util.Set;
+import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.GameListener;
 import pw.ian.cloudgame.gameplay.Gameplay;
-import pw.ian.cloudgame.gameplay.State;
 
 /**
  * A set of behaviors that can be applied to a Gameplay.
- *
- * @param <T> The type of the State
  */
-public abstract class Mixin<T extends State> extends GameListener<T> {
+public abstract class Mixin extends GameListener {
 
-    public Mixin(Gameplay<T> gameplay) {
+    private Set<Class<? extends State>> states = new HashSet<>();
+
+    public Mixin(Gameplay gameplay) {
         super(gameplay);
     }
 
@@ -25,6 +27,26 @@ public abstract class Mixin<T extends State> extends GameListener<T> {
      * whatever. This method is called during Gameplay#setup().
      */
     public void setup() {
+    }
+
+    /**
+     * Registers a state with the Gameplay.
+     *
+     * @param clazz
+     */
+    protected void state(Class<? extends State> clazz) {
+        states.add(clazz);
+    }
+
+    /**
+     * Applies all states of this mixin to a state.
+     *
+     * @param game
+     */
+    public void applyStates(Game game) {
+        for (Class<? extends State> state : states) {
+            game.newState(state);
+        }
     }
 
 }

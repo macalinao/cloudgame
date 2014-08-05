@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
  *
  * @author ian
  */
-public interface State {
+public interface Participants {
 
     public boolean isStarted();
 

@@ -37,7 +37,7 @@ public class GameStopCommand extends PlayerCommandHandler {
             return;
         }
 
-        Game<?> game = CloudGame.inst().getGameManager().gameAt(args.getArgument(0).rawString());
+        Game game = CloudGame.inst().getGameManager().gameAt(args.getArgument(0).rawString());
         if (game == null) {
             player.sendMessage(ChatColor.RED + "Game not found.");
             return;

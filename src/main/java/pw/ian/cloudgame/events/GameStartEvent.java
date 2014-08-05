@@ -16,7 +16,7 @@ public class GameStartEvent extends GameEvent {
 
     private static final HandlerList handlers = new HandlerList();
 
-    GameStartEvent(Game<?> game) {
+    GameStartEvent(Game game) {
         super(game);
     }
 

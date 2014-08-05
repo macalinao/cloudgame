@@ -15,21 +15,19 @@ import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
-import pw.ian.cloudgame.events.GameEventFactory;
-import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.GameListener;
 import pw.ian.cloudgame.gameplay.Gameplay;
-import pw.ian.cloudgame.gameplay.State;
+import pw.ian.cloudgame.gameplay.Participants;
 
 /**
  *
  * @author ian
  * @param <T>
  */
-public class SpectatorListener<T extends State> extends GameListener<T> {
+public class SpectatorListener extends GameListener {
 
-    public SpectatorListener(Gameplay<T> gameplay) {
+    public SpectatorListener(Gameplay gameplay) {
         super(gameplay);
     }
 
@@ -39,7 +37,7 @@ public class SpectatorListener<T extends State> extends GameListener<T> {
             return;
         }
 
-        Game<T> game = gameSpectated(e.getPlayer());
+        Game game = gameSpectated(e.getPlayer());
         if (game == null) {
             return;
         }
@@ -53,7 +51,7 @@ public class SpectatorListener<T extends State> extends GameListener<T> {
 
     @EventHandler
     public void onSpectatorPickupItem(PlayerPickupItemEvent e) {
-        Game<T> game = gameSpectated(e.getPlayer());
+        Game game = gameSpectated(e.getPlayer());
         if (game == null) {
             return;
         }
@@ -67,7 +65,7 @@ public class SpectatorListener<T extends State> extends GameListener<T> {
             return;
         }
 
-        Game<T> game = gameSpectated((Player) e.getDamager());
+        Game game = gameSpectated((Player) e.getDamager());
         if (game == null) {
             return;
         }
@@ -81,7 +79,7 @@ public class SpectatorListener<T extends State> extends GameListener<T> {
             return;
         }
 
-        Game<T> game = gameSpectated((Player) e.getEntity());
+        Game game = gameSpectated((Player) e.getEntity());
         if (game == null) {
             return;
         }
@@ -96,7 +94,7 @@ public class SpectatorListener<T extends State> extends GameListener<T> {
                 continue;
             }
 
-            Game<T> game = gameSpectated((Player) ent);
+            Game game = gameSpectated((Player) ent);
             if (game == null) {
                 continue;
             }
@@ -107,7 +105,7 @@ public class SpectatorListener<T extends State> extends GameListener<T> {
 
     @EventHandler
     public void onSpectatorInteract(PlayerInteractEvent e) {
-        Game<T> game = gameSpectated(e.getPlayer());
+        Game game = gameSpectated(e.getPlayer());
         if (game == null) {
             return;
         }
