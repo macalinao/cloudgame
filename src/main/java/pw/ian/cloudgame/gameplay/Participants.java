@@ -25,6 +25,8 @@ public interface Participants {
     public boolean hasPlayer(Player p);
 
     public boolean hasSpectator(Player p);
+    
+    public void removeSpectator(Player p);
 
     public List<Player> getParticipants();
 

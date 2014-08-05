@@ -5,6 +5,7 @@
  */
 package pw.ian.cloudgame.mixins;
 
+import me.confuser.barapi.BarAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -14,6 +15,7 @@ import org.bukkit.event.EventPriority;
 import pw.ian.cloudgame.events.GameEndEvent;
 import pw.ian.cloudgame.events.GameStartEvent;
 import pw.ian.cloudgame.events.GameStopEvent;
+import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Participants;
@@ -34,6 +36,17 @@ public class BasicFlowControl extends Mixin {
     @Override
     public void setup() {
         state(Status.class);
+    }
+
+    @EventHandler
+    public void onGameUnspectate(GameUnspectateEvent event) {
+        Game game = game(event);
+        if (game == null) {
+            return;
+        }
+
+        Player p = event.getPlayer();
+        game.getParticipants().removeSpectator(p);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
