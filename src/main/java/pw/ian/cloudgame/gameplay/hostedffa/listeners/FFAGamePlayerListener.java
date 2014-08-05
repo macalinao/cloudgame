@@ -18,7 +18,7 @@ import pw.ian.cloudgame.events.GameSpectateEvent;
 import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.GameListener;
-import pw.ian.cloudgame.gameplay.GameMaster;
+import pw.ian.cloudgame.gameplay.Participants;
 import pw.ian.cloudgame.hosted.Host;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
@@ -27,7 +27,7 @@ import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
  *
  * @author ian
  */
-public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
+public class FFAGamePlayerListener extends GameListener {
 
     private boolean barAPI;
 
@@ -39,12 +39,12 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
 
     @EventHandler
     public void onGameJoin(GameJoinEvent event) {
-        Game<HostedFFAState> game = game(event);
+        Game game = game(event);
         if (game == null) {
             return;
         }
 
-        HostedFFAState state = game.getState();
+        HostedFFAState state = (HostedFFAState) game.getParticipants();
         Player p = event.getPlayer();
 
         if (state.isStarted()) {
@@ -69,12 +69,12 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
 
     @EventHandler
     public void onGameLeave(GameLeaveEvent event) {
-        Game<HostedFFAState> game = game(event);
+        Game game = game(event);
         if (game == null) {
             return;
         }
 
-        HostedFFAState state = game.getState();
+        HostedFFAState state = (HostedFFAState) game.getParticipants();
         Player p = event.getPlayer();
 
         if (!state.isStarted()) {
@@ -108,7 +108,7 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
         }
 
         if (!failedKillsCheck && !failedDistanceCheck) {
-            game.getState().removePlayer(p);
+            ((HostedFFAState) game.getParticipants()).removePlayer(p);
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
             if (barAPI) {
                 BarAPI.removeBar(p);
@@ -119,18 +119,19 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
 
     @EventHandler
     public void onGameQuit(GameQuitEvent event) {
-        Game<HostedFFAState> game = game(event);
+        Game game = game(event);
         if (game == null) {
             return;
         }
 
         Player p = event.getPlayer();
-        if (game.getState().isProvideArmor()) {
+        HostedFFAState state = (HostedFFAState) game.getParticipants();
+        if (state.isProvideArmor()) {
             getGameplay().getPlugin().getPlayerStateManager().queueLoadState(event.getPlayer());
         }
         p.setGameMode(GameMode.SURVIVAL);
 
-        game.getState().removePlayer(p);
+        state.removePlayer(p);
         if (barAPI) {
             BarAPI.removeBar(p);
         }
@@ -139,24 +140,24 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
 
     @EventHandler
     public void onGameSpectate(GameSpectateEvent event) {
-        Game<HostedFFAState> game = game(event);
+        Game game = game(event);
         if (game == null) {
             return;
         }
 
         Player p = event.getPlayer();
-        if (!game.getState().isStarted()) {
+        if (!game.getParticipants().isStarted()) {
             p.sendMessage(ChatColor.RED + "The game hasn't started yet!");
             return;
         }
 
-        if (game.getState().hasPlayer(p)) {
+        if (game.getParticipants().hasPlayer(p)) {
             p.sendMessage(ChatColor.RED + "You can't use this command as a player!");
             return;
         }
 
         getGameplay().getPlugin().getPlayerStateManager().saveState(p);
-        game.getState().addSpectator(p);
+        ((HostedFFAState) game.getParticipants()).addSpectator(p);
         for (Player other : Bukkit.getOnlinePlayers()) {
             other.hidePlayer(p);
         }
@@ -171,14 +172,14 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
 
     @EventHandler
     public void onGameUnspectate(GameUnspectateEvent event) {
-        Game<HostedFFAState> game = game(event);
+        Game game = game(event);
         if (game == null) {
             return;
         }
 
         Player p = event.getPlayer();
 
-        game.getState().removeSpectator(p);
+        ((HostedFFAState) game.getParticipants()).removeSpectator(p);
         getGameplay().getPlugin().getPlayerStateManager().queueLoadState(p);
         for (Player other : Bukkit.getOnlinePlayers()) {
             other.showPlayer(p);

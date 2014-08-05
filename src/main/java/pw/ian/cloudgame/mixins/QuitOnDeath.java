@@ -26,7 +26,7 @@ public class QuitOnDeath extends Mixin {
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player p = e.getEntity();
         Game game = game(p);
-        if (game == null || !game.getState().isStarted()) {
+        if (game == null || !game.getParticipants().isStarted()) {
             return;
         }
 

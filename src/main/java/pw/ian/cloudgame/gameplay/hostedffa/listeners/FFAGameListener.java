@@ -26,7 +26,7 @@ import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAWinner;
  *
  * @author ian
  */
-public class FFAGameListener extends GameListener<HostedFFAState> {
+public class FFAGameListener extends GameListener {
 
     public FFAGameListener(HostedFFA ffa) {
         super(ffa);
@@ -34,7 +34,7 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void preGameStart(GameStartEvent event) {
-        Game<HostedFFAState> game = game(event);
+        Game game = game(event);
         if (game == null) {
             return;
         }
@@ -44,7 +44,7 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
                     "Type $D/" + getGameplay().getId() + " spectate $Lto spectate it!");
         }
 
-        HostedFFAState state = game.getState();
+        HostedFFAState state = (HostedFFAState) game.getParticipants();
         for (Player p : state.getPlayers()) {
             Location spawn = game.getArena().getNextSpawn();
             if (state.isProvideArmor()) {
@@ -59,7 +59,7 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void preGameEnd(GameEndEvent event) {
-        Game<HostedFFAState> game = game(event);
+        Game game = game(event);
         if (game == null) {
             return;
         }
@@ -70,13 +70,13 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
         } else {
             game.broadcast("$H" + winner.getPlayer().getName() + "$M won the " + getGameplay().getName() + "!");
             getGameplay().sendGameMessage(winner, "To redeem your prize, type $H/" + getGameplay().getId() + " redeem$M!");
-            ((HostedFFA) getGameplay()).addPrize(winner, game.getState().isProvideArmor() ? "easy" : "hard");
+            ((HostedFFA) getGameplay()).addPrize(winner, ((HostedFFAState) game.getParticipants()).isProvideArmor() ? "easy" : "hard");
         }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void postGameEnd(GameEndEvent event) {
-        Game<HostedFFAState> game = game(event);
+        Game game = game(event);
         if (game == null) {
             return;
         }
@@ -85,11 +85,11 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void preGameStop(GameStopEvent event) {
-        Game<HostedFFAState> game = game(event);
+        Game game = game(event);
         if (game == null) {
             return;
         }
-        HostedFFAState state = game.getState();
+        HostedFFAState state = (HostedFFAState) game.getParticipants();
 
         if (!state.isStarted()) {
             game.broadcast("The " + getGameplay().getName() + " has been cancelled.");
@@ -106,11 +106,11 @@ public class FFAGameListener extends GameListener<HostedFFAState> {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void postGameStop(GameStopEvent event) {
-        Game<HostedFFAState> game = game(event);
+        Game game = game(event);
         if (game == null) {
             return;
         }
-        game.getState().setOver();
+        ((HostedFFAState) game.getParticipants()).setOver();
         getGameplay().getPlugin().getGameManager().removeGame(game);
     }
 

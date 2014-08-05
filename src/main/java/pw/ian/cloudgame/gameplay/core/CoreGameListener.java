@@ -41,7 +41,7 @@ public class CoreGameListener extends GameListener {
             return;
         }
 
-        if (!game.getState().isStarted()) {
+        if (!game.getParticipants().isStarted()) {
             return;
         }
 

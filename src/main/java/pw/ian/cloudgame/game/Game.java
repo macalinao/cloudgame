@@ -54,7 +54,7 @@ public class Game {
         return arena;
     }
 
-    public Participants getState() {
+    public Participants getParticipants() {
         return participants;
     }
 

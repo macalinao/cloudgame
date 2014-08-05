@@ -43,7 +43,7 @@ public abstract class GameTask<T extends Participants> {
 
         @Override
         public void run() {
-            if (GameTask.this.game.getState().isOver()) {
+            if (GameTask.this.game.getParticipants().isOver()) {
                 cancel();
                 return;
             }

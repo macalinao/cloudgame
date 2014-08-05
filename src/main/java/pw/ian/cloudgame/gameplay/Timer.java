@@ -34,7 +34,7 @@ public abstract class Timer<T extends Participants> extends GameTask<T> {
 
     @Override
     public void run() {
-        if (game.getState().isStarted()) {
+        if (game.getParticipants().isStarted()) {
             cancel();
             return;
         }

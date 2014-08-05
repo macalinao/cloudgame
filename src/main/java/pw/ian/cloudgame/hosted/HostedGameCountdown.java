@@ -40,7 +40,7 @@ public class HostedGameCountdown extends Countdown {
 
     @Override
     public boolean checkCondition() {
-        return !(game.getState().isStarted() || game.getState().isOver());
+        return !(game.getParticipants().isStarted() || game.getParticipants().isOver());
     }
 
     @Override
@@ -49,7 +49,7 @@ public class HostedGameCountdown extends Countdown {
             game.getGameplay().sendBanner(p,
                     "A " + game.getGameplay().getName() + " on map $D" + game.getArena().getName() + " $Lis starting in $D" + time + "$L!",
                     "Type $D/" + game.getGameplay().getId() + " join $Lto join $D"
-                    + game.getState().getPlayers().size() + " $Lother players!");
+                    + game.getParticipants().getPlayers().size() + " $Lother players!");
         }
     }
 

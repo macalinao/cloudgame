@@ -23,7 +23,7 @@ public class NoCommands extends Mixin {
     @EventHandler
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
         Game game = game(e.getPlayer());
-        if (game != null && game.getState().isStarted() && !e.getMessage().startsWith("/" + getGameplay().getId())) {
+        if (game != null && game.getParticipants().isStarted() && !e.getMessage().startsWith("/" + getGameplay().getId())) {
             e.setCancelled(true);
         }
     }
@@ -31,7 +31,7 @@ public class NoCommands extends Mixin {
     @EventHandler
     public void onSpectatorCommandPreprocess(PlayerCommandPreprocessEvent e) {
         Game game = gameSpectated(e.getPlayer());
-        if (game != null && game.getState().isStarted()
+        if (game != null && game.getParticipants().isStarted()
                 && !e.getMessage().startsWith("/" + getGameplay().getId()) && !e.getMessage().startsWith("/msg") && !e.getMessage().startsWith("/r ")) {
             e.setCancelled(true);
         }

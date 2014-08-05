@@ -108,7 +108,7 @@ public class GameManager {
      */
     public Game spectatedGameOf(Player p) {
         for (Game g : games.values()) {
-            if (g.getState().getSpectators().contains(p)) {
+            if (g.getParticipants().getSpectators().contains(p)) {
                 return g;
             }
         }
@@ -123,7 +123,7 @@ public class GameManager {
      */
     public Game gameOf(Player p) {
         for (Game g : games.values()) {
-            if (g.getState().getPlayers().contains(p)) {
+            if (g.getParticipants().getPlayers().contains(p)) {
                 return g;
             }
         }
