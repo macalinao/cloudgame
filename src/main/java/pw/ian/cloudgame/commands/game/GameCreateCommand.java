@@ -42,7 +42,7 @@ public class GameCreateCommand extends PlayerCommandHandler {
             return;
         }
 
-        Game game = cloudGame.getGameManager().createGame(gameplay, arena, new Host(player.getUniqueId()));
+        Game game = cloudGame.getGameManager().createGame(gameplay, arena, new Host(player));
         if (game == null) {
             gameplay.sendGameMessage(player, "Failed to create game!");
             return;
