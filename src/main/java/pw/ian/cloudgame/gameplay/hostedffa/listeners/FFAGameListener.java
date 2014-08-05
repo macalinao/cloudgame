@@ -83,27 +83,6 @@ public class FFAGameListener extends GameListener {
         game.events().stop();
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void preGameStop(GameStopEvent event) {
-        Game game = game(event);
-        if (game == null) {
-            return;
-        }
-        HostedFFAState state = (HostedFFAState) game.getParticipants();
-
-        if (!state.isStarted()) {
-            game.broadcast("The " + getGameplay().getName() + " has been cancelled.");
-        } else {
-            for (Player player : state.getSpectators()) {
-                getGameplay().getPlugin().getPlayerStateManager().queueLoadState(player);
-            }
-
-            for (Player player : state.getParticipants()) {
-                game.events().quit(player);
-            }
-        }
-    }
-
     @EventHandler(priority = EventPriority.MONITOR)
     public void postGameStop(GameStopEvent event) {
         Game game = game(event);
