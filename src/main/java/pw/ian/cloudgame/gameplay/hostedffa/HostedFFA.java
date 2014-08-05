@@ -12,8 +12,10 @@ import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Winner;
 import pw.ian.cloudgame.mixins.BasicFlowControl;
+import pw.ian.cloudgame.mixins.Core;
 import pw.ian.cloudgame.mixins.NoCommands;
 import pw.ian.cloudgame.mixins.QuitOnDeath;
+import pw.ian.cloudgame.mixins.Spectators;
 import pw.ian.cloudgame.mixins.TransientInventories;
 import pw.ian.cloudgame.mixins.TimeLimit;
 
@@ -31,7 +33,9 @@ public abstract class HostedFFA extends Gameplay {
 
     @Override
     public void onEnable() {
+        mixin(Core.class);
         mixin(BasicFlowControl.class);
+        mixin(Spectators.class);
         mixin(TimeLimit.class);
         mixin(NoCommands.class);
         mixin(QuitOnDeath.class);

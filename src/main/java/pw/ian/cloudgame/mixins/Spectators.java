@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package pw.ian.cloudgame.gameplay.core;
+package pw.ian.cloudgame.mixins;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,18 +10,21 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import pw.ian.cloudgame.game.Game;
-import pw.ian.cloudgame.gameplay.GameListener;
 import pw.ian.cloudgame.gameplay.Gameplay;
-import pw.ian.cloudgame.gameplay.Participants;
+import pw.ian.cloudgame.mixin.Mixin;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 /**
  *
  * @author ian
- * @param <T>
  */
-public class SpectatorListener extends GameListener {
+public class Spectators extends Mixin {
 
-    public SpectatorListener(Gameplay gameplay) {
+    public Spectators(Gameplay gameplay) {
         super(gameplay);
     }
 
@@ -112,5 +109,4 @@ public class SpectatorListener extends GameListener {
 
         e.setCancelled(true);
     }
-
 }

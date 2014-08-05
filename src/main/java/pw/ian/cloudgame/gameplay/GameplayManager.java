@@ -8,8 +8,6 @@ package pw.ian.cloudgame.gameplay;
 import java.util.HashMap;
 import java.util.Map;
 import pw.ian.cloudgame.CloudGame;
-import pw.ian.cloudgame.gameplay.core.CoreGameListener;
-import pw.ian.cloudgame.gameplay.core.SpectatorListener;
 
 /**
  *
@@ -41,8 +39,6 @@ public class GameplayManager {
      */
     public void addGameplay(Gameplay gameplay) {
         gameplays.put(gameplay.getId(), gameplay);
-        plugin.getServer().getPluginManager().registerEvents(new CoreGameListener(gameplay), plugin);
-        plugin.getServer().getPluginManager().registerEvents(new SpectatorListener(gameplay), plugin);
         gameplay.onEnable();
     }
 

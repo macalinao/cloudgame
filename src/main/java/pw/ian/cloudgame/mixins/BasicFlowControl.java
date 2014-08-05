@@ -5,15 +5,10 @@
  */
 package pw.ian.cloudgame.mixins;
 
-import me.confuser.barapi.BarAPI;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import pw.ian.cloudgame.events.GameEndEvent;
-import pw.ian.cloudgame.events.GameJoinEvent;
 import pw.ian.cloudgame.events.GameQuitEvent;
 import pw.ian.cloudgame.events.GameStartEvent;
 import pw.ian.cloudgame.events.GameStopEvent;
@@ -21,8 +16,6 @@ import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Participants;
-import pw.ian.cloudgame.gameplay.hostedffa.HFFAParticipants;
-import pw.ian.cloudgame.hosted.Host;
 import pw.ian.cloudgame.mixin.Mixin;
 import pw.ian.cloudgame.states.Status;
 
