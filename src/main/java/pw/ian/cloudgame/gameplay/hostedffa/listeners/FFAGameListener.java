@@ -6,20 +6,16 @@
 package pw.ian.cloudgame.gameplay.hostedffa.listeners;
 
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import pw.ian.cloudgame.events.GameEndEvent;
-import pw.ian.cloudgame.events.GameEventFactory;
-import pw.ian.cloudgame.events.GameQuitEvent;
 import pw.ian.cloudgame.events.GameStartEvent;
-import pw.ian.cloudgame.events.GameStopEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.GameListener;
+import pw.ian.cloudgame.gameplay.Participants;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
-import pw.ian.cloudgame.gameplay.hostedffa.HFFAParticipants;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAWinner;
 
 /**
@@ -44,7 +40,7 @@ public class FFAGameListener extends GameListener {
                     "Type $D/" + getGameplay().getId() + " spectate $Lto spectate it!");
         }
 
-        HFFAParticipants state = (HFFAParticipants) game.getParticipants();
+        Participants state = game.getParticipants();
         for (Player p : state.getPlayers()) {
             Location spawn = game.getArena().getNextSpawn();
             p.teleport(spawn);
@@ -64,7 +60,7 @@ public class FFAGameListener extends GameListener {
         } else {
             game.broadcast("$H" + winner.getPlayer().getName() + "$M won the " + getGameplay().getName() + "!");
             getGameplay().sendGameMessage(winner, "To redeem your prize, type $H/" + getGameplay().getId() + " redeem$M!");
-            ((HostedFFA) getGameplay()).addPrize(winner, ((HFFAParticipants) game.getParticipants()).isProvideArmor() ? "easy" : "hard");
+            ((HostedFFA) getGameplay()).addPrize(winner, "easy"); // TODO make prizes a mixin
         }
     }
 

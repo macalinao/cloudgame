@@ -11,10 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.entity.Player;
 import pw.ian.cloudgame.events.GameEventFactory;
+import pw.ian.cloudgame.gameplay.FFAParticipants;
 import pw.ian.cloudgame.gameplay.GameMaster;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Participants;
-import pw.ian.cloudgame.gameplay.hostedffa.HFFAParticipants;
 import pw.ian.cloudgame.mixin.State;
 import pw.ian.cloudgame.model.arena.Arena;
 import pw.ian.cloudgame.stats.Stats;
@@ -42,7 +42,7 @@ public class Game {
         this.gameplay = gameplay;
         this.arena = arena;
         this.master = master;
-        participants = new HFFAParticipants();
+        participants = new FFAParticipants();
         stats = new Stats();
     }
 

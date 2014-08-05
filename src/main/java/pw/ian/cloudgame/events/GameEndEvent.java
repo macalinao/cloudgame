@@ -17,14 +17,14 @@ public class GameEndEvent extends GameEvent {
 
     private static final HandlerList handlers = new HandlerList();
 
-    private final Winner<?> winner;
+    private final Winner winner;
 
-    GameEndEvent(Game game, Winner<?> winner) {
+    GameEndEvent(Game game, Winner winner) {
         super(game);
         this.winner = winner;
     }
 
-    public Winner<?> getWinner() {
+    public Winner getWinner() {
         return winner;
     }
 

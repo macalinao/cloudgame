@@ -15,7 +15,6 @@ import pw.ian.albkit.util.Messaging;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.mixin.Mixin;
-import pw.ian.cloudgame.mixin.State;
 import pw.ian.cloudgame.model.arena.Arena;
 
 /**
@@ -88,7 +87,7 @@ public abstract class Gameplay {
      * @param w
      * @param message
      */
-    public void sendGameMessage(Winner<? extends Participants> w, String message) {
+    public void sendGameMessage(Winner w, String message) {
         w.sendMessage(colorScheme.getPrefix() + "[" + name + "]" + colorScheme.getMsg() + colorScheme.replaceColors(message));
     }
 

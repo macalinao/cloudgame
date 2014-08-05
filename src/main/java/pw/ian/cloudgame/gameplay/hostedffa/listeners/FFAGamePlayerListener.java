@@ -21,7 +21,6 @@ import pw.ian.cloudgame.gameplay.FFAParticipants;
 import pw.ian.cloudgame.gameplay.GameListener;
 import pw.ian.cloudgame.hosted.Host;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
-import pw.ian.cloudgame.gameplay.hostedffa.HFFAParticipants;
 import pw.ian.cloudgame.states.Status;
 
 /**
@@ -111,7 +110,7 @@ public class FFAGamePlayerListener extends GameListener {
         }
 
         if (!failedKillsCheck && !failedDistanceCheck) {
-            ((HFFAParticipants) game.getParticipants()).removePlayer(p);
+            game.getParticipants().removePlayer(p);
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
             if (barAPI) {
                 BarAPI.removeBar(p);
@@ -155,7 +154,6 @@ public class FFAGamePlayerListener extends GameListener {
         }
 
         getGameplay().getPlugin().getPlayerStateManager().saveState(p);
-        ((HFFAParticipants) game.getParticipants()).addSpectator(p);
         for (Player other : Bukkit.getOnlinePlayers()) {
             other.hidePlayer(p);
         }
