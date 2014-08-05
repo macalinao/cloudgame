@@ -13,6 +13,7 @@ import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Winner;
 import pw.ian.cloudgame.gameplay.hostedffa.listeners.FFAGameListener;
 import pw.ian.cloudgame.gameplay.hostedffa.listeners.FFAGamePlayerListener;
+import pw.ian.cloudgame.mixins.Announcements;
 import pw.ian.cloudgame.mixins.BasicFlowControl;
 import pw.ian.cloudgame.mixins.Core;
 import pw.ian.cloudgame.mixins.NoCommands;
@@ -42,6 +43,7 @@ public abstract class HostedFFA extends Gameplay {
         mixin(NoCommands.class);
         mixin(QuitOnDeath.class);
         mixin(TransientInventories.class);
+        mixin(Announcements.class);
 
         getPlugin().getServer().getPluginManager().registerEvents(new FFAGameListener(this), getPlugin());
         getPlugin().getServer().getPluginManager().registerEvents(new FFAGamePlayerListener(this), getPlugin());

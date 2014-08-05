@@ -6,6 +6,7 @@
 package pw.ian.cloudgame.events;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import pw.ian.cloudgame.game.Game;
 
@@ -14,9 +15,11 @@ import pw.ian.cloudgame.game.Game;
  *
  * @author ian
  */
-public class GameUnspectateEvent extends GamePlayerEvent {
+public class GameUnspectateEvent extends GamePlayerEvent implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();
+
+    private boolean cancelled = false;
 
     GameUnspectateEvent(Game game, Player player) {
         super(game, player);
@@ -29,5 +32,15 @@ public class GameUnspectateEvent extends GamePlayerEvent {
 
     public static HandlerList getHandlerList() {
         return handlers;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

@@ -11,6 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import pw.ian.cloudgame.events.GameJoinEvent;
 import pw.ian.cloudgame.events.GameLeaveEvent;
 import pw.ian.cloudgame.events.GameQuitEvent;
@@ -37,7 +38,7 @@ public class FFAGamePlayerListener extends GameListener {
         barAPI = koth.getPlugin().getServer().getPluginManager().isPluginEnabled("BarAPI");
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onGameJoin(GameJoinEvent event) {
         Game game = game(event);
         if (game == null) {
@@ -49,23 +50,24 @@ public class FFAGamePlayerListener extends GameListener {
 
         if (status.isStarted()) {
             game.getGameplay().sendGameMessage(p, "You can't join a " + getGameplay().getId() + " that is already in progress.");
+            event.setCancelled(true);
             return;
         }
 
         FFAParticipants parts = (FFAParticipants) game.getParticipants();
         if (parts.hasPlayer(p)) {
             game.getGameplay().sendGameMessage(p, "You have already joined the " + getGameplay().getId() + " queue!");
+            event.setCancelled(true);
             return;
         }
 
         if (game.getGameMaster() instanceof Host && p.getUniqueId().equals(((Host) game.getGameMaster()).getUniqueId())) {
             game.getGameplay().sendGameMessage(p, "You can't join the game if you are the host!");
+            event.setCancelled(true);
             return;
         }
 
         parts.addPlayer(p);
-        getGameplay().sendBanner(p, "You've joined the " + getGameplay().getId() + "! Pay attention to the countdown.",
-                "Want to leave the game? Type $D/" + getGameplay().getId() + " leave$L!");
     }
 
     @EventHandler
@@ -109,14 +111,17 @@ public class FFAGamePlayerListener extends GameListener {
             game.getGameplay().sendGameMessage(p, "You must be at least 20 blocks away from another player!");
         }
 
-        if (!failedKillsCheck && !failedDistanceCheck) {
-            game.getParticipants().removePlayer(p);
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
-            if (barAPI) {
-                BarAPI.removeBar(p);
-            }
-            game.getGameplay().sendGameMessage(p, "You have left the game.");
+        if (failedKillsCheck || failedDistanceCheck) {
+            event.setCancelled(true);
+            return;
         }
+
+        game.getParticipants().removePlayer(p);
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
+        if (barAPI) {
+            BarAPI.removeBar(p);
+        }
+        game.getGameplay().sendGameMessage(p, "You have left the game.");
     }
 
     @EventHandler
@@ -135,7 +140,7 @@ public class FFAGamePlayerListener extends GameListener {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onGameSpectate(GameSpectateEvent event) {
         Game game = game(event);
         if (game == null) {
@@ -145,11 +150,13 @@ public class FFAGamePlayerListener extends GameListener {
         Player p = event.getPlayer();
         if (!game.state(Status.class).isStarted()) {
             p.sendMessage(ChatColor.RED + "The game hasn't started yet!");
+            event.setCancelled(true);
             return;
         }
 
         if (game.getParticipants().hasPlayer(p)) {
             p.sendMessage(ChatColor.RED + "You can't use this command as a player!");
+            event.setCancelled(true);
             return;
         }
 
@@ -166,7 +173,7 @@ public class FFAGamePlayerListener extends GameListener {
         game.getGameplay().sendGameMessage(p, "Type /" + getGameplay().getId() + " spectate again to exit the mode!");
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onGameUnspectate(GameUnspectateEvent event) {
         Game game = game(event);
         if (game == null) {

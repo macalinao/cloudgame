@@ -35,11 +35,6 @@ public class FFAGameListener extends GameListener {
             return;
         }
 
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            getGameplay().sendBanner(p, "A " + getGameplay().getName() + " on map $D" + game.getArena().getName() + " $Lhas started!",
-                    "Type $D/" + getGameplay().getId() + " spectate $Lto spectate it!");
-        }
-
         Participants state = game.getParticipants();
         for (Player p : state.getPlayers()) {
             Location spawn = game.getArena().getNextSpawn();
