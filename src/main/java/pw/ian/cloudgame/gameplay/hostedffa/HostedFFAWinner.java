@@ -1,29 +1,12 @@
 package pw.ian.cloudgame.gameplay.hostedffa;
 
-import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import pw.ian.cloudgame.gameplay.Winner;
+import pw.ian.cloudgame.gameplay.core.PlayerWinner;
 
-public class HostedFFAWinner<T extends HostedFFAState> implements Winner<T> {
-
-    private final UUID winner;
-
+public class HostedFFAWinner<T extends HostedFFAState> extends PlayerWinner<T> {
     public HostedFFAWinner(Player winner) {
-        this.winner = winner.getUniqueId();
-    }
-
-    public Player getPlayer() {
-        return Bukkit.getPlayer(winner);
-    }
-
-    public UUID getPlayerId() {
-        return winner;
-    }
-
-    @Override
-    public void sendMessage(String message) {
-        getPlayer().sendMessage(message);
+        super(winner);
     }
 
     /**
