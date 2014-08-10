@@ -3,6 +3,8 @@ package pw.ian.cloudgame;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import pw.ian.albkit.AlbPlugin;
 import pw.ian.albkit.command.Commands;
 import pw.ian.cloudgame.commands.arena.ArenaCommand;
 import pw.ian.cloudgame.commands.game.GameCommand;
@@ -12,7 +14,7 @@ import pw.ian.cloudgame.gameplay.GameplayManager;
 import pw.ian.cloudgame.model.ModelManager;
 import pw.ian.cloudgame.playerstate.PlayerStateManager;
 
-public class CloudGame extends JavaPlugin {
+public class CloudGame extends AlbPlugin {
 
     private static CloudGame i;
 
@@ -30,6 +32,7 @@ public class CloudGame extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        init();
         i = this;
 
         saveDefaultConfig();
@@ -48,7 +51,7 @@ public class CloudGame extends JavaPlugin {
         playerStateManager.setupStateRestoreQueueProcessTask();
 
         gameManager = new GameManager(this);
-        getServer().getPluginManager().registerEvents(new CoreListener(this), this);
+        pluginMgr.registerEvents(new CoreListener(this), this);
     }
 
     @Override
