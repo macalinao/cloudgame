@@ -36,4 +36,19 @@ public class Stats {
         return sum;
     }
 
+    public int getDeathCount(Player p) {
+        UUID uuid = p.getUniqueId();
+        int sum = 0;
+        for (Death d : deaths) {
+            if (uuid.equals(d.getPlayer())) {
+                sum++;
+            }
+        }
+        return sum;
+    }
+
+    public double getKDRatio(Player p) {
+        return getKillCount(p) / getDeathCount(p);
+    }
+
 }
