@@ -7,7 +7,7 @@ import org.bukkit.Location;
 /**
  * A GameMaster implementation where the game master is a lobby
  */
-public class LobbyGameMaster implements GameMaster {
+public class Lobby implements GameMaster {
     private Location lobbySpawn;
 
     public Location getLobbySpawn() {
