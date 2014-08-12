@@ -20,6 +20,9 @@ import pw.ian.cloudgame.gameplay.Mixin;
 import pw.ian.cloudgame.states.Status;
 
 /**
+ * A mixin which controls the basic 'flow' of a game. This involves handling
+ * players joining, quitting and spectating the game and calling events for when
+ * the game starts or ends.
  *
  * @author ian
  */

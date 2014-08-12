@@ -14,6 +14,7 @@ import pw.ian.cloudgame.gameplay.Mixin;
 import pw.ian.cloudgame.states.Status;
 
 /**
+ * A mixin which causes players to quit the game when they die.
  *
  * @author ian
  */

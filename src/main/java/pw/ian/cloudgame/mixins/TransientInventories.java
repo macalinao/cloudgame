@@ -5,9 +5,7 @@
  */
 package pw.ian.cloudgame.mixins;
 
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -18,7 +16,8 @@ import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Mixin;
 
 /**
- * Gives players a temporary inventory for the games.
+ * Gives players a temporary inventory for the games. The old inventory is
+ * stored and restored after the game.
  */
 public class TransientInventories extends Mixin {
 

@@ -33,7 +33,6 @@ public class CoreListener implements Listener {
 
         final String spawnName = e.getPlayer().getName();
         (new BukkitRunnable() {
-
             @Override
             public void run() {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + spawnName);

@@ -10,8 +10,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 /**
+ * Stores the state of a player - their XP and inventory - for the duration of
+ * a game which uses the TransientInventories mixin so it can be restored after
+ * the game ends.
  *
- * @author simplyianm
+ * @author ian
  */
 public class PlayerState {
 
@@ -33,6 +36,11 @@ public class PlayerState {
         armor = p.getInventory().getArmorContents();
     }
 
+    /**
+     * Restores the given {@link Player} to the stored state
+     *
+     * @param p The {@link Player} to restore this state for
+     */
     public void restore(Player p) {
         p.setExp(xp);
         p.getInventory().setContents(main);

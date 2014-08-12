@@ -8,6 +8,7 @@ package pw.ian.cloudgame.playerstate;
 import org.bukkit.scheduler.BukkitRunnable;
 
 /**
+ * Restores {@link PlayerState}s after a game
  *
  * @author ian
  */

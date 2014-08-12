@@ -8,6 +8,8 @@ package pw.ian.cloudgame.states;
 import pw.ian.cloudgame.gameplay.State;
 
 /**
+ * A game {@link State} which sets a time limit on the game, providing a simple
+ * check for the amount of time the game has remaining
  *
  * @author ian
  */

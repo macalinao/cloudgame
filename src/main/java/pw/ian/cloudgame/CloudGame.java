@@ -15,10 +15,21 @@ import pw.ian.cloudgame.gameplay.GameplayManager;
 import pw.ian.cloudgame.model.ModelManager;
 import pw.ian.cloudgame.playerstate.PlayerStateManager;
 
+/**
+ * The plugin main class for CloudGame, a flexible, scalable minigames framework
+ * for the Bukkit API
+ */
 public class CloudGame extends AlbPlugin {
-
+    /**
+     * The CloudGame instance
+     */
     private static CloudGame i;
 
+    /**
+     * Gets the CloudGame instance
+     *
+     * @return The CloudGame plugin instance
+     */
     public static CloudGame inst() {
         return i;
     }
@@ -87,6 +98,12 @@ public class CloudGame extends AlbPlugin {
         return playerStateManager;
     }
 
+    /**
+     * Registers the given {@link Gameplay} with CloudGame. This also calls the
+     * {@link Gameplay}'s onEnable() method
+     *
+     * @param gameplay The {@link Gameplay} to register
+     */
     public void addGameplay(Gameplay gameplay) {
         gameplayManager.addGameplay(gameplay);
     }

@@ -11,6 +11,7 @@ import java.util.UUID;
 import org.bukkit.entity.Player;
 
 /**
+ * Provides player kills and deaths statistics for minigames
  *
  * @author ian
  */

@@ -29,6 +29,8 @@ import pw.ian.cloudgame.hosted.PlayerHost;
 import pw.ian.cloudgame.states.Status;
 
 /**
+ * Provides the functionality required for a basic free-for-all game, such as
+ * teleporting players to different spawn points when the game starts and more
  *
  * @author ian
  */

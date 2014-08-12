@@ -1,6 +1,5 @@
 package pw.ian.cloudgame.mixins;
 
-import me.confuser.barapi.BarAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;

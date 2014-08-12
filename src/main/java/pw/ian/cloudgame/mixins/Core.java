@@ -7,8 +7,6 @@ package pw.ian.cloudgame.mixins;
 
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,7 +18,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import pw.ian.cloudgame.events.GameJoinEvent;
 import pw.ian.cloudgame.events.GameLeaveEvent;
-import pw.ian.cloudgame.events.GameQuitEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Participants;
@@ -29,6 +26,9 @@ import pw.ian.cloudgame.states.Status;
 import pw.ian.cloudgame.stats.Death;
 
 /**
+ * Provides core functionality for a minigame. This involves stopping players
+ * from leaving the arena, handling players joining and leaving a game and
+ * handling player deaths
  *
  * @author ian
  */

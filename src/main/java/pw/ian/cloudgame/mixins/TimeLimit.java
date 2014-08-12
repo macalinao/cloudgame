@@ -10,6 +10,7 @@ import pw.ian.cloudgame.gameplay.Mixin;
 import pw.ian.cloudgame.states.RemainingTime;
 
 /**
+ * A mixin which enforces a time limit on the minigame it is applied to
  *
  * @author ian
  */

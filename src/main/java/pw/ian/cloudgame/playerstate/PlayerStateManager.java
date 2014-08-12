@@ -35,7 +35,7 @@ public class PlayerStateManager {
     }
 
     /**
-     * Sets up the task
+     * Sets up the restore task
      */
     public void setupStateRestoreQueueProcessTask() {
         (new PlayerStateRestoreQueueProcessTask(this)).runTaskTimer(plugin, 1L, 1L);
@@ -44,7 +44,7 @@ public class PlayerStateManager {
     /**
      * Queues loading of a player's saved state. Use this method!!
      *
-     * @param p
+     * @param p The {@link Player} to queue for loading
      */
     public void queueLoadState(Player p) {
         stateRestoreQueue.add(p.getUniqueId());
@@ -53,7 +53,7 @@ public class PlayerStateManager {
     /**
      * Loads a player's saved state.
      *
-     * @param p
+     * @param p The {@link Player} to load the state for
      */
     private void loadState(Player p) {
         PlayerState is = states.get(p.getUniqueId());
@@ -68,7 +68,7 @@ public class PlayerStateManager {
     /**
      * Saves the current state of a player.
      *
-     * @param p
+     * @param p The {@link Player} to save the state of
      */
     public void saveState(Player p) {
         PlayerInventory i = p.getInventory();

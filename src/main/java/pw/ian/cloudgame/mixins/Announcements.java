@@ -15,7 +15,7 @@ import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Mixin;
 
 /**
- * Global announcements when the game starts/ends.
+ * A mixin providing global announcements when the game starts/ends.
  */
 public class Announcements extends Mixin {
 

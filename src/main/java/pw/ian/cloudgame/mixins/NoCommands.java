@@ -13,7 +13,7 @@ import pw.ian.cloudgame.gameplay.Mixin;
 import pw.ian.cloudgame.states.Status;
 
 /**
- * Prevents usage of commands.
+ * Prevents usage of commands during a minigame.
  */
 public class NoCommands extends Mixin {
 

@@ -8,7 +8,8 @@ package pw.ian.cloudgame.states;
 import pw.ian.cloudgame.gameplay.State;
 
 /**
- * Stores game status
+ * A {@link State} storing basic data about the current status of a game - for
+ * example, when it started, and whether it is finished yet
  */
 public class Status extends State {
 
