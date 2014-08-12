@@ -2,12 +2,12 @@ package pw.ian.cloudgame;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import pw.ian.albkit.AlbPlugin;
 import pw.ian.albkit.command.Commands;
 import pw.ian.cloudgame.commands.arena.ArenaCommand;
 import pw.ian.cloudgame.commands.game.GameCommand;
+import pw.ian.cloudgame.commands.gameplay.GameplayCommand;
 import pw.ian.cloudgame.game.GameManager;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.GameplayManager;
@@ -40,6 +40,7 @@ public class CloudGame extends AlbPlugin {
         if (getConfig().getBoolean("register-commands", true)) {
             Commands.registerCommand(this, new ArenaCommand(this));
             Commands.registerCommand(this, new GameCommand());
+            Commands.registerCommand(this, new GameplayCommand());
         }
 
         modelManager = new ModelManager(this);

@@ -5,7 +5,9 @@
  */
 package pw.ian.cloudgame.gameplay;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import pw.ian.cloudgame.CloudGame;
 
@@ -50,6 +52,15 @@ public class GameplayManager {
      */
     public Gameplay getGameplay(String id) {
         return gameplays.get(id);
+    }
+
+    /**
+     * Gets a list of all registered Gameplays.
+     *
+     * @return
+     */
+    public List<Gameplay> getGameplays() {
+        return new ArrayList<>(gameplays.values());
     }
 
 }
