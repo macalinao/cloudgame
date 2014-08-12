@@ -37,7 +37,12 @@ public class GameplayListCommand extends CommandHandler {
         for (Gameplay gp : cg.getGameplayManager().getGameplays()) {
             memo.add("$H" + gp.getName());
         }
-        Messaging.sendBanner(ColorScheme.DEFAULT, sender, memo.toArray(new String[0]));
+        if (memo.size() > 0) {
+            Messaging.sendBanner(ColorScheme.DEFAULT, sender, memo.toArray(new String[0]));
+            return;
+        }
+
+        sender.sendMessage(ChatColor.RED + "There are no gameplays currently registered on the server.");
     }
 
 }
