@@ -16,6 +16,9 @@ commands:
     game:
         description: Handles games.
         usage: /game <subcommand> [args]
+    gameplay:
+        description: Gameplay command
+        usage: /gameplay <subcommand> [args]
 
 permissions:
     cloudgame.admin:
