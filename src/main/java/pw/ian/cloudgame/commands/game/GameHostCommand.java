@@ -35,13 +35,13 @@ public class GameHostCommand extends CommandHandler {
             return;
         }
 
-        Gameplay gameplay = cloudGame.getGameplayManager().getGameplay(args.getRaw(1));
+        Gameplay gameplay = cloudGame.getGameplayManager().getGameplay(args.getRaw(0));
         if (gameplay == null) {
             sender.sendMessage(ChatColor.RED + "That game type doesn't exist!");
             return;
         }
 
-        Arena arena = cloudGame.getModelManager().getArenas().find(args.getRaw(2));
+        Arena arena = cloudGame.getModelManager().getArenas().find(args.getRaw(1));
         if (arena == null) {
             gameplay.sendGameMessage(sender, "That arena doesn't exist!");
             return;
