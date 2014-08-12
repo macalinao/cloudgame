@@ -59,8 +59,6 @@ public class FFAGamePlayerListener extends GameListener {
             event.setCancelled(true);
             return;
         }
-
-        parts.addPlayer(p);
     }
 
     @EventHandler

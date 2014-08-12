@@ -69,6 +69,8 @@ public class Core extends Mixin {
             event.setCancelled(true);
             return;
         }
+
+        participants.addPlayer(player);
     }
 
     @EventHandler
