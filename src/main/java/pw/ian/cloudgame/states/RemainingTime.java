@@ -19,8 +19,9 @@ public class RemainingTime extends State {
         return mins;
     }
 
-    public void setMins(int mins) {
+    public RemainingTime setMins(int mins) {
         this.mins = mins;
+        return this;
     }
 
     public int remainingTime() {
