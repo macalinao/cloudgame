@@ -9,12 +9,16 @@ import java.util.UUID;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+
+import pw.ian.cloudgame.events.GameJoinEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
+import pw.ian.cloudgame.gameplay.Participants;
 import pw.ian.cloudgame.gameplay.Mixin;
 import pw.ian.cloudgame.states.Status;
 import pw.ian.cloudgame.stats.Death;
@@ -49,6 +53,24 @@ public class Core extends Mixin {
         }
 
         game.events().quit(e.getPlayer());
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onGameJoin(GameJoinEvent event) {
+        Game game = game(event);
+        if (game == null) {
+            return;
+        }
+
+        Player player = event.getPlayer();
+        Participants participants = game.getParticipants();
+        if (participants.hasPlayer(player)) {
+            game.getGameplay().sendGameMessage(player, "You have already joined the " + getGameplay().getId() + " queue!");
+            event.setCancelled(true);
+            return;
+        }
+
+        participants.addPlayer(player);
     }
 
     @EventHandler

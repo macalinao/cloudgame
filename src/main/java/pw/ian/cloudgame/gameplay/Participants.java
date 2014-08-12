@@ -18,6 +18,8 @@ public interface Participants {
 
     public List<Player> getSpectators();
 
+    public void addPlayer(Player p);
+
     public void removePlayer(Player p);
 
     public boolean hasPlayer(Player p);
