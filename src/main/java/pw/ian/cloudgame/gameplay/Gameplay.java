@@ -29,6 +29,8 @@ public abstract class Gameplay {
 
     private final String name;
 
+    private String description = "Default description.";
+
     private ColorScheme colorScheme = ColorScheme.DEFAULT;
 
     private LinkedHashSet<Mixin> mixins = new LinkedHashSet<>();
@@ -49,6 +51,14 @@ public abstract class Gameplay {
 
     public String getName() {
         return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public ColorScheme getColorScheme() {
@@ -128,7 +138,8 @@ public abstract class Gameplay {
      *
      * @param g
      */
-    public abstract void setup(Game g);
+    public void setup(Game g) {
+    }
 
     /**
      * Applies a mixin to this Gameplay.
