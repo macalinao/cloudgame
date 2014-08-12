@@ -35,7 +35,7 @@ public class GameplayListCommand extends CommandHandler {
     public void onCommand(CommandSender sender, Arguments args) {
         List<String> memo = new ArrayList<>();
         for (Gameplay gp : cg.getGameplayManager().getGameplays()) {
-            memo.add("$H" + gp.getName());
+            memo.add("$H" + gp.getName() + " - $M" + gp.getDescription());
         }
         if (memo.size() > 0) {
             Messaging.sendBanner(ColorScheme.DEFAULT, sender, memo.toArray(new String[0]));

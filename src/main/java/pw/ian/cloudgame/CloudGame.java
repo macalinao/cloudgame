@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 
 import pw.ian.albkit.AlbPlugin;
 import pw.ian.albkit.command.Commands;
+import pw.ian.cloudgame.builtin.FFA;
 import pw.ian.cloudgame.commands.arena.ArenaCommand;
 import pw.ian.cloudgame.commands.game.GameCommand;
 import pw.ian.cloudgame.commands.gameplay.GameplayCommand;
@@ -47,6 +48,7 @@ public class CloudGame extends AlbPlugin {
         modelManager.load();
 
         gameplayManager = new GameplayManager(this);
+        gameplayManager.addGameplay(new FFA());
 
         playerStateManager = new PlayerStateManager(this);
         playerStateManager.setupStateRestoreQueueProcessTask();
