@@ -8,9 +8,10 @@ package pw.ian.cloudgame.hosted;
 import pw.ian.cloudgame.gameplay.GameMaster;
 
 /**
+ * A {@link GameMaster} which is the Host of a game
  *
  * @author ian
+ * @see GameMaster
  */
 public interface Host extends GameMaster {
-
 }

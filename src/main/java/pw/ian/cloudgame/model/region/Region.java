@@ -12,6 +12,8 @@ import org.bukkit.World;
 import pw.ian.cloudgame.model.Model;
 
 /**
+ * Represents a CloudGame Region. Wraps around a WorldGuard
+ * {@link ProtectedRegion} to provide a {@link Model} which represents a region
  *
  * @author ian
  */

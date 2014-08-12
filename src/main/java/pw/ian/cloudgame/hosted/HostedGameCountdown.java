@@ -16,6 +16,8 @@ import pw.ian.cloudgame.states.Status;
 
 /**
  * Announces the game and starts it when the time is up.
+ *
+ * @see pw.ian.albkit.util.Countdown
  */
 public class HostedGameCountdown extends Countdown {
 

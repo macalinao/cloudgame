@@ -17,8 +17,11 @@ import pw.ian.cloudgame.model.ModelManager;
 import pw.ian.cloudgame.model.Models;
 
 /**
+ * Handles the loading, saving and searching for of {@link Region} objects in
+ * CloudGame
  *
  * @author ian
+ * @see Models
  */
 public class Regions extends Models<Region> {
 
@@ -26,6 +29,14 @@ public class Regions extends Models<Region> {
         super(modelManager, "regions");
     }
 
+    /**
+     * Creates a new {@link Region} object in the given {@link World}, using the
+     * given WorldGuard {@link ProtectedRegion} for location details
+     *
+     * @param world The {@link World} the {@link Region} is in
+     * @param pr The {@link ProtectedRegion} the {@link Region} wraps
+     * @return A new {@link Region} in the given World and ProtectedRegion
+     */
     public Region create(World world, ProtectedRegion pr) {
         Region r = new Region(id(world, pr), world, pr);
         add(r);
@@ -62,10 +73,10 @@ public class Regions extends Models<Region> {
     }
 
     /**
-     * Finds a region from its location.
+     * Finds a {@link Region} from its {@link Location}.
      *
-     * @param loc
-     * @return
+     * @param loc The {@link Location} to find the {@link Region} at
+     * @return The {@link Region} at the given {@link Location}
      */
     public Region find(Location loc) {
         ApplicableRegionSet regions = wg().getRegionManager(loc.getWorld()).getApplicableRegions(loc);

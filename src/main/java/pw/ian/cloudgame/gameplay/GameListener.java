@@ -13,8 +13,12 @@ import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.model.region.Region;
 
 /**
+ * A base {@link Listener} for {@link Gameplay}s registering {@link Listener}s
+ * with Bukkit. Provides utility methods for finding {@link Game}s from various
+ * parameters.
  *
  * @author ian
+ * @see org.bukkit.event.Listener
  */
 @SuppressWarnings("ALL")
 public class GameListener implements Listener {

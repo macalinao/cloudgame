@@ -1,7 +1,5 @@
 package pw.ian.cloudgame.hosted;
 
-import pw.ian.cloudgame.gameplay.GameMaster;
-
 import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -10,6 +8,7 @@ import org.bukkit.entity.Player;
  * A GameMaster implementation where the game master is a player, or 'host'.
  *
  * @author Ollie
+ * @see pw.ian.cloudgame.hosted.Host
  */
 public class PlayerHost implements Host {
 

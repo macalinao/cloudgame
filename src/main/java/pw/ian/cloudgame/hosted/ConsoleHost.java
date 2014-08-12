@@ -6,13 +6,20 @@
 package pw.ian.cloudgame.hosted;
 
 /**
- * Represents a host from the console.
+ * Represents a {@link Host} of a game from the console.
+ *
+ * @see Host
  */
 public class ConsoleHost implements Host {
-
+    /**
+     * There is only one console, so there is only a single instance of
+     * ConsoleHost
+     */
     public static final ConsoleHost INSTANCE = new ConsoleHost();
 
+    /**
+     * Do not call
+     */
     private ConsoleHost() {
-
     }
 }

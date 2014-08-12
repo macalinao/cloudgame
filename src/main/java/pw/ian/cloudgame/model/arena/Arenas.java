@@ -18,8 +18,11 @@ import pw.ian.cloudgame.model.Models;
 import pw.ian.cloudgame.model.region.Region;
 
 /**
+ * Manages {@link Arena}s in CloudGame. Used for finding {@link Arena}s from
+ * various arguments, such as name, location and region
  *
  * @author ian
+ * @see Models
  */
 public class Arenas extends Models<Arena> {
 
@@ -27,6 +30,12 @@ public class Arenas extends Models<Arena> {
         super(modelManager, "arenas");
     }
 
+    /**
+     * Creates a new {@link Arena} in the given {@link Region}
+     *
+     * @param r The {@link Region} to create the {@link Arena} in
+     * @return A newly created Arena in the given Region
+     */
     public Arena create(Region r) {
         Arena a = new Arena(r.getId(), r);
         if (has(r.getId())) {
@@ -37,10 +46,10 @@ public class Arenas extends Models<Arena> {
     }
 
     /**
-     * Finds an arena.
+     * Finds an {@link Arena} from its name
      *
      * @param fuzzy Search string
-     * @return Arena, or null if no matches.
+     * @return The {@link Arena} with the given name, or null if no matches.
      */
     public Arena find(String fuzzy) {
         Arena bestMatch = findById(fuzzy);
@@ -64,10 +73,11 @@ public class Arenas extends Models<Arena> {
     }
 
     /**
-     * Finds an arena from a given location.
+     * Finds an {@link Arena} from a given {@link Location}.
      *
-     * @param location
-     * @return
+     * @param location The {@link Location} to get the {@link Arena} from
+     * @return The {@link Arena} at the given {@link Location}
+     * @see #findByRegion(Region)
      */
     public Arena find(Location location) {
         Region r = getModelManager().getRegions().find(location);
@@ -77,9 +87,11 @@ public class Arenas extends Models<Arena> {
     /**
      * Finds an arena from a player requesting an arena.
      *
-     * @param player
-     * @param name
-     * @return
+     * @param player The {@link Player} requesting the arena
+     * @param name The {@link Region}'s name to get the {@link Arena} from
+     * @return The {@link Arena} in the given {@link Region} for the given
+     * {@link Player}
+     * @see #findByRegion(Region)
      */
     public Arena find(Player player, String name) {
         Region r = getModelManager().getRegions().findById(name);
@@ -108,10 +120,11 @@ public class Arenas extends Models<Arena> {
     }
 
     /**
-     * Finds an arena by its region.
+     * Finds an {@link Arena} by its {@link Region}.
      *
-     * @param r
-     * @return
+     * @param r The {@link Region} to get the {@link Arena} from
+     * @return The {@link Arena} in the given {@link Region}
+     * @see #findByMain(Region)
      */
     public Arena findByRegion(Region r) {
         return findByMain(r);
