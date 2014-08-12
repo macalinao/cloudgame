@@ -5,7 +5,6 @@
  */
 package pw.ian.cloudgame.gameplay.hostedffa.listeners;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,8 +14,8 @@ import pw.ian.cloudgame.events.GameStartEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.GameListener;
 import pw.ian.cloudgame.gameplay.Participants;
+import pw.ian.cloudgame.gameplay.core.PlayerWinner;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
-import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAWinner;
 
 /**
  *
@@ -49,7 +48,7 @@ public class FFAGameListener extends GameListener {
             return;
         }
 
-        HostedFFAWinner winner = (HostedFFAWinner) event.getWinner();
+        PlayerWinner winner = (PlayerWinner) event.getWinner();
         if (winner == null) {
             game.broadcast("Game over! Nobody won!");
         } else {

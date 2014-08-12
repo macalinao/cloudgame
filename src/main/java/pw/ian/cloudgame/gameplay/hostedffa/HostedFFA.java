@@ -7,10 +7,12 @@ package pw.ian.cloudgame.gameplay.hostedffa;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Winner;
+import pw.ian.cloudgame.gameplay.core.PlayerWinner;
 import pw.ian.cloudgame.gameplay.hostedffa.listeners.FFAGameListener;
 import pw.ian.cloudgame.gameplay.hostedffa.listeners.FFAGamePlayerListener;
 import pw.ian.cloudgame.mixins.Announcements;
@@ -67,7 +69,7 @@ public abstract class HostedFFA extends Gameplay {
      */
     public boolean redeemPrize(Player p) {
         for (Winner w : prizes.keySet()) {
-            if (((HostedFFAWinner) w).getPlayerId().equals(p.getUniqueId())) {
+            if (((PlayerWinner) w).getPlayerId().equals(p.getUniqueId())) {
                 return redeemPrize(w);
             }
         }
@@ -85,7 +87,12 @@ public abstract class HostedFFA extends Gameplay {
             return false;
         }
         String type = prizes.remove(w);
-        ((HostedFFAWinner) w).awardPrize(type);
+        PlayerWinner pw = (PlayerWinner) w;
+        if (type.equalsIgnoreCase("easy")) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ccrates give 2 " + pw.getPlayer().getName() + " 3");
+        } else {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ccrates give 3 " + pw.getPlayer().getName() + " 3");
+        }
         return true;
     }
 }
