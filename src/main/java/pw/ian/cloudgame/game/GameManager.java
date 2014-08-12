@@ -14,7 +14,7 @@ import pw.ian.cloudgame.events.GameEventFactory;
 import pw.ian.cloudgame.events.GameStopEvent;
 import pw.ian.cloudgame.gameplay.GameMaster;
 import pw.ian.cloudgame.gameplay.Gameplay;
-import pw.ian.cloudgame.gameplay.State;
+import pw.ian.cloudgame.gameplay.Participants;
 import pw.ian.cloudgame.model.arena.Arena;
 import pw.ian.cloudgame.model.region.Region;
 
@@ -26,7 +26,7 @@ public class GameManager {
 
     private final CloudGame plugin;
 
-    private final Map<Arena, Game<?>> games = new HashMap<>();
+    private final Map<Arena, Game> games = new HashMap<>();
 
     public GameManager(CloudGame plugin) {
         this.plugin = plugin;
@@ -42,7 +42,7 @@ public class GameManager {
      * @return Null if the game could not be created due to canUse restrictions
      * or there is already a game at the arena.
      */
-    public <T extends State> Game<T> createGame(Gameplay<T> gameplay, Arena arena, GameMaster master) {
+    public <T extends Participants> Game createGame(Gameplay gameplay, Arena arena, GameMaster master) {
         if (!gameplay.canUse(arena)) {
             return null;
         }
@@ -51,7 +51,7 @@ public class GameManager {
             return null;
         }
 
-        Game<T> game = new Game<>(gameplay, arena, master);
+        Game game = new Game(gameplay, arena, master);
         games.put(arena, game);
         gameplay.setup(game);
         return game;
@@ -62,7 +62,7 @@ public class GameManager {
      *
      * @param game
      */
-    public void removeGame(Game<?> game) {
+    public void removeGame(Game game) {
         games.remove(game.getArena());
     }
 
@@ -106,9 +106,9 @@ public class GameManager {
      * @param p
      * @return
      */
-    public Game<?> spectatedGameOf(Player p) {
+    public Game spectatedGameOf(Player p) {
         for (Game g : games.values()) {
-            if (g.getState().getSpectators().contains(p)) {
+            if (g.getParticipants().getSpectators().contains(p)) {
                 return g;
             }
         }
@@ -123,7 +123,7 @@ public class GameManager {
      */
     public Game gameOf(Player p) {
         for (Game g : games.values()) {
-            if (g.getState().getPlayers().contains(p)) {
+            if (g.getParticipants().getPlayers().contains(p)) {
                 return g;
             }
         }
@@ -134,7 +134,7 @@ public class GameManager {
      * Forces all games to stop.
      */
     public void stopAll() {
-        for (Game<?> game : games.values()) {
+        for (Game game : games.values()) {
             game.events().stop();
         }
         games.clear();

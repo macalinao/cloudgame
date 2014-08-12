@@ -27,7 +27,7 @@ public class Arena extends Model {
     private Map<String, Object> properties;
 
     Arena(String id, Region main) {
-        this(id, id, main, new HashMap<>(), new HashMap<>());
+        this(id, id, main, new HashMap<Integer, Location>(), new HashMap<String, Object>());
     }
 
     Arena(String id, String name, Region main, Map<Integer, Location> spawns, Map<String, Object> properties) {

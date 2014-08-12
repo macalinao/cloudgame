@@ -12,14 +12,15 @@ import org.bukkit.entity.Player;
 import pw.ian.albkit.util.Countdown;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.game.Game;
-import pw.ian.cloudgame.gameplay.State;
+import pw.ian.cloudgame.gameplay.Participants;
+import pw.ian.cloudgame.states.Status;
 
 /**
  * Announces the game and starts it when the time is up.
  *
  * @param <T>
  */
-public class HostedGameCountdown<T extends State> extends Countdown {
+public class HostedGameCountdown extends Countdown {
 
     private static final Map<Integer, String> messages = new HashMap<>();
 
@@ -31,16 +32,16 @@ public class HostedGameCountdown<T extends State> extends Countdown {
         messages.put(5 * 60, "5 minutes");
     }
 
-    private final Game<T> game;
+    private final Game game;
 
-    public HostedGameCountdown(Game<T> game) {
+    public HostedGameCountdown(Game game) {
         super(messages);
         this.game = game;
     }
 
     @Override
     public boolean checkCondition() {
-        return !(game.getState().isStarted() || game.getState().isOver());
+        return !(game.state(Status.class).isStarted() || game.state(Status.class).isOver());
     }
 
     @Override
@@ -49,7 +50,7 @@ public class HostedGameCountdown<T extends State> extends Countdown {
             game.getGameplay().sendBanner(p,
                     "A " + game.getGameplay().getName() + " on map $D" + game.getArena().getName() + " $Lis starting in $D" + time + "$L!",
                     "Type $D/" + game.getGameplay().getId() + " join $Lto join $D"
-                    + game.getState().getPlayers().size() + " $Lother players!");
+                    + game.getParticipants().getPlayers().size() + " $Lother players!");
         }
     }
 

@@ -1,6 +1,5 @@
 package pw.ian.cloudgame.gameplay.core;
 
-import pw.ian.cloudgame.gameplay.State;
 import pw.ian.cloudgame.gameplay.Winner;
 
 import org.bukkit.Bukkit;
@@ -16,7 +15,7 @@ import java.util.UUID;
  *
  * @author Ollie
  */
-public class TeamWinner<T extends State> implements Winner<T> {
+public class TeamWinner implements Winner {
     private final List<UUID> players;
 
     public TeamWinner(List<UUID> players) {
@@ -36,11 +35,11 @@ public class TeamWinner<T extends State> implements Winner<T> {
     }
 
     public List<UUID> getPlayerIds() {
-        return new ArrayList<UUID>(players);
+        return new ArrayList<>(players);
     }
 
     public List<Player> getPlayers() {
-        List<Player> result = new ArrayList<Player>();
+        List<Player> result = new ArrayList<>();
         for (UUID uuid : players) {
             result.add(Bukkit.getPlayer(uuid));
         }

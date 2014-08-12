@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import pw.ian.cloudgame.gameplay.core.PlayerWinner;
 
-public class HostedFFAWinner<T extends HostedFFAState> extends PlayerWinner<T> {
+public class HostedFFAWinner extends PlayerWinner {
     public HostedFFAWinner(Player winner) {
         super(winner);
     }

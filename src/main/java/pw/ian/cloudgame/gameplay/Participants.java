@@ -12,19 +12,21 @@ import org.bukkit.entity.Player;
  *
  * @author ian
  */
-public interface State {
-
-    public boolean isStarted();
-
-    public boolean isOver();
+public interface Participants {
 
     public List<Player> getPlayers();
 
     public List<Player> getSpectators();
 
+    public void removePlayer(Player p);
+
     public boolean hasPlayer(Player p);
 
     public boolean hasSpectator(Player p);
+
+    public void addSpectator(Player p);
+
+    public void removeSpectator(Player p);
 
     public List<Player> getParticipants();
 

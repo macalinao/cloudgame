@@ -11,23 +11,24 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import pw.ian.cloudgame.events.GameJoinEvent;
 import pw.ian.cloudgame.events.GameLeaveEvent;
 import pw.ian.cloudgame.events.GameQuitEvent;
 import pw.ian.cloudgame.events.GameSpectateEvent;
 import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
+import pw.ian.cloudgame.gameplay.FFAParticipants;
 import pw.ian.cloudgame.gameplay.GameListener;
-import pw.ian.cloudgame.gameplay.GameMaster;
 import pw.ian.cloudgame.hosted.Host;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
-import pw.ian.cloudgame.gameplay.hostedffa.HostedFFAState;
+import pw.ian.cloudgame.states.Status;
 
 /**
  *
  * @author ian
  */
-public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
+public class FFAGamePlayerListener extends GameListener {
 
     private boolean barAPI;
 
@@ -37,47 +38,50 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
         barAPI = koth.getPlugin().getServer().getPluginManager().isPluginEnabled("BarAPI");
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onGameJoin(GameJoinEvent event) {
-        Game<HostedFFAState> game = game(event);
+        Game game = game(event);
         if (game == null) {
             return;
         }
 
-        HostedFFAState state = game.getState();
         Player p = event.getPlayer();
+        Status status = game.state(Status.class);
 
-        if (state.isStarted()) {
+        if (status.isStarted()) {
             game.getGameplay().sendGameMessage(p, "You can't join a " + getGameplay().getId() + " that is already in progress.");
+            event.setCancelled(true);
             return;
         }
 
-        if (state.hasPlayer(p)) {
+        FFAParticipants parts = (FFAParticipants) game.getParticipants();
+        if (parts.hasPlayer(p)) {
             game.getGameplay().sendGameMessage(p, "You have already joined the " + getGameplay().getId() + " queue!");
+            event.setCancelled(true);
             return;
         }
 
         if (game.getGameMaster() instanceof Host && p.getUniqueId().equals(((Host) game.getGameMaster()).getUniqueId())) {
             game.getGameplay().sendGameMessage(p, "You can't join the game if you are the host!");
+            event.setCancelled(true);
             return;
         }
 
-        state.addPlayer(p);
-        getGameplay().sendBanner(p, "You've joined the " + getGameplay().getId() + "! Pay attention to the countdown.",
-                "Want to leave the game? Type $D/" + getGameplay().getId() + " leave$L!");
+        parts.addPlayer(p);
     }
 
     @EventHandler
     public void onGameLeave(GameLeaveEvent event) {
-        Game<HostedFFAState> game = game(event);
+        Game game = game(event);
         if (game == null) {
             return;
         }
 
-        HostedFFAState state = game.getState();
         Player p = event.getPlayer();
+        Status status = game.state(Status.class);
+        FFAParticipants state = (FFAParticipants) game.getParticipants();
 
-        if (!state.isStarted()) {
+        if (!status.isStarted()) {
             if (!state.hasPlayer(p)) {
                 game.getGameplay().sendGameMessage(p, "You aren't part of the " + getGameplay().getId() + " queue.");
                 return;
@@ -107,88 +111,39 @@ public class FFAGamePlayerListener extends GameListener<HostedFFAState> {
             game.getGameplay().sendGameMessage(p, "You must be at least 20 blocks away from another player!");
         }
 
-        if (!failedKillsCheck && !failedDistanceCheck) {
-            game.getState().removePlayer(p);
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
-            if (barAPI) {
-                BarAPI.removeBar(p);
-            }
-            game.getGameplay().sendGameMessage(p, "You have left the game.");
+        if (failedKillsCheck || failedDistanceCheck) {
+            event.setCancelled(true);
+            return;
         }
+
+        game.getParticipants().removePlayer(p);
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
+        if (barAPI) {
+            BarAPI.removeBar(p);
+        }
+        game.getGameplay().sendGameMessage(p, "You have left the game.");
     }
 
     @EventHandler
     public void onGameQuit(GameQuitEvent event) {
-        Game<HostedFFAState> game = game(event);
+        Game game = game(event);
         if (game == null) {
             return;
         }
 
         Player p = event.getPlayer();
-        if (game.getState().isProvideArmor()) {
-            getGameplay().getPlugin().getPlayerStateManager().queueLoadState(event.getPlayer());
-        }
         p.setGameMode(GameMode.SURVIVAL);
 
-        game.getState().removePlayer(p);
         if (barAPI) {
             BarAPI.removeBar(p);
         }
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
     }
 
-    @EventHandler
-    public void onGameSpectate(GameSpectateEvent event) {
-        Game<HostedFFAState> game = game(event);
-        if (game == null) {
-            return;
-        }
-
-        Player p = event.getPlayer();
-        if (!game.getState().isStarted()) {
-            p.sendMessage(ChatColor.RED + "The game hasn't started yet!");
-            return;
-        }
-
-        if (game.getState().hasPlayer(p)) {
-            p.sendMessage(ChatColor.RED + "You can't use this command as a player!");
-            return;
-        }
-
-        getGameplay().getPlugin().getPlayerStateManager().saveState(p);
-        game.getState().addSpectator(p);
-        for (Player other : Bukkit.getOnlinePlayers()) {
-            other.hidePlayer(p);
-        }
-        p.teleport(game.getArena().getNextSpawn());
-        p.setAllowFlight(true);
-        p.setFlying(true);
-        p.setHealth(p.getMaxHealth());
-        p.setFoodLevel(20);
-
-        game.getGameplay().sendGameMessage(p, "Type /" + getGameplay().getId() + " spectate again to exit the mode!");
-    }
-
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onGameUnspectate(GameUnspectateEvent event) {
-        Game<HostedFFAState> game = game(event);
-        if (game == null) {
-            return;
-        }
-
-        Player p = event.getPlayer();
-
-        game.getState().removeSpectator(p);
-        getGameplay().getPlugin().getPlayerStateManager().queueLoadState(p);
-        for (Player other : Bukkit.getOnlinePlayers()) {
-            other.showPlayer(p);
-        }
-        p.setFlying(false);
         if (barAPI) {
-            BarAPI.removeBar(p);
+            BarAPI.removeBar(event.getPlayer());
         }
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
-
-        game.getGameplay().sendGameMessage(p, "You are no longer spectating the game.");
     }
 }

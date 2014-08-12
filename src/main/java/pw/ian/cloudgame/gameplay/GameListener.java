@@ -15,17 +15,17 @@ import pw.ian.cloudgame.model.region.Region;
 /**
  *
  * @author ian
- * @param <T> The type of state
  */
-@SuppressWarnings("ALL") public class GameListener<T extends State> implements Listener {
+@SuppressWarnings("ALL")
+public class GameListener implements Listener {
 
-    private final Gameplay<T> gameplay;
+    private final Gameplay gameplay;
 
-    public GameListener(Gameplay<T> gameplay) {
+    public GameListener(Gameplay gameplay) {
         this.gameplay = gameplay;
     }
 
-    public Gameplay<T> getGameplay() {
+    public Gameplay getGameplay() {
         return gameplay;
     }
 
@@ -35,7 +35,7 @@ import pw.ian.cloudgame.model.region.Region;
      * @param loc
      * @return
      */
-    public Game<T> game(Location loc) {
+    protected Game game(Location loc) {
         Region r = gameplay.getPlugin().getModelManager().getRegions().find(loc);
         if (r == null) {
             return null;
@@ -47,7 +47,7 @@ import pw.ian.cloudgame.model.region.Region;
         if (!game.getGameplay().equals(gameplay)) {
             return null;
         }
-        return (Game<T>) game;
+        return game;
     }
 
     /**
@@ -56,7 +56,7 @@ import pw.ian.cloudgame.model.region.Region;
      * @param p
      * @return
      */
-    public Game<T> game(Player p) {
+    protected Game game(Player p) {
         Game game = gameplay.getPlugin().getGameManager().gameOf(p);
         if (game == null) {
             return null;
@@ -64,7 +64,7 @@ import pw.ian.cloudgame.model.region.Region;
         if (!game.getGameplay().equals(gameplay)) {
             return null;
         }
-        return (Game<T>) game;
+        return game;
     }
 
     /**
@@ -73,11 +73,11 @@ import pw.ian.cloudgame.model.region.Region;
      * @param g
      * @return
      */
-    public Game<T> game(GameEvent g) {
+    public Game game(GameEvent g) {
         if (!g.getGame().getGameplay().equals(gameplay)) {
             return null;
         }
-        return (Game<T>) g.getGame();
+        return g.getGame();
     }
 
     /**
@@ -86,7 +86,7 @@ import pw.ian.cloudgame.model.region.Region;
      * @param p
      * @return
      */
-    public Game<T> gameSpectated(Player p) {
+    public Game gameSpectated(Player p) {
         Game game = gameplay.getPlugin().getGameManager().spectatedGameOf(p);
         if (game == null) {
             return null;
@@ -94,6 +94,6 @@ import pw.ian.cloudgame.model.region.Region;
         if (!game.getGameplay().equals(gameplay)) {
             return null;
         }
-        return (Game<T>) game;
+        return game;
     }
 }

@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
  *
  * @author ian
  */
-public abstract class FFAState implements State {
+public class FFAParticipants implements Participants {
 
     private final Set<UUID> spectators = new HashSet<>();
 
@@ -71,5 +71,13 @@ public abstract class FFAState implements State {
             }
         }
         return ret;
+    }
+
+    @Override
+    public List<Player> getParticipants() {
+        List<Player> participants = new ArrayList<>();
+        participants.addAll(getSpectators());
+        participants.addAll(getPlayers());
+        return participants;
     }
 }

@@ -5,15 +5,11 @@
  */
 package pw.ian.cloudgame.commands.game;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import pw.ian.albkit.command.PlayerCommandHandler;
 import pw.ian.albkit.command.parser.Arguments;
 import pw.ian.cloudgame.CloudGame;
-import pw.ian.cloudgame.events.GameEventFactory;
-import pw.ian.cloudgame.events.GameSpectateEvent;
-import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
 
 /**
@@ -35,13 +31,13 @@ public class GameSpectateCommand extends PlayerCommandHandler {
             return;
         }
 
-        Game<?> game = CloudGame.inst().getGameManager().gameAt(args.getArgument(0).rawString());
+        Game game = CloudGame.inst().getGameManager().gameAt(args.getArgument(0).rawString());
         if (game == null) {
             player.sendMessage(ChatColor.RED + "Game not found.");
             return;
         }
 
-        if (!game.getState().hasSpectator(player)) {
+        if (!game.getParticipants().hasSpectator(player)) {
             game.events().spectate(player);
         } else {
             game.events().unspectate(player);

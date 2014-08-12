@@ -17,7 +17,7 @@ public abstract class GamePlayerEvent extends GameEvent {
 
     private final Player player;
 
-    protected GamePlayerEvent(Game<?> game, Player player) {
+    protected GamePlayerEvent(Game game, Player player) {
         super(game);
         this.player = player;
     }

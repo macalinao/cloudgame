@@ -1,6 +1,5 @@
 package pw.ian.cloudgame.gameplay.core;
 
-import pw.ian.cloudgame.gameplay.State;
 import pw.ian.cloudgame.gameplay.Winner;
 
 import org.bukkit.Bukkit;
@@ -13,7 +12,7 @@ import java.util.UUID;
  *
  * @author Ollie
  */
-public class PlayerWinner<T extends State> implements Winner<T> {
+public class PlayerWinner implements Winner {
     /**
      * The unique identifier of the player who is the winner
      */

@@ -26,7 +26,7 @@ public class GameLeaveCommand extends PlayerCommandHandler {
 
     @Override
     public void onCommand(Player player, Arguments args) {
-        Game<?> game = CloudGame.inst().getGameManager().gameOf(player);
+        Game game = CloudGame.inst().getGameManager().gameOf(player);
         if (game == null) {
             player.sendMessage(ChatColor.RED + "You aren't in a game.");
         }

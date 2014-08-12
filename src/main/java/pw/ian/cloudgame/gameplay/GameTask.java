@@ -7,19 +7,20 @@ package pw.ian.cloudgame.gameplay;
 
 import org.bukkit.scheduler.BukkitRunnable;
 import pw.ian.cloudgame.game.Game;
+import pw.ian.cloudgame.states.Status;
 
 /**
  *
  * @author ian
  * @param <T>
  */
-public abstract class GameTask<T extends State> {
+public abstract class GameTask<T extends Participants> {
 
-    private final Game<T> game;
+    private final Game game;
 
     private GameTaskBukkitRunnable task;
 
-    public GameTask(Game<T> game) {
+    public GameTask(Game game) {
         this.game = game;
         this.task = new GameTaskBukkitRunnable();
     }
@@ -43,7 +44,7 @@ public abstract class GameTask<T extends State> {
 
         @Override
         public void run() {
-            if (GameTask.this.game.getState().isOver()) {
+            if (GameTask.this.game.state(Status.class).isOver()) {
                 cancel();
                 return;
             }
