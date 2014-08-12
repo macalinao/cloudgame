@@ -5,12 +5,14 @@
  */
 package pw.ian.cloudgame.hosted;
 
-import pw.ian.cloudgame.gameplay.GameMaster;
-
 /**
- *
- * @author ian
+ * Represents a host from the console.
  */
-public interface Host extends GameMaster {
+public class ConsoleHost implements Host {
 
+    public static final ConsoleHost INSTANCE = new ConsoleHost();
+
+    private ConsoleHost() {
+
+    }
 }

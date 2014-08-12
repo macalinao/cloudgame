@@ -15,7 +15,7 @@ import pw.ian.cloudgame.gameplay.FFAParticipants;
 import pw.ian.cloudgame.gameplay.GameMaster;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Participants;
-import pw.ian.cloudgame.mixin.State;
+import pw.ian.cloudgame.gameplay.State;
 import pw.ian.cloudgame.model.arena.Arena;
 import pw.ian.cloudgame.stats.Stats;
 

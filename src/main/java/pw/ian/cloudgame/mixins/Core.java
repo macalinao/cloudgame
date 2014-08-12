@@ -19,7 +19,7 @@ import pw.ian.cloudgame.events.GameJoinEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Participants;
-import pw.ian.cloudgame.mixin.Mixin;
+import pw.ian.cloudgame.gameplay.Mixin;
 import pw.ian.cloudgame.states.Status;
 import pw.ian.cloudgame.stats.Death;
 

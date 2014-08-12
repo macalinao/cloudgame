@@ -6,7 +6,7 @@
 package pw.ian.cloudgame.mixins;
 
 import pw.ian.cloudgame.gameplay.Gameplay;
-import pw.ian.cloudgame.mixin.Mixin;
+import pw.ian.cloudgame.gameplay.Mixin;
 import pw.ian.cloudgame.states.RemainingTime;
 
 /**

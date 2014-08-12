@@ -7,11 +7,8 @@ package pw.ian.cloudgame.game;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import pw.ian.cloudgame.CloudGame;
-import pw.ian.cloudgame.events.GameEventFactory;
-import pw.ian.cloudgame.events.GameStopEvent;
 import pw.ian.cloudgame.gameplay.GameMaster;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Participants;
@@ -53,6 +50,7 @@ public class GameManager {
 
         Game game = new Game(gameplay, arena, master);
         games.put(arena, game);
+        gameplay.applyMixins(game);
         gameplay.setup(game);
         return game;
     }

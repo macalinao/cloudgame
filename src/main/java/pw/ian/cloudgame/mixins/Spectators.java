@@ -17,7 +17,7 @@ import pw.ian.cloudgame.events.GameSpectateEvent;
 import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
-import pw.ian.cloudgame.mixin.Mixin;
+import pw.ian.cloudgame.gameplay.Mixin;
 import pw.ian.cloudgame.states.Status;
 
 /**

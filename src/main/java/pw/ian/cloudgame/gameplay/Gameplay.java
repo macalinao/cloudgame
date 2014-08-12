@@ -6,15 +6,14 @@
 package pw.ian.cloudgame.gameplay;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.LinkedHashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import pw.ian.albkit.util.ColorScheme;
 import pw.ian.albkit.util.Messaging;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.game.Game;
-import pw.ian.cloudgame.mixin.Mixin;
 import pw.ian.cloudgame.model.arena.Arena;
 
 /**
@@ -31,6 +30,8 @@ public abstract class Gameplay {
     private final String name;
 
     private ColorScheme colorScheme = ColorScheme.DEFAULT;
+
+    private LinkedHashSet<Mixin> mixins = new LinkedHashSet<>();
 
     protected Gameplay(CloudGame plugin, String id) {
         this.plugin = plugin;
@@ -71,13 +72,13 @@ public abstract class Gameplay {
     }
 
     /**
-     * Sends a game related message to the given player.
+     * Sends a game related message to the given CommandSender.
      *
-     * @param p
+     * @param sender
      * @param message
      */
-    public void sendGameMessage(Player p, String message) {
-        p.sendMessage(colorScheme.getPrefix() + "[" + name + "] " + colorScheme.getMsg() + colorScheme.replaceColors(message));
+    public void sendGameMessage(CommandSender sender, String message) {
+        sender.sendMessage(colorScheme.getPrefix() + "[" + name + "] " + colorScheme.getMsg() + colorScheme.replaceColors(message));
     }
 
     /**
@@ -112,6 +113,17 @@ public abstract class Gameplay {
     }
 
     /**
+     * Applies this Gameplay's mixins to the given game.
+     *
+     * @param game The game
+     */
+    public void applyMixins(Game game) {
+        for (Mixin m : mixins) {
+            m.applyStates(game);
+        }
+    }
+
+    /**
      * Sets up the gameplay.
      *
      * @param g
@@ -121,13 +133,13 @@ public abstract class Gameplay {
     /**
      * Applies a mixin to this Gameplay.
      *
-     * @param game The game to set up
      * @param clazz
      */
     protected void mixin(Class<? extends Mixin> clazz) {
         try {
             Mixin m = (Mixin) clazz.getConstructors()[0].newInstance(this); // will be reworked when we remove generics
             m.setup();
+            mixins.add(m);
         } catch (InstantiationException ex) {
             Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {

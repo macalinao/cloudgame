@@ -18,7 +18,7 @@ import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.FFAParticipants;
 import pw.ian.cloudgame.gameplay.GameListener;
-import pw.ian.cloudgame.hosted.Host;
+import pw.ian.cloudgame.hosted.PlayerHost;
 import pw.ian.cloudgame.gameplay.hostedffa.HostedFFA;
 import pw.ian.cloudgame.states.Status;
 
@@ -54,7 +54,7 @@ public class FFAGamePlayerListener extends GameListener {
 
         FFAParticipants parts = (FFAParticipants) game.getParticipants();
 
-        if (game.getGameMaster() instanceof Host && p.getUniqueId().equals(((Host) game.getGameMaster()).getUniqueId())) {
+        if (game.getGameMaster() instanceof PlayerHost && p.getUniqueId().equals(((PlayerHost) game.getGameMaster()).getUniqueId())) {
             game.getGameplay().sendGameMessage(p, "You can't join the game if you are the host!");
             event.setCancelled(true);
             return;

@@ -15,7 +15,7 @@ import pw.ian.cloudgame.events.GameQuitEvent;
 import pw.ian.cloudgame.events.GameStartEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
-import pw.ian.cloudgame.mixin.Mixin;
+import pw.ian.cloudgame.gameplay.Mixin;
 
 /**
  * Gives players a temporary inventory for the games.

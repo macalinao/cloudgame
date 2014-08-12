@@ -12,13 +12,10 @@ import org.bukkit.entity.Player;
 import pw.ian.albkit.util.Countdown;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.game.Game;
-import pw.ian.cloudgame.gameplay.Participants;
 import pw.ian.cloudgame.states.Status;
 
 /**
  * Announces the game and starts it when the time is up.
- *
- * @param <T>
  */
 public class HostedGameCountdown extends Countdown {
 
