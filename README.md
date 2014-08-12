@@ -13,7 +13,11 @@ also customizable, allowing people to make their server however they'd like.
 Other minigame frameworks were too complicated or too specific to create games. Some people want one command
 per game, others want an entire minigame minus one feature, and others want something that looks completely custom.
 
-CloudGame seeks to fix this problem.
+CloudGame seeks to fix this problem with a few simple design principles:
+
+* Everything is a mixin (a plugin for a minigame).
+* All game logic is handled through event listeners and timers.
+* Game state is handled through mixins.
 
 Using an innovative "mixin" system, developers can mix and match different parts of games as they please.
 You could create a Team Deathmatch that has a 10 minute time limit, and by deleting one line of code you
@@ -22,7 +26,7 @@ could get rid of that countdown.
 Mixins are basically plugins that a game can use to change how the game works. They provide listeners
 and data that power the game.
 
-Another huge point of CloudGame is that **everything is an event**. All game logic is handled in events
+Another huge point of CloudGame is that everything uses events. All game logic is handled in events
 to allow mixins to modify how the game operates. If you want to send an extra message when a player leaves
 a game, you can just subscribe to the `GameLeaveEvent` and send a message there.
 
