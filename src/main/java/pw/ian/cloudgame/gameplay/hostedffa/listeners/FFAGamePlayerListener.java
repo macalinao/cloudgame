@@ -7,7 +7,6 @@ package pw.ian.cloudgame.gameplay.hostedffa.listeners;
 
 import me.confuser.barapi.BarAPI;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +14,6 @@ import org.bukkit.event.EventPriority;
 import pw.ian.cloudgame.events.GameJoinEvent;
 import pw.ian.cloudgame.events.GameLeaveEvent;
 import pw.ian.cloudgame.events.GameQuitEvent;
-import pw.ian.cloudgame.events.GameSpectateEvent;
 import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.FFAParticipants;
@@ -55,11 +53,6 @@ public class FFAGamePlayerListener extends GameListener {
         }
 
         FFAParticipants parts = (FFAParticipants) game.getParticipants();
-        if (parts.hasPlayer(p)) {
-            game.getGameplay().sendGameMessage(p, "You have already joined the " + getGameplay().getId() + " queue!");
-            event.setCancelled(true);
-            return;
-        }
 
         if (game.getGameMaster() instanceof Host && p.getUniqueId().equals(((Host) game.getGameMaster()).getUniqueId())) {
             game.getGameplay().sendGameMessage(p, "You can't join the game if you are the host!");
