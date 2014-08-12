@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.entity.Player;
 import pw.ian.cloudgame.events.GameEventFactory;
-import pw.ian.cloudgame.gameplay.FFAParticipants;
+import pw.ian.cloudgame.gameplay.core.FFAParticipants;
 import pw.ian.cloudgame.gameplay.GameMaster;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Participants;

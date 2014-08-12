@@ -12,7 +12,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import pw.ian.cloudgame.CloudGame;
+
 import pw.ian.cloudgame.events.GameEndEvent;
 import pw.ian.cloudgame.events.GameJoinEvent;
 import pw.ian.cloudgame.events.GameLeaveEvent;
@@ -20,7 +20,7 @@ import pw.ian.cloudgame.events.GameQuitEvent;
 import pw.ian.cloudgame.events.GameStartEvent;
 import pw.ian.cloudgame.events.GameUnspectateEvent;
 import pw.ian.cloudgame.game.Game;
-import pw.ian.cloudgame.gameplay.FFAParticipants;
+import pw.ian.cloudgame.gameplay.core.FFAParticipants;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Mixin;
 import pw.ian.cloudgame.gameplay.Participants;

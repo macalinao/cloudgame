@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pw.ian.cloudgame.gameplay;
+package pw.ian.cloudgame.gameplay.core;
+
+import pw.ian.cloudgame.gameplay.Participants;
 
 import java.util.ArrayList;
 import java.util.HashSet;
