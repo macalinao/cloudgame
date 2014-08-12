@@ -13,6 +13,7 @@ import pw.ian.cloudgame.model.Model;
 import pw.ian.cloudgame.model.region.Region;
 
 /**
+ * Represents a minigame Arena in CloudGame
  *
  * @author ian
  */

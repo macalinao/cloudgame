@@ -13,6 +13,7 @@ import pw.ian.cloudgame.model.arena.Arenas;
 import pw.ian.cloudgame.model.region.Regions;
 
 /**
+ * Manages all models in CloudGame, including {@link Regions} and {@link Arenas}
  *
  * @author ian
  */

@@ -6,12 +6,16 @@
 package pw.ian.cloudgame.model;
 
 /**
- * Model
+ * Represents a model in CloudGame. A model could be an Arena, a Region or
+ * something else
  *
  * @author ian
  */
 public abstract class Model {
 
+    /**
+     * The id of this Model
+     */
     private final String id;
 
     protected Model(String id) {
@@ -19,9 +23,9 @@ public abstract class Model {
     }
 
     /**
-     * Gets the id of the model
+     * Gets the id of the Model
      *
-     * @return
+     * @return This Model's ID
      */
     public String getId() {
         return id;

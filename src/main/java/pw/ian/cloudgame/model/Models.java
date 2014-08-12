@@ -14,9 +14,10 @@ import java.util.Map;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 /**
+ * An abstract store for {@link Model}s of type <T>
  *
  * @author ian
- * @param <T>
+ * @param <T> The type of {@link Model} this object stores
  */
 public abstract class Models<T extends Model> {
 
@@ -42,9 +43,7 @@ public abstract class Models<T extends Model> {
     /**
      * Returns the model if the add was successful
      *
-     * @param id
-     * @param model
-     * @return
+     * @param model The {@link Model} to add
      */
     protected void add(T model) {
         map.put(model.getId(), model);
@@ -65,8 +64,8 @@ public abstract class Models<T extends Model> {
     /**
      * Returns true if the remove was successful
      *
-     * @param id
-     * @return
+     * @param id The ID of the {@link Model} to remove
+     * @return Whether the model was removed
      */
     public boolean remove(String id) {
         map.remove(id);
