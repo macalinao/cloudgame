@@ -105,16 +105,6 @@ public class Core extends Mixin {
     }
 
     @EventHandler
-    public void onGameQuit(GameQuitEvent event) {
-        Game game = game(event);
-        if (game == null) {
-            return;
-        }
-
-        Player p = event.getPlayer();
-    }
-
-    @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player p = e.getEntity();
         Location location = p.getLocation();
