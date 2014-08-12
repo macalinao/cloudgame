@@ -6,6 +6,9 @@
 package pw.ian.cloudgame.mixins;
 
 import java.util.UUID;
+
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,6 +19,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import pw.ian.cloudgame.events.GameJoinEvent;
+import pw.ian.cloudgame.events.GameLeaveEvent;
+import pw.ian.cloudgame.events.GameQuitEvent;
 import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.gameplay.Participants;
@@ -71,6 +76,45 @@ public class Core extends Mixin {
         }
 
         participants.addPlayer(player);
+    }
+
+    @EventHandler
+    public void onGameLeave(GameLeaveEvent event) {
+        Game game = game(event);
+        if (game == null) {
+            return;
+        }
+
+        Status status = game.state(Status.class);
+        Participants participants = game.getParticipants();
+        Player player = event.getPlayer();
+
+        if (!status.isStarted()) {
+            if (!participants.hasPlayer(player)) {
+                game.getGameplay().sendGameMessage(player, "You aren't part of the " + getGameplay().getId() + " queue.");
+                return;
+            }
+
+            participants.removePlayer(player);
+            game.getGameplay().sendGameMessage(player, "You've left the " + getGameplay().getId() + ". To rejoin, type $H/" + getGameplay().getId() + " join$M!");
+            return;
+        }
+
+        game.getParticipants().removePlayer(player);
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + player.getName());
+        game.getGameplay().sendGameMessage(player, "You have left the game.");
+    }
+
+    @EventHandler
+    public void onGameQuit(GameQuitEvent event) {
+        Game game = game(event);
+        if (game == null) {
+            return;
+        }
+
+        Player p = event.getPlayer();
+        p.setGameMode(GameMode.SURVIVAL);
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
     }
 
     @EventHandler

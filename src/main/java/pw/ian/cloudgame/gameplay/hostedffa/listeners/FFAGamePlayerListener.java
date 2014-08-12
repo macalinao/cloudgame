@@ -69,19 +69,7 @@ public class FFAGamePlayerListener extends GameListener {
         }
 
         Player p = event.getPlayer();
-        Status status = game.state(Status.class);
         FFAParticipants state = (FFAParticipants) game.getParticipants();
-
-        if (!status.isStarted()) {
-            if (!state.hasPlayer(p)) {
-                game.getGameplay().sendGameMessage(p, "You aren't part of the " + getGameplay().getId() + " queue.");
-                return;
-            }
-
-            state.removePlayer(p);
-            game.getGameplay().sendGameMessage(p, "You've left the " + getGameplay().getId() + ". To rejoin, type $H/koth join$M!");
-            return;
-        }
 
         // Kills check
         boolean failedKillsCheck = game.getStats().getKillCount(p) == 0;
@@ -107,12 +95,9 @@ public class FFAGamePlayerListener extends GameListener {
             return;
         }
 
-        game.getParticipants().removePlayer(p);
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
         if (barAPI) {
             BarAPI.removeBar(p);
         }
-        game.getGameplay().sendGameMessage(p, "You have left the game.");
     }
 
     @EventHandler
@@ -122,13 +107,9 @@ public class FFAGamePlayerListener extends GameListener {
             return;
         }
 
-        Player p = event.getPlayer();
-        p.setGameMode(GameMode.SURVIVAL);
-
         if (barAPI) {
-            BarAPI.removeBar(p);
+            BarAPI.removeBar(event.getPlayer());
         }
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
