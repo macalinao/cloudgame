@@ -7,6 +7,7 @@ package pw.ian.cloudgame.mixins;
 
 import me.confuser.barapi.BarAPI;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -146,6 +147,7 @@ public class HostedFFA extends Mixin {
         if (barAPI) {
             BarAPI.removeBar(p);
         }
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
     }
 
     @EventHandler
@@ -158,6 +160,9 @@ public class HostedFFA extends Mixin {
         if (barAPI) {
             BarAPI.removeBar(event.getPlayer());
         }
+        Player p = event.getPlayer();
+        p.setGameMode(GameMode.SURVIVAL);
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
     }
 
     @EventHandler(priority = EventPriority.MONITOR)

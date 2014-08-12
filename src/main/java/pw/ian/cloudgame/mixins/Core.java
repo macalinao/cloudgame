@@ -101,7 +101,6 @@ public class Core extends Mixin {
         }
 
         game.getParticipants().removePlayer(player);
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + player.getName());
         game.getGameplay().sendGameMessage(player, "You have left the game.");
     }
 
@@ -113,8 +112,6 @@ public class Core extends Mixin {
         }
 
         Player p = event.getPlayer();
-        p.setGameMode(GameMode.SURVIVAL);
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawn " + p.getName());
     }
 
     @EventHandler
