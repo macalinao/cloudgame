@@ -19,7 +19,10 @@ import pw.ian.cloudgame.model.region.Region;
 @SuppressWarnings("ALL")
 public class GameListener implements Listener {
 
-    private final Gameplay gameplay;
+    /**
+     * The Gameplay this GameListener is associated with.
+     */
+    protected final Gameplay gameplay;
 
     public GameListener(Gameplay gameplay) {
         this.gameplay = gameplay;
