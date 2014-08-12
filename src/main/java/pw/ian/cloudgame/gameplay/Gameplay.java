@@ -148,6 +148,7 @@ public abstract class Gameplay {
     protected void mixin(Class<? extends Mixin> clazz) {
         try {
             Mixin m = (Mixin) clazz.getConstructors()[0].newInstance(this); // will be reworked when we remove generics
+            m.resolveDependencies();
             m.setup();
             mixins.put(clazz, m);
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
