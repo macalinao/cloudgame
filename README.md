@@ -1,5 +1,5 @@
 # CloudGame
-A cloud-based minigame framework.
+A flexible, scalable minigame framework for the Bukkit API.
 
 [![Stories in Ready](https://badge.waffle.io/simplyianm/cloudgame.png?label=ready&title=Ready)](https://waffle.io/simplyianm/cloudgame)
 [![Build Status](https://travis-ci.org/simplyianm/cloudgame.svg?branch=master)](https://travis-ci.org/simplyianm/cloudgame)
