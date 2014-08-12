@@ -57,7 +57,7 @@ public class Arena extends Model {
     /**
      * Adds a spawn to this arena.
      *
-     * @param l
+     * @param l The location of the spawn to add
      * @return The index of the created spawn.
      */
     public int addSpawn(Location l) {
