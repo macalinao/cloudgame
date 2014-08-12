@@ -1,6 +1,5 @@
 package pw.ian.cloudgame.commands.game;
 
-import pw.ian.albkit.command.PlayerCommandHandler;
 import pw.ian.albkit.command.parser.Arguments;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.game.Game;
@@ -11,11 +10,12 @@ import pw.ian.cloudgame.model.arena.Arena;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import pw.ian.albkit.command.CommandHandler;
 import pw.ian.cloudgame.hosted.ConsoleHost;
 import pw.ian.cloudgame.hosted.Host;
 import pw.ian.cloudgame.hosted.HostedGameCountdown;
 
-public class GameHostCommand extends PlayerCommandHandler {
+public class GameHostCommand extends CommandHandler {
 
     private final CloudGame cloudGame;
 
