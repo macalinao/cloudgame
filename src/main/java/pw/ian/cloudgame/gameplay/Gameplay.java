@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pw.ian.cloudgame.gameplay;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +29,10 @@ public abstract class Gameplay {
 
     private ColorScheme colorScheme = ColorScheme.DEFAULT;
 
-    private LinkedHashSet<Mixin> mixins = new LinkedHashSet<>();
+    /**
+     * Stores the mixins associated with this Gameplay.
+     */
+    private LinkedHashMap<Class<? extends Mixin>, Mixin> mixins = new LinkedHashMap<>();
 
     protected Gameplay(CloudGame plugin, String id) {
         this.plugin = plugin;
@@ -128,7 +127,7 @@ public abstract class Gameplay {
      * @param game The game
      */
     public void applyMixins(Game game) {
-        for (Mixin m : mixins) {
+        for (Mixin m : mixins.values()) {
             m.applyStates(game);
         }
     }
@@ -150,15 +149,19 @@ public abstract class Gameplay {
         try {
             Mixin m = (Mixin) clazz.getConstructors()[0].newInstance(this); // will be reworked when we remove generics
             m.setup();
-            mixins.add(m);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
+            mixins.put(clazz, m);
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            CloudGame.inst().getLogger().log(Level.SEVERE, "Could not instantiate mixin instance!", ex);
         }
+    }
+
+    /**
+     * Checks if this Gameplay possesses the given mixin.
+     *
+     * @param clazz The class of the mixin.
+     * @return Boolean
+     */
+    public boolean hasMixin(Class<? extends Mixin> clazz) {
+        return mixins.containsKey(clazz);
     }
 }
