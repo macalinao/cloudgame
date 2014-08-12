@@ -14,7 +14,7 @@ import pw.ian.cloudgame.game.Game;
 import pw.ian.cloudgame.gameplay.FFAParticipants;
 import pw.ian.cloudgame.gameplay.Gameplay;
 import pw.ian.cloudgame.hosted.PlayerHost;
-import pw.ian.cloudgame.mixin.Mixin;
+import pw.ian.cloudgame.gameplay.Mixin;
 import pw.ian.cloudgame.states.Status;
 
 /**

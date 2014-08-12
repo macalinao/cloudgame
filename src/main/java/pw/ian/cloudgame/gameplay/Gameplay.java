@@ -14,7 +14,6 @@ import pw.ian.albkit.util.ColorScheme;
 import pw.ian.albkit.util.Messaging;
 import pw.ian.cloudgame.CloudGame;
 import pw.ian.cloudgame.game.Game;
-import pw.ian.cloudgame.mixin.Mixin;
 import pw.ian.cloudgame.model.arena.Arena;
 
 /**

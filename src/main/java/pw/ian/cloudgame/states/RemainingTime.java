@@ -5,7 +5,7 @@
  */
 package pw.ian.cloudgame.states;
 
-import pw.ian.cloudgame.mixin.State;
+import pw.ian.cloudgame.gameplay.State;
 
 /**
  *
