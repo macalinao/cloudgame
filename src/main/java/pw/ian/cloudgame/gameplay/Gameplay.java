@@ -71,13 +71,13 @@ public abstract class Gameplay {
     }
 
     /**
-     * Sends a game related message to the given player.
+     * Sends a game related message to the given CommandSender.
      *
-     * @param p
+     * @param sender
      * @param message
      */
-    public void sendGameMessage(Player p, String message) {
-        p.sendMessage(colorScheme.getPrefix() + "[" + name + "] " + colorScheme.getMsg() + colorScheme.replaceColors(message));
+    public void sendGameMessage(CommandSender sender, String message) {
+        sender.sendMessage(colorScheme.getPrefix() + "[" + name + "] " + colorScheme.getMsg() + colorScheme.replaceColors(message));
     }
 
     /**
