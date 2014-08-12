@@ -30,7 +30,7 @@ public class GameHostCommand extends CommandHandler {
 
     @Override
     public void onCommand(CommandSender sender, Arguments args) {
-        if (args.length() < 3) {
+        if (args.length() < 2) {
             sendUsageMessage(sender);
             return;
         }
